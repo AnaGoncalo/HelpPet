@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h3>Cadastrar Animal</h3>
+
+        <h:form enctype="multipart/form-data">
+            <h:panelGrid columns="2">   
+                Nome: <h:inputText value="#{animalBean.animal.nomeAnimal}"/>
+                Especie: <h:inputText value="#{animalBean.animal.especie}"/>
+                Tipo: <h:inputText value="#{animalBean.animal.tipoAnimal}"/>
+                Sexo: <h:inputText value="#{animalBean.animal.sexo}"/>
+                Idade: <h:inputText value="#{animalBean.animal.idade}"/>
+                Raca: <h:inputText value="#{animalBean.animal.raca}"/>
+                <h:commandButton action="#{animalBean.Salvar()}" value="Salvar"/>
+                <h:commandLink action="listarAnimais.xhtml" value="Cancelar"/>
+            </h:panelGrid>
+        </h:form>
+
+    </h:body>
+</html>
+

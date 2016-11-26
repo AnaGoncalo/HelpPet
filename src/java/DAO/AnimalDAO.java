@@ -32,7 +32,8 @@ public class AnimalDAO {
         return "Animal" + a;
     }
     
-    public static String CadastrarAnimal(Animal animal) throws SQLException{
+    public static String CadastrarAnimal(Animal animal) throws SQLException
+    {
         System.out.println("animal dao");
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;

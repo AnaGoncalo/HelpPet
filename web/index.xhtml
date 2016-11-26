@@ -8,10 +8,14 @@
     </head>
     <body>
         <h1>Help Pet</h1>
+        <h2>Usuario da sessão: #{loginBean.usuarioLogado.nomeUsuario}</h2>
         <h:form>
             <h:commandButton action="listarAnimais.xhtml" value="Animais"/>
+            <h:commandButton action="listarDenuncias.xhtml" value="Denuncias"/>
+            <h:commandButton action="listarExperiencias.xhtml" value="Experiencias"/>
             <h:commandButton action="index.xhtml" value="Eventos"/>
             <h:commandButton action="index.xhtml" value="ONGs"/>
+            <h:commandButton action="loginSignin.xhtml" value="Login/Signin"/>
         </h:form>
         
         

@@ -47,6 +47,8 @@ public class AnimalBean {
         
         caminho.request().post(Entity.json(json));
         
+        Listar();
+        
     }
     
     public void Listar(){

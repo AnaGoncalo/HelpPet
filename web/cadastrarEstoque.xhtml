@@ -1,23 +1,88 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h3>Cadastrar Estoque</h3>
 
-        <h:form enctype="multipart/form-data">
-            <h:panelGrid columns="2">   
-                Nome estoque: <h:inputText value="#{estoqueBean.estoque.nomeEstoque}"/>
-                Necessidade: <h:inputText value="#{estoqueBean.estoque.necessidade}"/>
-                Qtd diaria: <h:inputText value="#{estoqueBean.estoque.qtdDiaria}"/>
-                Qtd atual: <h:inputText value="#{estoqueBean.estoque.qtdAtual}"/>
-                <h:commandButton action="#{estoqueBean.Salvar()}" value="Salvar"/>
-                <h:commandLink action="listarEstoques.xhtml" value="Cancelar"/>
-            </h:panelGrid>
-        </h:form>
+
+<!--        <h3>Cadastrar Denuncia</h3>-->
+
+        <div class="container">
+            
+            <!-- Barra de Menu -->
+            <b:navBar brand="Help Pet" brandHref="#" inverse="true" fixed="top">
+                <b:navbarLinks styleClass="navbar-left">
+                    <h:form>
+                        <b:commandButton value="Animais" action="faces/listarAnimais.xhtml" look="link" />
+                        <b:commandButton value="Denuncias" action="faces/listarDenuncias.xhtml" look="link" />
+                        <b:commandButton value="Experiencias" action="faces/listarExperiencias.xhtml" look="link" />
+                        <b:commandButton value="Estoques" action="faces/listarEstoques" look="link" />
+                    </h:form>
+                </b:navbarLinks>
+            </b:navBar>
+
+            <br/><br/><br/>
+
+            
+            
+            <div class="row">
+                <div class="col-lg-1">
+                    <!-- Div para ajustar na tela -->
+                </div>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2>Cadastrar Estoque</h2>
+                        </div>
+                        <div class="panel-body form-group">
+                            <h:form>
+                                <div class="row caption">
+                                    <div class="col-lg-6">
+                                        <b:inputText value="#{estoqueBean.estoque.nomeEstoque}" name="nome" class="form-control glyphicon" style="font-family: arial;" placeholder="Nome do Estoque. ex: Ração" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <b:inputText value="#{estoqueBean.estoque.necessidade}" name="necessidade" class="form-control glyphicon" style="font-family: arial;" placeholder="Necessidade mensal" />
+                                    </div>
+                                </div>
+                                
+                                <br/>
+                                
+                                <div class="row caption">
+                                    <div class="col-lg-6">
+                                        <b:inputText value="#{estoqueBean.estoque.qtdAtual}" name="qtdA" class="form-control glyphicon" style="font-family: arial;" placeholder="Quantidade Atual" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <b:inputText value="#{estoqueBean.estoque.qtdDiaria}" name="qtdD" class="form-control glyphicon" style="font-family: arial;" placeholder="Quantidade Diaria" />
+                                    </div>
+                                </div>
+                                
+                                <br/>
+                                
+                                <div class="row caption">
+                                    <div class="col-lg-6">
+                                        <div class="btn-group">
+                                            <b:commandButton action="#{estoqueBean.Salvar()}" value="Salvar" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="btn-group">       
+                                            <b:commandButton action="listarEstoques.xhtml" value="Cancelar" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </h:body>
 </html>
 

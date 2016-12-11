@@ -1,22 +1,82 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h3>Cadastrar Experiencia</h3>
 
-        <h:form enctype="multipart/form-data">
-            <h:panelGrid columns="2">   
-                Titulo: <h:inputText value="#{experienciaBean.experiencia.tituloExperiencia}"/>
-                Tipo: <h:inputText value="#{experienciaBean.experiencia.tipoExperiencia}"/>
-                Texto: <h:inputText value="#{experienciaBean.experiencia.texto}"/>
-                <h:commandButton action="#{experienciaBean.Salvar()}" value="Salvar"/>
-                <h:commandLink action="listarExperiencias.xhtml" value="Cancelar"/>
-            </h:panelGrid>
-        </h:form>
+
+<!--        <h3>Cadastrar Denuncia</h3>-->
+
+        <div class="container">
+            <!-- Barra de Menu -->
+            <b:navBar brand="Help Pet" brandHref="#" inverse="true" fixed="top">
+                <b:navbarLinks styleClass="navbar-left">
+                    <h:form>
+                        <b:commandButton value="Animais" action="faces/listarAnimais.xhtml" look="link" />
+                        <b:commandButton value="Denuncias" action="faces/listarDenuncias.xhtml" look="link" />
+                        <b:commandButton value="Experiencias" action="faces/listarExperiencias.xhtml" look="link" />
+                        <b:commandButton value="Estoques" action="faces/listarEstoques" look="link" />
+                    </h:form>
+                </b:navbarLinks>
+            </b:navBar>
+
+            <br/><br/><br/>
+
+            
+            <div class="row">
+                <div class="col-lg-1">
+                    <!-- Div para ajustar na tela -->
+                </div>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2>Cadastrar Experiencia</h2>
+                        </div>
+                        <div class="panel-body form-group">
+                            <h:form>
+                                <div class="row caption">
+                                    <div class="col-lg-6">
+                                        <b:inputText value="#{experienciaBean.experiencia.tipoExperiencia}" name="tipo" class="form-control glyphicon" style="font-family: arial;" placeholder="Tipo" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <b:inputText value="#{experienciaBean.experiencia.tituloExperiencia}" name="titulo" class="form-control glyphicon" style="font-family: arial;" placeholder="Titulo" />
+                                    </div>
+                                </div>
+                                
+                                <br/>
+                                <div class="row caption">
+                                    <div class="col-lg-12">
+                                     
+                                        <b:inputText value="#{experienciaBean.experiencia.texto}" name="descricao" class="form-control glyphicon" style="font-family: arial;" placeholder="Texto" />
+                                        
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row caption">
+                                    <div class="col-lg-6">
+                                        <div class="btn-group">
+                                            <b:commandButton action="#{experienciaBean.Salvar()}" value="Salvar" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="btn-group">       
+                                            <b:commandButton action="listarExperiencias.xhtml" value="Cancelar" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </h:body>
 </html>
 

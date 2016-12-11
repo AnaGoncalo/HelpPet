@@ -2,22 +2,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>Facelet Title</title>
-    </head>
-    <body>
-        <h1>Help Pet</h1>
-        <h2>Usuario da sessão: #{loginBean.usuarioLogado.nomeUsuario}</h2>
-        <h:form>
-            <h:commandButton action="listarAnimais.xhtml" value="Animais"/>
-            <h:commandButton action="listarDenuncias.xhtml" value="Denuncias"/>
-            <h:commandButton action="listarExperiencias.xhtml" value="Experiencias"/>
-            <h:commandButton action="listarEstoques.xhtml" value="Estoques"/>
-            <h:commandButton action="loginSignin.xhtml" value="Login/Signin"/>
-        </h:form>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Help Pet</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+
+        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
+
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+
+        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
+
+    </h:head>
+    <h:body>
+
+        <!-- Menu -->
+
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <!-- Título da página -->
+        <div id="home" class="home">
+            <div class="text-vcenter">
+                <h1 style="color: #00EEEE;">#HelpPet</h1>
+                <h3 style="color: #ffa812;">Seja Bem-Vindo!</h3>
+            </div>
+        </div>
         
-        
-    </body>
+        <!-- Título da página -->
+        <div id="home" class="home">
+            <div class="text-vcenter">
+                <h1 style="color: #00EEEE;">#Denuncie</h1>
+                <h2 style="color: #ffa812;">ABANDONAR OU MALTRATAR UM ANIMAL É CRIME!</h2>
+                <p class="lead" style="color: #ffa812;">Não deixe de denunciar, os animais não podem pedir socorro, seja a voz deles!</p>
+                <p class="lead" style="font-weight:bold;color: #ffa812;">A denúncia é totalmente anônima.</p>
+                <h:form>
+                    <a href="#novadenuncia" style="background-color: #ffa812; color: white;" class="btn btn-default">Denuncie</a>
+                </h:form>
+            </div>
+        </div>
+
+
+        <!-- Rodapé -->
+        <div id="footer" align="center">
+            <b:row>
+                <ui:insert name="footer">
+                    <!-- Import de página do rodapé -->
+                    <ui:include src="rodape.xhtml"/>
+                </ui:insert>
+            </b:row>
+        </div>
+        <br/>
+    </h:body>
+    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
 </html>
 

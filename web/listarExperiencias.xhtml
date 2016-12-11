@@ -2,36 +2,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h2>Experiencias</h2>
-         <h:form>
-            <h:commandButton action="cadastrarExperiencia.xhtml" value="Nova Experiencia"/>
-        </h:form>
-        <br/>
-        <h:dataTable value="#{experienciaBean.experiencias}" var="experiencia">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Titulo Experiencia"/>
-                </f:facet>
-                <h:outputText value="#{experiencia.tituloExperiencia}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Tipo Experiencia"/>
-                </f:facet>
-                <h:outputText value="#{experiencia.tipoExperiencia}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Texto"/>
-                </f:facet>
-                <h:outputText value="#{experiencia.texto}"/>
-            </h:column>
-        </h:dataTable>
+        <b:container>
+            <!-- Barra de Menu -->
+            <b:navBar brand="Help Pet" brandHref="#" inverse="true" fixed="top">
+                <b:navbarLinks styleClass="navbar-left">
+                    <h:form>
+                        <b:commandButton value="Animais" action="listarAnimais.jsf" look="link" />
+                        <b:commandButton value="Denuncias" action="listarDenuncias.jsf" look="link" />
+                        <b:commandButton value="Experiencias" action="listarExperiencias.jsf" look="link" />
+                        <b:commandButton value="Estoques" action="listarEstoques.jsf" look="link" />
+                    </h:form>
+                </b:navbarLinks>
+            </b:navBar>
+
+            <br/><br/><br/>
+
+            
+            <h2>Experiencias</h2>
+            <h:form>
+                <div class="btn-group">
+                    <b:commandButton action="cadastrarExperiencia.xhtml" value="Nova Experiencia" class="btn btn-primary" />
+                </div>
+            </h:form>
+            <br/>
+
+            <b:row>
+                <c:forEach var="experiencia" items="#{experienciaBean.experiencias}">
+
+                    <b:column col-lg="3">
+                        <div class="thumbnail">
+
+                            <div class="caption">
+                                <h4>#{experiencia.tituloExperiencia}</h4>
+                                <p>#{experiencia.tipoExperiencia}</p>
+                                <p>#{experiencia.texto}</p>
+                                <p></p>
+                            </div>
+                        </div><!-- /.col-lg-4 -->
+
+                    </b:column>
+
+                </c:forEach>
+            </b:row>
+        </b:container>
     </h:body>
 </html>
 

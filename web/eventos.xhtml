@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Help Pet - Eventos</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+
+        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
+
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+
+        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
+
+    </h:head>
+    <h:body>
+
+        <!-- Menu -->
+
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <!-- Título da página -->
+        <div id="home" class="home">
+            <div class="text-vcenter">
+                <h1 style="color: #00EEEE;">#SejaUmHelper</h1>
+                <h2 style="color: #ffa812;">FIQUE POR DENTRO DO MUNDO PET</h2>
+                <h2 style="color: #ffa812;">Campanhas de Vacinação, Feiras de Adoção e Muito Mais!</h2>
+                <h:form>
+                    <a href="#novoevento" style="background-color: #ffa812; color: white;" class="btn btn-default">Novo Evento</a>
+                </h:form>
+            </div>
+        </div>
+
+        <!-- Opções -->
+        <div class="container-fluid">
+            <b:row>
+                <b:column col-md="8">
+                    <!--Ajustar-->
+                </b:column>
+
+                <h:form class="form-signin">
+                    <b:column col-md="2">
+                        <b:selectOneMenu value="#" style="width: 170px; height: 40px; color: #ffa812;" class="form-control">
+                            <f:selectItem itemLabel="Local" itemValue="1"/>
+                        </b:selectOneMenu>
+                    </b:column>
+                    <b:column col-md="1">
+                        <b:button value="Ok" style="background-color: #ffa812; color: white;" class="btn btn-default"/>
+                    </b:column>
+                </h:form>
+            </b:row>
+
+            <!-- Listagem de eventos -->
+            <b:row>
+                <c:forEach var="evento" items="#{eventoBean.eventos}">
+                    <div class="col-xs-18 col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <img src="imagens/gato1.png" alt="Foto do animal" style="width:auto; height:280px;"/>
+                            <div class="caption" align="center">
+                                <h3>#{evento.nomeEvento}</h3>
+                                    <p>Data #{evento.dataEvento}</p>
+                                    <p>Local: #{evento.idLocalizacao}</p>
+                                <p><a href="verEvento.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </b:row>
+
+        </div>
+
+        <!-- Paginação-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" align="center">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">1</a>
+                        <a href="#" class="btn btn-default">2</a>
+                        <a href="#" class="btn btn-default">3</a>
+                        <a href="#" class="btn btn-default">4</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulário de denúncia -->
+        <div id="novoevento" class="container-fluid" align="center" style="background-color: #ffa812; overflow:hidden; height:auto;">
+            <h:form>
+
+                <b:row>
+                    <h2 class="text-center" style="color: white;">Cadastre um Evento</h2> 
+                </b:row>
+
+                <div class="container-fluid">
+                    
+                    <b:row>
+                        <b:column col-md="1">
+                            <!-- Espaçamento -->
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Nome:
+                            </label>
+                        </b:column>
+                        <b:column col-md="5">
+                            <b:inputText value="#{eventoBean.evento.nomeEvento}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>    
+                    </b:row>
+                    
+                    <b:row>
+                        <b:column col-md="1">
+                            <!-- Espaçamento -->
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Data:
+                            </label>
+                        </b:column>
+                        <b:column col-md="2">
+                            <b:inputText value="#{eventoBean.evento.dataEvento}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Hora:
+                            </label>    
+                        </b:column>
+                        <b:column col-md="2">
+                            <b:inputText value="#{eventoBean.evento.horarioEvento}"  class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Foto:
+                            </label>
+                        </b:column>
+                        <b:column col-md="2">
+                            <!--Input de imagem-->
+                            <!--                            <h:inputFile value="" />-->
+                        </b:column>
+                    </b:row>
+                    
+                    <b:row>
+                        <b:column col-md="1">
+                            <!-- Espaçamento -->
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px; color: white;">
+                                Descrição:
+                            </label>
+                        </b:column>
+                        <b:column col-md="8">
+                            <b:inputTextarea value="#{eventoBean.evento.descricaoEvento}" rows="2"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column col-md="1">
+                            <!-- Espaçamento -->
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Estado:
+                            </label>
+                        </b:column>
+                        <b:column col-md="2">
+                            <b:inputText value="#{eventoBean.evento.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Cidade:
+                            </label>    
+                        </b:column>
+                        <b:column col-md="2">
+                            <b:inputText value="#{animalBean.animal.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Bairro:
+                            </label>    
+                        </b:column>
+                        <b:column col-md="2">
+                            <b:inputText value="#{animalBean.animal.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>
+                    </b:row>
+                    
+                    <b:row>
+                        <b:column col-md="1">
+                            <!-- Espaçamento -->
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Rua:
+                            </label>
+                        </b:column>
+                        <b:column col-md="4">
+                            <b:inputText value="#{animalBean.animal.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>
+                        <b:column col-md="1">
+                            <label style="font-size: 15px;color: white;">
+                                Complemento:
+                            </label>
+                        </b:column>
+                        <b:column col-md="3">
+                            <b:inputText value="#{animalBean.animal.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
+                        </b:column>
+                    </b:row>
+
+                    <b:row>
+                        <b:column col-md="12">
+                            <div align="center">
+                                <b:commandButton action="#{eventoBean.Salvar()}" value="Cadastrar" style="background-color: white; color: #ffa812;" class="btn btn-default"/>
+                            </div>
+                        </b:column>
+                    </b:row>
+
+                </div>
+            </h:form>
+        </div>
+        <br/>
+        <!-- Rodapé -->
+        <div id="footer" align="center">
+            <b:row>
+                <ui:insert name="footer">
+                    <!-- Import de página do rodapé -->
+                    <ui:include src="rodape.xhtml"/>
+                </ui:insert>
+            </b:row>
+        </div>
+        <br/>
+    </h:body>
+    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
+</html>
+

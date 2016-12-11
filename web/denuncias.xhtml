@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Help Pet - Denunciar</title>
+        <title>Help Pet - Denúncias</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
@@ -19,7 +19,12 @@
 
         <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
 
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
 
         <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
@@ -28,6 +33,7 @@
     <h:body>
 
         <!-- Menu -->
+
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
@@ -38,31 +44,85 @@
         <!-- Título da página -->
         <div id="home" class="home">
             <div class="text-vcenter">
-                <h1 class="branco" style="color: #ffa812;">Denuncie e ajude a salvar animais!</h1>
+                <h1 style="color: #00EEEE;">#Denuncie</h1>
+                <h2 style="color: #ffa812;">ABANDONAR OU MALTRATAR UM ANIMAL É CRIME!</h2>
+                <p class="lead" style="color: #ffa812;">Não deixe de denunciar, os animais não podem pedir socorro, seja a voz deles!</p>
+                <p class="lead" style="font-weight:bold;color: #ffa812;">A denúncia é totalmente anônima.</p>
+                <h:form>
+                    <a href="#novadenuncia" style="background-color: #ffa812; color: white;" class="btn btn-default">Denuncie</a>
+                </h:form>
             </div>
         </div>
 
-        <!-- Descrição -->
-        <div id="about" class="pad-section" style="background-color:white;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6" align="center">
-                        <img src="imagens/logo.png" style="width: 200px;" alt="" />
-                    </div>
-                    <div class="col-sm-6 text-center">
-                        <h2 style="color: #ffa812;">ABANDONAR OU MALTRATAR ANIMAL É CRIME!</h2>
-                        <p class="lead" style="color: #ffa812;">Não deixe de denunciar, os animais não podem pedir socorro, seja a voz deles!</p>
-                        <p class="lead" style="font-weight:bold;color: #ffa812;">A denúncia é totalmente anônima.</p>
+        <!-- Opções -->
+        <div class="container-fluid">
+            <b:row>
+                <b:column col-md="8">
+                    <!--Ajustar-->
+                </b:column>
 
+                <h:form class="form-signin">
+                    <b:column col-md="2">
+                        <b:selectOneMenu value="#" style="width: 170px; height: 40px; color: #ffa812;" class="form-control">
+                            <f:selectItem itemLabel="Tipo" itemValue="1"/>
+                            <f:selectItem itemLabel="Abandono" itemValue="1"/>
+                            <f:selectItem itemLabel="Maus-tratos" itemValue="2"/>
+                        </b:selectOneMenu>
+                    </b:column>
+                    <b:column col-md="1">
+                        <b:button value="Ok" style="background-color: #ffa812; color: white;" class="btn btn-default"/>
+                    </b:column>
+                </h:form>
+            </b:row>
+
+            <!-- Listagem de denúncias -->
+            <b:row>
+                <c:forEach var="denuncia" items="#{denunciaBean.denuncias}">
+                    <div class="col-xs-18 col-sm-6 col-md-6">
+                        <div class="thumbnail">
+                            <b:row>
+                                <b:column col-md="6">
+                                    <img src="imagens/gato1.png" alt="Foto da Denúncia" style="width:280px; height:280px;"/>
+                                </b:column>
+                                <b:column col-md="6">
+                                    <div class="caption">
+                                        <div align="center">
+                                            <h3>#{denuncia.tituloDenuncia}</h3>
+                                            <h5>#{denuncia.tipoDenuncia}</h5>
+                                        </div>
+                                        <div align="left" >
+                                            <p>#{denuncia.descricaoDenuncia}</p>
+                                        </div>
+                                        <div align="right">
+                                            <p>11/12/2016 - Bairro da Saudade, Serra Caiada / RN.</p>
+                                        </div>
+                                    </div>
+                                </b:column>
+                            </b:row>
+                        </div>
+                    </div>
+                </c:forEach>
+            </b:row>
+
+        </div>
+
+        <!-- Paginação-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" align="center">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">1</a>
+                        <a href="#" class="btn btn-default">2</a>
+                        <a href="#" class="btn btn-default">3</a>
+                        <a href="#" class="btn btn-default">4</a>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <!-- Formulário de denúncia -->
-        <div class="container-fluid" align="center" style="background-color: #ffa812; overflow:hidden; height:auto;">
-            <h:form>
+        <div  class="container-fluid" align="center" style="background-color: #ffa812; overflow:hidden; height:auto;">
+            <h:form id="novadenuncia">
 
                 <b:row>
                     <h2 class="text-center" style="color: white;">Faça sua denúncia</h2> 
@@ -132,7 +192,7 @@
                         </b:column>
                         <b:column col-md="3">
                             <!--Input de imagem-->
-<!--                            <h:inputFile value="" />-->
+                            <!--                            <h:inputFile value="" />-->
                         </b:column>
                         <b:column col-md="1">
                             <!-- Espaçamento -->
@@ -172,20 +232,18 @@
                 </div>
             </h:form>
         </div>
-
-
-        <!-- /third section -->
-
         <br/>
         <!-- Rodapé -->
         <div id="footer" align="center">
-            <ui:insert name="footer">
-                <!-- Import de página do rodapé -->
-                <ui:include src="rodape.xhtml"/> 
-            </ui:insert>
+            <b:row>
+                <ui:insert name="footer">
+                    <!-- Import de página do rodapé -->
+                    <ui:include src="rodape.xhtml"/>
+                </ui:insert>
+            </b:row>
         </div>
         <br/>
-
     </h:body>
+    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
 </html>
 

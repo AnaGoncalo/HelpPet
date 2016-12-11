@@ -2,48 +2,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h2>Estoques</h2>
-         <h:form>
-            <h:commandButton action="cadastrarEstoque.xhtml" value="Novo Estoque"/>
-        </h:form>
-        <br/>
-        <h:dataTable value="#{estoqueBean.estoques}" var="estoque">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Nome estoque"/>
-                </f:facet>
-                <h:outputText value="#{estoque.nomeEstoque}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Necessidade"/>
-                </f:facet>
-                <h:outputText value="#{estoque.necessidade}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Quantidade Diaria"/>
-                </f:facet>
-                <h:outputText value="#{estoque.qtdDiaria}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Quantidade Atual"/>
-                </f:facet>
-                <h:outputText value="#{estoque.qtdAtual}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Usuario"/>
-                </f:facet>
-                <h:outputText value="#{estoque.idUsuario}"/>
-            </h:column>
-        </h:dataTable>
+
+        <!-- Barra de Menu -->
+        <b:navBar brand="Help Pet" brandHref="#" inverse="true" fixed="top">
+            <b:navbarLinks styleClass="navbar-left">
+                <h:form>
+                    <b:commandButton value="Animais" action="listarAnimais.jsf" look="link" />
+                    <b:commandButton value="Denuncias" action="listarDenuncias.jsf" look="link" />
+                    <b:commandButton value="Experiencias" action="listarExperiencias.jsf" look="link" />
+                    <b:commandButton value="Estoques" action="listarEstoques.jsf" look="link" />
+                </h:form>
+            </b:navbarLinks>
+        </b:navBar>
+
+        <br/><br/><br/>
+        <b:container>
+            <h2>Estoques</h2>
+            <h:form>
+                <div class="btn-group">
+                    <b:commandButton action="cadastrarEstoque.xhtml" value="Novo Estoque" class="btn btn-primary" />
+                </div>
+            </h:form>
+            <br/>
+
+            <b:row>
+                <c:forEach var="estoque" items="#{estoqueBean.estoques}">
+
+                    <b:column col-lg="3">
+                        <div class="thumbnail">
+
+                            <div class="caption">
+                                <h4>#{estoque.nomeEstoque}</h4>
+                                <p>#{estoque.necessidade}</p>
+                                <p>#{estoque.qtdAtual}</p>
+                                <p>#{estoque.qtdDiaria}</p>
+                            </div>
+                        </div><!-- /.col-lg-4 -->
+
+                    </b:column>
+
+                </c:forEach>
+            </b:row>
+        </b:container>
     </h:body>
 </html>
 

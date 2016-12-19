@@ -7,6 +7,7 @@ package Beans;
 
 import DAO.AnimalDAO;
 import Modelo.Animal;
+import Modelo.Encontro;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,9 +30,8 @@ import javax.ws.rs.core.MediaType;
 public class AnimalBean {
     private Animal animal = new Animal();
     private List<Animal> animais = new ArrayList();
-    /**
-     * Creates a new instance of AnimalBean
-     */
+   private Encontro encontro = new Encontro();
+    
     public AnimalBean() throws SQLException {
         Listar();
     }
@@ -51,6 +51,25 @@ public class AnimalBean {
         
     }
     
+    public String SalvarEncontro(){
+        encontro.setIdUsuario(1); //pega o usuario da sessao
+        encontro.setIdLocalizacao(1);
+        encontro.setIdAnimal(animal.getIdAnimal());
+        
+        Client cliente = ClientBuilder.newClient();
+        
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
+        
+        Gson gson = new Gson();
+        
+        String json = gson.toJson(encontro);
+        
+        caminho.request().post(Entity.json(json));
+        
+        return "index.jsf";
+        
+    }
+    
     public void Listar(){
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal");
@@ -60,7 +79,23 @@ public class AnimalBean {
         Animal[] vetor = gson.fromJson(json, Animal[].class);
         animais = Arrays.asList(vetor);
     }
-
+    
+    public String VerAnimal(Animal a){
+        animal = a;
+        
+        return "animal.jsf";
+    }
+    
+    public String Adotar(Animal a){
+        animal = a;
+        //encontro = new Encontro();
+        encontro.setIdUsuario(1); //pega o usuario da sessao
+        encontro.setIdLocalizacao(1);
+        encontro.setIdAnimal(animal.getIdAnimal());
+        
+        return "cadastrarEncontro.jsf";
+    }
+    
     public Animal getAnimal() {
         return animal;
     }
@@ -75,6 +110,14 @@ public class AnimalBean {
 
     public void setAnimais(List<Animal> animais) {
         this.animais = animais;
+    }
+
+    public Encontro getEncontro() {
+        return encontro;
+    }
+
+    public void setEncontro(Encontro encontro) {
+        this.encontro = encontro;
     }
     
     

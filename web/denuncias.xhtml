@@ -55,7 +55,8 @@
         </div>
 
         <!-- Opções -->
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color: #efefef;">
+            <br/>
             <b:row>
                 <b:column col-md="8">
                     <!--Ajustar-->
@@ -90,7 +91,7 @@
                                             <h3>#{denuncia.tituloDenuncia}</h3>
                                             <h5>#{denuncia.tipoDenuncia}</h5>
                                         </div>
-                                        <div align="left" >
+                                        <div align="left" style="min-height: 110px;">
                                             <p>#{denuncia.descricaoDenuncia}</p>
                                         </div>
                                         <div align="right">
@@ -104,24 +105,25 @@
                 </c:forEach>
             </b:row>
 
-        </div>
-
-        <!-- Paginação-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12" align="center">
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-default">1</a>
-                        <a href="#" class="btn btn-default">2</a>
-                        <a href="#" class="btn btn-default">3</a>
-                        <a href="#" class="btn btn-default">4</a>
+            <!-- Paginação-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-default">1</a>
+                            <a href="#" class="btn btn-default">2</a>
+                            <a href="#" class="btn btn-default">3</a>
+                            <a href="#" class="btn btn-default">4</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
+
+
         <!-- Formulário de denúncia -->
-        <div  class="container-fluid" align="center" style="background-color: #ffa812; overflow:hidden; height:auto;">
+        <div  class="container-fluid" align="center" style="background-color: #FF8C00; overflow:hidden; height:auto;">
             <h:form id="novadenuncia">
 
                 <b:row>

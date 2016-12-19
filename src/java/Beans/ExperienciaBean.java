@@ -56,7 +56,6 @@ public class ExperienciaBean {
         caminho.request().post(Entity.json(json));
         
         Listar();
-        
     }
 
     public Experiencia getExperiencia() {

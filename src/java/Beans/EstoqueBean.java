@@ -58,6 +58,7 @@ public class EstoqueBean {
         
         caminho.request().post(Entity.json(json));
         
+        Listar();
     }
     
     public Estoque getEstoque() {

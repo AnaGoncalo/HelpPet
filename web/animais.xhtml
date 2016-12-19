@@ -79,7 +79,7 @@
                 <c:forEach var="animal" items="#{animalBean.animais}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail">
-                            <img src="imagens/gato1.png" alt="Foto do animal" style="width:280px; height:280px;"/>
+                            <img src="imagens/gato3.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
                             <div class="caption" align="center">
                                 <h4>#{animal.nomeAnimal}</h4>
                                 <div align="left">
@@ -87,7 +87,9 @@
                                     <p>Especie: #{animal.especie}</p>
                                     <p>Local: #{animal.idLocalizacao}</p>
                                 </div>
-                                <p><a href="verAnimal.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                                <h:form>
+                                <p><b:commandButton action="#{animalBean.VerAnimal(animal)}" value="Ver Mais" class="btn btn-default" style="background-color: #ffa812; color: white;"/></p>
+                                </h:form>
                             </div>
                         </div>
                     </div>

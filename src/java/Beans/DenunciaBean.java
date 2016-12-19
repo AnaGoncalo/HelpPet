@@ -56,6 +56,7 @@ public class DenunciaBean {
         
         caminho.request().post(Entity.json(json));
         
+        Listar();
     }
 
     public Denuncia getDenuncia() {

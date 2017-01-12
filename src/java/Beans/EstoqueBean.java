@@ -7,13 +7,18 @@ package Beans;
 
 import DAO.EstoqueDAO;
 import Modelo.Estoque;
+import Modelo.Usuario;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -28,10 +33,8 @@ import javax.ws.rs.client.WebTarget;
 public class EstoqueBean {
     private Estoque estoque = new Estoque();
     private List<Estoque> estoques = new ArrayList();
+    private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
 
-    /**
-     * Creates a new instance of EstoqueBean
-     */
     public EstoqueBean(){
         Listar();
     }
@@ -47,6 +50,14 @@ public class EstoqueBean {
         
     }
     
+    public void MeusEstoques(){
+        try {
+            estoques = EstoqueDAO.ListarPorUsuario(user.getIdUsuario());
+        } catch (SQLException ex) {
+            Logger.getLogger(EstoqueBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void Salvar(){
         Client cliente = ClientBuilder.newClient();
         
@@ -59,6 +70,14 @@ public class EstoqueBean {
         caminho.request().post(Entity.json(json));
         
         Listar();
+    }
+    
+    public FacesContext getFacesContext(){
+        return FacesContext.getCurrentInstance();
+    }
+  
+    public HttpSession getSession(){
+        return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
     
     public Estoque getEstoque() {

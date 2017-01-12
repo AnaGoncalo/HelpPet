@@ -83,4 +83,36 @@ public class EventoDAO {
         } 
         return lista;
     }
+    
+    public static List<Evento> ListarPorUsuario(int idUsuario) throws SQLException
+    {
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Evento> lista = new ArrayList();
+        String sql= "SELECT * FROM Evento WHERE idUsuario = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, idUsuario);
+            
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                Evento a = new Evento(rs.getInt("idEvento"), rs.getString("nomeEvento"), rs.getDate("dataEvento"), 
+                        rs.getString("horarioEvento"), rs.getString("descricaoEvento"), rs.getString("fotoEvento"),
+                        rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
+                lista.add(a);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            Banco.closeConexao(conn, rs, pstmt, null);
+        } 
+        return lista;
+    }
 }

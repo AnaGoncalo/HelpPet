@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Help Pet - ONGs</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+
+        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
+
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+
+        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
+
+    </h:head>
+    <h:body>
+
+        <!-- Menu -->
+
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <!-- Título da página -->
+        <div id="home" class="home">
+            <div class="text-vcenter">
+                <h1 style="color: #00EEEE;">#Adote</h1>
+                <h2 style="color: #ffa812;">AJUDE OS ANIMAIS A ENCONTRAREM UM LAR!</h2>
+                <p class="lead" style="color: #ffa812;">Adote um novo pet, ou o ajude a encontrar um lar!</p>
+                <h:form>
+                    <a href="#novoanimal" style="background-color: #ffa812; color: white;" class="btn btn-default">Novo Animal</a>
+                </h:form>
+            </div>
+        </div>
+
+        <!-- Opções -->
+        <div class="container-fluid">
+            <b:row>
+                <b:column col-md="8">
+                    <!--Ajustar-->
+                </b:column>
+
+                <h:form class="form-signin">
+                    <b:column col-md="2">
+                        <b:selectOneMenu value="#" style="width: 170px; height: 40px; color: #ffa812;" class="form-control">
+                            <f:selectItem itemLabel="Tipo" itemValue="1"/>
+                            <f:selectItem itemLabel="Adoção" itemValue="1"/>
+                            <f:selectItem itemLabel="Perdido" itemValue="2"/>
+                        </b:selectOneMenu>
+                    </b:column>
+                    <b:column col-md="1">
+                        <b:button value="Ok" style="background-color: #ffa812; color: white;" class="btn btn-default"/>
+                    </b:column>
+                </h:form>
+            </b:row>
+
+            <!-- Listagem de animais -->
+            <b:row>
+                <c:forEach var="ong" items="#{ongBean.ongs}">
+                    <div class="col-xs-18 col-sm-6 col-md-3">
+                        <div class="thumbnail">
+                            <img src="imagens/gato3.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
+                            <div class="caption" align="center">
+                                <h4>#{ong.nomeUsuario}</h4>
+                                <div align="left">
+                                    
+                                </div>
+                                <h:form>
+                                    <p><b:commandButton action="#{usuarioBean.VerUsuario(ong)}" value="Ver Mais" class="btn btn-default" style="background-color: #ffa812; color: white;"/></p>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </b:row>
+
+        </div>
+
+        <!-- Paginação-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" align="center">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">1</a>
+                        <a href="#" class="btn btn-default">2</a>
+                        <a href="#" class="btn btn-default">3</a>
+                        <a href="#" class="btn btn-default">4</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <br/>
+        <!-- Rodapé -->
+        <div id="footer" align="center">
+            <b:row>
+                <ui:insert name="footer">
+                    <!-- Import de página do rodapé -->
+                    <ui:include src="rodape.xhtml"/>
+                </ui:insert>
+            </b:row>
+        </div>
+        <br/>
+    </h:body>
+    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
+</html>
+

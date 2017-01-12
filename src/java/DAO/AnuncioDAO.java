@@ -80,4 +80,35 @@ public class AnuncioDAO {
         } 
         return lista;
     }
+    
+    public static List<Anuncio> ListarPorUsuario(int idUsuario) throws SQLException
+    {
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Anuncio> lista = new ArrayList();
+        String sql= "SELECT * FROM Anuncio WHERE idUsuario = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, idUsuario);
+            
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                Anuncio a = new Anuncio(rs.getInt("idAnuncio"), rs.getString("tituloAnuncio"), rs.getString("descricaoAnuncio"), 
+                        rs.getString("fotoAnuncio"), rs.getString("tipoAnuncio"), rs.getInt("idUsuario"));
+                lista.add(a);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(AnuncioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            Banco.closeConexao(conn, rs, pstmt, null);
+        } 
+        return lista;
+    }
 }

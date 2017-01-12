@@ -10,9 +10,12 @@ import Modelo.Experiencia;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 /**
  *
  * @author Ana Gonçalo
@@ -30,6 +33,7 @@ public class ExperienciaService {
        
        return json;
    } 
+   
    // "http://localhost:8080/TesteWS/rest/experiencia"
    @POST
    public String cadastrarExperiencia(String json) throws SQLException{
@@ -42,5 +46,21 @@ public class ExperienciaService {
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
        
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/experiencia/{idUsuario}"
+   @GET
+   @Path("{idUsuario}")
+   public String listarPorUsuario(@PathParam("idUsuario") int idUsuario){
+       
+       Gson gson = new Gson();
+       String json = null;
+       try {
+           json = gson.toJson(ExperienciaDAO.ListarPorUsuario(idUsuario));
+       } catch (SQLException ex) {
+           Logger.getLogger(ExperienciaService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       return json;
    }
 }

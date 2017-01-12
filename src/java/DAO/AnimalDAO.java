@@ -138,7 +138,7 @@ public class AnimalDAO {
                 Animal a = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getString("especie"), 
                         rs.getString("raca"), rs.getString("idade"), rs.getString("sexo"), rs.getString("descricaoAnimal"), 
                         rs.getString("tipoAnimal"), rs.getString("fotoAnimal"), rs.getDate("dataCadastro"),
-                         rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
+                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
                 lista.add(a);
             }
         } 
@@ -153,7 +153,7 @@ public class AnimalDAO {
         return lista;
     }
     
-    public List<Animal> ListarPorUsuario(int idUsuario) throws SQLException
+    public static List<Animal> ListarPorUsuario(int idUsuario) throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
@@ -168,11 +168,10 @@ public class AnimalDAO {
             rs = pstmt.executeQuery();
             while(rs.next())
             {
-                
                 Animal a = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getString("especie"), 
                         rs.getString("raca"), rs.getString("idade"), rs.getString("sexo"), rs.getString("descricaoAnimal"), 
-                        rs.getString("tipo"), rs.getString("fotoAnimal"), rs.getDate("dataCadastro"), rs.getBoolean("statusAnimal"),
-                        rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
+                        rs.getString("tipoAnimal"), rs.getString("fotoAnimal"), rs.getDate("dataCadastro"),
+                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
                 
                 lista.add(a);
             }

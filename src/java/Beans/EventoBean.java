@@ -5,17 +5,24 @@
  */
 package Beans;
 
+import DAO.EventoDAO;
 import Modelo.Evento;
+import Modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,6 +33,7 @@ import javax.faces.bean.RequestScoped;
 public class EventoBean {
     private Evento evento = new Evento();
     private List<Evento> eventos = new ArrayList();
+    private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
 
     public EventoBean() {
         Listar();
@@ -42,6 +50,14 @@ public class EventoBean {
         
     }
     
+    public void MeusEventos(){
+        try {
+            eventos = EventoDAO.ListarPorUsuario(user.getIdUsuario());
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void Salvar(){
         Client cliente = ClientBuilder.newClient();
         
@@ -54,6 +70,14 @@ public class EventoBean {
         caminho.request().post(Entity.json(json));
         
         Listar();
+    }
+    
+    public FacesContext getFacesContext(){
+        return FacesContext.getCurrentInstance();
+    }
+  
+    public HttpSession getSession(){
+        return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
 
     public Evento getEvento() {

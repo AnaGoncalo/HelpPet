@@ -5,14 +5,21 @@
  */
 package Beans;
 
+import DAO.EncontroDAO;
 import Modelo.Encontro;
 import Modelo.Animal;
+import Modelo.Usuario;
 import com.google.gson.Gson;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -27,6 +34,7 @@ public class EncontroBean {
     private Encontro encontro;
     private Animal animal;
     private List<Encontro> encontros = new ArrayList();
+    private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
     
     public EncontroBean() {
     }
@@ -51,6 +59,14 @@ public class EncontroBean {
         
     }
     
+    public void MeusEncontros(){
+        try {
+            encontros = EncontroDAO.ListarPorUsuario(user.getIdUsuario());
+        } catch (SQLException ex) {
+            Logger.getLogger(EncontroBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void Listar(){
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/encontro");
@@ -59,6 +75,14 @@ public class EncontroBean {
         Gson gson = new Gson();
         Encontro[] vetor = gson.fromJson(json, Encontro[].class);
         encontros = Arrays.asList(vetor);
+    }
+    
+    public FacesContext getFacesContext(){
+        return FacesContext.getCurrentInstance();
+    }
+  
+    public HttpSession getSession(){
+        return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
 
     public Encontro getEncontro() {

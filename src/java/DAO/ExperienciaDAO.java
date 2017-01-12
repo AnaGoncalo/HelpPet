@@ -83,4 +83,36 @@ public class ExperienciaDAO {
         return lista;
     }
     
+    public static List<Experiencia> ListarPorUsuario(int idUsuario) throws SQLException
+    {
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Experiencia> lista = new ArrayList();
+        String sql= "SELECT * FROM Experiencia WHERE idUsuario = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, idUsuario);
+            
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                Experiencia a = new Experiencia(rs.getInt("idExperiencia"), rs.getString("tituloExperiencia"), 
+                        rs.getString("tipoExperiencia"), rs.getString("texto"), rs.getString("foto"), 
+                        rs.getDate("dataCadastro"), rs.getBoolean("statusExperiencia"), rs.getInt("idUsuario"));
+                lista.add(a);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(ExperienciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            Banco.closeConexao(conn, rs, pstmt, null);
+        } 
+        return lista;
+    }
+    
 }

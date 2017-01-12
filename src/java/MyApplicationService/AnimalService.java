@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,35 +27,52 @@ import javax.ws.rs.PathParam;
 public class AnimalService {
    // "http://localhost:8080/TesteWS/rest/animal"
    @GET
-   public String listar() throws SQLException
+   public String listar()
    {
-       List<Animal> animais = AnimalDAO.ListarAnimaisNaoAdotados();
+       List<Animal> animais = null;
+       try {
+           animais = AnimalDAO.ListarAnimaisNaoAdotados();
+       } catch (SQLException ex) {
+           Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
+       }
        
        Gson gson = new Gson();
        String json = gson.toJson(animais);
        
        return json;
    }
-   // "http://localhost:8080/TesteWS/rest/animal/{codigo}"
+   
+   // "http://localhost:8080/TesteWS/rest/animal/{idUsuario}"
    @GET
-   @Path("{codigo}")
-   public String listarByCod(@PathParam("codigo") String codigo){
-       AnimalDAO animalDao = new AnimalDAO();
+   @Path("{idUsuario}")
+   public String listarPorUsuario(@PathParam("idUsuario") int idUsuario){
        
        Gson gson = new Gson();
-       String json = gson.toJson(animalDao.listarByCod(codigo));
+       String json = null;
+       try {
+           json = gson.toJson(AnimalDAO.ListarPorUsuario(idUsuario));
+       } catch (SQLException ex) {
+           Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
+       }
        
        return json;
    }
+   
    // "http://localhost:8080/TesteWS/rest/animal"
    @POST
-   public String cadastrarAnimal(String json) throws SQLException{
+   public String cadastrarAnimal(String json) 
+   {
        Gson gson = new Gson();
        Animal a = gson.fromJson(json, Animal.class);
-       a.setIdUsuario(1);
+       
        a.setIdLocalizacao(1);
        System.out.println("Deu certo " + a.getNomeAnimal());
-       AnimalDAO.CadastrarAnimal(a);
+       
+       try {
+           AnimalDAO.CadastrarAnimal(a);
+       } catch (SQLException ex) {
+           Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
+       }
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

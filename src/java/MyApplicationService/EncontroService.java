@@ -10,10 +10,13 @@ import Modelo.Encontro;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.midi.Soundbank;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 /**
  *
  * @author Ana Gonçalo
@@ -31,6 +34,7 @@ public class EncontroService {
        
        return json;
    } 
+   
    // "http://localhost:8080/TesteWS/rest/encontro"
    @POST
    public String cadastrarEncontro(String json) throws SQLException{
@@ -45,5 +49,20 @@ public class EncontroService {
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
    }
-    
+   
+   // "http://localhost:8080/TesteWS/rest/encontro/{idUsuario}"
+   @GET
+   @Path("{idUsuario}")
+   public String listarPorUsuario(@PathParam("idUsuario") int idUsuario){
+       
+       Gson gson = new Gson();
+       String json = null;
+       try {
+           json = gson.toJson(EncontroDAO.ListarPorUsuario(idUsuario));
+       } catch (SQLException ex) {
+           Logger.getLogger(EncontroService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       return json;
+   }
 }

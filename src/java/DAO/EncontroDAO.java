@@ -84,4 +84,36 @@ public class EncontroDAO {
         return lista;
     }
     
+    public static List<Encontro> ListarPorUsuario(int idUsuario) throws SQLException
+    {
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Encontro> lista = new ArrayList();
+        String sql= "SELECT * FROM Encontro WHERE idUsuario = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, idUsuario);
+            
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getDate("dataEncontro"), rs.getString("horarioEncontro"),
+                        rs.getBoolean("statusEncontro"), rs.getBoolean("editado"), rs.getInt("idAnimal"), rs.getInt("idUsuario"),
+                        rs.getInt("idLocalizacao"));
+                lista.add(a);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(EncontroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            Banco.closeConexao(conn, rs, pstmt, null);
+        } 
+        return lista;
+    }
+    
 }

@@ -8,13 +8,18 @@ package Beans;
 import DAO.AnimalDAO;
 import Modelo.Animal;
 import Modelo.Encontro;
+import Modelo.Usuario;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -29,8 +34,10 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class AnimalBean {
     private Animal animal = new Animal();
+    private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
+  
     private List<Animal> animais = new ArrayList();
-   private Encontro encontro = new Encontro();
+    private Encontro encontro = new Encontro();
     
     public AnimalBean() throws SQLException {
         Listar();
@@ -43,6 +50,7 @@ public class AnimalBean {
         
         Gson gson = new Gson();
         
+        animal.setIdUsuario(user.getIdUsuario());
         String json = gson.toJson(animal);
         
         caminho.request().post(Entity.json(json));
@@ -52,7 +60,8 @@ public class AnimalBean {
     }
     
     public String SalvarEncontro(){
-        encontro.setIdUsuario(1); //pega o usuario da sessao
+        //encontro.setIdUsuario(1); //pega o usuario da sessao
+        encontro.setIdUsuario(user.getIdUsuario());
         encontro.setIdLocalizacao(1);
         encontro.setIdAnimal(animal.getIdAnimal());
         
@@ -80,6 +89,14 @@ public class AnimalBean {
         animais = Arrays.asList(vetor);
     }
     
+    public void MeusAnimais(){
+        try {
+            animais = AnimalDAO.ListarPorUsuario(user.getIdUsuario());
+        } catch (SQLException ex) {
+            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public String VerAnimal(Animal a){
         animal = a;
         
@@ -94,6 +111,14 @@ public class AnimalBean {
         encontro.setIdAnimal(animal.getIdAnimal());
         
         return "cadastrarEncontro.jsf";
+    }
+    
+    public FacesContext getFacesContext(){
+        return FacesContext.getCurrentInstance();
+    }
+  
+    public HttpSession getSession(){
+        return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
     
     public Animal getAnimal() {

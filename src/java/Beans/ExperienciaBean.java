@@ -5,13 +5,20 @@
  */
 package Beans;
 
+import DAO.ExperienciaDAO;
 import Modelo.Experiencia;
+import Modelo.Usuario;
 import com.google.gson.Gson;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -26,10 +33,8 @@ import javax.ws.rs.client.WebTarget;
 public class ExperienciaBean {
     private Experiencia experiencia = new Experiencia();
     private List<Experiencia> experiencias = new ArrayList();
+    private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
     
-    /**
-     * Creates a new instance of ExperienciaBean
-     */
     public ExperienciaBean() {
         Listar();
     }
@@ -44,6 +49,14 @@ public class ExperienciaBean {
         experiencias = Arrays.asList(vetor);
     }
     
+    public void MinhasExperiencias(){
+        try {
+            experiencias = ExperienciaDAO.ListarPorUsuario(user.getIdUsuario());
+        } catch (SQLException ex) {
+            Logger.getLogger(ExperienciaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void Salvar(){
         Client cliente = ClientBuilder.newClient();
         
@@ -56,6 +69,14 @@ public class ExperienciaBean {
         caminho.request().post(Entity.json(json));
         
         Listar();
+    }
+    
+    public FacesContext getFacesContext(){
+        return FacesContext.getCurrentInstance();
+    }
+  
+    public HttpSession getSession(){
+        return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
 
     public Experiencia getExperiencia() {

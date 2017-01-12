@@ -10,9 +10,12 @@ import Modelo.Evento;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 /**
  *
@@ -31,6 +34,7 @@ public class EventoService {
        
        return json;
    } 
+   
    // "http://localhost:8080/TesteWS/rest/evento"
    @POST
    public String cadastrarEvento(String json) throws SQLException{
@@ -43,5 +47,21 @@ public class EventoService {
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/evento/{idUsuario}"
+   @GET
+   @Path("{idUsuario}")
+   public String listarPorUsuario(@PathParam("idUsuario") int idUsuario){
+       
+       Gson gson = new Gson();
+       String json = null;
+       try {
+           json = gson.toJson(EventoDAO.ListarPorUsuario(idUsuario));
+       } catch (SQLException ex) {
+           Logger.getLogger(EventoService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       return json;
    }
 }

@@ -79,4 +79,35 @@ public class EstoqueDAO {
         } 
         return lista;
     }
+    
+    public static List<Estoque> ListarPorUsuario(int idUsuario) throws SQLException
+    {
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Estoque> lista = new ArrayList();
+        String sql= "SELECT * FROM Estoque WHERE idUsuario = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, idUsuario);
+            
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                Estoque a = new Estoque(rs.getInt("idEstoque"), rs.getString("nomeEstoque"), rs.getString("necessidade"), 
+                        rs.getDouble("qtdDiaria"), rs.getDouble("qtdAtual"), rs.getInt("idUsuario"));
+                lista.add(a);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            Banco.closeConexao(conn, rs, pstmt, null);
+        } 
+        return lista;
+    }
 }

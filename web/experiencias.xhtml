@@ -86,7 +86,9 @@
                                 <div align="left">
                                     <p>#{experiencia.texto}</p>
                                 </div>
-                                <p><a href="verExperiencia.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                                <h:form>
+                                    <p><b:commandButton action="#{experienciaBean.VerExperiencia(experiencia)}" value="Ver Mais" class="btn btn-default" style="background-color: #ffa812; color: white;"/></p>
+                                </h:form>
                             </div>
                         </div>
                     </div>

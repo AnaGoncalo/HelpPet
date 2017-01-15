@@ -69,6 +69,11 @@ public class AnuncioBean {
         
         Listar();
     }
+    
+    public String VerAnuncio(Anuncio a){
+        anuncio = a;
+        return "anuncio.jsf";
+    }
 
     public FacesContext getFacesContext(){
         return FacesContext.getCurrentInstance();

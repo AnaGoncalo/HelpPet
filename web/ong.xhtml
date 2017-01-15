@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Help Pet - ONG</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+
+        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
+
+        <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+
+        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
+
+    </h:head>
+    <h:body>
+
+        <!-- Menu -->
+
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+
+
+        <b:row>
+            <!-- Opções -->
+            <div class="container-fluid">
+
+                <b:column col-md="2">
+                    <!-- Espaçamento -->
+                </b:column>
+                <!-- Detalhes do Animal -->
+                <b:column col-md="8">
+                    <div class="thumbnail">
+                        <b:row>
+                            <b:column col-md="6">
+                                <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
+                            </b:column>
+                            <b:column col-md="6">
+                                <div class="caption" align="center">
+                                    <h4>#{pjBean.pessoa.nomeUsuario}</h4>
+                                    <div align="left">
+                                        <p>Email: #{pjBean.pessoa.email}</p>
+                                        <p>CNPJ: #{pjBean.pessoa.cnpj}</p>
+                                        <p>Descrição: #{pjBean.pessoa.descricao}</p>
+                                        <c:forEach var="estoque" items="#{estoqueBean.estoques}">
+                                            <b:column col-lg="4">
+                                                <div class="thumbnail">
+                                                    <div class="caption">
+                                                        <h4>#{estoque.nomeEstoque}</h4>
+                                                        <p>#{estoque.necessidade}</p>
+                                                        <p>#{estoque.qtdAtual}</p>
+                                                        <p>#{estoque.qtdDiaria}</p>
+                                                    </div>
+                                                </div><!-- /.col-lg-4 -->
+                                            </b:column>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+
+                            </b:column>
+                        </b:row>
+                    </div>
+                </b:column>
+            </div>
+        </b:row>
+
+        <br/>
+        <!-- Rodapé -->
+        <div id="footer" align="center">
+            <b:row>
+                <ui:insert name="footer">
+                    <!-- Import de página do rodapé -->
+                    <ui:include src="rodape.xhtml"/>
+                </ui:insert>
+            </b:row>
+        </div>
+        <br/>
+    </h:body>
+    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
+</html>
+

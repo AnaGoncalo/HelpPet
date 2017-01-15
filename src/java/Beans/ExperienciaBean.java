@@ -71,6 +71,11 @@ public class ExperienciaBean {
         Listar();
     }
     
+    public String VerExperiencia(Experiencia e){
+        experiencia = e;
+        return "experiencia.jsf";
+    }
+    
     public FacesContext getFacesContext(){
         return FacesContext.getCurrentInstance();
     }

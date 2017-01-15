@@ -72,6 +72,11 @@ public class EventoBean {
         Listar();
     }
     
+    public String VerEvento(Evento e){
+        evento = e;
+        return "evento.jsf";
+    }
+    
     public FacesContext getFacesContext(){
         return FacesContext.getCurrentInstance();
     }

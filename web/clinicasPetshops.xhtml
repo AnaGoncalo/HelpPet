@@ -76,7 +76,7 @@
 
             <!-- Listagem de animais -->
             <b:row>
-                <c:forEach var="clinica" items="#{clinicaPetshopBean.clinicasPetshops}">
+                <c:forEach var="clinica" items="#{pjBean.pjs}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail">
                             <img src="imagens/gato3.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
@@ -86,7 +86,7 @@
                                     
                                 </div>
                                 <h:form>
-                                    <p><b:commandButton action="#{usuarioBean.VerUsuario(clinica)}" value="Ver Mais" class="btn btn-default" style="background-color: #ffa812; color: white;"/></p>
+                                    <p><b:commandButton action="#{pjBean.VerClinica(clinica)}" value="Ver Mais" class="btn btn-default" style="background-color: #ffa812; color: white;"/></p>
                                 </h:form>
                             </div>
                         </div>

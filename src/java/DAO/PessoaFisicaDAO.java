@@ -6,7 +6,6 @@
 package DAO;
 
 import Modelo.PessoaFisica;
-import Modelo.PessoaJuridica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +20,7 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class PessoaFisicaDAO {
+    
     
     public static List<PessoaFisica> listarHelpers() throws SQLException
     {
@@ -50,6 +50,30 @@ public class PessoaFisicaDAO {
             Banco.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
+    }
+    
+    public static void editarPF(PessoaFisica pf) throws SQLException
+    {
+        System.out.println("Testando editar DAO PF");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "UPDATE PessoaFisica SET cpf = ? WHERE idHelper = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setString(1, pf.getCpf());
+            pstmt.setInt(2, pf.getIdHelper());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(PessoaFisicaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        } 
     }
     
     

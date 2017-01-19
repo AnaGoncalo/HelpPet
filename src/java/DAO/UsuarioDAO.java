@@ -52,6 +52,35 @@ public class UsuarioDAO {
         } 
     }
     
+    public static void editar(Usuario usuario) throws SQLException
+    {
+        System.out.println("Testando editar DAo Usuario");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "UPDATE Usuario SET nomeUsuario = ?, email = ?, senha = ?, dataNascimento = ?, foto = ?, "
+                + "idPermissao = ? WHERE idUsuario = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setString(1, usuario.getNomeUsuario());
+            pstmt.setString(2, usuario.getEmail());
+            pstmt.setString(3, usuario.getSenha());
+            pstmt.setDate(4, (Date) usuario.getDataNascimento());
+            pstmt.setString(5, usuario.getFoto());
+            pstmt.setInt(6, usuario.getIdPermissao());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        } 
+    }
+    
     public Usuario buscarById(int idUsuario) throws SQLException
     {
         Connection conn = Banco.getConexao();

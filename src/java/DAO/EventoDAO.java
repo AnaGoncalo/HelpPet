@@ -54,6 +54,38 @@ public class EventoDAO {
         return "OK!";
     }
     
+    public static String EditarEvento(Evento evento) throws SQLException
+    {
+        System.out.println("evento dao editar");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "UPDATE Evento SET nomeEvento = ?, dataEvento = ?, horarioEvento = ?, descricaoEvento = ?, "
+                + "fotoEvento = ?, idUsuario = ?, idLocalizacao = ? WHERE idEvento = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setString(1, evento.getNomeEvento());
+            pstmt.setDate(2, (Date) evento.getDataEvento());
+            pstmt.setString(3, evento.getHorarioEvento());
+            pstmt.setString(4, evento.getDescricaoEvento());
+            pstmt.setString(5, evento.getFotoEvento());
+            pstmt.setInt(6, evento.getIdUsuario());
+            pstmt.setInt(7, evento.getIdLocalizacao());
+            pstmt.setInt(8, evento.getIdEvento());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "OK!";
+    }
+    
     public static List<Evento> ListarEventos() throws SQLException
     {
         Connection conn = Banco.getConexao();

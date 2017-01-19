@@ -67,7 +67,7 @@ public class AnimalDAO {
         return "OK!";
     }
     
-    public void EditarAnimal(Animal animal) throws SQLException
+    public static void EditarAnimal(Animal animal) throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;

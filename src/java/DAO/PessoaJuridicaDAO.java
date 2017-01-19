@@ -82,4 +82,32 @@ public class PessoaJuridicaDAO {
         } 
         return lista;
     }
+    
+    public static void editarPJ(PessoaJuridica pj) throws SQLException
+    {
+        System.out.println("Testando editar DAO PJ");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "UPDATE PessoaJuridica SET cnpj = ?, funcionamento = ?, descricao = ?, site = ? "
+                + "WHERE idClinicaPetshop = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setString(1, pj.getCnpj());
+            pstmt.setString(2, pj.getFuncionamento());
+            pstmt.setString(3, pj.getDescricao());
+            pstmt.setString(4, pj.getSite());
+            pstmt.setInt(5, pj.getIdClinicaPetshop());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(PessoaJuridicaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        } 
+    }
 }

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -70,6 +71,27 @@ public class AnimalService {
        
        try {
            AnimalDAO.CadastrarAnimal(a);
+       } catch (SQLException ex) {
+           Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+       
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/animal"
+   @PUT
+   public String editarAnimal(String json) 
+   {
+       Gson gson = new Gson();
+       Animal a = gson.fromJson(json, Animal.class);
+       
+       a.setIdLocalizacao(1);
+       System.out.println("Deu certo " + a.getNomeAnimal());
+       
+       try {
+           AnimalDAO.EditarAnimal(a);
        } catch (SQLException ex) {
            Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
        }

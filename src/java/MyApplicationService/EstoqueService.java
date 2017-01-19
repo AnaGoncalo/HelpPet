@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -40,9 +41,22 @@ public class EstoqueService {
    public String cadastrarEstoque(String json) throws SQLException{
        Gson gson = new Gson();
        Estoque a = gson.fromJson(json, Estoque.class);
-       a.setIdUsuario(1);
+       //a.setIdUsuario(1);
        System.out.println("Deu certo " + a.getNomeEstoque());
        EstoqueDAO.CadastrarEstoque(a);
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/estoque"
+   @PUT
+   public String editarEstoque(String json) throws SQLException{
+       Gson gson = new Gson();
+       Estoque a = gson.fromJson(json, Estoque.class);
+       
+       System.out.println("Deu certo " + a.getNomeEstoque());
+       EstoqueDAO.EditarEstoque(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

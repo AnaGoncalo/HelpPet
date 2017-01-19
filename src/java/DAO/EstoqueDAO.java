@@ -51,6 +51,36 @@ public class EstoqueDAO {
         return "OK!";
     }
     
+    public static String EditarEstoque(Estoque estoque) throws SQLException
+    {
+        System.out.println("estoque dao editar");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "UPDATE Estoque SET nomeEstoque = ?, necessidade = ?, qtdDiaria = ?, qtdAtual = ?, idUsuario = ? "
+                + "WHERE idEstoque = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setString(1, estoque.getNomeEstoque());
+            pstmt.setString(2, estoque.getNecessidade());
+            pstmt.setDouble(3, estoque.getQtdDiaria());
+            pstmt.setDouble(4, estoque.getQtdAtual());
+            pstmt.setInt(5, estoque.getIdUsuario());
+            pstmt.setInt(6, estoque.getIdEstoque());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "OK!";
+    }
+    
     public static List<Estoque> ListarEstoques() throws SQLException
     {
         Connection conn = Banco.getConexao();

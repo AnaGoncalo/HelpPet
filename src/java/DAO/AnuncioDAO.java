@@ -52,6 +52,36 @@ public class AnuncioDAO {
         return "OK!";
     }
     
+    public static String EditarAnuncio(Anuncio anuncio) throws SQLException
+    {
+        System.out.println("anuncio dao editar");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "UPDATE Anuncio SET tituloAnuncio = ?, descricaoAnuncio = ?, fotoAnuncio = ?, tipoAnuncio = ?, "
+                + "idUsuario = ? WHERE idAnuncio = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setString(1, anuncio.getTituloAnuncio());
+            pstmt.setString(2, anuncio.getDescricaoAnuncio());
+            pstmt.setString(3, anuncio.getFotoAnuncio());
+            pstmt.setString(4, anuncio.getTipoAnuncio());
+            pstmt.setInt(5, anuncio.getIdUsuario());
+            pstmt.setInt(6, anuncio.getIdAnuncio());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(AnuncioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "OK!";
+    }
+    
     public static List<Anuncio> ListarAnuncios() throws SQLException
     {
         Connection conn = Banco.getConexao();

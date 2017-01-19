@@ -53,6 +53,37 @@ public class ExperienciaDAO {
         return "OK!";
     }
     
+    public static String EditarExperiencia(Experiencia experiencia) throws SQLException{
+        
+        System.out.println("experiencia dao editar");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "UPDATE Experiencia SET tituloExperiencia = ?, tipoExperiencia = ?, texto = ?, foto = ?,"
+                + "statusExperiencia = ?, idUsuario = ? WHERE idExperiencia = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setString(1, experiencia.getTituloExperiencia());
+            pstmt.setString(2, experiencia.getTipoExperiencia());
+            pstmt.setString(3, experiencia.getTexto());
+            pstmt.setString(4, experiencia.getFoto());
+            pstmt.setBoolean(5, experiencia.isStatusExperiencia());
+            pstmt.setInt(6, experiencia.getIdUsuario());
+            pstmt.setInt(7, experiencia.getIdExperiencia());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(ExperienciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "Ok!";
+    }
+    
     public static List<Experiencia> ListarExperiencias() throws SQLException
     {
         Connection conn = Banco.getConexao();

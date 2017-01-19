@@ -59,6 +59,7 @@ public class EstoqueBean {
     }
     
     public void Salvar(){
+        estoque.setIdUsuario(user.getIdUsuario());
         Client cliente = ClientBuilder.newClient();
         
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque");

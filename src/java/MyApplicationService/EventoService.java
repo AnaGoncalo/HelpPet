@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -44,6 +45,20 @@ public class EventoService {
        a.setIdLocalizacao(1);
        System.out.println("Deu certo " + a.getNomeEvento());
        EventoDAO.CadastrarEvento(a);
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/evento"
+   @PUT
+   public String editarEvento(String json) throws SQLException{
+       Gson gson = new Gson();
+       Evento a = gson.fromJson(json, Evento.class);
+       a.setIdUsuario(1);
+       a.setIdLocalizacao(1);
+       System.out.println("Deu certo " + a.getNomeEvento());
+       EventoDAO.EditarEvento(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

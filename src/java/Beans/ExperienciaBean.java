@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -58,6 +59,7 @@ public class ExperienciaBean {
     }
     
     public void Salvar(){
+        experiencia.setIdUsuario(user.getIdUsuario());
         Client cliente = ClientBuilder.newClient();
         
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/experiencia");
@@ -74,6 +76,13 @@ public class ExperienciaBean {
     public String VerExperiencia(Experiencia e){
         experiencia = e;
         return "experiencia.jsf";
+    }
+    
+    public void EditarExperiencia(ActionEvent evento){
+        //experiencia = (Experiencia) evento.getComponent().getAttributes().get("experienciaSelecionada");
+               
+        
+        
     }
     
     public FacesContext getFacesContext(){

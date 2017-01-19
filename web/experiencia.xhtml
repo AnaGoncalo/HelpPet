@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Help Pet - Anuncio</title>
+        <title>Help Pet - Experiencia</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
@@ -67,7 +67,13 @@
                                         <p>#{experienciaBean.experiencia.texto}</p>
                                     </div>
                                 </div>
-
+                                <h:form>
+                                    <p>
+                                        <b:commandButton actionListener="#{experienciaBean.EditarExperiencia()}" value="Editar" class="btn btn-default" style="background-color: #ffa812; color: white;">
+                                            <f:attribute name="experienciaSelecionada" value="#{experienciaBean.experiencia}"/>
+                                        </b:commandButton>
+                                    </p>
+                                </h:form>
                             </b:column>
                         </b:row>
                     </div>

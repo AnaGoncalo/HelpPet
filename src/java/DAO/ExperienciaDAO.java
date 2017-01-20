@@ -84,6 +84,30 @@ public class ExperienciaDAO {
         return "Ok!";
     }
     
+    public static String ExcluirExperiencia(Experiencia experiencia) throws SQLException{
+        
+        System.out.println("experiencia dao excluir");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "DELETE FROM Experiencia WHERE idExperiencia = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setInt(1, experiencia.getIdExperiencia());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(ExperienciaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "Ok!";
+    }
+    
     public static List<Experiencia> ListarExperiencias() throws SQLException
     {
         Connection conn = Banco.getConexao();

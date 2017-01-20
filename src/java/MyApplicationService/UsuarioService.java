@@ -10,6 +10,8 @@ import Modelo.Usuario;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 
 /**
@@ -19,7 +21,7 @@ import javax.ws.rs.Path;
 @Path("usuario")
 public class UsuarioService {
     
-    // "http://localhost:8080/TesteWS/rest/usuario"
+   // "http://localhost:8080/TesteWS/rest/usuario"
    @POST
    public String cadastrarUsuario(String json) throws SQLException{
        Gson gson = new Gson();
@@ -31,6 +33,32 @@ public class UsuarioService {
        String jsonSaida = gson.toJson(u);
        return jsonSaida;
        
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/usuario"
+   @PUT
+   public String editarUsuario(String json) throws SQLException{
+       Gson gson = new Gson();
+       Usuario u = gson.fromJson(json, Usuario.class);
+       
+       System.out.println("Deu certo " + u.getNomeUsuario());
+       UsuarioDAO.editar(u);
+       
+       String jsonSaida = gson.toJson(u);
+       return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/usuario"
+   @DELETE
+   public String excluirUsuario(String json) throws SQLException{
+       Gson gson = new Gson();
+       Usuario u = gson.fromJson(json, Usuario.class);
+       
+       System.out.println("Deu certo " + u.getNomeUsuario());
+       UsuarioDAO.excluir(u);
+       
+       String jsonSaida = gson.toJson(u);
+       return jsonSaida;
    }
     
 }

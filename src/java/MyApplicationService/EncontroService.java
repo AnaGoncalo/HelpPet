@@ -16,6 +16,7 @@ import javax.sound.midi.Soundbank;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 /**
@@ -59,6 +60,18 @@ public class EncontroService {
        
        
        EncontroDAO.EditarEncontro(a);
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/encontro"
+   @DELETE
+   public String excluirEncontro(String json) throws SQLException{
+       Gson gson = new Gson();
+       Encontro a = gson.fromJson(json, Encontro.class);
+       
+       EncontroDAO.ExcluirEncontro(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

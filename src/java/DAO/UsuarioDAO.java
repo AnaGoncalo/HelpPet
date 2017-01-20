@@ -81,6 +81,29 @@ public class UsuarioDAO {
         } 
     }
     
+    public static void excluir(Usuario usuario) throws SQLException
+    {
+        System.out.println("Testando excluir DAO usuario");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "DELETE FROM Usuario WHERE idUsuario = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setInt(1, usuario.getIdUsuario());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        } 
+    }
+    
     public Usuario buscarById(int idUsuario) throws SQLException
     {
         Connection conn = Banco.getConexao();

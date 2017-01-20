@@ -86,6 +86,30 @@ public class EventoDAO {
         return "OK!";
     }
     
+    public static String ExcluirEvento(Evento evento) throws SQLException
+    {
+        System.out.println("evento dao excluir");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "DELETE FROM Evento WHERE idEvento = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setInt(1, evento.getIdEvento());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "OK!";
+    }
+    
     public static List<Evento> ListarEventos() throws SQLException
     {
         Connection conn = Banco.getConexao();

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 /**
@@ -48,6 +49,7 @@ public class ExperienciaService {
        return jsonSaida;
        
    }
+   
    // "http://localhost:8080/TesteWS/rest/experiencia"
    @PUT
    public String editarExperiencia(String json) throws SQLException{
@@ -55,6 +57,18 @@ public class ExperienciaService {
        Experiencia a = gson.fromJson(json, Experiencia.class);
        
        ExperienciaDAO.EditarExperiencia(a);
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/experiencia"
+   @DELETE
+   public String excluirExperiencia(String json) throws SQLException{
+       Gson gson = new Gson();
+       Experiencia a = gson.fromJson(json, Experiencia.class);
+       
+       ExperienciaDAO.ExcluirExperiencia(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

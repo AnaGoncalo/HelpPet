@@ -99,7 +99,7 @@ public class AnimalDAO {
         } 
     }
     
-    public void ExcluirAnimal(Animal animal) throws SQLException
+    public static void ExcluirAnimal(Animal animal) throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;

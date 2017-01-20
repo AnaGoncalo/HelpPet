@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -59,6 +60,19 @@ public class EventoService {
        a.setIdLocalizacao(1);
        System.out.println("Deu certo " + a.getNomeEvento());
        EventoDAO.EditarEvento(a);
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/evento"
+   @DELETE
+   public String excluirEvento(String json) throws SQLException{
+       Gson gson = new Gson();
+       Evento a = gson.fromJson(json, Evento.class);
+       
+       System.out.println("Deu certo " + a.getNomeEvento());
+       EventoDAO.ExcluirEvento(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

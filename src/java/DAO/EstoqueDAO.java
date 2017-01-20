@@ -81,6 +81,30 @@ public class EstoqueDAO {
         return "OK!";
     }
     
+    public static String ExcluirEstoque(Estoque estoque) throws SQLException
+    {
+        System.out.println("estoque dao excluir");
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "DELETE FROM Estoque WHERE idEstoque = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setInt(1, estoque.getIdEstoque());
+           
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(EstoqueDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "OK!";
+    }
+    
     public static List<Estoque> ListarEstoques() throws SQLException
     {
         Connection conn = Banco.getConexao();

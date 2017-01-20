@@ -82,6 +82,30 @@ public class AnuncioDAO {
         return "OK!";
     }
     
+    public static String ExcluirAnuncio(Anuncio anuncio) throws SQLException
+    {
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        String comandoSql = "DELETE FROM Anuncio WHERE idAnuncio = ?";
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setInt(1, anuncio.getIdAnuncio());
+            
+            pstmt.executeUpdate();
+            System.out.println("Resultado excluir DAO");// + pstmt.executeUpdate());
+        }
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(AnuncioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        finally
+        {
+            Banco.closeConexao(conn, null, pstmt, null);
+        }
+        return "OK!";
+    }
+    
     public static List<Anuncio> ListarAnuncios() throws SQLException
     {
         Connection conn = Banco.getConexao();

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -38,7 +39,7 @@ public class AnuncioService {
    
    // "http://localhost:8080/TesteWS/rest/anuncio"
    @POST
-   public String cadastrarEstoque(String json) throws SQLException{
+   public String cadastrarAnuncio(String json) throws SQLException{
        Gson gson = new Gson();
        Anuncio a = gson.fromJson(json, Anuncio.class);
        a.setIdUsuario(1);
@@ -51,12 +52,24 @@ public class AnuncioService {
    
    // "http://localhost:8080/TesteWS/rest/anuncio"
    @PUT
-   public String editarEstoque(String json) throws SQLException{
+   public String editarAnuncio(String json) throws SQLException{
        Gson gson = new Gson();
        Anuncio a = gson.fromJson(json, Anuncio.class);
        
        System.out.println("Deu certo " + a.getTituloAnuncio());
        AnuncioDAO.EditarAnuncio(a);
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+   }
+   
+   //
+   @DELETE
+   public String excluirAnuncio(String json) throws SQLException{
+       Gson gson = new Gson();
+       Anuncio a = gson.fromJson(json, Anuncio.class); 
+       
+       AnuncioDAO.ExcluirAnuncio(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

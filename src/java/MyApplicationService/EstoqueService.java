@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -57,6 +58,19 @@ public class EstoqueService {
        
        System.out.println("Deu certo " + a.getNomeEstoque());
        EstoqueDAO.EditarEstoque(a);
+       
+       String jsonSaida = gson.toJson(a);
+       return jsonSaida;
+   }
+   
+   // "http://localhost:8080/TesteWS/rest/estoque"
+   @DELETE
+   public String excluirEstoque(String json) throws SQLException{
+       Gson gson = new Gson();
+       Estoque a = gson.fromJson(json, Estoque.class);
+       
+       System.out.println("Deu certo " + a.getNomeEstoque());
+       EstoqueDAO.ExcluirEstoque(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

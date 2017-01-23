@@ -51,11 +51,13 @@ public class AnuncioBean {
     }
     
     public void MeusAnuncios(){
-        try {
-            anuncios = AnuncioDAO.ListarPorUsuario(user.getIdUsuario());
-        } catch (SQLException ex) {
-            Logger.getLogger(AnuncioBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/anuncio/" + user.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        
+        Gson gson = new Gson();
+        Anuncio[] vetor = gson.fromJson(json, Anuncio[].class);
+        anuncios = Arrays.asList(vetor);
     }
     
     public void Salvar(){

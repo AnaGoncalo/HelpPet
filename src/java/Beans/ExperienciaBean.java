@@ -51,23 +51,21 @@ public class ExperienciaBean {
     }
     
     public void MinhasExperiencias(){
-        try {
-            experiencias = ExperienciaDAO.ListarPorUsuario(user.getIdUsuario());
-        } catch (SQLException ex) {
-            Logger.getLogger(ExperienciaBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia" + user.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        
+        Gson gson = new Gson();
+        Experiencia[] vetor = gson.fromJson(json, Experiencia[].class);
+        experiencias = Arrays.asList(vetor);
     }
     
     public void Salvar(){
         experiencia.setIdUsuario(user.getIdUsuario());
         Client cliente = ClientBuilder.newClient();
-        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/experiencia");
-        
         Gson gson = new Gson();
-        
         String json = gson.toJson(experiencia);
-        
         caminho.request().post(Entity.json(json));
         
         Listar();

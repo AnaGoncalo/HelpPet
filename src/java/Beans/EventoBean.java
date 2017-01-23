@@ -47,15 +47,16 @@ public class EventoBean {
         Gson gson = new Gson();
         Evento[] vetor = gson.fromJson(json, Evento[].class);
         eventos = Arrays.asList(vetor);
-        
     }
     
     public void MeusEventos(){
-        try {
-            eventos = EventoDAO.ListarPorUsuario(user.getIdUsuario());
-        } catch (SQLException ex) {
-            Logger.getLogger(EventoBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/evento" + user.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        
+        Gson gson = new Gson();
+        Evento[] vetor = gson.fromJson(json, Evento[].class);
+        eventos = Arrays.asList(vetor);
     }
     
     public void Salvar(){

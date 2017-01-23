@@ -104,7 +104,7 @@ public class UsuarioDAO {
         } 
     }
     
-    public Usuario buscarById(int idUsuario) throws SQLException
+    public static Usuario buscarById(int idUsuario) throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
@@ -144,7 +144,7 @@ public class UsuarioDAO {
         return u;
     }
     
-    public PessoaFisica buscarPF(int idUsuario) throws SQLException
+    public static PessoaFisica buscarPF(int idUsuario) throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
@@ -173,7 +173,7 @@ public class UsuarioDAO {
         return u;
     }
     
-    public PessoaJuridica buscarPJ(int idUsuario) throws SQLException
+    public static PessoaJuridica buscarPJ(int idUsuario) throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;

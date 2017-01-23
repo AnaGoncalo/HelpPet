@@ -39,7 +39,7 @@ public class LogarService {
        } catch (SQLException ex) {
            Logger.getLogger(LogarService.class.getName()).log(Level.SEVERE, null, ex);
        }
-       
+       System.out.println("Service: Logou? " + usuarioLogado.getNomeUsuario());
        String jsonSaida = gson.toJson(usuarioLogado);
        return jsonSaida;
        

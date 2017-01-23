@@ -60,11 +60,13 @@ public class EncontroBean {
     }
     
     public void MeusEncontros(){
-        try {
-            encontros = EncontroDAO.ListarPorUsuario(user.getIdUsuario());
-        } catch (SQLException ex) {
-            Logger.getLogger(EncontroBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/encontro/" + user.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        
+        Gson gson = new Gson();
+        Encontro[] vetor = gson.fromJson(json, Encontro[].class);
+        encontros = Arrays.asList(vetor);
     }
     
     public void Listar(){

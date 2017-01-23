@@ -51,11 +51,13 @@ public class EstoqueBean {
     }
     
     public void MeusEstoques(){
-        try {
-            estoques = EstoqueDAO.ListarPorUsuario(user.getIdUsuario());
-        } catch (SQLException ex) {
-            Logger.getLogger(EstoqueBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/estoque/" + user.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        
+        Gson gson = new Gson();
+        Estoque[] vetor = gson.fromJson(json, Estoque[].class);
+        estoques = Arrays.asList(vetor);
     }
     
     public void Salvar(){

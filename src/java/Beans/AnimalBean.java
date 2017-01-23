@@ -45,18 +45,32 @@ public class AnimalBean {
     
     public void Salvar(){
         Client cliente = ClientBuilder.newClient();
-        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal");
-        
         Gson gson = new Gson();
         
         animal.setIdUsuario(user.getIdUsuario());
         String json = gson.toJson(animal);
-        
         caminho.request().post(Entity.json(json));
         
         Listar();
+    }
+    public void Listar(){
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal");
+        String json = caminho.request().get(String.class);
         
+        Gson gson = new Gson();
+        Animal[] vetor = gson.fromJson(json, Animal[].class);
+        animais = Arrays.asList(vetor);
+    }
+    
+    public void MeusAnimais(){
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + user.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        Gson gson = new Gson();
+        Animal[] vetor = gson.fromJson(json, Animal[].class);
+        animais = Arrays.asList(vetor);
     }
     
     public String SalvarEncontro(){
@@ -79,23 +93,7 @@ public class AnimalBean {
         
     }
     
-    public void Listar(){
-        Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal");
-        String json = caminho.request().get(String.class);
-        
-        Gson gson = new Gson();
-        Animal[] vetor = gson.fromJson(json, Animal[].class);
-        animais = Arrays.asList(vetor);
-    }
     
-    public void MeusAnimais(){
-        try {
-            animais = AnimalDAO.ListarPorUsuario(user.getIdUsuario());
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimalBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     public String VerAnimal(Animal a){
         animal = a;
@@ -106,7 +104,7 @@ public class AnimalBean {
     public String Adotar(Animal a){
         animal = a;
         //encontro = new Encontro();
-        encontro.setIdUsuario(1); //pega o usuario da sessao
+        encontro.setIdUsuario(user.getIdUsuario()); //pega o usuario da sessao
         encontro.setIdLocalizacao(1);
         encontro.setIdAnimal(animal.getIdAnimal());
         

@@ -14,13 +14,15 @@ and open the template in the editor.
     </head>
     <body>
         <h2>Login</h2>
-        <h:outputText value="#{loginBean.usuarioLogado.nomeUsuario}"/>
+        
         <h:form>
+            <h:commandButton action="#{usuarioBean.VerPerfil()}" value="#{loginBean.usuarioLogado.nomeUsuario}"/> 
+            <br/>
             Email:
-            <h:inputText value="#{loginBean.email}"/>
+            <h:inputText value="#{loginBean.user.email}"/>
             <br/>
             Senha:
-            <h:inputSecret value="#{loginBean.senha}"/>
+            <h:inputSecret value="#{loginBean.user.senha}"/>
             <br/>
             <h:commandButton action="#{loginBean.Logar()}" value="Logar"/>
         </h:form>

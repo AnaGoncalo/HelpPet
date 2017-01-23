@@ -48,12 +48,21 @@ public class AnimalBean {
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal");
         Gson gson = new Gson();
         
-        animal.setIdUsuario(user.getIdUsuario());
-        String json = gson.toJson(animal);
-        caminho.request().post(Entity.json(json));
+        if(animal.getIdAnimal() != 0)
+        {
+            animal.setIdUsuario(user.getIdUsuario());
+            String json = gson.toJson(animal);
+            caminho.request().post(Entity.json(json));
+        }
+        else
+        {
+            String json = gson.toJson(animal);
+            caminho.request().put(Entity.json(json));
+        }
         
         Listar();
     }
+    
     public void Listar(){
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal");

@@ -61,14 +61,21 @@ public class EventoBean {
     
     public void Salvar(){
         Client cliente = ClientBuilder.newClient();
-        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/evento");
-        
         Gson gson = new Gson();
         
-        String json = gson.toJson(evento);
+        if(evento.getIdUsuario() == 0)
+        {
+            evento.setIdUsuario(user.getIdUsuario());
+            String json = gson.toJson(evento);
+            caminho.request().post(Entity.json(json));
+        }
+        else
+        {
+            String json = gson.toJson(evento);
+            caminho.request().put(Entity.json(json));
+        }
         
-        caminho.request().post(Entity.json(json));
         
         Listar();
     }

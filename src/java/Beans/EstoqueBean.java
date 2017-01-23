@@ -61,17 +61,21 @@ public class EstoqueBean {
     }
     
     public void Salvar(){
-        estoque.setIdUsuario(user.getIdUsuario());
-        Client cliente = ClientBuilder.newClient();
-        
+        Client cliente = ClientBuilder.newClient();        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque");
-        
         Gson gson = new Gson();
         
-        String json = gson.toJson(estoque);
-        
-        caminho.request().post(Entity.json(json));
-        
+        if(estoque.getIdEstoque() == 0)
+        {
+            estoque.setIdUsuario(user.getIdUsuario());
+            String json = gson.toJson(estoque);
+            caminho.request().post(Entity.json(json));
+        }
+        else
+        {
+            String json = gson.toJson(estoque);
+            caminho.request().put(Entity.json(json));
+        }
         Listar();
     }
     

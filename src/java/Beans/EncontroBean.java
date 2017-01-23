@@ -48,14 +48,21 @@ public class EncontroBean {
     
     public void Salvar(){
         Client cliente = ClientBuilder.newClient();
-        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
-        
         Gson gson = new Gson();
         
-        String json = gson.toJson(encontro);
+        if(encontro.getIdEncontro() == 0)
+        {
+            encontro.setIdUsuario(user.getIdUsuario());
+            String json = gson.toJson(encontro);
+            caminho.request().post(Entity.json(json));
+        }
+        else
+        {
+            String json = gson.toJson(encontro);
+            caminho.request().put(Entity.json(json));
+        }
         
-        caminho.request().post(Entity.json(json));
         
     }
     

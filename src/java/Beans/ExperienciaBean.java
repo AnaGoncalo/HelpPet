@@ -61,12 +61,23 @@ public class ExperienciaBean {
     }
     
     public void Salvar(){
-        experiencia.setIdUsuario(user.getIdUsuario());
+        
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/experiencia");
         Gson gson = new Gson();
-        String json = gson.toJson(experiencia);
-        caminho.request().post(Entity.json(json));
+        
+        if(experiencia.getIdExperiencia() == 0)
+        {
+            experiencia.setIdUsuario(user.getIdUsuario());
+            String json = gson.toJson(experiencia);
+            caminho.request().post(Entity.json(json));
+        }
+        else
+        {
+            String json = gson.toJson(experiencia);
+            caminho.request().put(Entity.json(json));
+        }
+        
         
         Listar();
     }

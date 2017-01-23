@@ -61,13 +61,21 @@ public class AnuncioBean {
     }
     
     public void Salvar(){
-        anuncio.setIdUsuario(user.getIdUsuario());
-        
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/anuncio");
         Gson gson = new Gson();
-        String json = gson.toJson(anuncio);
-        caminho.request().post(Entity.json(json));
+        
+        if(anuncio.getIdAnuncio() == 0)
+        {
+            anuncio.setIdUsuario(user.getIdUsuario());
+            String json = gson.toJson(anuncio);
+            caminho.request().post(Entity.json(json));
+        }
+        else
+        {
+            String json = gson.toJson(anuncio);
+            caminho.request().put(Entity.json(json));
+        }
         
         Listar();
     }

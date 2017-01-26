@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
@@ -65,12 +64,12 @@
 
         <!-- Rodapé -->
         <div id="footer" align="center">
-            <b:row>
+            <div class="row">
                 <ui:insert name="footer">
                     <!-- Import de página do rodapé -->
                     <ui:include src="rodape.xhtml"/>
                 </ui:insert>
-            </b:row>
+            </div>
         </div>
         <br/>
     </h:body>

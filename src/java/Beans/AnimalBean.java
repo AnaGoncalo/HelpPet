@@ -34,6 +34,7 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class AnimalBean {
     private Animal animal = new Animal();
+    private Usuario dono = null;
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
   
     private List<Animal> animais = new ArrayList();
@@ -83,29 +84,37 @@ public class AnimalBean {
     }
     
     public String SalvarEncontro(){
-        //encontro.setIdUsuario(1); //pega o usuario da sessao
-        encontro.setIdUsuario(user.getIdUsuario());
-        encontro.setIdLocalizacao(1);
-        encontro.setIdAnimal(animal.getIdAnimal());
-        
         Client cliente = ClientBuilder.newClient();
-        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
-        
         Gson gson = new Gson();
         
-        String json = gson.toJson(encontro);
+        encontro.setIdLocalizacao(1);
         
-        caminho.request().post(Entity.json(json));
-        
+        if(encontro.getIdEncontro() == 0)
+        {
+            encontro.setIdUsuario(user.getIdUsuario());
+            encontro.setIdAnimal(animal.getIdAnimal());
+            String json = gson.toJson(encontro);
+            caminho.request().post(Entity.json(json));
+        }
+        else
+        {
+            String json = gson.toJson(encontro);
+            caminho.request().put(Entity.json(json));
+        }
         return "index.jsf";
-        
     }
     
     
     
     public String VerAnimal(Animal a){
         animal = a;
+        
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/usuario/" + animal.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        Gson gson = new Gson();
+        dono = gson.fromJson(json, Usuario.class);
         
         return "animal.jsf";
     }
@@ -151,6 +160,12 @@ public class AnimalBean {
     public void setEncontro(Encontro encontro) {
         this.encontro = encontro;
     }
-    
-    
+
+    public Usuario getDono() {
+        return dono;
+    }
+
+    public void setDono(Usuario dono) {
+        this.dono = dono;
+    }
 }

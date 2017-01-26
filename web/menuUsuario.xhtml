@@ -11,7 +11,24 @@
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <script src="js/helpppet_js.js"></script>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color: #ffa812;">&times;</a>
+        <div class="overlay-content user-menu">
+            <img src="imagens/foto.jpg" alt="Foto do usuário" class="circular"/>
+            <a href="perfilUsuario.jsf" style="font-size: 27px;color: #ffa812;">Meu Perfil</a>
+            <a href="meusAnimais.jsf" style="font-size: 27px;color: #ffa812;">Meus Animais</a>
+            <a href="minhasAdocoes.jsf" style="font-size: 27px;color: #ffa812;">Minhas Adoções</a>
+            <a href="meusEventos.jsf" style="font-size: 27px;color: #ffa812;">Meus Eventos</a>
+            <a href="meusAnuncios.jsf" style="font-size: 27px;color: #ffa812;">Meus Anúncios</a>
+            <a href="minhasExperiencias.jsf" style="font-size: 27px;color: #ffa812;">Minhas Experiências</a>
+            
+        </div>
+    </div>
+
 
     <div style="position: fixed; width: 100%; top:0; z-index: 99;">
         <nav class="navbar navbar-inverse">
@@ -30,41 +47,107 @@
                     <ul class="nav navbar-nav">
                         <li><a href="animais.jsf" style="color: #ffa812; font-size: 15px;">Animais <span class="sr-only">(current)</span></a></li>
                         <li><a href="ongs.jsf" style="color: #ffa812; font-size: 15px;" >ONGs</a></li>
-                        <li><a href="clinicasPetshops" style="color: #ffa812; font-size: 15px;">Clínicas/Pet Shops</a></li>
+                        <li><a href="clinicasPetshops.jsf" style="color: #ffa812; font-size: 15px;">Clínicas/Pet Shops</a></li>
                         <li><a href="eventos.jsf" style="color: #ffa812; font-size: 15px;">Eventos</a></li>
+                        <li><a href="experiencias.jsf" style="color: #ffa812; font-size: 15px;">Espaço Helper</a></li>
                         <li><a href="anuncios.jsf" style="color: #ffa812; font-size: 15px;">Anúncios</a></li>
                         <li><a href="denuncias.jsf" style="color: #ffa812; font-size: 15px;">Denúncias</a></li>
                     </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <li>
-                            <div class="search">
-                                <h:form role="search" style="border-style: none;padding-top: 10px;">
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <h:inputText class="form-control input-sm"  style="height: 30px; color: white; font-size: 14px;"/>
-                                        <h:commandLink class="btnn btn-sm">
-                                            <img src="imagens/pesquisa.png" alt="Imagem do botão de pesquisa" style="width: 20px; padding-top: 10px;"/>
-                                        </h:commandLink>
-                                    </h:panelGrid>
-                                </h:form> 
-                            </div>
-                        </li>
-
-                        <li><a href="loginSignin.jsf" style="color: #ffa812; font-size: 15px;">Entrar</a></li>
-                        <li><a href="cadastrarUsuario.jsf" style="color: #ffa812; font-size: 15px;">Cadastro</a></li>
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li><a style="font-size:30px;cursor:pointer;color: #ffa812; font-size: 15px;" onclick="openNav()"> Camila </a></li>
+                        <li><a href="#" style="color: #ffa812; font-size: 15px;">Sair</a></li>
                     </ul>
+
                 </div>
             </div>
         </nav>
-
     </div>
+
     <style>
+        .overlay {
+            height: 0%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0, 0.9);
+            overflow-y: hidden;
+            transition: 0.5s;
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 25%;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .overlay a {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 36px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay a:hover, .overlay a:focus {
+            color: #f1f1f1;
+        }
+
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 45px;
+            font-size: 60px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .overlay {overflow-y: auto;}
+            .overlay a {font-size: 20px}
+            .overlay .closebtn {
+                font-size: 40px;
+                top: 15px;
+                right: 35px;
+            }
+        }
+        .position{
+
+            margin-left: 930px;
+
+        }
+        .user-menu{
+            margin-top: -6%;
+
+        }
+        img {
+
+            border-radius: 900px;
+        }
+
+        .circular {
+            width: 190px;
+            height: 190px;
+            border-radius: 150px;
+            -webkit-border-radius: 150px;
+            -moz-border-radius: 150px;
+            background: url() no-repeat;
+        }
+
+        .circular img {
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
 
         .search {
             /*padding: 5px 0;*/
             width: 230px;
-            /*height: 30px;*/
+            /*height: 30px; */
             position: relative;
             /*left: 10px;
             //float: left;
@@ -101,8 +184,9 @@
 
         }
 
+
     </style>
 
 
-</html>
 
+</html>

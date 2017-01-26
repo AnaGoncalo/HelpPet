@@ -3,204 +3,375 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Help Pet - Anuncios</title>
+        <title>Help Pet - Anúncio</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
+
+        <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
 
 
-        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
-
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
-
-        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
 
     </h:head>
     <h:body>
 
         <!-- Menu -->
-
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
 
         <!-- Título da página -->
         <div id="home" class="home">
             <div class="text-vcenter">
-                <h1 style="color: #00EEEE;">#Anuncie</h1>
-                <h2 style="color: #ffa812;">O LOCAL CERTO PARA O SEU ANUNCIO!</h2>
-                <h2 style="color: #ffa812;">Promoções de produtos e serviços para o publico ideal!</h2>
-                <h:form>
-                    <a href="#novoanuncio" style="background-color: #ffa812; color: white;" class="btn btn-default">Novo Anuncio</a>
-                </h:form>
+                <h1 class="branco" style="color: #1E90FF;">Anúncios</h1>
+                <div style="margin-top: 10%;">
+                    <button class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px;" id="click">Anuncie</button>
+                </div>
             </div>
         </div>
 
-        <!-- Opções -->
-        <div class="container-fluid">
-            <b:row>
-                <b:column col-md="8">
-                    <!--Ajustar-->
-                </b:column>
 
-                <h:form class="form-signin">
-                    <b:column col-md="2">
-                        <b:selectOneMenu value="#" style="width: 170px; height: 40px; color: #ffa812;" class="form-control">
-                            <f:selectItem itemLabel="Tipo" itemValue="Tipo"/>
-                            <f:selectItem itemLabel="Banho e Tosa" itemValue="Banho e Tosa"/>
-                            <f:selectItem itemLabel="Banho" itemValue="Banho"/>
-                            <f:selectItem itemLabel="Tosa" itemValue="Tosa"/>
-                            <f:selectItem itemLabel="Vacinação" itemValue="Vacinação"/>
-                        </b:selectOneMenu>
-                    </b:column>
-                    <b:column col-md="1">
-                        <b:button value="Ok" style="background-color: #ffa812; color: white;" class="btn btn-default"/>
-                    </b:column>
-                </h:form>
-            </b:row>
 
-            <!-- Listagem de eventos -->
-            <b:row>
-                <c:forEach var="anuncio" items="#{anuncioBean.anuncios}">
-                    <div class="col-xs-18 col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:auto; height:280px;"/>
-                            <div class="caption" align="center">
-                                <h3>#{anuncio.tituloAnuncio}</h3>
-                                <p>#{anuncio.tipoAnuncio}</p>
-                                <p>#{anuncio.descricaoAnuncio}</p>
-                                <h:form>
-                                <p><b:commandButton action="#{anuncioBean.VerAnuncio(anuncio)}" value="Ver Mais" class="btn btn-default" style="background-color: #ffa812; color: white;"/></p>
-                                </h:form>
+        <!-- Pequena listagem de anúncios -->
+        <div id="about" class="pad-section" style="background-color:#1E90FF;">
+            <div class="container" align="center">
+                <h3 align="center" style="color: white;">Anúncios</h3>
+                <hr/>
+                <br/>
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Melhor ração para o seu gato</h5>
+
+                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da anúncio 1 -->
+
+                            <div class="modal fade" id="myModal1" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Melhor ração para o seu gato</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Descrição: A melhor ração para o seu bichinho, e com o melhor preço.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" style="background-color: #1E90FF; color: white; border-radius: 0px;" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </c:forEach>
-            </b:row>
+                </div>
 
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Melhor ração para o seu gato</h5>
+
+                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal2" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da anúncio 2 -->
+
+                            <div class="modal fade" id="myModal2" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Melhor ração para o seu gato</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Descrição: A melhor ração para o seu bichinho, e com o melhor preço.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" style="background-color: #1E90FF; color: white; border-radius: 0px;" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Melhor ração para o seu gato</h5>
+
+                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da anúncio 3 -->
+
+                            <div class="modal fade" id="myModal3" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Melhor ração para o seu gato</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Descrição: A melhor ração para o seu bichinho, e com o melhor preço.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" style="background-color: #1E90FF; color: white; border-radius: 0px;" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Melhor ração para o seu gato</h5>
+
+                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal4" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da anúncio 4 -->
+
+                            <div class="modal fade" id="myModal4" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Melhor ração para o seu gato</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Descrição: A melhor ração para o seu bichinho, e com o melhor preço.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" style="background-color: #1E90FF; color: white; border-radius: 0px;" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div align="right">
+                    <p><a href="buscarAnuncio.jsf" class="btn btn-default" style="background-color: white; color: #1E90FF; font-weight:bold; width: 60px; height: 60px;border-radius:100%;">
+                            <i class="material-icons" style="color: #1E90FF; padding-top: 12px;">add</i>
+                        </a></p>
+
+                </div>
+
+            </div>
         </div>
 
-        <!-- Paginação-->
+        <!-- Formulário de cadastro de anúncio -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12" align="center">
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-default">1</a>
-                        <a href="#" class="btn btn-default">2</a>
-                        <a href="#" class="btn btn-default">3</a>
-                        <a href="#" class="btn btn-default">4</a>
+                <div class="col-md-12">
+
+
+
+                    <!-- Título do formulário -->
+
+                    <div class="container-fluid" id="anuncio">
+                        <div class="row">
+                            <div class="col-md-12" align="center">
+                                <h3 style="color: #1E90FF;">Cadastre seu anúncio</h3>
+                            </div>
+                        </div>
                     </div>
+
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="alert alert-dismissible panel panel-default" style="margin-top: 5%; padding-left: 20px; padding-right: 20px; background-color: #1E90FF; border-radius: 0px;">
+                                    <!--Panel-->
+                                    <div class="card">
+                                        <div class="card-header panel panel-default" style="margin-top: -5%; padding-top: 3%; background-color: white; border-radius: 0px; margin-bottom: 10px; color: black;">
+
+
+                                            <!-- Form-->
+
+                                            <h:form class="form-signin">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+
+
+
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-2" >
+                                                                    </div>
+                                                                    <div class="col-md-2" >
+                                                                        <label style="font-size: 14px;color: black; padding-left: 10px; padding-top: 5px;">
+                                                                            Título:  
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-md-8" >
+                                                                        <h:inputText class="form-control" style="width: 75%;font-size: 14px; margin-left: 10px;"/>
+                                                                    </div>
+
+                                                                    <div class="col-md-2" >
+                                                                    </div>
+                                                                    <div class="col-md-2" >
+                                                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                                                            Descrição:  
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-md-8" >
+                                                                        <h:inputTextarea rows="3" class="form-control" style="margin-left: 10px; width: 75%;"/>  
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                            <div class="col-md-12" align="center">
+                                                                <br/>
+                                                                <h:button value="Cadastrar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px;"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                            </h:form>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Formulário de denúncia -->
-        <div id="novoanuncio" class="container-fluid" align="center" style="background-color: #ffa812; overflow:hidden; height:auto;">
-            <h:form>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#click").click(function() {
+                    $('html, body').animate({
+                        scrollTop: $("#anuncio").offset().top
+                    }, 2000);
+                });
+            });
+        </script>
 
-                <b:row>
-                    <h2 class="text-center" style="color: white;">Cadastre um Anuncio</h2> 
-                </b:row>
-
-                <div class="container-fluid">
-
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Titulo:
-                            </label>
-                        </b:column>
-                        <b:column col-md="5">
-                            <b:inputText value="#{anuncioBean.anuncio.tituloAnuncio}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Tipo:
-                            </label>
-                        </b:column>
-                        <b:column col-md="2">
-                            <b:selectOneMenu value="#{anuncioBean.anuncio.tipoAnuncio}" class="form-control" style="font-size: 15px; color: white; background-color: #ffa812">
-                                <f:selectItem itemLabel="Banho e Tosa" itemValue="Banho e Tosa"/>
-                                <f:selectItem itemLabel="Banho" itemValue="Banho"/>
-                                <f:selectItem itemLabel="Tosa" itemValue="Tosa"/>
-                                <f:selectItem itemLabel="Vacinação" itemValue="Vacinação"/>
-                            </b:selectOneMenu>
-<!--                            <b:inputText value="#{anuncioBean.anuncio.tipoAnuncio}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>-->
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Foto:
-                            </label>
-                        </b:column>
-                        <b:column col-md="4">
-                            <!--Input de imagem-->
-                            <!--                            <h:inputFile value="" />-->
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px; color: white;">
-                                Descrição:
-                            </label>
-                        </b:column>
-                        <b:column col-md="8">
-                            <b:inputTextarea value="#{anuncioBean.anuncio.descricaoAnuncio}" rows="2"/>
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column col-md="12">
-                            <div align="center">
-                                <b:commandButton action="#{anuncioBean.Salvar()}" value="Cadastrar" style="background-color: white; color: #ffa812;" class="btn btn-default"/>
-                            </div>
-                        </b:column>
-                    </b:row>
-
-                </div>
-            </h:form>
-        </div>
-        <br/>
-        <!-- Rodapé -->
-        <div id="footer" align="center">
-            <b:row>
-                <ui:insert name="footer">
-                    <!-- Import de página do rodapé -->
-                    <ui:include src="rodape.xhtml"/>
-                </ui:insert>
-            </b:row>
-        </div>
-        <br/>
     </h:body>
-    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
 </html>
 

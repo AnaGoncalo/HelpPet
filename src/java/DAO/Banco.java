@@ -23,7 +23,8 @@ public class Banco {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/HelpPet2", "root", "ananne");
+            //conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/HelpPet2", "root", "ananne");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://node121247-helppet2.jelasticlw.com.br/HelpPet2", "root", "MRQqab58683");
         } 
         catch (ClassNotFoundException exc) 
         {

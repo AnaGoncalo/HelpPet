@@ -30,8 +30,8 @@ public class PessoaJuridica extends Usuario{
     }
 
     public PessoaJuridica(int idClinicaPetshop, String cnpj, String funcionamento, String descricao, String site, int idUsuario, 
-            String nomeUsuario, String email, String senha, Date dataNascimento, String foto, int idPermissao) {
-        super(idUsuario, nomeUsuario, email, senha, dataNascimento, foto, idPermissao);
+            String nomeUsuario, String email, String senha, Date dataNascimento, String foto, String localizacao, int idPermissao) {
+        super(idUsuario, nomeUsuario, email, senha, dataNascimento, foto, localizacao, idPermissao);
         this.idClinicaPetshop = idClinicaPetshop;
         this.cnpj = cnpj;
         this.funcionamento = funcionamento;

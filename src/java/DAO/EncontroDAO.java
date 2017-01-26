@@ -29,7 +29,7 @@ public class EncontroDAO {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "INSERT INTO Encontro(dataEncontro, horarioEncontro, statusEncontro, editado, idAnimal, idUsuario, "
-                + "idLocalizacao) values(?, ?, ?, ?, ?, ?, ?)";
+                + "localizacao) values(?, ?, ?, ?, ?, ?, ?)";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -39,7 +39,7 @@ public class EncontroDAO {
             pstmt.setBoolean(4, encontro.isEditado());
             pstmt.setInt(5, encontro.getIdAnimal());
             pstmt.setInt(6, encontro.getIdUsuario());
-            pstmt.setInt(7, encontro.getIdLocalizacao());
+            pstmt.setString(7, encontro.getLocalizacao());
            
             pstmt.executeUpdate();
         }
@@ -60,7 +60,7 @@ public class EncontroDAO {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "UPDATE Encontro SET dataEncontro = ?, horarioEncontro = ?, statusEncontro = ?, editado = ?, "
-                + "idAnimal = ?, idUsuario = ?, idLocalizacao = ? WHERE idEncontro = ?";
+                + "idAnimal = ?, idUsuario = ?, localizacao = ? WHERE idEncontro = ?";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -70,7 +70,7 @@ public class EncontroDAO {
             pstmt.setBoolean(4, encontro.isEditado());
             pstmt.setInt(5, encontro.getIdAnimal());
             pstmt.setInt(6, encontro.getIdUsuario());
-            pstmt.setInt(7, encontro.getIdLocalizacao());
+            pstmt.setString(7, encontro.getLocalizacao());
             pstmt.setInt(8, encontro.getIdEncontro());
            
             pstmt.executeUpdate();
@@ -125,7 +125,7 @@ public class EncontroDAO {
             { 
                 Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getDate("dataEncontro"), rs.getString("horarioEncontro"),
                         rs.getBoolean("statusEncontro"), rs.getBoolean("editado"), rs.getInt("idAnimal"), rs.getInt("idUsuario"),
-                        rs.getInt("idLocalizacao"));
+                        rs.getString("localizacao"));
                 lista.add(a);
             }
         } 
@@ -157,7 +157,7 @@ public class EncontroDAO {
             {
                 Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getDate("dataEncontro"), rs.getString("horarioEncontro"),
                         rs.getBoolean("statusEncontro"), rs.getBoolean("editado"), rs.getInt("idAnimal"), rs.getInt("idUsuario"),
-                        rs.getInt("idLocalizacao"));
+                        rs.getString("localizacao"));
                 lista.add(a);
             }
         } 

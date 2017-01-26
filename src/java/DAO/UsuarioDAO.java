@@ -29,7 +29,8 @@ public class UsuarioDAO {
         System.out.println("Testando inserir DAo Usuario");
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Usuario(nomeUsuario, email, senha, dataNascimento, foto, idPermissao) values(?, ?, ?, ?, ?, ?)";
+        String comandoSql = "INSERT INTO Usuario(nomeUsuario, email, senha, dataNascimento, foto, localizacao, idPermissao) "
+                + "values(?, ?, ?, ?, ?, ?, ?)";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -38,7 +39,8 @@ public class UsuarioDAO {
             pstmt.setString(3, usuario.getSenha());
             pstmt.setDate(4, null);
             pstmt.setString(5, usuario.getFoto());
-            pstmt.setInt(6, usuario.getIdPermissao());
+            pstmt.setString(6, usuario.getLocalizacao());
+            pstmt.setInt(7, usuario.getIdPermissao());
            
             pstmt.executeUpdate();
         }
@@ -58,7 +60,7 @@ public class UsuarioDAO {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "UPDATE Usuario SET nomeUsuario = ?, email = ?, senha = ?, dataNascimento = ?, foto = ?, "
-                + "idPermissao = ? WHERE idUsuario = ?";
+                + "localizacao = ? WHERE idUsuario = ?";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -67,7 +69,8 @@ public class UsuarioDAO {
             pstmt.setString(3, usuario.getSenha());
             pstmt.setDate(4, (Date) usuario.getDataNascimento());
             pstmt.setString(5, usuario.getFoto());
-            pstmt.setInt(6, usuario.getIdPermissao());
+            pstmt.setString(6, usuario.getLocalizacao());
+            pstmt.setInt(7, usuario.getIdUsuario());
            
             pstmt.executeUpdate();
         }
@@ -122,14 +125,14 @@ public class UsuarioDAO {
                 if(rs.getInt("idPermissao") == 1){
                     PessoaFisica pf = buscarPF(idUsuario);
                     u = new PessoaFisica(pf.getIdHelper(), pf.getCpf(), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), rs.getString("senha"),
-                        rs.getDate("dataNascimento"), rs.getString("foto"), rs.getInt("idPermissao"));
+                        rs.getDate("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
                 }
                 else
                 {
                     PessoaJuridica pj = buscarPJ(idUsuario);
                     u = new PessoaJuridica(pj.getIdClinicaPetshop(), pj.getCnpj(), pj.getFuncionamento(), pj.getDescricao(), pj.getSite(),
                                                 rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), rs.getString("senha"),
-                                                rs.getDate("dataNascimento"), rs.getString("foto"), rs.getInt("idPermissao"));
+                                                rs.getDate("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
                 }
             }
         } 
@@ -227,14 +230,14 @@ public class UsuarioDAO {
                     System.out.println("Usuario logado " + pf.getCpf());
                     u = new PessoaFisica(pf.getIdHelper(), pf.getCpf(), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
                             rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), 
-                            rs.getString("foto"), rs.getInt("idPermissao"));
+                            rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
                 }
                 else
                 {
                     PessoaJuridica pj = buscarPJ(rs.getInt("idUsuario"));
                     u = new PessoaJuridica(pj.getIdClinicaPetshop(), pj.getCnpj(), pj.getFuncionamento(), pj.getDescricao(), pj.getSite(),
                             rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), rs.getString("senha"),
-                            rs.getDate("dataNascimento"), rs.getString("foto"), rs.getInt("idPermissao"));
+                            rs.getDate("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
                 }
             }
         } 
@@ -265,7 +268,8 @@ public class UsuarioDAO {
             {
                 PessoaJuridica pj = new PessoaJuridica(rs.getInt("idClinicaPetshop"), rs.getString("cnpj"), rs.getString("funcionamento"), 
                                         rs.getString("descricao"), rs.getString("site"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
                 lista.add(pj);
             }
         } 
@@ -296,7 +300,8 @@ public class UsuarioDAO {
             {
                 PessoaJuridica pj = new PessoaJuridica(rs.getInt("idClinicaPetshop"), rs.getString("cnpj"), rs.getString("funcionamento"), 
                                         rs.getString("descricao"), rs.getString("site"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
                 lista.add(pj);
             }
         } 

@@ -24,14 +24,14 @@ public class Animal {
     private Date cadastro;
     private boolean statusAnimal;
     private int idUsuario;
-    private int idLocalizacao;
+    private String localizacao;
 
     public Animal() {
        
     }
 
     public Animal(int idAnimal, String nome, String especie, String raca, String idade, String sexo, String descricao, 
-            String tipo, String foto, Date cadastro, boolean status, int idUsuario, int idLocalizacao) {
+            String tipo, String foto, Date cadastro, boolean status, int idUsuario, String localizacao) {
         this.idAnimal = idAnimal;
         this.nomeAnimal = nome;
         this.especie = especie;
@@ -44,7 +44,7 @@ public class Animal {
         this.cadastro = cadastro;
         this.statusAnimal = status;
         this.idUsuario = idUsuario;
-        this.idLocalizacao = idLocalizacao;
+        this.localizacao = localizacao;
     }
    
     
@@ -143,11 +143,13 @@ public class Animal {
         this.idUsuario = idUsuario;
     }
 
-    public int getIdLocalizacao() {
-        return idLocalizacao;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
-    public void setIdLocalizacao(int idLocalizacao) {
-        this.idLocalizacao = idLocalizacao;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
+
+    
 }

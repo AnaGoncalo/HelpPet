@@ -3,209 +3,236 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Help Pet - Animail</title>
+        <title>Help Pet - Animal</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
 
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
 
-        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
-
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
-
-        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
-
+        <script src="js/jquery-1.11.0.min.js"></script>
     </h:head>
     <h:body>
 
         <!-- Menu -->
-
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
 
 
+        <br/>
+        <br/>
+        <br/>
 
-        <b:row>
-            <!-- Opções -->
-            <div class="container-fluid">
-
-                <b:column col-md="2">
-                    <!-- Espaçamento -->
-                </b:column>
-                <!-- Detalhes do Animal -->
-                <b:column col-md="8">
-                    <div class="thumbnail">
-                        <b:row>
-                            <b:column col-md="6">
-                                <img src="imagens/gato3.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
-                            </b:column>
-                            <b:column col-md="6">
-                                <div class="caption" align="center">
-                                    <!-- <% Animal a = #{animalBean.animal}; %> -->
-                                    <h4>#{animalBean.animal.nomeAnimal}</h4>
-                                    <div align="left">
-                                        <p>Tipo: #{animalBean.animal.tipoAnimal}</p>
-                                        <p>Especie: #{animalBean.animal.especie}</p>
-                                        <p>Local: #{animalBean.animal.idLocalizacao}</p>
-                                    </div>
-                                    <h:form>
-                                        <a href="#novoencontro" style="background-color: #ffa812; color: white;" class="btn btn-default">Adotar</a>
-                                    </h:form>
-                                </div>
-
-                            </b:column>
-                        </b:row>
-                    </div>
-                </b:column>
-            </div>
-        </b:row>
-
-        <!-- Paginação-->
+        <!-- Formulário de cadastro de anúncio -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12" align="center">
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-default">1</a>
-                        <a href="#" class="btn btn-default">2</a>
-                        <a href="#" class="btn btn-default">3</a>
-                        <a href="#" class="btn btn-default">4</a>
+                <div class="col-md-12">
+
+
+
+                    <!-- Título do formulário -->
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12" align="center">
+                                <h3 style="color: #ffa812;">Adote</h3>
+                                <h5 style="color: #1E90FF;">Gostou desse bichinho? Marque um encontre com o responsável do animal.</h5>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8">
+
+                                <div class="alert alert-dismissible panel panel-default" style="margin-top: 5%; padding-left: 20px; padding-right: 20px; background-color: #ffa812; border-radius: 0px;">
+                                    <!--Panel-->
+                                    <div class="card">
+                                        <div class="card-header panel panel-default" style="margin-top: -5%; padding-top: 3%; background-color: white; border-radius: 0px; margin-bottom: 10px; color: black;">
+
+
+                                            <!-- Conteúdo -->
+                                            <div>
+                                                <div class="modal-header" align="center">
+                                                    <h4 class="modal-title">#{animalBean.animal.nomeAnimal}</h4>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-1">
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <div align="left">
+                                                                    <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+                                                                    <p>Responsável: <a href="perfilUsuario.jsf" style="text-decoration: none; color: black;">#{animalBean.dono.nomeUsuario}</a></p>
+                                                                    <p>Espécie: #{animalBean.animal.especie}</p>
+                                                                    <p>Idade: #{animalBean.animal.idade}</p>
+                                                                    <p>Raça: #{animalBean.animal.raca}</p>
+                                                                    <p>Sexo: #{animalBean.animal.sexo}</p>
+                                                                    <p>Descrição: #{animalBean.animal.descricaoAnimal}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <p><a href="#" data-toggle="modal" data-target="#encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;">Marcar encontro</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Formulário de encontro -->
-        <div id="novoencontro" class="container-fluid" align="center" style="background-color: #ffa812; overflow:hidden; height:auto;">
-            <h:form>
 
-                <b:row>
-                    <h2 class="text-center" style="color: white;">Cadastre um Encontro para adotar #{animalBean.animal.nomeAnimal} #{animalBean.animal.idAnimal}</h2> 
-                </b:row>
 
-                <div class="container-fluid">
 
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Data:
-                            </label>
-                        </b:column>
-                        <b:column col-md="2">
-                            
-                        </b:column>    
-                    </b:row>
 
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Horario:
-                            </label>
-                        </b:column>
-                        <b:column col-md="2">
-                            <b:inputText value="#{animalBean.encontro.horarioEncontro}" class="form-control" style="font-size: 15px;"></b:inputText>
-                            <h:inputHidden value="#{animalBean.animal.idAnimal}" class="form-control"></h:inputHidden>
-                        </b:column>
-                    </b:row>
+        <!-- Formulário -->
 
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Estado:
-                            </label>
-                        </b:column>
-                        <b:column col-md="2">
-                            <b:inputText value="#{animalBean.encontro.idLocalizacao}" class="form-control" style="font-size: 15px; "></b:inputText>
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Cidade:
-                            </label>    
-                        </b:column>
-                        <b:column col-md="2">
-                            <b:inputText value="#{animalBean.encontro.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Bairro:
-                            </label>    
-                        </b:column>
-                        <b:column col-md="2">
-                            <b:inputText value="#{animalBean.encontro.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
-                        </b:column>
-                    </b:row>
+        <div class="modal fade" id="encontro" role="dialog">
+            <div class="modal-dialog">
 
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Rua:
-                            </label>
-                        </b:column>
-                        <b:column col-md="4">
-                            <b:inputText value="#{animalBean.encontro.idLocalizacao}" class="form-control" style="font-size: 15px; "></b:inputText>
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Complemento:
-                            </label>
-                        </b:column>
-                        <b:column col-md="3">
-                            <b:inputText value="#{animalBean.encontro.idLocalizacao}" class="form-control" style="font-size: 15px; "></b:inputText>
-                        </b:column>
-                    </b:row>
+                <!-- Conteúdo -->
+                <div class="modal-content">
+                    <div class="modal-header" align="center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Marque o encontro</h4>
+                        <hr/>
+                        <h6 style="color: red;">Os dados informados aqui serão vistos apenas pelo responsável do animal</h6>
+                    </div>
+                    <div class="modal-body">
+                        <h:form >
+                            <div class="col-md-12">
+                                <div class="row">
 
-                    <b:row>
-                        <b:column col-md="12">
-                            <div align="center">
-                                <b:commandButton action="#{animalBean.SalvarEncontro()}" value="Cadastrar" style="background-color: white; color: #ffa812;" class="btn btn-default"/>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                            Estado:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:selectOneMenu value="#" style="color: black; width: 100%;" class="form-control">
+                                            <f:selectItem itemLabel="Acre" itemValue="ac"/>
+                                            <f:selectItem itemLabel="Alagoas" itemValue="al"/>
+                                            <f:selectItem itemLabel="Amapá" itemValue="ap"/>
+                                            <f:selectItem itemLabel="Amazonas" itemValue="am"/>
+                                            <f:selectItem itemLabel="Bahia" itemValue="ba"/>
+                                            <f:selectItem itemLabel="Ceará" itemValue="ce"/>
+                                            <f:selectItem itemLabel="Distrito Federal" itemValue="df"/>
+                                            <f:selectItem itemLabel="Espírito Santo" itemValue="es"/>
+                                            <f:selectItem itemLabel="Goiás" itemValue="go"/>
+                                            <f:selectItem itemLabel="Maranhão" itemValue="ma"/>
+                                            <f:selectItem itemLabel="Mato Grosso" itemValue="mt"/>
+                                            <f:selectItem itemLabel="Mato Grosso do Sul" itemValue="ms"/>
+                                            <f:selectItem itemLabel="Minas Gerais" itemValue="mg"/>
+                                            <f:selectItem itemLabel="Pará" itemValue="pa"/>
+                                            <f:selectItem itemLabel="Paraíba" itemValue="pb"/>
+                                            <f:selectItem itemLabel="Paraná" itemValue="pr"/>
+                                            <f:selectItem itemLabel="Pernambuco	" itemValue="pe"/>
+                                            <f:selectItem itemLabel="Piauí" itemValue="pi"/>
+                                            <f:selectItem itemLabel="Rio de Janeiro" itemValue="rj"/>
+                                            <f:selectItem itemLabel="Rio Grande do Norte" itemValue="rn"/>
+                                            <f:selectItem itemLabel="Rio Grande do Sul" itemValue="rs"/>
+                                            <f:selectItem itemLabel="Rondônia" itemValue="ro"/>
+                                            <f:selectItem itemLabel="Roraima" itemValue="rr"/>
+                                            <f:selectItem itemLabel="Santa Catarina" itemValue="sc"/>
+                                            <f:selectItem itemLabel="São Paulo" itemValue="sp"/>
+                                            <f:selectItem itemLabel="Sergipe" itemValue="se"/>
+                                            <f:selectItem itemLabel="Tocantins" itemValue="to"/>
+                                        </h:selectOneMenu>
+
+
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                            Cidade:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Bairro:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Rua:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Número:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Complemento:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Hora:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <h:commandButton action="adocao.xhtml" value="Marcar encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
+                                        <br/>
+                                    </div>
+                                </div>
                             </div>
-                        </b:column>
-                    </b:row>
-
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
-            </h:form>
+            </div>
         </div>
-        <br/>
-        <!-- Rodapé -->
-        <div id="footer" align="center">
-            <b:row>
-                <ui:insert name="footer">
-                    <!-- Import de página do rodapé -->
-                    <ui:include src="rodape.xhtml"/>
-                </ui:insert>
-            </b:row>
-        </div>
-        <br/>
     </h:body>
-    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
 </html>
 

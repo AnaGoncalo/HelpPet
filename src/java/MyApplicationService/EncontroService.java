@@ -42,8 +42,7 @@ public class EncontroService {
    public String cadastrarEncontro(String json) throws SQLException{
        Gson gson = new Gson();
        Encontro a = gson.fromJson(json, Encontro.class);
-       a.setIdUsuario(1);
-       a.setIdLocalizacao(1);
+       //a.setIdUsuario(1);
        System.out.println("Ainda não deu certo" + a.getHorarioEncontro());
        System.out.println("Deu certo " + a.getIdAnimal());
        EncontroDAO.CadastrarEncontro(a);

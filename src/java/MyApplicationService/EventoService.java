@@ -43,7 +43,6 @@ public class EventoService {
        Gson gson = new Gson();
        Evento a = gson.fromJson(json, Evento.class);
        a.setIdUsuario(1);
-       a.setIdLocalizacao(1);
        System.out.println("Deu certo " + a.getNomeEvento());
        EventoDAO.CadastrarEvento(a);
        
@@ -57,7 +56,6 @@ public class EventoService {
        Gson gson = new Gson();
        Evento a = gson.fromJson(json, Evento.class);
        a.setIdUsuario(1);
-       a.setIdLocalizacao(1);
        System.out.println("Deu certo " + a.getNomeEvento());
        EventoDAO.EditarEvento(a);
        

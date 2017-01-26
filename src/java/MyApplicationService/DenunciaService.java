@@ -37,7 +37,6 @@ public class DenunciaService {
    public String cadastrarDenuncia(String json) throws SQLException{
        Gson gson = new Gson();
        Denuncia a = gson.fromJson(json, Denuncia.class);
-       a.setIdLocalizacao(1);
        System.out.println("Deu certo " + a.getTituloDenuncia());
        DenunciaDAO.CadastrarDenuncia(a);
        

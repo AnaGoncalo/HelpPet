@@ -29,7 +29,7 @@ public class DenunciaDAO {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "INSERT INTO Denuncia(tituloDenuncia, descricaoDenuncia, fotoDenuncia, tipoDenuncia,"
-                + "idLocalizacao) values(?, ?, ?, ?, ?)";
+                + "localizacao) values(?, ?, ?, ?, ?)";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -37,7 +37,7 @@ public class DenunciaDAO {
             pstmt.setString(2, denuncia.getDescricaoDenuncia());
             pstmt.setString(3, denuncia.getFotoDenuncia());
             pstmt.setString(4, denuncia.getTipoDenuncia());
-            pstmt.setInt(5, denuncia.getIdLocalizacao());
+            pstmt.setString(5, denuncia.getLocalizacao());
            
             pstmt.executeUpdate();
         }
@@ -67,7 +67,7 @@ public class DenunciaDAO {
             { 
                 Denuncia a = new Denuncia(rs.getInt("idDenuncia"), rs.getString("tituloDenuncia"), 
                         rs.getString("descricaoDenuncia"),rs.getString("fotoDenuncia"), rs.getString("tipoDenuncia"), 
-                        rs.getDate("dataDenuncia"), rs.getInt("idLocalizacao"));
+                        rs.getDate("dataDenuncia"), rs.getString("localizacao"));
                 lista.add(a);
             }
         } 

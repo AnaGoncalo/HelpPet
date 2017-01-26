@@ -19,12 +19,12 @@ public class Evento {
     private String descricaoEvento;
     private String fotoEvento;
     private int idUsuario;
-    private int idLocalizacao;
+    private String localizacao;
 
     public Evento() {
     }
 
-    public Evento(int idEvento, String nomeEvento, Date dataEvento, String horarioEvento, String descricaoEvento, String fotoEvento, int idUsuario, int idLocalizacao) {
+    public Evento(int idEvento, String nomeEvento, Date dataEvento, String horarioEvento, String descricaoEvento, String fotoEvento, int idUsuario, String localizacao) {
         this.idEvento = idEvento;
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
@@ -32,7 +32,7 @@ public class Evento {
         this.descricaoEvento = descricaoEvento;
         this.fotoEvento = fotoEvento;
         this.idUsuario = idUsuario;
-        this.idLocalizacao = idLocalizacao;
+        this.localizacao = localizacao;
     }
 
     public int getIdEvento() {
@@ -91,12 +91,12 @@ public class Evento {
         this.idUsuario = idUsuario;
     }
 
-    public int getIdLocalizacao() {
-        return idLocalizacao;
+    public String getlocalizacao() {
+        return localizacao;
     }
 
-    public void setIdLocalizacao(int idLocalizacao) {
-        this.idLocalizacao = idLocalizacao;
+    public void setlocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
     
     

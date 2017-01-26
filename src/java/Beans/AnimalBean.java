@@ -38,10 +38,12 @@ public class AnimalBean {
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
   
     private List<Animal> animais = new ArrayList();
+    private List<Animal> animaisTop = new ArrayList();
     private Encontro encontro = new Encontro();
     
     public AnimalBean() throws SQLException {
         Listar();
+        animaisTop = animais.subList(1, 5);
     }
     
     public void Salvar(){
@@ -87,8 +89,7 @@ public class AnimalBean {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
         Gson gson = new Gson();
-        
-        encontro.setIdLocalizacao(1);
+       
         
         if(encontro.getIdEncontro() == 0)
         {
@@ -123,7 +124,6 @@ public class AnimalBean {
         animal = a;
         //encontro = new Encontro();
         encontro.setIdUsuario(user.getIdUsuario()); //pega o usuario da sessao
-        encontro.setIdLocalizacao(1);
         encontro.setIdAnimal(animal.getIdAnimal());
         
         return "cadastrarEncontro.jsf";
@@ -168,4 +168,14 @@ public class AnimalBean {
     public void setDono(Usuario dono) {
         this.dono = dono;
     }
+
+    public List<Animal> getAnimaisTop() {
+        return animaisTop;
+    }
+
+    public void setAnimaisTop(List<Animal> animaisTop) {
+        this.animaisTop = animaisTop;
+    }
+    
+    
 }

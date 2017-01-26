@@ -18,19 +18,19 @@ public class Denuncia {
     private String fotoDenuncia;
     private String tipoDenuncia;
     private Date dataDenuncia;
-    private int idLocalizacao;
+    private String localizacao;
 
     public Denuncia() {
     }
 
-    public Denuncia(int idDenuncia, String tituloDenuncia, String descricaoDenuncia, String fotoDenuncia, String tipoDenuncia, Date dataDenuncia, int idLocalizacao) {
+    public Denuncia(int idDenuncia, String tituloDenuncia, String descricaoDenuncia, String fotoDenuncia, String tipoDenuncia, Date dataDenuncia, String localizacao) {
         this.idDenuncia = idDenuncia;
         this.tituloDenuncia = tituloDenuncia;
         this.descricaoDenuncia = descricaoDenuncia;
         this.fotoDenuncia = fotoDenuncia;
         this.tipoDenuncia = tipoDenuncia;
         this.dataDenuncia = dataDenuncia;
-        this.idLocalizacao = idLocalizacao;
+        this.localizacao = localizacao;
     }
 
     public int getIdDenuncia() {
@@ -81,13 +81,15 @@ public class Denuncia {
         this.dataDenuncia = dataDenuncia;
     }
 
-    public int getIdLocalizacao() {
-        return idLocalizacao;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
-    public void setIdLocalizacao(int idLocalizacao) {
-        this.idLocalizacao = idLocalizacao;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
+
+    
     
     
 }

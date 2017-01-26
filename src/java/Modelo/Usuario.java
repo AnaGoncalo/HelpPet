@@ -18,27 +18,30 @@ public class Usuario {
     private String senha;
     private Date dataNascimento;
     private String foto;
+    private String localizacao;
     private int idPermissao;
     
     public Usuario()
     {
     }
 
-    public Usuario(int idUsuario, String nomeUsuario, String email, String senha, String fotoUsuario, int idPermissao) {
+    public Usuario(int idUsuario, String nomeUsuario, String email, String senha, String fotoUsuario, String localizacao, int idPermissao) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.senha = senha;
+        this.localizacao = localizacao;
         this.idPermissao = idPermissao;
     }
 
-    public Usuario(int idUsuario, String nomeUsuario, String email, String senha, Date dataNascimento, String foto, int idPermissao) {
+    public Usuario(int idUsuario, String nomeUsuario, String email, String senha, Date dataNascimento, String foto, String localizacao, int idPermissao) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.senha = senha;
         this.dataNascimento = dataNascimento;
         this.foto = foto;
+        this.localizacao = localizacao;
         this.idPermissao = idPermissao;
     }
 
@@ -97,6 +100,16 @@ public class Usuario {
     public void setIdPermissao(int idPermissao) {
         this.idPermissao = idPermissao;
     }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+    
+    
 
     
 }

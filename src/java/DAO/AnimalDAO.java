@@ -37,7 +37,8 @@ public class AnimalDAO {
         System.out.println("animal dao");
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Animal(especie, nomeAnimal, sexo, idade, raca, descricaoAnimal, fotoAnimal, tipoAnimal, statusAnimal, dataCadastro, idUsuario, idLocalizacao) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String comandoSql = "INSERT INTO Animal(especie, nomeAnimal, sexo, idade, raca, descricaoAnimal, fotoAnimal, tipoAnimal, "
+                + "statusAnimal, dataCadastro, idUsuario, localizacao) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -52,7 +53,7 @@ public class AnimalDAO {
             pstmt.setBoolean(9, false);
             pstmt.setDate(10, (Date) animal.getCadastro());
             pstmt.setInt(11, animal.getIdUsuario());
-            pstmt.setInt(12, animal.getIdLocalizacao());
+            pstmt.setString(12, animal.getLocalizacao());
            
             pstmt.executeUpdate();
         }
@@ -72,7 +73,7 @@ public class AnimalDAO {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "UPDATE Animal SET especie = ?, nomeAnimal = ?, sexo = ?, idade = ?, raca = ?, "
-                            + "descricaoAnimal = ?, fotoAnimal = ?, statusAnimal = ? WHERE idAnimal = ?";
+                            + "descricaoAnimal = ?, fotoAnimal = ?, statusAnimal = ?, localizacao = ? WHERE idAnimal = ?";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -84,7 +85,8 @@ public class AnimalDAO {
             pstmt.setString(6, animal.getDescricaoAnimal());
             pstmt.setString(7, animal.getFotoAnimal());
             pstmt.setBoolean(8, animal.isStatusAnimal());
-            pstmt.setInt(9, animal.getIdAnimal());
+            pstmt.setString(9, animal.getLocalizacao());
+            pstmt.setInt(10, animal.getIdAnimal());
             
             pstmt.executeUpdate();
             System.out.println("Resultado editar DAO");
@@ -138,7 +140,7 @@ public class AnimalDAO {
                 Animal a = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getString("especie"), 
                         rs.getString("raca"), rs.getString("idade"), rs.getString("sexo"), rs.getString("descricaoAnimal"), 
                         rs.getString("tipoAnimal"), rs.getString("fotoAnimal"), rs.getDate("dataCadastro"),
-                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
+                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getString("localizacao"));
                 lista.add(a);
             }
         } 
@@ -171,7 +173,7 @@ public class AnimalDAO {
                 Animal a = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getString("especie"), 
                         rs.getString("raca"), rs.getString("idade"), rs.getString("sexo"), rs.getString("descricaoAnimal"), 
                         rs.getString("tipoAnimal"), rs.getString("fotoAnimal"), rs.getDate("dataCadastro"),
-                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
+                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getString("localizacao"));
                 
                 lista.add(a);
             }

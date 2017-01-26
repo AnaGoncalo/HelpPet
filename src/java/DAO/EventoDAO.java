@@ -29,7 +29,7 @@ public class EventoDAO {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "INSERT INTO Evento(nomeEvento, dataEvento, horarioEvento, descricaoEvento, fotoEvento, idUsuario,"
-                + " idLocalizacao) values(?, ?, ?, ?, ?, ?, ?)";
+                + " localizacao) values(?, ?, ?, ?, ?, ?, ?)";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -39,7 +39,7 @@ public class EventoDAO {
             pstmt.setString(4, evento.getDescricaoEvento());
             pstmt.setString(5, evento.getFotoEvento());
             pstmt.setInt(6, evento.getIdUsuario());
-            pstmt.setInt(7, evento.getIdLocalizacao());
+            pstmt.setString(7, evento.getlocalizacao());
            
             pstmt.executeUpdate();
         }
@@ -60,7 +60,7 @@ public class EventoDAO {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "UPDATE Evento SET nomeEvento = ?, dataEvento = ?, horarioEvento = ?, descricaoEvento = ?, "
-                + "fotoEvento = ?, idUsuario = ?, idLocalizacao = ? WHERE idEvento = ?";
+                + "fotoEvento = ?, idUsuario = ?, localizacao = ? WHERE idEvento = ?";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
@@ -70,7 +70,7 @@ public class EventoDAO {
             pstmt.setString(4, evento.getDescricaoEvento());
             pstmt.setString(5, evento.getFotoEvento());
             pstmt.setInt(6, evento.getIdUsuario());
-            pstmt.setInt(7, evento.getIdLocalizacao());
+            pstmt.setString(7, evento.getlocalizacao());
             pstmt.setInt(8, evento.getIdEvento());
            
             pstmt.executeUpdate();
@@ -125,7 +125,7 @@ public class EventoDAO {
             { 
                 Evento a = new Evento(rs.getInt("idEvento"), rs.getString("nomeEvento"), rs.getDate("dataEvento"), 
                         rs.getString("horarioEvento"), rs.getString("descricaoEvento"), rs.getString("fotoEvento"),
-                        rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
+                        rs.getInt("idUsuario"), rs.getString("localizacao"));
                 lista.add(a);
             }
         } 
@@ -157,7 +157,7 @@ public class EventoDAO {
             {
                 Evento a = new Evento(rs.getInt("idEvento"), rs.getString("nomeEvento"), rs.getDate("dataEvento"), 
                         rs.getString("horarioEvento"), rs.getString("descricaoEvento"), rs.getString("fotoEvento"),
-                        rs.getInt("idUsuario"), rs.getInt("idLocalizacao"));
+                        rs.getInt("idUsuario"), rs.getString("localizacao"));
                 lista.add(a);
             }
         } 

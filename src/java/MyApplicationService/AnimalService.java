@@ -67,7 +67,6 @@ public class AnimalService {
        Gson gson = new Gson();
        Animal a = gson.fromJson(json, Animal.class);
        
-       a.setIdLocalizacao(1);
        System.out.println("Deu certo " + a.getNomeAnimal());
        
        try {

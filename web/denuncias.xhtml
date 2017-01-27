@@ -3,118 +3,168 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Help Pet - Denúncias</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
 
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
 
-        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
-
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
-
-        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
 
     </h:head>
-    <h:body>
+    <h:body style="background-color: #F0F0F0;">
 
         <!-- Menu -->
-
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
 
         <!-- Título da página -->
-        <div id="home" class="home">
-            <div class="text-vcenter">
-                <h1 style="color: #00EEEE;">#Denuncie</h1>
-                <h2 style="color: #ffa812;">ABANDONAR OU MALTRATAR UM ANIMAL É CRIME!</h2>
-                <p class="lead" style="color: #ffa812;">Não deixe de denunciar, os animais não podem pedir socorro, seja a voz deles!</p>
-                <p class="lead" style="font-weight:bold;color: #ffa812;">A denúncia é totalmente anônima.</p>
-                <h:form>
-                    <a href="#novadenuncia" style="background-color: #ffa812; color: white;" class="btn btn-default">Denuncie</a>
-                </h:form>
-            </div>
+        <div style="margin-top: 7%; height: 100px; background-color: #9400D3;" align="center">
+            <h3 align="center" style="color: white; padding-top:  20px;">Denúncias</h3>
+            <hr style="margin-left: 10px; margin-right: 20px;"/>
         </div>
 
-        <!-- Opções -->
-        <div class="container-fluid" style="background-color: #efefef;">
-            <br/>
-            <b:row>
-                <b:column col-md="8">
-                    <!--Ajustar-->
-                </b:column>
-
-                <h:form class="form-signin">
-                    <b:column col-md="2">
-                        <b:selectOneMenu value="#" style="width: 170px; height: 40px; color: #ffa812;" class="form-control">
-                            <f:selectItem itemLabel="Tipo" itemValue="1"/>
-                            <f:selectItem itemLabel="Abandono" itemValue="1"/>
-                            <f:selectItem itemLabel="Maus-tratos" itemValue="2"/>
-                        </b:selectOneMenu>
-                    </b:column>
-                    <b:column col-md="1">
-                        <b:button value="Ok" style="background-color: #ffa812; color: white;" class="btn btn-default"/>
-                    </b:column>
-                </h:form>
-            </b:row>
-
-            <!-- Listagem de denúncias -->
-            <b:row>
+        <!-- Listagem das denúncias-->
+        <div class="container" id="tourpackages-carousel" >
+            <div class="row">
+                <br/><br/>
                 <c:forEach var="denuncia" items="#{denunciaBean.denuncias}">
-                    <div class="col-xs-18 col-sm-6 col-md-6">
-                        <div class="thumbnail">
-                            <b:row>
-                                <b:column col-md="6">
-                                    <img src="imagens/gato1.png" alt="Foto da Denúncia" style="width:280px; height:280px;"/>
-                                </b:column>
-                                <b:column col-md="6">
-                                    <div class="caption">
-                                        <div align="center">
-                                            <h3>#{denuncia.tituloDenuncia}</h3>
-                                            <h5>#{denuncia.tipoDenuncia}</h5>
+                
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/gato1.png" alt="Foto da Denúncia" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>#{denuncia.tituloDenuncia}</h5>
+                            <div align="left">
+                                <p>Tipo: #{denuncia.tipoDenuncia}</p>
+                                <p>Local: #Local</p>
+                                <p>Data: #{denuncia.dataDenuncia}</p>
+                            </div>
+                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="background-color: #9400D3; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da denúncia 1 -->
+
+                            <div class="modal fade" id="myModal1" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">#{denuncia.tituloDenuncia}</h4>
                                         </div>
-                                        <div align="left" style="min-height: 110px;">
-                                            <p>#{denuncia.descricaoDenuncia}</p>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/gato1.png" alt="Foto da Denúncia" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Tipo: #{denuncia.tipoDenuncia}</p>
+                                                            <p>Local: #Local</p>
+                                                            <p>Data: #{denuncia.dataDenuncia}</p>
+                                                            <p>Descrição: #{denuncia.descricaoDenuncia}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        <div align="right">
-                                            <p>11/12/2016 - Bairro da Saudade, Serra Caiada / RN.</p>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" style="background-color: #9400D3; color: white;" data-dismiss="modal">Fechar</button>
                                         </div>
                                     </div>
-                                </b:column>
-                            </b:row>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                
                 </c:forEach>
-            </b:row>
+                
 
-            <!-- Paginação-->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12" align="center">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-default">1</a>
-                            <a href="#" class="btn btn-default">2</a>
-                            <a href="#" class="btn btn-default">3</a>
-                            <a href="#" class="btn btn-default">4</a>
-                        </div>
+            </div>
+        </div>
+
+        <!-- Área de pesquisa -->
+
+        <div id="container-floating">
+
+            <div id="floating-button" style="background-color: #9400D3;">
+                <a href="#" data-toggle="modal" data-target="#pesquisa" >
+                    <i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;"> search</i>
+                </a>
+            </div>
+        </div>
+
+
+
+        <!-- Formulário -->
+
+        <div class="modal fade" id="pesquisa" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Conteúdo -->
+                <div class="modal-content">
+                    <div class="modal-header" align="center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Busca</h4>
+                        <hr/>
+                        <h5>Busque por uma denúncia especifíca</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h:form>
+                            <div class="col-md-12">
+                                <div class="row">
+
+                                    <div class="col-md-2" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Tipo:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h:selectOneMenu value="#" style="height: 30px; color: black;font-size: 14px;" class="form-control">
+                                            <f:selectItem itemLabel="Abandono" itemValue="1"/>
+                                            <f:selectItem itemLabel="Maus-tratos" itemValue="2"/>
+                                        </h:selectOneMenu>                                          
+                                    </div>
+                                    <div class="col-md-2" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Local:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <button class="btn btn-default" style="background-color: #9400D3; color: white;border-radius: 0px; width: 100%;" data-dismiss="modal">Pesquisar</button>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
                     </div>
                 </div>
             </div>
@@ -122,130 +172,31 @@
 
 
 
-        <!-- Formulário de denúncia -->
-        <div  class="container-fluid" align="center" style="background-color: #FF8C00; overflow:hidden; height:auto;">
-            <h:form id="novadenuncia">
-
-                <b:row>
-                    <h2 class="text-center" style="color: white;">Faça sua denúncia</h2> 
-                    <hr/>
-                </b:row>
-
-                <div class="container-fluid">
-
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Tipo:
-                            </label>
-                        </b:column>
-                        <b:column col-md="3">
-                            <b:inputText value="#{denunciaBean.denuncia.tipoDenuncia}" class="form-control" style="font-size: 15px;"></b:inputText>
-                        </b:column>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Estado:
-                            </label>    
-                        </b:column>
-                        <b:column col-md="3">
-                            <b:inputText value="#{denunciaBean.denuncia.idLocalizacao}"  class="form-control" style="font-size: 15px; color: white;"></b:inputText>
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Titulo:
-                            </label>
-                        </b:column>
-                        <b:column col-md="3">
-                            <b:inputText value="#{denunciaBean.denuncia.tituloDenuncia}" class="form-control" style="font-size: 15px; "></b:inputText>
-                        </b:column>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Cidade:
-                            </label>    
-                        </b:column>
-                        <b:column col-md="3">
-                            <b:inputText value="#{denunciaBean.denuncia.idLocalizacao}" class="form-control" style="font-size: 15px; color: white;"></b:inputText>
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Foto:
-                            </label>
-                        </b:column>
-                        <b:column col-md="3">
-                            <!--Input de imagem-->
-                            <!--                            <h:inputFile value="" />-->
-                        </b:column>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Bairro:
-                            </label>    
-                        </b:column>
-                        <b:column col-md="3">
-                            <b:inputText class="form-control" style="font-size: 15px; color: white;"></b:inputText>
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column col-md="1">
-                            <!-- Espaçamento -->
-                        </b:column>
-                        <b:column col-md="1">
-                            <label style="font-size: 15px;color: white;">
-                                Descrição:
-                            </label>
-                        </b:column>
-                        <b:column col-md="8">
-                            <b:inputTextarea value="#{denunciaBean.denuncia.descricaoDenuncia}" rows="3"/>
-                        </b:column>
-                    </b:row>
-
-                    <b:row>
-                        <b:column col-md="12">
-                            <div align="center">
-                                <b:commandButton action="#{denunciaBean.Salvar()}" value="Denunciar" style="background-color: white; color: #ffa812;" class="btn btn-default"/>
-                            </div>
-                        </b:column>
-                    </b:row>
-
-                </div>
-            </h:form>
+        <!-- Paginação -->
+        <div align="center">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item" style="color: red; background-color: red;"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <br/>
-        <!-- Rodapé -->
-        <div id="footer" align="center">
-            <b:row>
-                <ui:insert name="footer">
-                    <!-- Import de página do rodapé -->
-                    <ui:include src="rodape.xhtml"/>
-                </ui:insert>
-            </b:row>
-        </div>
-        <br/>
+
     </h:body>
-    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
 </html>
 

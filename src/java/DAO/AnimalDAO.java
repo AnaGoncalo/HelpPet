@@ -186,6 +186,7 @@ public class AnimalDAO {
         {
             Banco.closeConexao(conn, rs, pstmt, null);
         } 
+        System.out.println("Animal DAO : qtd " + lista.size());
         return lista;
     }
 }

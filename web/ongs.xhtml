@@ -3,126 +3,223 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Help Pet - ONGs</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
 
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
 
-        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
-
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
-
-        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
-
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
     </h:head>
-    <h:body>
+    <h:body style="background-color: #F0F0F0;">
 
         <!-- Menu -->
-
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
 
         <!-- Título da página -->
-        <div id="home" class="home">
-            <div class="text-vcenter">
-                <h1 style="color: #00EEEE;">#Adote</h1>
-                <h2 style="color: #ffa812;">AJUDE OS ANIMAIS A ENCONTRAREM UM LAR!</h2>
-                <p class="lead" style="color: #ffa812;">Adote um novo pet, ou o ajude a encontrar um lar!</p>
-                <h:form>
-                    <a href="#novoanimal" style="background-color: #ffa812; color: white;" class="btn btn-default">Novo Animal</a>
-                </h:form>
-            </div>
+        <div style="margin-top: 13%; height: 100px; background-color: #FFB772;">
+            <h3 align="center" style="color: white; padding-top:  20px;">ONGs</h3>
+            <hr style="margin-left: 10px; margin-right: 20px;"/>
         </div>
 
-        <!-- Opções -->
-        <div class="container-fluid">
-            <b:row>
-                <b:column col-md="8">
-                    <!--Ajustar-->
-                </b:column>
 
-                <h:form class="form-signin">
-                    <b:column col-md="2">
-                        <b:selectOneMenu value="#" style="width: 170px; height: 40px; color: #ffa812;" class="form-control">
-                            <f:selectItem itemLabel="Tipo" itemValue="1"/>
-                            <f:selectItem itemLabel="Adoção" itemValue="1"/>
-                            <f:selectItem itemLabel="Perdido" itemValue="2"/>
-                        </b:selectOneMenu>
-                    </b:column>
-                    <b:column col-md="1">
-                        <b:button value="Ok" style="background-color: #ffa812; color: white;" class="btn btn-default"/>
-                    </b:column>
-                </h:form>
-            </b:row>
 
-            <!-- Listagem de animais -->
-            <b:row>
-                <c:forEach var="ong" items="#{pjBean.pjs}">
-                    <div class="col-xs-18 col-sm-6 col-md-3">
-                        <div class="thumbnail">
-                            <img src="imagens/gato3.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
-                            <div class="caption" align="center">
-                                <h4>#{ong.nomeUsuario}</h4>
-                                <div align="left">
-                                    
-                                </div>
+        <!-- Listagem das ONGs -->
+
+        <div class="container" id="tourpackages-carousel" >
+            <div class="row">
+                <br/><br/>
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>ONG Cão sem Dono</h5>
+                            <div align="left">
+                                <p>Local: São Paulo/SP</p>
+                            </div>
+                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>ONG Cão sem Dono</h5>
+                            <div align="left">
+                                <p>Local: São Paulo/SP</p>
+                            </div>
+                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>ONG Cão sem Dono</h5>
+                            <div align="left">
+                                <p>Local: São Paulo/SP</p>
+                            </div>
+                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>ONG Cão sem Dono</h5>
+                            <div align="left">
+                                <p>Local: São Paulo/SP</p>
+                            </div>
+                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>ONG Cão sem Dono</h5>
+                            <div align="left">
+                                <p>Local: São Paulo/SP</p>
+                            </div>
+                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Área de pesquisa -->
+
+                <div id="container-floating">
+
+                    <div id="floating-button" style="background-color: #FFB772;">
+                        <a href="#" data-toggle="modal" data-target="#pesquisa" >
+                            <i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;"> search</i>
+                        </a>
+                    </div>
+
+                </div>
+
+
+
+                <!-- Formulário -->
+
+                <div class="modal fade" id="pesquisa" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Conteúdo -->
+                        <div class="modal-content">
+                            <div class="modal-header" align="center">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Filtragem</h4>
+                                <hr/>
+                                <h5 style="color: #ffa812;">Busque por instituições que mais precisam da sua ajuda!</h5>
+                            </div>
+                            <div class="modal-body">
                                 <h:form>
-                                    <p><b:commandButton action="#{pjBean.VerOng(ong)}" value="Ver Mais" class="btn btn-default" style="background-color: #ffa812; color: white;"/></p>
+                                    <div class="col-md-12">
+                                        <div class="row">
+
+                                            <div class="col-md-2" align="left">
+                                                <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                                    Estoque:  
+                                                </label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h:selectOneMenu value="#" style="height: 30px; color: black;font-size: 14px;" class="form-control">
+                                                    <f:selectItem itemLabel="Ração" itemValue="1"/>
+                                                    <f:selectItem itemLabel="Tipo de estoque" itemValue="2"/>
+                                                    <f:selectItem itemLabel="Tipo de estoque" itemValue="3"/>
+                                                    <f:selectItem itemLabel="Tipo de estoque" itemValue="4"/>
+                                                
+                                                </h:selectOneMenu>                                          
+                                            </div>
+                                            <div class="col-md-2" align="left">
+                                                <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                                    Cidade:  
+                                                </label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <br/>
+                                                <button class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px; width: 100%;" data-dismiss="modal">Pesquisar</button>
+                                                <br/>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </h:form>
+                            </div>
+                            <div class="modal-footer">
                             </div>
                         </div>
                     </div>
-                </c:forEach>
-            </b:row>
-
-        </div>
-
-        <!-- Paginação-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12" align="center">
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-default">1</a>
-                        <a href="#" class="btn btn-default">2</a>
-                        <a href="#" class="btn btn-default">3</a>
-                        <a href="#" class="btn btn-default">4</a>
-                    </div>
                 </div>
+
+
             </div>
         </div>
 
-        
-        <br/>
-        <!-- Rodapé -->
-        <div id="footer" align="center">
-            <b:row>
-                <ui:insert name="footer">
-                    <!-- Import de página do rodapé -->
-                    <ui:include src="rodape.xhtml"/>
-                </ui:insert>
-            </b:row>
+
+
+        <!-- Paginação -->
+        <div align="center">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item" style="color: red; background-color: red;"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <br/>
+
+
     </h:body>
-    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
 </html>
 

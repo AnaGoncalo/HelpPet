@@ -7,6 +7,7 @@ package Beans;
 
 import DAO.UsuarioDAO;
 import Modelo.PessoaFisica;
+import Modelo.PessoaJuridica;
 import Modelo.Usuario;
 import com.google.gson.Gson;
 import java.sql.SQLException;
@@ -27,18 +28,14 @@ import javax.ws.rs.client.WebTarget;
 @SessionScoped
 public class LoginBean {
     private Usuario user = new Usuario();
-    String email;
-    String senha;
     private Usuario usuarioLogado = null;
-    private UsuarioDAO usuarioDao;
+    private PessoaFisica pf = null;
+    private PessoaJuridica pj = null;
     
     public LoginBean() {
     }
     
     public String Logar() throws SQLException{
-        
-        //usuarioDao = new UsuarioDAO();
-        //usuarioLogado = usuarioDao.logar(email, senha);
         
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/logar");
@@ -47,7 +44,14 @@ public class LoginBean {
         json = caminho.request().post(Entity.json(json), String.class);
         
         usuarioLogado = gson.fromJson(json, Usuario.class);
-        
+        if(usuarioLogado.getIdPermissao() == 1)
+        {
+            
+        }
+        else
+        {
+            
+        }
         System.out.println("Logou? " + usuarioLogado.getNomeUsuario());
         
         getSession().setAttribute("usuarioLogado", usuarioLogado);
@@ -77,24 +81,5 @@ public class LoginBean {
     public void setUser(Usuario user) {
         this.user = user;
     }
-    
-    
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    
     
 }

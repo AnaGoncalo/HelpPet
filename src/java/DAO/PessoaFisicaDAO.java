@@ -21,6 +21,38 @@ import java.util.logging.Logger;
  */
 public class PessoaFisicaDAO {
     
+    public static List<PessoaFisica> byId(int idUsuario) throws SQLException
+    {
+        Connection conn = Banco.getConexao();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<PessoaFisica> lista = new ArrayList();
+        String comandoSql= "SELECT * FROM PessoaFisica pf inner join usuario on usuario.idUsuario = pf.idHelper where Usuario.idPermissao = 1 AND idUsuario = ?";
+        
+        try
+        {
+            pstmt = conn.prepareStatement(comandoSql);
+            pstmt.setInt(1, idUsuario);
+            
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                PessoaFisica pf = new PessoaFisica(rs.getInt("idHelper"), rs.getString("cpf"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
+                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
+                lista.add(pf);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(PessoaFisicaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            Banco.closeConexao(conn, rs, pstmt, null);
+        } 
+        return lista;
+    }
     
     public static List<PessoaFisica> listarHelpers() throws SQLException
     {

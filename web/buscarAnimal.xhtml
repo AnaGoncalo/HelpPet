@@ -25,7 +25,7 @@
         <!-- Menu -->
         <div id="header">
             <ui:insert name="header">
-                 Import de página de menu 
+                Import de página de menu 
                 <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
@@ -36,7 +36,7 @@
             <h3 align="center" style="color: white; padding-top:  20px;">Animais para adoção</h3>
             <hr style="margin-left: 10px; margin-right: 20px;"/>
         </div>
-        
+
         <!-- Listagem de animais-->
 
         <div class="container" id="tourpackages-carousel" >
@@ -44,18 +44,23 @@
                 <br/><br/>
                 <c:forEach var="animal" items="#{animalBean.animais}">
                     <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>#{animal.nomeAnimal}</h5>
-                            <div align="left">
-                                <p>Espécie: #{animal.especie}</p>
-                                <p>Local: </p>
+                        <div class="thumbnail caixa">
+                            <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <div class="caption" align="center">
+                                <h5>#{animal.nomeAnimal}</h5>
+                                <div align="left">
+                                    <p>Espécie: #{animal.especie}</p>
+                                    <p>Local: #{animal.localizacao}</p>
+                                </div>
+                                <p>
+                                    <h:form>
+                                        <h:commandLink action="#{animalBean.VerAnimal(animal)}" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"> Ver Mais</h:commandLink>
+                                    </h:form>
+                                </p>
+
                             </div>
-                            <p><a href="animal.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
                         </div>
                     </div>
-                </div>
                 </c:forEach>
             </div>
         </div>

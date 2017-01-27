@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Help Pet - Perfil</title>
+
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
+
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
+    </h:head>
+    <h:body style="background-color: #F0F0F0;">
+
+        <!-- Menu -->
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menuUsuario.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div align="center" >        
+            <div style="background: #ffa812; height: 260px;">
+
+            </div>
+            <div class="panel panel-default divPerfil" align="left">
+                <img src="imagens/foto.jpg" style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
+                <div class="tituloNomeUsuario">
+                    <h3 style="padding-top: 2%;">#{usuarioBean.pf.nomeUsuario}</h3>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Conteúdo que importa -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default cardsLateralEsquerda">
+                            <h5><i class="material-icons">info</i> Informações</h5>
+                            <hr/>
+                            <p class="itensPerfil">E-mail: #{usuarioBean.pf.email}</p>
+                            <p class="itensPerfil">CPF: #{usuarioBean.pf.cpf}</p>
+                            <p class="itensPerfil">Nascimento: #{usuarioBean.pf.dataNascimento}</p>
+                            <p class="itensPerfil">Localização: #{usuarioBean.pf.localizacao}</p>
+                            <div style="margin-bottom: 15px;">
+                                <a href="editarPerfil.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default cardsLateralEsquerda">
+                            <h5><i class="material-icons">event</i> Encontros</h5>
+                            <hr/>
+                            <p class="itensPerfil"><strong>Último encontro marcardo</strong></p>
+                            <p class="itensPerfil">Animal: Gato 1</p>
+                            <p class="itensPerfil">Local: Natal/RN - Tirol</p>
+                            <p class="itensPerfil">Data: 00/00/0000 - Hora: 00:00</p>
+                            <div style="margin-bottom: 15px;">
+                                <a href="minhasAdocoes.jsf" class="btn btn-warning btn-xs" style="margin-left: 0%">Ver mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default cardsLateralEsquerda">
+                            <h5><i class="material-icons">book</i> Experiências</h5>
+                            <hr/>
+                            <p class="itensPerfil"><strong>Última experiência adicionada</strong></p>
+                            <p class="itensPerfil">Nome: Minha Experiência</p>
+                            <p class="itensPerfil">Data: 00/00/0000</p>
+                            <div style="margin-bottom: 15px;">
+                                <a href="minhasExperiencias.jsf" class="btn btn-warning btn-xs" style="margin-left: 0%">Ver mais</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default wrapper meusAnunciosEventos" role="main">
+                            <div class="panel-body">
+                                <div aling="center">
+                                    <!-- Abas de Meus animais e Meus eventos-->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active" style="width: 50%"><a href="#pets" data-toggle="tab">Animais</a></li>
+                                        <li style=" width: 50%"><a href="#eventos" data-toggle="tab">Eventos</a></li>
+                                    </ul>
+                                </div>
+                                <div id="myTabContent" class="tab-content">
+                                    <!-- Listagem de Meus animais-->
+                                    <div class="tab-pane fade active in" id="pets">
+                                        <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
+                                            <div class="row">
+                                                <c:forEach var="animal" items="#{usuarioBean.meusAnimaisTop}">
+                                                <div class="col-md-6">
+                                                    <img src="imagens/gato2.jpg" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
+                                                </div>
+                                                </c:forEach>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12" align="center">
+                                            <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                                        </div>
+                                    </div>
+                                    <!-- Eventos -->
+                                    <div class="tab-pane fade" id="eventos">
+                                        <div class="tab-pane fade active in" >
+
+                                            <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <img src="imagens/evento.png" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <img src="imagens/evento.png" width="200px" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <img src="imagens/evento.png" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <img src="imagens/evento.png" width="200px" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" align="center">
+                                                <p><a href="meusEventos.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+        </div>
+        
+    </h:body>
+</html>

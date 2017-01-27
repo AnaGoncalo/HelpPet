@@ -1,48 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <h2>Login</h2>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Help Pet - Login</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css"></link>
+
+
+
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
+
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
         
-        <h:form>
-            <h:commandButton action="#{usuarioBean.VerPerfil()}" value="#{loginBean.usuarioLogado.nomeUsuario}"/> 
-            <br/>
-            Email:
-            <h:inputText value="#{loginBean.user.email}"/>
-            <br/>
-            Senha:
-            <h:inputSecret value="#{loginBean.user.senha}"/>
-            <br/>
-            <h:commandButton action="#{loginBean.Logar()}" value="Logar"/>
-        </h:form>
-        <br/>
-        <h:form>
-            Nome:
-            <h:inputText value="#{usuarioBean.usuario.nomeUsuario}"/>
-            <br/>
-            Email:
-            <h:inputText value="#{usuarioBean.usuario.email}"/>
-            <br/>
-            Senha:
-            <h:inputText value="#{usuarioBean.usuario.senha}"/>
-            <br/>
-            Permissao:
-            <h:inputText value="#{usuarioBean.usuario.idPermissao}"/>
-            <br/>
-            <h:commandButton action="#{usuarioBean.Salvar()}" value="Salvar"/>
-            <br/>
-                         
-        </h:form>
-    </body>
+        <script type="text/javascript" src="js/loginFacebook.js"></script>
+        <script>
+            function myFacebookLogin() {
+                FB.login(function () {}, {scope: 'public_profile,email'});
+            }
+        </script>
+
+
+    </h:head>
+    <h:body style="background-image: url('imagens/fundo2.png');">
+
+        <!-- Menu -->
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menuUsuario.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <br/><br/><br/><br/><br/>
+
+
+        <!-- Corpo da página -->
+        <div class="container-fluid">
+            <h3 class="text-center login-title laranja" style="color: #FF8C00;">Olá, Helper. Faça seu login</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4" align="center">
+
+                            <div class="account-wall" align="center">
+                                <img class="profile-img" src="imagens/logo.png" alt="Logo Help Pet" height="100px;"/>
+                                <br/>
+                                <br/>
+
+                                <h:form class="form-signin">
+
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <i class="material-icons">email</i>
+                                        <h:inputText value="#{loginBean.user.email}"  class="form-control" style="font-size: 15px; width: 280px; margin-left: 10px;" p:placeholder="E-mail"/>
+                                        <i class="material-icons">lock</i>
+                                        <h:inputSecret value="#{loginBean.user.senha}" class="form-control" style="font-size: 15px;width: 280px; margin-left: 10px;" p:placeholder="Senha"/>
+
+                                    </h:panelGrid>
+                                    <br/>
+                                    <h:commandButton action="#{loginBean.Logar()}" value="Entrar" style="height: 38px;width: 300px; background-color: #ffa812; color: white;border-radius: 0px;" class="btn btn-default"/>
+                                </h:form>
+                                <br/>
+                                <a class="btn btn-block btn-social btn-facebook" style="width: 300px;border-radius: 0px;" id="face">
+                                    <span class="fa"><img src="imagens/f.png" height="21px;"/></span> <div style="color: white;">Entre com o facebook </div>
+                                </a>
+
+                                <br/>
+                                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
+                                <br/>
+                                <a href="cadastrarUsuario.jsf" style="font-size: 15px; text-decoration: none;">Quero ser um Helper</a>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </h:body>
 </html>
+

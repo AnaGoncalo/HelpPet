@@ -1,0 +1,581 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Help Pet - Meus animais</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
+
+        <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
+
+
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
+
+    </h:head>
+    <h:body style="background-color: #F0F0F0;">
+
+        <!-- Menu -->
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menuUsuario.xhtml"/>
+            </ui:insert>
+        </div>
+
+
+        <!-- Título da página -->
+        <div style="margin-top: 13%; height: 100px; background-color: #ffa812;" align="center">
+            <h3 align="center" style="color: white; padding-top:  20px;">Meus animais</h3>
+            <hr style="margin-left: 10px; margin-right: 20px;"/>
+        </div>
+
+
+
+        <!-- Listagem de animais-->
+
+        <div class="container" id="tourpackages-carousel" >
+            <div class="row">
+                <br/><br/>
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Gato 1</h5>
+                            <div align="left">
+                                <p>Espécie: Gato</p>
+                                <p>Local: Natal/RN</p>
+                            </div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal1"  class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da animal -->
+
+                            <div class="modal fade" id="myModal1" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Gato 1</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Espécie: Espécie 1</p>
+                                                            <p>Idade: 0-6 meses</p>
+                                                            <p>Raça: Raça 1</p>
+                                                            <p>Sexo: Macho</p>
+                                                            <p>Descrição: Sou um 'serumaninho' legal. Gosto de abraços e adoro receber carinho. Sou vacinado e castrado.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="#" class="btn btn-danger " style="border-radius: 0px;"> Excluir</a>
+                                                    </div>
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="editarAnimal.jsf" class="btn btn-success " style="border-radius: 0px;"> Editar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Gato 1</h5>
+                            <div align="left">
+                                <p>Espécie: Gato</p>
+                                <p>Local: Natal/RN</p>
+                            </div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal2"  class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da animal -->
+
+                            <div class="modal fade" id="myModal2" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Gato 1</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Espécie: Espécie 1</p>
+                                                            <p>Idade: 0-6 meses</p>
+                                                            <p>Raça: Raça 1</p>
+                                                            <p>Sexo: Macho</p>
+                                                            <p>Descrição: Sou um 'serumaninho' legal. Gosto de abraços e adoro receber carinho. Sou vacinado e castrado.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="#" class="btn btn-danger " style="border-radius: 0px;"> Excluir</a>
+                                                    </div>
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="editarAnimal.jsf" class="btn btn-success " style="border-radius: 0px;"> Editar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Gato 1</h5>
+                            <div align="left">
+                                <p>Espécie: Gato</p>
+                                <p>Local: Natal/RN</p>
+                            </div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal3"  class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da animal -->
+
+                            <div class="modal fade" id="myModal3" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Gato 1</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Espécie: Espécie 1</p>
+                                                            <p>Idade: 0-6 meses</p>
+                                                            <p>Raça: Raça 1</p>
+                                                            <p>Sexo: Macho</p>
+                                                            <p>Descrição: Sou um 'serumaninho' legal. Gosto de abraços e adoro receber carinho. Sou vacinado e castrado.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="#" class="btn btn-danger " style="border-radius: 0px;"> Excluir</a>
+                                                    </div>
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="editarAnimal.jsf" class="btn btn-success " style="border-radius: 0px;"> Editar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Gato 1</h5>
+                            <div align="left">
+                                <p>Espécie: Gato</p>
+                                <p>Local: Natal/RN</p>
+                            </div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal4"  class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da animal -->
+
+                            <div class="modal fade" id="myModal4" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Gato 1</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Espécie: Espécie 1</p>
+                                                            <p>Idade: 0-6 meses</p>
+                                                            <p>Raça: Raça 1</p>
+                                                            <p>Sexo: Macho</p>
+                                                            <p>Descrição: Sou um 'serumaninho' legal. Gosto de abraços e adoro receber carinho. Sou vacinado e castrado.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="#" class="btn btn-danger " style="border-radius: 0px;"> Excluir</a>
+                                                    </div>
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="editarAnimal.jsf" class="btn btn-success " style="border-radius: 0px;"> Editar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Gato 1</h5>
+                            <div align="left">
+                                <p>Espécie: Gato</p>
+                                <p>Local: Natal/RN</p>
+                            </div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal5"  class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da animal -->
+
+                            <div class="modal fade" id="myModal5" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Gato 1</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Espécie: Espécie 1</p>
+                                                            <p>Idade: 0-6 meses</p>
+                                                            <p>Raça: Raça 1</p>
+                                                            <p>Sexo: Macho</p>
+                                                            <p>Descrição: Sou um 'serumaninho' legal. Gosto de abraços e adoro receber carinho. Sou vacinado e castrado.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="#" class="btn btn-danger " style="border-radius: 0px;"> Excluir</a>
+                                                    </div>
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="editarAnimal.jsf" class="btn btn-success " style="border-radius: 0px;"> Editar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-18 col-sm-6 col-md-3">
+                    <div class="thumbnail caixa">
+                        <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <div class="caption" align="center">
+                            <h5>Gato 1</h5>
+                            <div align="left">
+                                <p>Espécie: Gato</p>
+                                <p>Local: Natal/RN</p>
+                            </div>
+                            <p><a href="#" data-toggle="modal" data-target="#myModal6"  class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                            <!-- Detalhamento da animal -->
+
+                            <div class="modal fade" id="myModal6" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Conteúdo -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Gato 1</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div align="left">
+                                                            <p>Espécie: Espécie 1</p>
+                                                            <p>Idade: 0-6 meses</p>
+                                                            <p>Raça: Raça 1</p>
+                                                            <p>Sexo: Macho</p>
+                                                            <p>Descrição: Sou um 'serumaninho' legal. Gosto de abraços e adoro receber carinho. Sou vacinado e castrado.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top: 20px;">
+                                                <div class="row">
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="#" class="btn btn-danger " style="border-radius: 0px;"> Excluir</a>
+                                                    </div>
+                                                    <div class="col-md-6" align="center" style="padding-bottom: 10px;">
+                                                        <a href="editarAnimal.jsf" class="btn btn-success " style="border-radius: 0px;"> Editar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- Área de pesquisa -->
+
+        <div id="container-floating">
+
+            <div id="floating-button" style="background-color: #ffa812;">
+                <a href="#" data-toggle="modal" data-target="#pesquisa" >
+                    <i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;"> search</i>
+                </a>
+            </div>
+
+        </div>
+
+
+
+        <!-- Formulário -->
+
+        <div class="modal fade" id="pesquisa" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Conteúdo -->
+                <div class="modal-content">
+                    <div class="modal-header" align="center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Busca</h4>
+                        <hr/>
+                        <h5>Encontre seu pet</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h:form>
+                            <div class="col-md-12">
+                                <div class="row">
+
+                                    <div class="col-md-2" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Espécie:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
+                                            <f:selectItem itemLabel="Espécie 1" itemValue="1"/>
+                                            <f:selectItem itemLabel="Espécie 2" itemValue="2"/>
+                                            <f:selectItem itemLabel="Espécie 3" itemValue="3"/>
+                                            <f:selectItem itemLabel="Espécie 4" itemValue="4"/>
+                                            <f:selectItem itemLabel="Espécie 5" itemValue="5"/>
+
+                                        </h:selectOneMenu>
+                                    </div>
+
+
+                                    <div class="col-md-2" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Idade:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
+                                            <f:selectItem itemLabel="0-6 meses" itemValue="1"/>
+                                            <f:selectItem itemLabel="6-12 meses" itemValue="2"/>
+                                            <f:selectItem itemLabel="1-2 anos" itemValue="3"/>
+                                            <f:selectItem itemLabel="2-5 anos" itemValue="4"/>
+                                            <f:selectItem itemLabel="Mais de 5 anos" itemValue="5"/>
+                                        </h:selectOneMenu>
+                                    </div>
+
+
+                                    <div class="col-md-2" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Raça:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
+                                            <f:selectItem itemLabel="Raça 1" itemValue="1"/>
+                                            <f:selectItem itemLabel="Raça 2" itemValue="2"/>
+                                            <f:selectItem itemLabel="Raça 3" itemValue="3"/>
+                                            <f:selectItem itemLabel="Raça 4" itemValue="4"/>
+                                        </h:selectOneMenu>
+                                    </div>
+
+
+                                    <div class="col-md-2" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Sexo:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
+                                            <f:selectItem itemLabel="Macho" itemValue="1"/>
+                                            <f:selectItem itemLabel="Fêmea" itemValue="2"/>
+                                        </h:selectOneMenu>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <button class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" data-dismiss="modal">Pesquisar</button>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Paginação -->
+        <div align="center">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item" style="color: red; background-color: red;"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+
+
+    </h:body>
+</html>
+

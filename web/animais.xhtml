@@ -15,13 +15,19 @@
         <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
 
         <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/estilo.css" />
 
 
         <script src="js/jquery-1.11.0.min.js"></script>
         <!-- <script src="js/bootstrap.min.js"></script> -->
 
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" type="text/css" rel="stylesheet" />
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrxINM1KI934Mqpuis8YJRh0XBzLQCSR4&amp;libraries=places&amp;callback=initAutocomplete"
+        async="" defer=""></script>
+        <script type="text/javascript" src="js/mapa.js"></script>
+
     </h:head>
-    <h:body>
+    <h:body onload="initAutocomplete()">
 
         <!-- Menu -->
         <div id="header">
@@ -31,9 +37,17 @@
             </ui:insert>
         </div>
 
+        
         <br/>
         <br/>
         <br/>
+        <br/>
+        <br/>
+        <form id="mapa" class="mapa">
+            <input id="txtEndereco" class="controls" type="text" placeholder="Search Box" value=""/>
+            <input type="submit" value="Enviar" name="btnEnviar"  />
+        </form>
+        <div id="map" ></div>
         <br/>
         <br/>
 
@@ -95,11 +109,10 @@
                     <div class="container-fluid" id="adote">
                         <div class="row">
                             <div class="col-md-12" align="center">
-                                <h3 style="color: #ffa812;">Cadastre um Animal</h3>
+                                <h3 style="color: #ffa812;">Cadastre um animal</h3>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="container-fluid">
 
@@ -114,7 +127,6 @@
                                         <div class="card-header panel panel-default" style="margin-top: -5%; padding-top: 3%; background-color: white; border-radius: 0px; margin-bottom: 10px; color: black;">
 
                                             <!-- Form-->
-
                                             <h:form class="form-signin">
 
                                                 <div class="row">
@@ -123,59 +135,72 @@
                                                     <div class="col-md-5">
                                                         <h:panelGrid columns="2" cellpadding="5">
                                                             <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                                                Nome:
+                                                                Tipo:
                                                             </label>
-                                                            <h:inputText class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
-                                                            <label style="font-size: 14px;color: black;padding-left: 10px;">
+                                                            <h:selectOneMenu value="#{animalBean.animal.tipoAnimal}" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
+                                                                <f:selectItem itemLabel="Adoção" itemValue="Adoção"/>
+                                                                <f:selectItem itemLabel="Perdido" itemValue="Perdido"/>
+                                                                <f:selectItem itemLabel="Resgate" itemValue="Resgate"/>
+                                                            </h:selectOneMenu>
+                                                            <label style="font-size: 14px;color: black; padding-left: 10px;">
                                                                 Espécie:
                                                             </label>
-                                                            <h:selectOneMenu value="#" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
-                                                                <f:selectItem itemLabel="Espécie 1" itemValue="1"/>
-                                                                <f:selectItem itemLabel="Espécie 2" itemValue="2"/>
-                                                                <f:selectItem itemLabel="Espécie 3" itemValue="3"/>
-                                                                <f:selectItem itemLabel="Espécie 4" itemValue="4"/>
+                                                            <h:selectOneMenu value="#{animalBean.animal.especie}" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
+                                                                <f:selectItem itemLabel="Cachorro" itemValue="Cachorro"/>
+                                                                <f:selectItem itemLabel="Gato" itemValue="Gato"/>
                                                             </h:selectOneMenu>
                                                             <label style="font-size: 14px;color: black;padding-left: 10px;">
                                                                 Idade:
                                                             </label>
-                                                            <h:selectOneMenu value="#" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
-                                                                <f:selectItem itemLabel="0-6 meses" itemValue="1"/>
-                                                                <f:selectItem itemLabel="6-12 meses" itemValue="2"/>
-                                                                <f:selectItem itemLabel="1-2 anos" itemValue="3"/>
-                                                                <f:selectItem itemLabel="2-5 anos" itemValue="4"/>
-                                                                <f:selectItem itemLabel="Mais de 5 anos" itemValue="5"/>
+                                                            <h:selectOneMenu value="#{animalBean.animal.idade}" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
+                                                                <f:selectItem itemLabel="0-6 meses" itemValue="0-6 meses"/>
+                                                                <f:selectItem itemLabel="6-12 meses" itemValue="6-12 meses"/>
+                                                                <f:selectItem itemLabel="1-2 anos" itemValue="1-2 anos"/>
+                                                                <f:selectItem itemLabel="2-5 anos" itemValue="2-5 anos"/>
+                                                                <f:selectItem itemLabel="Mais de 5 anos" itemValue="mais de 5 anos"/>
+                                                            </h:selectOneMenu>
+                                                            <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                                                Sexo:
+                                                            </label>
+                                                            <h:selectOneMenu value="#{animalBean.animal.sexo}" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
+                                                                <f:selectItem itemLabel="Macho" itemValue="1"/>
+                                                                <f:selectItem itemLabel="Fêmea" itemValue="2"/>
+                                                            </h:selectOneMenu>
+                                                            <label style="font-size: 14px;color: black;padding-left: 10px;">
+                                                                Raça:
+                                                            </label>
+                                                            <h:selectOneMenu value="#{animalBean.animal.raca}" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
+                                                                <f:selectItem itemLabel="Viralata" itemValue="Viralata"/>
+                                                                <f:selectItem itemLabel="Outra" itemValue="Outra"/>
                                                             </h:selectOneMenu>
                                                         </h:panelGrid>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <h:panelGrid columns="2" cellpadding="5">
                                                             <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                                                Raça:
+                                                                Nome:
                                                             </label>
-                                                            <h:selectOneMenu value="#" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
-                                                                <f:selectItem itemLabel="Raça 1" itemValue="1"/>
-                                                                <f:selectItem itemLabel="Raça 2" itemValue="2"/>
-                                                                <f:selectItem itemLabel="Raça 3" itemValue="3"/>
-                                                                <f:selectItem itemLabel="Raça 4" itemValue="4"/>
-                                                            </h:selectOneMenu>
-                                                            <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                                                Sexo:
+                                                            <h:inputText value="#{animalBean.animal.nomeAnimal}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
+                                                            
+                                                            <label style="font-size: 14px;color: black;padding-left: 10px;">
+                                                                Local:
                                                             </label>
-                                                            <h:selectOneMenu value="#" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
-                                                                <f:selectItem itemLabel="Macho" itemValue="1"/>
-                                                                <f:selectItem itemLabel="Fêmea" itemValue="2"/>
-                                                            </h:selectOneMenu>
+                                                            <h:inputText value="#{animalBean.animal.localizacao}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
+                                                            <label style="font-size: 14px;color: black;padding-left: 10px;">
+                                                                Imagem:
+                                                            </label>
+                                                            <h:inputText value="#{animalBean.animal.fotoAnimal}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
                                                             <label style="font-size: 14px;color: black; padding-left: 10px;">
                                                                 Descrição:
                                                             </label>
-                                                            <h:inputTextarea rows="3" class="form-control" style="margin-left: 10px;"/>  
+                                                            <h:inputTextarea value="#{animalBean.animal.descricaoAnimal}" rows="3" class="form-control" style="margin-left: 10px;"/>  
                                                         </h:panelGrid>
                                                     </div>
                                                     <div class="col-md-1">
                                                     </div>
                                                     <div class="col-md-12" align="center">
                                                         <br/>
-                                                        <h:button value="Cadastrar" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"/>
+                                                        <h:commandButton action="#{animalBean.Salvar()}" value="Cadastrar" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"/>
                                                     </div>
                                                 </div>
                                                 <br/>
@@ -199,19 +224,14 @@
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $("#click").click(function () {
-                    $('html, body').animate({
-                        scrollTop: $("#adote").offset().top
-                    }, 2000);
-                });
+        $(document).ready(function () {
+            $("#click").click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#adote").offset().top
+                }, 2000);
             });
+        });
         </script>
-
-
-
-
-
     </h:body>
 </html>
 

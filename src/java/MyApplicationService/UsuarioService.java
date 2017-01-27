@@ -6,6 +6,7 @@
 package MyApplicationService;
 
 import DAO.ExperienciaDAO;
+import DAO.PessoaFisicaDAO;
 import DAO.UsuarioDAO;
 import Modelo.Usuario;
 import com.google.gson.Gson;
@@ -74,6 +75,9 @@ public class UsuarioService {
        String json = null;
        try {
            json = gson.toJson(UsuarioDAO.buscarById(idUsuario));
+//           Usuario u = gson.fromJson(json, Usuario.class);
+//           if(u.getIdPermissao() == 1)
+//               json = gson.toJson(PessoaFisicaDAO.byId(u.getIdUsuario()));
        } catch (SQLException ex) {
            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, null, ex);
        }

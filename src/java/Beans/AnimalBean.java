@@ -51,8 +51,9 @@ public class AnimalBean {
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal");
         Gson gson = new Gson();
         
-        if(animal.getIdAnimal() != 0)
+        if(animal.getIdAnimal() == 0)
         {
+            System.out.println("Bean Salvar: " + animal.getNomeAnimal());
             animal.setIdUsuario(user.getIdUsuario());
             String json = gson.toJson(animal);
             caminho.request().post(Entity.json(json));
@@ -118,6 +119,12 @@ public class AnimalBean {
         dono = gson.fromJson(json, Usuario.class);
         
         return "animal.jsf";
+    }
+    
+    public String EditarAnimal(){
+        //animal = a;
+        System.out.println("Edita ...");
+        return "index.jsf?faces-redirect=true";
     }
     
     public String Adotar(Animal a){

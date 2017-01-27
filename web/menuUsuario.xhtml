@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
@@ -18,14 +19,16 @@
     <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color: #ffa812;">&times;</a>
         <div class="overlay-content user-menu">
+            <c:if test="#{loginBean.usuarioLogado != null}">
             <img src="imagens/foto.jpg" alt="Foto do usuário" class="circular"/>
-            <a href="perfilUsuario.jsf" style="font-size: 27px;color: #ffa812;">Meu Perfil</a>
+            <a href="#{usuarioBean.VerPerfil(loginBean.usuarioLogado.idUsuario)}" style="font-size: 27px;color: #ffa812;">Meu Perfil</a>
             <a href="meusAnimais.jsf" style="font-size: 27px;color: #ffa812;">Meus Animais</a>
             <a href="minhasAdocoes.jsf" style="font-size: 27px;color: #ffa812;">Minhas Adoções</a>
             <a href="meusEventos.jsf" style="font-size: 27px;color: #ffa812;">Meus Eventos</a>
             <a href="meusAnuncios.jsf" style="font-size: 27px;color: #ffa812;">Meus Anúncios</a>
             <a href="minhasExperiencias.jsf" style="font-size: 27px;color: #ffa812;">Minhas Experiências</a>
-            
+            </c:if>
+
         </div>
     </div>
 
@@ -55,8 +58,14 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right ">
-                        <li><a style="font-size:30px;cursor:pointer;color: #ffa812; font-size: 15px;" onclick="openNav()"> Camila </a></li>
-                        <li><a href="#" style="color: #ffa812; font-size: 15px;">Sair</a></li>
+                        <c:if test="#{loginBean.usuarioLogado != null}">
+                            <li><a style="font-size:30px;cursor:pointer;color: #ffa812; font-size: 15px;" onclick="openNav()">#{loginBean.usuarioLogado.nomeUsuario}</a></li>
+                            <li><a href="#" style="color: #ffa812; font-size: 15px;">Sair</a></li>
+                        </c:if>
+                        <c:if test="#{loginBean.usuarioLogado == null}">
+                            <li><a href="loginSignin.jsf" style="color: #ffa812; font-size: 15px;">Entrar</a></li>
+                            <li><a href="cadastrarUsuario.jsf" style="color: #ffa812; font-size: 15px;">Cadastro</a></li>
+                        </c:if>
                     </ul>
 
                 </div>

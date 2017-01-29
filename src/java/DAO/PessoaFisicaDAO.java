@@ -38,8 +38,8 @@ public class PessoaFisicaDAO {
             while(rs.next())
             {
                 PessoaFisica pf = new PessoaFisica(rs.getInt("idHelper"), rs.getString("cpf"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
-                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getString("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));    
                 lista.add(pf);
             }
         } 
@@ -69,8 +69,8 @@ public class PessoaFisicaDAO {
             while(rs.next())
             {
                 PessoaFisica pf = new PessoaFisica(rs.getInt("idHelper"), rs.getString("cpf"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
-                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getString("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));    
                 lista.add(pf);
             }
         } 

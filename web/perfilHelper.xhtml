@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Help Pet - Perfil</title>
 
@@ -61,12 +62,12 @@
                         <div class="col-md-12 panel panel-default cardsLateralEsquerda">
                             <h5><i class="material-icons">event</i> Encontros</h5>
                             <hr/>
-                            <p class="itensPerfil"><strong>Último encontro marcardo</strong></p>
-                            <p class="itensPerfil">Animal: Gato 1</p>
-                            <p class="itensPerfil">Local: Natal/RN - Tirol</p>
-                            <p class="itensPerfil">Data: 00/00/0000 - Hora: 00:00</p>
-                            <div style="margin-bottom: 15px;">
-                                <a href="minhasAdocoes.jsf" class="btn btn-warning btn-xs" style="margin-left: 0%">Ver mais</a>
+                            <div align="center">
+                                <h1 style="font-size: 90px;"><strong>#{encontroBean.encontros.size()}</strong></h1>
+                                <h5>Encontros!</h5>
+                                <div style="padding-top: 10px; padding-bottom: 10px;">
+                                    <p><a href="meusEncontros.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">Meus Encontros</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,11 +75,12 @@
                         <div class="col-md-12 panel panel-default cardsLateralEsquerda">
                             <h5><i class="material-icons">book</i> Experiências</h5>
                             <hr/>
-                            <p class="itensPerfil"><strong>Última experiência adicionada</strong></p>
-                            <p class="itensPerfil">Nome: Minha Experiência</p>
-                            <p class="itensPerfil">Data: 00/00/0000</p>
-                            <div style="margin-bottom: 15px;">
-                                <a href="minhasExperiencias.jsf" class="btn btn-warning btn-xs" style="margin-left: 0%">Ver mais</a>
+                            <div align="center">
+                                <h1 style="font-size: 90px;"><strong>#{experienciaBean.minhasExperiencias.size()}</strong></h1>
+                                <h5>Experiências!</h5>
+                                <div style="padding-top: 10px; padding-bottom: 10px;">
+                                    <p><a href="minhasExperiencias.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">Minhas Experiencias</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,28 +102,19 @@
                                 <div id="myTabContent" class="tab-content">
                                     <!-- Listagem de Meus animais-->
                                     <div class="tab-pane fade active in" id="pets">
+                                        
                                         <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <c:forEach var="animal" items="#{animalBean.meusAnimais}">
+                                                <div class="col-md-6" style="margin-bottom: 10px">
                                                     <img src="imagens/gato2.jpg" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <img src="imagens/gato2.jpg" width="200px" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
-                                                </div>
+                                                    </c:forEach>
                                             </div>
                                         </div>
-                                        <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <img src="imagens/gato2.jpg" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <img src="imagens/gato2.jpg" width="200px" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                          
                                         <div class="col-md-12" align="center">
-                                            <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                                            <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;">Meus Animais</a></p>
 
                                         </div>
                                     </div>
@@ -131,26 +124,16 @@
 
                                             <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <c:forEach var="evento" items="#{eventoBean.meusEventos}">
+                                                    <div class="col-md-6" style="margin-bottom: 10px">
                                                         <img src="imagens/evento.png" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <img src="imagens/evento.png" width="200px" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <img src="imagens/evento.png" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <img src="imagens/evento.png" width="200px" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
-                                                    </div>
+                                                        </c:forEach>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-md-12" align="center">
-                                                <p><a href="meusEventos.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                                                <p><a href="meusEventos.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;">Meus Eventos</a></p>
 
                                             </div>
                                         </div>

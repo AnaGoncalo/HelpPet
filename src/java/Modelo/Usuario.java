@@ -16,9 +16,10 @@ public class Usuario {
     private String nomeUsuario;
     private String email;
     private String senha;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String foto;
     private String localizacao;
+    private String telefone;
     private int idPermissao;
     
     public Usuario()
@@ -34,7 +35,7 @@ public class Usuario {
         this.idPermissao = idPermissao;
     }
 
-    public Usuario(int idUsuario, String nomeUsuario, String email, String senha, Date dataNascimento, String foto, String localizacao, int idPermissao) {
+    public Usuario(int idUsuario, String nomeUsuario, String email, String senha, String dataNascimento, String foto, String localizacao, String telefone, int idPermissao) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.email = email;
@@ -42,6 +43,7 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
         this.foto = foto;
         this.localizacao = localizacao;
+        this.telefone = telefone;
         this.idPermissao = idPermissao;
     }
 
@@ -77,11 +79,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -108,8 +110,14 @@ public class Usuario {
     public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
-    
-    
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     
 }

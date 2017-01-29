@@ -23,8 +23,8 @@ public class PessoaFisica extends Usuario {
         this.cpf = cpf;
     }
 
-    public PessoaFisica(int idHelper, String cpf, int idUsuario, String nomeUsuario, String email, String senha, Date dataNascimento, String foto, String localizacao, int idPermissao) {
-        super(idUsuario, nomeUsuario, email, senha, dataNascimento, foto, localizacao, idPermissao);
+    public PessoaFisica(int idHelper, String cpf, int idUsuario, String nomeUsuario, String email, String senha, String dataNascimento, String foto, String localizacao, String telefone, int idPermissao) {
+        super(idUsuario, nomeUsuario, email, senha, dataNascimento, foto, localizacao, telefone, idPermissao);
         this.idHelper = idHelper;
         this.cpf = cpf;
     }

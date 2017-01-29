@@ -33,6 +33,7 @@ import javax.ws.rs.client.WebTarget;
 public class EstoqueBean {
     private Estoque estoque = new Estoque();
     private List<Estoque> estoques = new ArrayList();
+    private List<Estoque> meusEstoques = new ArrayList();
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
 
     public EstoqueBean(){

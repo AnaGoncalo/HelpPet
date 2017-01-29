@@ -67,7 +67,7 @@ public class UsuarioDAO {
             pstmt.setString(1, usuario.getNomeUsuario());
             pstmt.setString(2, usuario.getEmail());
             pstmt.setString(3, usuario.getSenha());
-            pstmt.setDate(4, (Date) usuario.getDataNascimento());
+            pstmt.setString(4, usuario.getDataNascimento());
             pstmt.setString(5, usuario.getFoto());
             pstmt.setString(6, usuario.getLocalizacao());
             pstmt.setInt(7, usuario.getIdUsuario());
@@ -125,14 +125,14 @@ public class UsuarioDAO {
                 if(rs.getInt("idPermissao") == 1){
                     PessoaFisica pf = buscarPF(idUsuario);
                     u = new PessoaFisica(pf.getIdHelper(), pf.getCpf(), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), rs.getString("senha"),
-                        rs.getDate("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
+                        rs.getString("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));
                 }
                 else
                 {
                     PessoaJuridica pj = buscarPJ(idUsuario);
                     u = new PessoaJuridica(pj.getIdClinicaPetshop(), pj.getCnpj(), pj.getFuncionamento(), pj.getDescricao(), pj.getSite(),
                                                 rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), rs.getString("senha"),
-                                                rs.getDate("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
+                                                rs.getString("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));
                 }
             }
         } 
@@ -229,15 +229,15 @@ public class UsuarioDAO {
                     PessoaFisica pf = buscarPF(rs.getInt("idUsuario"));
                     System.out.println("Usuario logado " + pf.getCpf());
                     u = new PessoaFisica(pf.getIdHelper(), pf.getCpf(), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                            rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), 
-                            rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
+                            rs.getString("email"), rs.getString("senha"), rs.getString("dataNascimento"), 
+                            rs.getString("foto"), rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));
                 }
                 else
                 {
                     PessoaJuridica pj = buscarPJ(rs.getInt("idUsuario"));
                     u = new PessoaJuridica(pj.getIdClinicaPetshop(), pj.getCnpj(), pj.getFuncionamento(), pj.getDescricao(), pj.getSite(),
                             rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), rs.getString("senha"),
-                            rs.getDate("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getInt("idPermissao"));
+                            rs.getString("dataNascimento"), rs.getString("foto"), rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));
                 }
             }
         } 
@@ -268,8 +268,8 @@ public class UsuarioDAO {
             {
                 PessoaJuridica pj = new PessoaJuridica(rs.getInt("idClinicaPetshop"), rs.getString("cnpj"), rs.getString("funcionamento"), 
                                         rs.getString("descricao"), rs.getString("site"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
-                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getString("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));    
                 lista.add(pj);
             }
         } 
@@ -300,8 +300,8 @@ public class UsuarioDAO {
             {
                 PessoaJuridica pj = new PessoaJuridica(rs.getInt("idClinicaPetshop"), rs.getString("cnpj"), rs.getString("funcionamento"), 
                                         rs.getString("descricao"), rs.getString("site"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
-                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getString("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));    
                 lista.add(pj);
             }
         } 

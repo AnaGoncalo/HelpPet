@@ -49,7 +49,7 @@
                                 <div align="left">
                                     <p>#{clinica.localizacao}</p>
                                 </div>
-                                <p><a href="perfilClinicaPetShop.jsf" class="btn btn-default" style="background-color: #b48cd0; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                                <p><h:form><h:commandLink action="#{pjBean.VerClinica(clinica)}" class="btn btn-default" style="background-color: #b48cd0; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</h:commandLink></h:form></p>
                             </div>
                         </div>
                     </div>

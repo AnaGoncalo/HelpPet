@@ -36,7 +36,7 @@
             <div class="panel panel-default divPerfil" align="left">
                 <img src="imagens/petshop.jpg"  style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
-                    <h3 style="padding-top: 2%;">#{pjBean.clinica.nomeUsuario}</h3>
+                    <h3 style="padding-top: 2%;">#{loginBean.usuarioLogado.nomeUsuario}</h3>
                 </div>
             </div>
         </div>
@@ -53,9 +53,12 @@
                         <div class="col-md-12 panel panel-default cardsLateralEsquerda">
                             <h5><i class="material-icons">info</i> Informações</h5>
                             <hr/>
-                            <p class="itensPerfil">E-mail: #{pjBean.clinica.email}</p>
-                            <p class="itensPerfil">Telefone: #{pjBean.clinica.telefone}</p>
-                            <p class="itensPerfil">Local: #{pjBean.clinica.localizacao}</p>
+                            <p class="itensPerfil">E-mail: #{loginBean.usuarioLogado.email}</p>
+                            <p class="itensPerfil">Telefone: #{loginBean.usuarioLogado.telefone}</p>
+                            <p class="itensPerfil">Local: #{loginBean.usuarioLogado.localizacao}</p>
+                            <p class="itensPerfil">CNPJ: #{loginBean.pj.cnpj}</p>
+                            <p class="itensPerfil">Funcionamento: #{loginBean.pj.funcionamento}</p>
+                            <p class="itensPerfil">Site: #{loginBean.pj.site}</p>
                             <div style="margin-bottom: 15px;">
                                 <a href="editarClinicaPetShop.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
                             </div>
@@ -107,22 +110,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>

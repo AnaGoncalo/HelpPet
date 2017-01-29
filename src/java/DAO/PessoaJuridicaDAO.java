@@ -37,8 +37,8 @@ public class PessoaJuridicaDAO {
             {
                 PessoaJuridica pj = new PessoaJuridica(rs.getInt("idClinicaPetshop"), rs.getString("cnpj"), rs.getString("funcionamento"), 
                                         rs.getString("descricao"), rs.getString("site"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
-                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getString("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));    
                 lista.add(pj);
             }
         } 
@@ -69,8 +69,8 @@ public class PessoaJuridicaDAO {
             {
                 PessoaJuridica pj = new PessoaJuridica(rs.getInt("idClinicaPetshop"), rs.getString("cnpj"), rs.getString("funcionamento"), 
                                         rs.getString("descricao"), rs.getString("site"), rs.getInt("idUsuario"), rs.getString("nomeUsuario"), 
-                                        rs.getString("email"), rs.getString("senha"), rs.getDate("dataNascimento"), rs.getString("foto"), 
-                                        rs.getString("localizacao"), rs.getInt("idPermissao"));    
+                                        rs.getString("email"), rs.getString("senha"), rs.getString("dataNascimento"), rs.getString("foto"), 
+                                        rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));    
                 lista.add(pj);
             }
         } 

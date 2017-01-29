@@ -35,14 +35,29 @@ public class LoginBean {
 
     public LoginBean() {
     }
-    
-    public String VerPerfil(){
-        if(usuarioLogado.getIdPermissao() == 1)
-            return "verHelper.jsf";
-        else if(usuarioLogado.getIdPermissao() == 2)
-            return "ong.jsf";
-        else
-            return "clinicaPetshop.jsf";
+
+    public String VerPerfil() {
+        if (usuarioLogado.getIdPermissao() == 1) {
+            Client cliente = ClientBuilder.newClient();
+            WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaFisica/" + usuarioLogado.getIdUsuario());
+            String json = caminho.request().get(String.class);
+            Gson gson = new Gson();
+            pf = gson.fromJson(json, PessoaFisica.class);
+            return "perfilHelper.jsf";
+        } else {
+            Client cliente = ClientBuilder.newClient();
+            WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaJuridica/" + usuarioLogado.getIdUsuario());
+            String json = caminho.request().get(String.class);
+            Gson gson = new Gson();
+            pj = gson.fromJson(json, PessoaJuridica.class);
+
+            if (usuarioLogado.getIdPermissao() == 2) {
+                return "perfilOng.jsf";
+            } else {
+                return "perfilClinica.jsf";
+            }
+        }
+
     }
 
     public String Logar() throws SQLException {
@@ -93,5 +108,22 @@ public class LoginBean {
     public void setUser(Usuario user) {
         this.user = user;
     }
+
+    public PessoaFisica getPf() {
+        return pf;
+    }
+
+    public void setPf(PessoaFisica pf) {
+        this.pf = pf;
+    }
+
+    public PessoaJuridica getPj() {
+        return pj;
+    }
+
+    public void setPj(PessoaJuridica pj) {
+        this.pj = pj;
+    }
+    
 
 }

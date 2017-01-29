@@ -22,9 +22,55 @@
         <!-- <script src="js/bootstrap.min.js"></script> -->
 
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" type="text/css" rel="stylesheet" />
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrxINM1KI934Mqpuis8YJRh0XBzLQCSR4&amp;libraries=places&amp;callback=initAutocomplete"
+
+        <script>
+            // This example displays an address form, using the autocomplete feature
+            // of the Google Places API to help users fill in the information.
+
+            var placeSearch, autocomplete;
+
+            function initAutocomplete() {
+                // Create the autocomplete object, restricting the search to geographical
+                // location types.
+                autocomplete = new google.maps.places.Autocomplete(
+                        (document.getElementById('autocomplete')),
+                        {types: ['geocode']});
+
+                // When the user selects an address from the dropdown, populate the address
+                // fields in the form.
+                autocomplete.addListener('place_changed', fillInAddress);
+
+
+                $('form').submit(function (event) {
+                    event.preventDefault();
+
+                    alert("Endereço: " + document.getElementById('autocomplete'));
+                });
+            }
+            // [START region_geolocation]
+            // Bias the autocomplete object to the user's geographical location,
+            // as supplied by the browser's 'navigator.geolocation' object.
+            function geolocate() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var geolocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        var circle = new google.maps.Circle({
+                            center: geolocation,
+                            radius: position.coords.accuracy
+                        });
+                        autocomplete.setBounds(circle.getBounds());
+                    });
+                }
+            }
+            // [END region_geolocation]
+
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhrNWKeaGAXhLtfJ1njhfvgbIuKYSgoTE&amp;libraries=places&amp;callback=initAutocomplete"
         async="" defer=""></script>
-        <script type="text/javascript" src="js/mapa.js"></script>
 
     </h:head>
     <h:body onload="initAutocomplete()">
@@ -37,19 +83,22 @@
             </ui:insert>
         </div>
 
-        
+
         <br/>
         <br/>
         <br/>
+        <div id="locationField">// essa parte no lugar da localização
+            <input id="autocomplete" placeholder="Endereço" onFocus="geolocate()" type="text" />
+        </div>
         <br/>
         <br/>
-        <form id="mapa" class="mapa">
+        <!--<form id="mapa" class="mapa">
             <input id="txtEndereco" class="controls" type="text" placeholder="Search Box" value=""/>
             <input type="submit" value="Enviar" name="btnEnviar"  />
         </form>
         <div id="map" ></div>
         <br/>
-        <br/>
+        <br/> -->
 
         <!-- Título da página -->
         <div id="home" class="home">
@@ -163,8 +212,8 @@
                                                                 Sexo:
                                                             </label>
                                                             <h:selectOneMenu value="#{animalBean.animal.sexo}" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
-                                                                <f:selectItem itemLabel="Macho" itemValue="1"/>
-                                                                <f:selectItem itemLabel="Fêmea" itemValue="2"/>
+                                                                <f:selectItem itemLabel="Macho" itemValue="Macho"/>
+                                                                <f:selectItem itemLabel="Fêmea" itemValue="Fêmea"/>
                                                             </h:selectOneMenu>
                                                             <label style="font-size: 14px;color: black;padding-left: 10px;">
                                                                 Raça:
@@ -181,10 +230,13 @@
                                                                 Nome:
                                                             </label>
                                                             <h:inputText value="#{animalBean.animal.nomeAnimal}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
-                                                            
+
                                                             <label style="font-size: 14px;color: black;padding-left: 10px;">
                                                                 Local:
                                                             </label>
+                                                            <div id="locationField">
+                                                                <h:inputText value="#{animalBean.animal.localizacao}" id="autocomplete" onfocus="geolocate()" />
+                                                            </div>
                                                             <h:inputText value="#{animalBean.animal.localizacao}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
                                                             <label style="font-size: 14px;color: black;padding-left: 10px;">
                                                                 Imagem:
@@ -224,13 +276,13 @@
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script>
-        $(document).ready(function () {
-            $("#click").click(function () {
-                $('html, body').animate({
-                    scrollTop: $("#adote").offset().top
-                }, 2000);
-            });
-        });
+                                                                    $(document).ready(function () {
+                                                                        $("#click").click(function () {
+                                                                            $('html, body').animate({
+                                                                                scrollTop: $("#adote").offset().top
+                                                                            }, 2000);
+                                                                        });
+                                                                    });
         </script>
     </h:body>
 </html>

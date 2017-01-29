@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -39,14 +40,21 @@ public class AnimalBean {
   
     private List<Animal> animais = new ArrayList();
     private List<Animal> animaisTop = new ArrayList();
+    private List<Animal> meusAnimais = new ArrayList();
     private Encontro encontro = new Encontro();
     
     public AnimalBean() throws SQLException {
         Listar();
         animaisTop = animais.subList(1, 5);
+        
+        if (user != null) {
+            ListarMeusAnimais();
+        }
     }
     
-    public void Salvar(){
+    public String Salvar(){
+        if(user == null)
+            return "loginSignin.jsf";
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal");
         Gson gson = new Gson();
@@ -64,7 +72,8 @@ public class AnimalBean {
             caminho.request().put(Entity.json(json));
         }
         
-        Listar();
+        ListarMeusAnimais();
+        return "meusAnimais.jsf";
     }
     
     public void Listar(){
@@ -77,13 +86,13 @@ public class AnimalBean {
         animais = Arrays.asList(vetor);
     }
     
-    public void MeusAnimais(){
+    public void ListarMeusAnimais() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);
-        animais = Arrays.asList(vetor);
+        meusAnimais = Arrays.asList(vetor);
     }
     
     public String SalvarEncontro(){
@@ -91,7 +100,6 @@ public class AnimalBean {
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
         Gson gson = new Gson();
        
-        
         if(encontro.getIdEncontro() == 0)
         {
             encontro.setIdUsuario(user.getIdUsuario());
@@ -107,8 +115,6 @@ public class AnimalBean {
         return "index.jsf";
     }
     
-    
-    
     public String VerAnimal(Animal a){
         animal = a;
         
@@ -121,10 +127,11 @@ public class AnimalBean {
         return "animal.jsf";
     }
     
-    public String EditarAnimal(){
-        //animal = a;
+    public String EditarAnimal(Animal a){
+        animal = a;
         System.out.println("Edita ...");
-        return "index.jsf?faces-redirect=true";
+        return "editarAnimal.jsf";
+//return "index.jsf?faces-redirect=true";
     }
     
     public String Adotar(Animal a){
@@ -136,12 +143,21 @@ public class AnimalBean {
         return "cadastrarEncontro.jsf";
     }
     
+    public String VerResponsavel(){
+        getRequest().setAttribute("usuario", dono);
+        return "VerHelper.jssetAttribute(f?faces-redirect=true";
+    }
+    
     public FacesContext getFacesContext(){
         return FacesContext.getCurrentInstance();
     }
   
     public HttpSession getSession(){
         return (HttpSession) getFacesContext().getExternalContext().getSession(false);
+    }
+    
+    public HttpServletRequest getRequest() {
+        return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
     }
     
     public Animal getAnimal() {
@@ -183,6 +199,14 @@ public class AnimalBean {
     public void setAnimaisTop(List<Animal> animaisTop) {
         this.animaisTop = animaisTop;
     }
-    
+
+    public List<Animal> getMeusAnimais() {
+        ListarMeusAnimais();
+        return meusAnimais;
+    }
+
+    public void setMeusAnimais(List<Animal> meusAnimais) {
+        this.meusAnimais = meusAnimais;
+    }
     
 }

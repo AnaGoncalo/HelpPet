@@ -37,6 +37,8 @@ public class EncontroBean {
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
     
     public EncontroBean() {
+        if(user != null)
+            MeusEncontros();
     }
     
     public String Adotar(Animal a){
@@ -86,6 +88,11 @@ public class EncontroBean {
         encontros = Arrays.asList(vetor);
     }
     
+    public String VerEncontro(Encontro e){
+        encontro = e;
+        return "encontro.jsf";
+    }
+    
     public FacesContext getFacesContext(){
         return FacesContext.getCurrentInstance();
     }
@@ -103,6 +110,7 @@ public class EncontroBean {
     }
 
     public List<Encontro> getEncontros() {
+        MeusEncontros();
         return encontros;
     }
 

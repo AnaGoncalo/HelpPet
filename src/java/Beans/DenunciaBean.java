@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -26,13 +28,22 @@ import javax.ws.rs.client.WebTarget;
 @RequestScoped
 public class DenunciaBean {
     private Denuncia denuncia = new Denuncia();
+    
     private List<Denuncia> denuncias = new ArrayList();
+    private List<Denuncia> denunciasTop = new ArrayList();
 
     /**
      * Creates a new instance of DenunciaBean
      */
     public DenunciaBean() {
         Listar();
+        
+        if(denuncias.size() > 4){
+            denunciasTop = denuncias.subList(1, 5);
+        }
+        else{
+            denunciasTop = denuncias;
+        }
     }
     
     public void Listar(){
@@ -45,7 +56,8 @@ public class DenunciaBean {
         denuncias = Arrays.asList(vetor);
     }
     
-    public void Salvar(){
+    public String Salvar(){
+        
         Client cliente = ClientBuilder.newClient();
         
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/denuncia");
@@ -57,6 +69,8 @@ public class DenunciaBean {
         caminho.request().post(Entity.json(json));
         
         Listar();
+        
+        return "buscarDenuncia.jsf";
     }
 
     public Denuncia getDenuncia() {
@@ -74,7 +88,13 @@ public class DenunciaBean {
     public void setDenuncias(List<Denuncia> denuncias) {
         this.denuncias = denuncias;
     }
-    
-    
+
+    public List<Denuncia> getDenunciasTop() {
+        return denunciasTop;
+    }
+
+    public void setDenunciasTop(List<Denuncia> denunciasTop) {
+        this.denunciasTop = denunciasTop;
+    }
     
 }

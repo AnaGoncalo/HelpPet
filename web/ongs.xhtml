@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Help Pet - ONGs</title>
 
@@ -28,98 +29,37 @@
         </div>
 
         <!-- Título da página -->
-        <div style="margin-top: 13%; height: 100px; background-color: #FFB772;">
+        <div style="margin-top: 7%; height: 100px; background-color: #FFB772;">
             <h3 align="center" style="color: white; padding-top:  20px;">ONGs</h3>
             <hr style="margin-left: 10px; margin-right: 20px;"/>
         </div>
 
-
-
         <!-- Listagem das ONGs -->
-
         <div class="container" id="tourpackages-carousel" >
             <div class="row">
                 <br/><br/>
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>ONG Cão sem Dono</h5>
-                            <div align="left">
-                                <p>Local: São Paulo/SP</p>
+                <c:forEach var="ong" items="#{pjBean.ongs}">
+                    <div class="col-xs-18 col-sm-6 col-md-3">
+                        <div class="thumbnail caixa">
+                            <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <div class="caption" align="center">
+                                <h:inputHidden value="#{ong.idUsuario}"/>
+                                <h5>#{ong.nomeUsuario}</h5>
+                                <div align="left">
+                                    <p>Local: #{ong.localizacao}</p>
+                                </div>
+                                <p>
+                                    <h:form>
+                                        <h:commandLink  action="#{pjBean.VerOng(ong)}" value="Ver Mais" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;" />
+                                    </h:form>
+                                </p>
                             </div>
-                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
                         </div>
                     </div>
-                </div>
-
-
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>ONG Cão sem Dono</h5>
-                            <div align="left">
-                                <p>Local: São Paulo/SP</p>
-                            </div>
-                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>ONG Cão sem Dono</h5>
-                            <div align="left">
-                                <p>Local: São Paulo/SP</p>
-                            </div>
-                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>ONG Cão sem Dono</h5>
-                            <div align="left">
-                                <p>Local: São Paulo/SP</p>
-                            </div>
-                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>ONG Cão sem Dono</h5>
-                            <div align="left">
-                                <p>Local: São Paulo/SP</p>
-                            </div>
-                            <p><a href="perfilONG.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
-                        </div>
-                    </div>
-                </div>
-
-
+                </c:forEach>
 
 
                 <!-- Área de pesquisa -->
-
                 <div id="container-floating">
 
                     <div id="floating-button" style="background-color: #FFB772;">
@@ -161,7 +101,7 @@
                                                     <f:selectItem itemLabel="Tipo de estoque" itemValue="2"/>
                                                     <f:selectItem itemLabel="Tipo de estoque" itemValue="3"/>
                                                     <f:selectItem itemLabel="Tipo de estoque" itemValue="4"/>
-                                                
+
                                                 </h:selectOneMenu>                                          
                                             </div>
                                             <div class="col-md-2" align="left">

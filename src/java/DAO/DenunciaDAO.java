@@ -67,7 +67,7 @@ public class DenunciaDAO {
             { 
                 Denuncia a = new Denuncia(rs.getInt("idDenuncia"), rs.getString("tituloDenuncia"), 
                         rs.getString("descricaoDenuncia"),rs.getString("fotoDenuncia"), rs.getString("tipoDenuncia"), 
-                        rs.getDate("dataDenuncia"), rs.getString("localizacao"));
+                        rs.getString("dataDenuncia"), rs.getString("localizacao"));
                 lista.add(a);
             }
         } 

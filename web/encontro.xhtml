@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Help Pet - Encontro</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
+
+        <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
+
+
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
+
+    </h:head>
+    <h:body>
+
+
+        <!-- Menu -->
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menuUsuario.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+
+        <div id="home1" class="home" style="margin-top: 40px;">
+            <div class="" align="center" style="margin-top: 5%;">    
+                <img src="imagens/gato2.jpg" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
+
+            </div>
+            <div class="" style="margin-left:19%; margin-top: 2%">    
+                <img src="imagens/foto.jpg" alt="Imagem do responsável pelo animal" class="circular2"   /> <!--FOTO DO RESPONSÁVEL-->
+
+            </div>
+            <div class="" style="margin-left:65%; margin-top: -150px;">    
+                <img src="imagens/foto2.jpg" alt="Iamgem do adotante" class="circular2"   /> <!--FOTO DO ADOTANTE-->
+
+            </div>
+        </div>
+
+
+
+        <!-- Adoção -->
+        <div id="services" class="pad-section" style="background-color:#ffa812;">
+            <div class="container">
+                <h2 class="text-center" style="color:white;">Adoção</h2> 
+                <hr/>
+                <div class="row text-center" >
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <ul class="nav nav-tabs" style="font-size: large;">
+                                <li class="active" style="width: 100%"><a href="#informacoes" data-toggle="tab" aria-expanded="true">Informações</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content" style="color:#000000;">
+                                <div class="tab-pane fade active in" id="informacoes">
+                                    <br></br>
+                                    <h5 aling="center">Status: #{encontroBean.encontro.statusEncontro}</h5>
+                                    <h5 aling="center">Responsável: #{encontroBean.encontro.idUsuario}</h5>
+                                    <h5 aling="center">Local: #{encontroBean.encontro.localizacao}</h5>
+                                    <h5 aling="center">Data: #{encontroBean.encontro.dataEncontro}</h5>
+                                    <h5 aling="center">Hora: #{encontroBean.encontro.horarioEncontro}</h5>
+                                    <a href="#" class="btn btn-primary" style="border-radius: 0px;" data-toggle="modal" data-target="#encontro">Editar</a>
+
+                                    <a href="#" class="btn btn-success" style="margin-left: 10%; border-radius: 0px; ">Confirmar</a>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulário -->
+
+        <div class="modal fade" id="encontro" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Conteúdo -->
+                <div class="modal-content">
+                    <div class="modal-header" align="center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Marque o encontro</h4>
+                        <hr/>
+                        <h6 style="color: red;">Os dados informados aqui serão vistos apenas pelo responsável do animal</h6>
+                    </div>
+                    <div class="modal-body">
+                        <h:form >
+                            <div class="col-md-12">
+                                <div class="row">
+
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                            Estado:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:selectOneMenu value="#" style="color: black; width: 100%;" class="form-control">
+                                            <f:selectItem itemLabel="Acre" itemValue="ac"/>
+                                            <f:selectItem itemLabel="Alagoas" itemValue="al"/>
+                                            <f:selectItem itemLabel="Amapá" itemValue="ap"/>
+                                            <f:selectItem itemLabel="Amazonas" itemValue="am"/>
+                                            <f:selectItem itemLabel="Bahia" itemValue="ba"/>
+                                            <f:selectItem itemLabel="Ceará" itemValue="ce"/>
+                                            <f:selectItem itemLabel="Distrito Federal" itemValue="df"/>
+                                            <f:selectItem itemLabel="Espírito Santo" itemValue="es"/>
+                                            <f:selectItem itemLabel="Goiás" itemValue="go"/>
+                                            <f:selectItem itemLabel="Maranhão" itemValue="ma"/>
+                                            <f:selectItem itemLabel="Mato Grosso" itemValue="mt"/>
+                                            <f:selectItem itemLabel="Mato Grosso do Sul" itemValue="ms"/>
+                                            <f:selectItem itemLabel="Minas Gerais" itemValue="mg"/>
+                                            <f:selectItem itemLabel="Pará" itemValue="pa"/>
+                                            <f:selectItem itemLabel="Paraíba" itemValue="pb"/>
+                                            <f:selectItem itemLabel="Paraná" itemValue="pr"/>
+                                            <f:selectItem itemLabel="Pernambuco	" itemValue="pe"/>
+                                            <f:selectItem itemLabel="Piauí" itemValue="pi"/>
+                                            <f:selectItem itemLabel="Rio de Janeiro" itemValue="rj"/>
+                                            <f:selectItem itemLabel="Rio Grande do Norte" itemValue="rn"/>
+                                            <f:selectItem itemLabel="Rio Grande do Sul" itemValue="rs"/>
+                                            <f:selectItem itemLabel="Rondônia" itemValue="ro"/>
+                                            <f:selectItem itemLabel="Roraima" itemValue="rr"/>
+                                            <f:selectItem itemLabel="Santa Catarina" itemValue="sc"/>
+                                            <f:selectItem itemLabel="São Paulo" itemValue="sp"/>
+                                            <f:selectItem itemLabel="Sergipe" itemValue="se"/>
+                                            <f:selectItem itemLabel="Tocantins" itemValue="to"/>
+                                        </h:selectOneMenu>
+
+
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                            Cidade:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Bairro:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Rua:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Número:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Complemento:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Hora:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <h:commandButton action="adocao.xhtml" value="Marcar encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <style>
+            /* general styles */
+            html, body {
+                height: 100%;
+                width: 100%;
+            }
+            /* padded section */
+            .pad-section {
+                padding: 50px 0;
+            }
+            .pad-section img {
+                width: 100%;
+            }
+            /* vertical-centered text */
+            .text-vcenter {
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+            }
+            .text-vcenter h1 {
+                font-size: 4.5em;
+                font-weight: 700;
+                margin: 0;
+                padding: 0;
+                margin-top: -20%;
+                color:#FF8C00;
+            }
+            /* additional sections */
+            #home1 {
+                background: url("imagens/fundo2.png") no-repeat center center fixed; 
+                display: table;
+                height: 100%;
+                position: relative;
+                width: 100%;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+            #about {
+            }
+            #services {
+                background-color: #3399ff;
+                color: #ffffff;
+                height: 115%;
+            }
+            #services .glyphicon {
+                border: 2px solid #FFFFFF;
+                border-radius: 50%;
+                display: inline-block;
+                font-size: 60px;
+                height: 1240px;
+                line-height: 140px;
+                text-align: center;
+                vertical-align: middle;
+                width: 140px;
+            }
+            #information {
+                display: table;
+                height: 800px;
+                position: relative;
+                width: 100%;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+            #information .panel {
+                opacity: 0.85;
+            }
+            img {
+                border-radius: 900px;
+            }
+            .circular {
+                width: 190px;
+                height: 190px;
+                border-radius: 150px;
+                -webkit-border-radius: 150px;
+                -moz-border-radius: 150px;
+                background: url() no-repeat;
+            }
+            .circular img {
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+            .circular2 {
+                width: 150px;
+                height: 150px;
+                border-radius: 150px;
+                -webkit-border-radius: 150px;
+                -moz-border-radius: 150px;
+                background: url() no-repeat;
+            }
+        </style>
+
+
+    </h:body>
+</html>

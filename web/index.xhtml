@@ -3,36 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Help Pet</title>
+        <title>Help Pet - Início</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
+
+        <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
+
+        <link href="http://bootswatch.com/paper/bootstrap.min.css" rel="stylesheet"/>
 
 
-        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
-
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
-
-        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
 
     </h:head>
     <h:body>
-
         <!-- Menu -->
-
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
@@ -40,39 +30,105 @@
             </ui:insert>
         </div>
 
-        <!-- Título da página -->
-        <div id="home" class="home">
-            <div class="text-vcenter">
-                <h1 style="color: #00EEEE;">#HelpPet</h1>
-                <h3 style="color: #ffa812;">Seja Bem-Vindo!</h3>
+        <br/><br/>
+
+        <!-- Carrossel -->
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li style="background-color: #ffa812;" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li style="background-color: #ffa812;" data-target="#myCarousel" data-slide-to="1"></li>
+                <li style="background-color: #ffa812;" data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox" >
+                <div class="item active" align="center">
+                    <img style="border-radius: 0px;height: 500px;" class="first-slide" aling="center" src="imagens/carrossel.jpg" alt="Banner"/>
+                </div>
+                <div class="item" align="center">
+                    <img style="border-radius: 0px;height: 500px;" class="first-slide" aling="center" src="imagens/carrossel.jpg" alt="Banner"/>
+                </div>
+                <div class="item" align="center">
+                    <img style="border-radius: 0px;height: 500px;" class="first-slide" aling="center" src="imagens/carrossel.jpg" alt="Banner"/>
+                </div>
             </div>
-        </div>
-        
-        <!-- Título da página -->
-        <div id="home" class="home">
-            <div class="text-vcenter">
-                <h1 style="color: #00EEEE;">#Denuncie</h1>
-                <h2 style="color: #ffa812;">ABANDONAR OU MALTRATAR UM ANIMAL É CRIME!</h2>
-                <p class="lead" style="color: #ffa812;">Não deixe de denunciar, os animais não podem pedir socorro, seja a voz deles!</p>
-                <p class="lead" style="font-weight:bold;color: #ffa812;">A denúncia é totalmente anônima.</p>
-                <h:form>
-                    <a href="#novadenuncia" style="background-color: #ffa812; color: white;" class="btn btn-default">Denuncie</a>
-                </h:form>
-            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
 
 
-        <!-- Rodapé -->
-        <div id="footer" align="center">
+
+
+        <br></br><br></br>
+        <div class="col-md-12" align="center">
+            <h2 class="featurette-heading">Adote</h2>
+            <br/><br/>
+        </div>
+
+        <div class="container marketing" align="center">
+
+            <!-- Três imagens -->
             <div class="row">
-                <ui:insert name="footer">
-                    <!-- Import de página do rodapé -->
-                    <ui:include src="rodape.xhtml"/>
-                </ui:insert>
+                <c:forEach var="animal" items="#{animalBean.animaisTop}">
+                    <div class="col-lg-3">
+                        <img class="img-circle" src="imagens/gato2.jpg" alt="Imagem animal" width="140" height="140"/>
+                        <h4>#{animal.nomeAnimal}</h4>
+                        <p>Espécie: #{animal.especie}</p>
+                        <p>Local: #{animal.localizacao}</p>
+                        <p><a href="detalhamentoAnimal.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                    </div>
+                </c:forEach>
+            </div>
+
+
+            <div class="col-md-11"></div>
+            <div class="col-md-1" align="center">
+                <br/>
+                <p><a href="listagemAnimais.jsf" class="btn btn-default" style="background-color: #ffa812; color: white; font-weight:bold; width: 60px; height: 60px;border-radius:100%;"><i class="material-icons" style="color: white; padding-top: 12px;">add</i></a></p>
+            </div>
+
+        </div>
+
+
+        <hr class="featurette-divider"/>
+
+        <div class="row featurette">
+            <div class="col-md-8 col-md-push-4">
+                <h2 class="featurette-heading">#Denuncie</h2>
+                <p class="lead">texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto </p>
+                <a href="cadastrarDenuncia.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;" id="click">Denuncie</a>
+            </div>
+            <div class="col-md-4 col-md-pull-8" align="center">
+                <img class="featurette-image img-responsive center-block" src="imagens/logo.png" alt="Generic placeholder image"/>
             </div>
         </div>
-        <br/>
-    </h:body>
-    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
-</html>
 
+
+
+        <hr class="featurette-divider"/>
+        <footer>
+
+            <p class="pull-right"><a href="#"><img src="imagens/voltar.png" height="50px"/></a></p>
+
+        </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </h:body>
+
+</html>

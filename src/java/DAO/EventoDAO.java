@@ -34,7 +34,7 @@ public class EventoDAO {
         {
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, evento.getNomeEvento());
-            pstmt.setDate(2, (Date) evento.getDataEvento());
+            pstmt.setString(2, evento.getDataEvento());
             pstmt.setString(3, evento.getHorarioEvento());
             pstmt.setString(4, evento.getDescricaoEvento());
             pstmt.setString(5, evento.getFotoEvento());
@@ -65,7 +65,7 @@ public class EventoDAO {
         {
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, evento.getNomeEvento());
-            pstmt.setDate(2, (Date) evento.getDataEvento());
+            pstmt.setString(2, evento.getDataEvento());
             pstmt.setString(3, evento.getHorarioEvento());
             pstmt.setString(4, evento.getDescricaoEvento());
             pstmt.setString(5, evento.getFotoEvento());
@@ -123,7 +123,7 @@ public class EventoDAO {
             rs= stmt.executeQuery(sql);
             while(rs.next())
             { 
-                Evento a = new Evento(rs.getInt("idEvento"), rs.getString("nomeEvento"), rs.getDate("dataEvento"), 
+                Evento a = new Evento(rs.getInt("idEvento"), rs.getString("nomeEvento"), rs.getString("dataEvento"), 
                         rs.getString("horarioEvento"), rs.getString("descricaoEvento"), rs.getString("fotoEvento"),
                         rs.getInt("idUsuario"), rs.getString("localizacao"));
                 lista.add(a);
@@ -155,7 +155,7 @@ public class EventoDAO {
             rs = pstmt.executeQuery();
             while(rs.next())
             {
-                Evento a = new Evento(rs.getInt("idEvento"), rs.getString("nomeEvento"), rs.getDate("dataEvento"), 
+                Evento a = new Evento(rs.getInt("idEvento"), rs.getString("nomeEvento"), rs.getString("dataEvento"), 
                         rs.getString("horarioEvento"), rs.getString("descricaoEvento"), rs.getString("fotoEvento"),
                         rs.getInt("idUsuario"), rs.getString("localizacao"));
                 lista.add(a);

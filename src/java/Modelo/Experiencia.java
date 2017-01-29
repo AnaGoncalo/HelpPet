@@ -17,14 +17,14 @@ public class Experiencia {
     private String tipoExperiencia;
     private String texto;
     private String foto;
-    private Date dataCadastro;
+    private String dataCadastro;
     private boolean statusExperiencia;
     private int idUsuario;
 
     public Experiencia() {
     }
 
-    public Experiencia(int idExperiencia, String tituloExperiencia, String tipoExperiencia, String texto, String foto, Date dataCadastro, boolean statusExperiencia, int idUsuario) {
+    public Experiencia(int idExperiencia, String tituloExperiencia, String tipoExperiencia, String texto, String foto, String dataCadastro, boolean statusExperiencia, int idUsuario) {
         this.idExperiencia = idExperiencia;
         this.tituloExperiencia = tituloExperiencia;
         this.tipoExperiencia = tipoExperiencia;
@@ -75,11 +75,11 @@ public class Experiencia {
         this.foto = foto;
     }
 
-    public Date getDataCadastro() {
+    public String getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
+    public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 

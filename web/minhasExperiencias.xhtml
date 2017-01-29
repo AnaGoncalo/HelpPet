@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Help Pet - Espaço Helper</title>
+        <title>Help Pet - Minhas Experiencias</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
@@ -39,12 +39,12 @@
                 <div class="col-md-8">
 
                     <h2 class="page-header" style="color: #ffa812;">
-                        Espaço Helper
+                        Minhas Experiencias
                         <br/>
                     </h2>
-                    <small style="font-size: 16px;">Espaço destinado para troca de experiências entre os Helpers</small>   
+                    <small style="font-size: 16px;">Listagem das experiências que você cadastrou</small>   
 
-                    <c:forEach var="experiencia" items="#{experienciaBean.experiencias}">
+                    <c:forEach var="experiencia" items="#{experienciaBean.minhasExperiencias}">
                         <!-- Primeira experiência -->
                         <h3 style="text-decoration: none; color: #1E90FF;">
                             #{experiencia.tituloExperiencia}
@@ -116,6 +116,8 @@
                         <h4 style="color: white;">Espaço Helper</h4>
                         <hr/>
                         <p>Vocês podem colocar um pequeno texto explicativo aqui!!!!!!</p>
+
+
                     </div>
 
                 </div>
@@ -125,7 +127,17 @@
 
             <hr/>
 
+
+
+
+
+
+
+
+
+
             <!-- Área de pesquisa -->
+
             <div id="container-floating">
 
                 <div id="floating-button" style="background-color: #1E90FF;">
@@ -136,7 +148,10 @@
 
             </div>
 
+
+
             <!-- Formulário -->
+
             <div class="modal fade" id="pesquisa" role="dialog">
                 <div class="modal-dialog">
 

@@ -3,25 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Help Pet - Meus animais</title>
+        <title>Help Pet - Meus Anúncios</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
 
-        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
-
-        <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
-
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
 
         <script src="js/jquery-1.11.0.min.js"></script>
         <!-- <script src="js/bootstrap.min.js"></script> -->
 
     </h:head>
     <h:body style="background-color: #F0F0F0;">
+
 
         <!-- Menu -->
         <div id="header">
@@ -33,41 +31,37 @@
 
 
         <!-- Título da página -->
-        <div style="margin-top: 7%; height: 100px; background-color: #ffa812;" align="center">
-            <h3 align="center" style="color: white; padding-top:  20px;">Meus animais</h3>
+        <div style="margin-top: 7%; height: 100px; background-color: #1E90FF;" align="center">
+            <h3 align="center" style="color: white; padding-top:  20px;">Meus anúncios</h3>
             <hr style="margin-left: 10px; margin-right: 20px;"/>
         </div>
 
 
 
-        <!-- Listagem de animais-->
-
+        <!-- Listagem das anúncios-->
         <div class="container" id="tourpackages-carousel" >
             <div class="row">
                 <br/><br/>
-                <c:forEach var="animal" items="#{animalBean.meusAnimais}">
+                <c:forEach var="anuncio" items="#{anuncioBean.meusAnuncios}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
-                            <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
                             <div class="caption" align="center">
-                                <h5>#{animal.nomeAnimal}</h5>
-                                <div align="left">
-                                    <p>Espécie: #{animal.especie}</p>
-                                    <p>Tipo: #{animal.tipoAnimal}</p>
-                                    <p>Local: #{animal.localizacao}</p>
-                                </div>
-                                <p><a href="#" data-toggle="modal" data-target="##{animal.idAnimal}"  class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                                <h5>#{anuncio.tituloAnuncio}</h5>
+                                <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="##{anuncio.idAnuncio}" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
 
-                                <!-- Detalhamento da animal -->
-
-                                <div class="modal fade" id="#{animal.idAnimal}" role="dialog">
+                                <!-- Detalhamento do anúncio -->
+                                <div class="modal fade" id="#{anuncio.idAnuncio}" role="dialog">
                                     <div class="modal-dialog">
 
                                         <!-- Conteúdo -->
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">#{animal.nomeAnimal}</h4>
+                                                <h4 class="modal-title">#{anuncio.tituloAnuncio}</h4>
+                                                <div align="left">
+                                                    <p>Tipo: #{anuncio.tipoAnuncio}</p>
+                                                </div>
                                             </div>
                                             <div class="modal-body">
 
@@ -76,17 +70,12 @@
                                                         <div class="col-md-1">
                                                         </div>
                                                         <div class="col-md-5">
-                                                            <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                            <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:250px;border-radius: 0px;"/>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <div align="left">
-                                                                <p>Espécie: #{animal.especie}</p>
-                                                                <p>Tipo: #{animal.tipoAnimal} -> [ #{animal.getStatusAnimalString()} ]</p>
-                                                                <p>Local: #{animal.localizacao}</p>
-                                                                <p>Idade: #{animal.idade}</p>
-                                                                <p>Sexo: #{animal.sexo}</p>
-                                                                <p>Raça: #{animal.raca}</p>
-                                                                <p>Descrição: #{animal.descricaoAnimal}</p>
+                                                                <p>Tipo: #{anuncio.tipoAnuncio}</p>
+                                                                <p>Descrição: #{anuncio.descricaoAnuncio}</p>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1">
@@ -99,19 +88,17 @@
                                                             <a href="#" class="btn btn-danger " style="border-radius: 0px;"> Excluir</a>
                                                         </div>
                                                         <div class="col-md-6" align="center" style="padding-bottom: 10px;">
-                                                            <h:form>
-                                                                <h:commandLink action="#{animalBean.EditarAnimal(animal)}" value="Editar" class="btn btn-success " style="border-radius: 0px;"/>
-                                                            </h:form>
+                                                            <a href="editarAnuncio.jsf" class="btn btn-success " style="border-radius: 0px;"> Editar</a>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div class="modal-footer">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -121,11 +108,19 @@
         </div>
 
 
+
+
+
+
+
+
+
+
         <!-- Área de pesquisa -->
 
         <div id="container-floating">
 
-            <div id="floating-button" style="background-color: #ffa812;">
+            <div id="floating-button" style="background-color: #1E90FF;">
                 <a href="#" data-toggle="modal" data-target="#pesquisa" >
                     <i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;"> search</i>
                 </a>
@@ -146,7 +141,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Busca</h4>
                         <hr/>
-                        <h5>Encontre seu pet</h5>
+                        <h5>Busque por uma denúncia específica</h5>
                     </div>
                     <div class="modal-body">
                         <h:form>
@@ -155,64 +150,16 @@
 
                                     <div class="col-md-2" align="left">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Espécie:  
+                                            Nome:  
                                         </label>
                                     </div>
                                     <div class="col-md-10">
-                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
-                                            <f:selectItem itemLabel="Espécie 1" itemValue="1"/>
-                                            <f:selectItem itemLabel="Espécie 2" itemValue="2"/>
-                                            <f:selectItem itemLabel="Espécie 3" itemValue="3"/>
-                                            <f:selectItem itemLabel="Espécie 4" itemValue="4"/>
-                                            <f:selectItem itemLabel="Espécie 5" itemValue="5"/>
-
-                                        </h:selectOneMenu>
-                                    </div>
-
-                                    <div class="col-md-2" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Idade:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
-                                            <f:selectItem itemLabel="0-6 meses" itemValue="1"/>
-                                            <f:selectItem itemLabel="6-12 meses" itemValue="2"/>
-                                            <f:selectItem itemLabel="1-2 anos" itemValue="3"/>
-                                            <f:selectItem itemLabel="2-5 anos" itemValue="4"/>
-                                            <f:selectItem itemLabel="Mais de 5 anos" itemValue="5"/>
-                                        </h:selectOneMenu>
-                                    </div>
-
-                                    <div class="col-md-2" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Raça:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
-                                            <f:selectItem itemLabel="Raça 1" itemValue="1"/>
-                                            <f:selectItem itemLabel="Raça 2" itemValue="2"/>
-                                            <f:selectItem itemLabel="Raça 3" itemValue="3"/>
-                                            <f:selectItem itemLabel="Raça 4" itemValue="4"/>
-                                        </h:selectOneMenu>
-                                    </div>
-
-                                    <div class="col-md-2" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Sexo:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <h:selectOneMenu value="#" style="width: 100%; font-size: 14px; color: black;" class="form-control">
-                                            <f:selectItem itemLabel="Macho" itemValue="1"/>
-                                            <f:selectItem itemLabel="Fêmea" itemValue="2"/>
-                                        </h:selectOneMenu>
+                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
                                     </div>
 
                                     <div class="col-md-12">
                                         <br/>
-                                        <button class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" data-dismiss="modal">Pesquisar</button>
+                                        <button class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px; width: 100%;" data-dismiss="modal">Pesquisar</button>
                                         <br/>
                                     </div>
                                 </div>
@@ -224,6 +171,7 @@
                 </div>
             </div>
         </div>
+
 
 
         <!-- Paginação -->
@@ -253,4 +201,3 @@
 
     </h:body>
 </html>
-

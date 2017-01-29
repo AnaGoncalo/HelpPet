@@ -32,11 +32,26 @@ import javax.ws.rs.client.WebTarget;
 @RequestScoped
 public class AnuncioBean {
     private Anuncio anuncio = new Anuncio();
-    private List<Anuncio> anuncios = new ArrayList();
+    
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
+    
+    private List<Anuncio> anuncios = new ArrayList();
+    private List<Anuncio> anunciosTop = new ArrayList();
+    private List<Anuncio> meusAnuncios = new ArrayList();
     
     public AnuncioBean() {
         Listar();
+        
+        if(anuncios.size() > 4){
+            anunciosTop = anuncios.subList(1, 5);
+        }
+        else{
+            anunciosTop = anuncios;
+        }
+        
+        if(user != null){
+            ListarMeusAnuncios();
+        }
     }
     
     public void Listar(){
@@ -47,20 +62,23 @@ public class AnuncioBean {
         Gson gson = new Gson();
         Anuncio[] vetor = gson.fromJson(json, Anuncio[].class);
         anuncios = Arrays.asList(vetor);
-        
     }
     
-    public void MeusAnuncios(){
+    public void ListarMeusAnuncios(){
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/anuncio/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
         Anuncio[] vetor = gson.fromJson(json, Anuncio[].class);
-        anuncios = Arrays.asList(vetor);
+        meusAnuncios = Arrays.asList(vetor);
     }
     
-    public void Salvar(){
+    public String Salvar(){
+        if(user == null){
+            return "loginSignin.jsf";
+        }
+        
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/anuncio");
         Gson gson = new Gson();
@@ -78,11 +96,18 @@ public class AnuncioBean {
         }
         
         Listar();
+        ListarMeusAnuncios();
+        return "meusAnuncios.jsf";
     }
     
     public String VerAnuncio(Anuncio a){
         anuncio = a;
         return "anuncio.jsf";
+    }
+    
+    public String EditarAnuncio(Anuncio a){
+        anuncio = a;
+        return "editarAnuncio.jsf";
     }
 
     public FacesContext getFacesContext(){
@@ -108,7 +133,21 @@ public class AnuncioBean {
     public void setAnuncios(List<Anuncio> anuncios) {
         this.anuncios = anuncios;
     }
-    
-    
+
+    public List<Anuncio> getAnunciosTop() {
+        return anunciosTop;
+    }
+
+    public void setAnunciosTop(List<Anuncio> anunciosTop) {
+        this.anunciosTop = anunciosTop;
+    }
+
+    public List<Anuncio> getMeusAnuncios() {
+        return meusAnuncios;
+    }
+
+    public void setMeusAnuncios(List<Anuncio> meusAnuncios) {
+        this.meusAnuncios = meusAnuncios;
+    }
     
 }

@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Encontro {
     private int idEncontro;
-    private Date dataEncontro;
+    private String dataEncontro;
     private String horarioEncontro;
     private boolean statusEncontro;
     private boolean editado;
@@ -24,7 +24,7 @@ public class Encontro {
     public Encontro() {
     }
 
-    public Encontro(int idEncontro, Date dataEncontro, String horarioEncontro, boolean statusEncontro, boolean editado, int idAnimal, int idUsuario, String localizacao) {
+    public Encontro(int idEncontro, String dataEncontro, String horarioEncontro, boolean statusEncontro, boolean editado, int idAnimal, int idUsuario, String localizacao) {
         this.idEncontro = idEncontro;
         this.dataEncontro = dataEncontro;
         this.horarioEncontro = horarioEncontro;
@@ -43,11 +43,11 @@ public class Encontro {
         this.idEncontro = idEncontro;
     }
 
-    public Date getDataEncontro() {
+    public String getDataEncontro() {
         return dataEncontro;
     }
 
-    public void setDataEncontro(Date dataEncontro) {
+    public void setDataEncontro(String dataEncontro) {
         this.dataEncontro = dataEncontro;
     }
 

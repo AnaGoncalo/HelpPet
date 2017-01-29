@@ -14,7 +14,7 @@ import java.util.Date;
 public class Evento {
     private int idEvento;
     private String nomeEvento;
-    private Date dataEvento;
+    private String dataEvento;
     private String horarioEvento;
     private String descricaoEvento;
     private String fotoEvento;
@@ -24,7 +24,7 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(int idEvento, String nomeEvento, Date dataEvento, String horarioEvento, String descricaoEvento, String fotoEvento, int idUsuario, String localizacao) {
+    public Evento(int idEvento, String nomeEvento, String dataEvento, String horarioEvento, String descricaoEvento, String fotoEvento, int idUsuario, String localizacao) {
         this.idEvento = idEvento;
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
@@ -51,11 +51,11 @@ public class Evento {
         this.nomeEvento = nomeEvento;
     }
 
-    public Date getDataEvento() {
+    public String getDataEvento() {
         return dataEvento;
     }
 
-    public void setDataEvento(Date dataEvento) {
+    public void setDataEvento(String dataEvento) {
         this.dataEvento = dataEvento;
     }
 
@@ -98,7 +98,5 @@ public class Evento {
     public void setlocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
-    
-    
     
 }

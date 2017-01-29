@@ -123,7 +123,7 @@ public class ExperienciaDAO {
             { 
                 Experiencia a = new Experiencia(rs.getInt("idExperiencia"), rs.getString("tituloExperiencia"), 
                         rs.getString("tipoExperiencia"), rs.getString("texto"), rs.getString("foto"), 
-                        rs.getDate("dataCadastro"), rs.getBoolean("statusExperiencia"), rs.getInt("idUsuario"));
+                        rs.getString("dataCadastro"), rs.getBoolean("statusExperiencia"), rs.getInt("idUsuario"));
                 lista.add(a);
             }
         } 
@@ -155,7 +155,7 @@ public class ExperienciaDAO {
             {
                 Experiencia a = new Experiencia(rs.getInt("idExperiencia"), rs.getString("tituloExperiencia"), 
                         rs.getString("tipoExperiencia"), rs.getString("texto"), rs.getString("foto"), 
-                        rs.getDate("dataCadastro"), rs.getBoolean("statusExperiencia"), rs.getInt("idUsuario"));
+                        rs.getString("dataCadastro"), rs.getBoolean("statusExperiencia"), rs.getInt("idUsuario"));
                 lista.add(a);
             }
         } 

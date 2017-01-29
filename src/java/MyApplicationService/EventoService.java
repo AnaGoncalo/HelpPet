@@ -42,7 +42,6 @@ public class EventoService {
    public String cadastrarEvento(String json) throws SQLException{
        Gson gson = new Gson();
        Evento a = gson.fromJson(json, Evento.class);
-       a.setIdUsuario(1);
        System.out.println("Deu certo " + a.getNomeEvento());
        EventoDAO.CadastrarEvento(a);
        
@@ -55,7 +54,6 @@ public class EventoService {
    public String editarEvento(String json) throws SQLException{
        Gson gson = new Gson();
        Evento a = gson.fromJson(json, Evento.class);
-       a.setIdUsuario(1);
        System.out.println("Deu certo " + a.getNomeEvento());
        EventoDAO.EditarEvento(a);
        

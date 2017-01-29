@@ -42,7 +42,6 @@ public class AnuncioService {
    public String cadastrarAnuncio(String json) throws SQLException{
        Gson gson = new Gson();
        Anuncio a = gson.fromJson(json, Anuncio.class);
-       a.setIdUsuario(1);
        System.out.println("Deu certo " + a.getTituloAnuncio());
        AnuncioDAO.CadastrarAnuncio(a);
        

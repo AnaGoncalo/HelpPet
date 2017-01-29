@@ -2,97 +2,137 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Help Pet - Experiencia</title>
+        <title>Help Pet - Experiência</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/blog-home.css"></link>
 
 
-        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
-
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
-
-        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
-
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
     </h:head>
     <h:body>
 
         <!-- Menu -->
-
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
 
 
 
-        <b:row>
-            <!-- Opções -->
-            <div class="container-fluid">
 
-                <b:column col-md="2">
-                    <!-- Espaçamento -->
-                </b:column>
-                <!-- Detalhes do Animal -->
-                <b:column col-md="8">
-                    <div class="thumbnail">
-                        <b:row>
-                            <b:column col-md="6">
-                                <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
-                            </b:column>
-                            <b:column col-md="6">
-                                <div class="caption" align="center">
-                                    <h4>#{experienciaBean.experiencia.tituloExperiencia}</h4>
-                                    <div align="left">
-                                        <p>Tipo: #{experienciaBean.experiencia.tipoExperiencia}</p>
-                                        <p>Data: #{experienciaBean.experiencia.dataCadastro}</p>
-                                        <p>Usuario: #{experienciaBean.experiencia.idUsuario}</p>
-                                        <p>#{experienciaBean.experiencia.texto}</p>
-                                    </div>
-                                </div>
-                                <h:form>
-                                    <p>
-                                        <b:commandButton actionListener="#{experienciaBean.EditarExperiencia()}" value="Editar" class="btn btn-default" style="background-color: #ffa812; color: white;">
-                                            <f:attribute name="experienciaSelecionada" value="#{experienciaBean.experiencia}"/>
-                                        </b:commandButton>
-                                    </p>
-                                </h:form>
-                            </b:column>
-                        </b:row>
+        <!-- Conteúdo -->
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8">
+
+                    <h2 class="page-header" style="color: #ffa812;">
+                        Espaço Helper
+                        <br/>
+                    </h2>
+                    <small style="font-size: 16px;">Espaço destinado para troca de experiências entre os Helpers</small>   
+
+                    <!-- Primeira experiência -->
+                    <h3 style="text-decoration: none; color: #1E90FF;">
+                        #{experienciaBean.experiencia.tituloExperiencia}
+                    </h3>
+                    <p class="lead" style="font-size: 15px;">
+                        Por: <a href="#" style="text-decoration: none;">#{experienciaBean.autor.nomeUsuario}</a>
+                    </p>
+                    <p>Tipo: #{experiencia.tipoExperiencia}</p>
+                    <p><i class="material-icons" style=" font-size: 15px;">query_builder</i> Publicado em #{experienciaBean.experiencia.dataCadastro}</p>
+                    <hr/>
+                    <img class="img-responsive" style="border-radius: 0px; width: 890px; height: 300px;" src="imagens/experiencia.jpg" alt="Imagem da postagem"/>
+                    <hr/>
+                    <p>#{experienciaBean.experiencia.texto}</p>
+                    <p><a href="experiencias.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><i class="material-icons" style="color: white; font-size: 16px; padding-right: 10px;">arrow_back</i>Voltar</a></p>
+                    <hr/>
+
+
+
+                </div>
+
+                <!-- Lateral -->
+                <div class="col-md-4">
+
+                    <!-- Área de pesquisa -->
+                    <br/><br/>
+                    <div class="well panel panel-default" align="center" style="background-color: #ffa812; height: 170px;">
+                        <h4 style="color: white;">Pesquisa</h4>
+                        <hr/>
+                        <div >
+                            <h:form>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:inputText class="form-control" style="color: white;"/>
+                                    <a href="#"><i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;"> search</i></a>
+                                </h:panelGrid>
+                            </h:form>
+
+                        </div>
                     </div>
-                </b:column>
-            </div>
-        </b:row>
+                    <!-- Categorias -->
 
-        <br/>
-        <!-- Rodapé -->
-        <div id="footer" align="center">
-            <b:row>
-                <ui:insert name="footer">
-                    <!-- Import de página do rodapé -->
-                    <ui:include src="rodape.xhtml"/>
-                </ui:insert>
-            </b:row>
+                    <div class="well panel panel-default" align="center" style="background-color: #ffa812;">
+                        <h4 style="color: white;">Categorias</h4>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-lg-6" align="center" >
+                                <ul class="list-unstyled">
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6" align="center">
+                                <ul class="list-unstyled">
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well panel panel-default" align="center" style="background-color: #ffa812; color: white;">
+                        <h4 style="color: white;">Espaço Helper</h4>
+                        <hr/>
+                        <p>Vocês podem colocar um pequeno texto explicativo aqui!!!!!!</p>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr/>
+
         </div>
-        <br/>
+
+
+
     </h:body>
-    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
 </html>
 

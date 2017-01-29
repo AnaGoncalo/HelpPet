@@ -17,13 +17,13 @@ public class Denuncia {
     private String descricaoDenuncia;
     private String fotoDenuncia;
     private String tipoDenuncia;
-    private Date dataDenuncia;
+    private String dataDenuncia;
     private String localizacao;
 
     public Denuncia() {
     }
 
-    public Denuncia(int idDenuncia, String tituloDenuncia, String descricaoDenuncia, String fotoDenuncia, String tipoDenuncia, Date dataDenuncia, String localizacao) {
+    public Denuncia(int idDenuncia, String tituloDenuncia, String descricaoDenuncia, String fotoDenuncia, String tipoDenuncia, String dataDenuncia, String localizacao) {
         this.idDenuncia = idDenuncia;
         this.tituloDenuncia = tituloDenuncia;
         this.descricaoDenuncia = descricaoDenuncia;
@@ -73,11 +73,11 @@ public class Denuncia {
         this.tipoDenuncia = tipoDenuncia;
     }
 
-    public Date getDataDenuncia() {
+    public String getDataDenuncia() {
         return dataDenuncia;
     }
 
-    public void setDataDenuncia(Date dataDenuncia) {
+    public void setDataDenuncia(String dataDenuncia) {
         this.dataDenuncia = dataDenuncia;
     }
 

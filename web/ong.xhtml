@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
@@ -11,93 +10,242 @@
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
 
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
 
-        <link type="text/css" rel="stylesheet" href="css/css_helppet.css"  media="screen,projection"/>
-
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-
-
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-
-
-        <link type="text/css" rel="stylesheet" href="css/bootstrap_paper.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min_paper.css"  media="screen,projection"/>
-
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
     </h:head>
-    <h:body>
+    <h:body style="background-color: #F0F0F0;">
 
         <!-- Menu -->
-
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
 
+        <div align="center" >        
+            <div style="background: #FFB772; height: 260px;">
 
-
-        <b:row>
-            <!-- Opções -->
-            <div class="container-fluid">
-
-                <b:column col-md="2">
-                    <!-- Espaçamento -->
-                </b:column>
-                <!-- Detalhes do Animal -->
-                <b:column col-md="8">
-                    <div class="thumbnail">
-                        <b:row>
-                            <b:column col-md="6">
-                                <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:280px; height:280px;"/>
-                            </b:column>
-                            <b:column col-md="6">
-                                <div class="caption" align="center">
-                                    <h4>#{pjBean.pessoa.nomeUsuario}</h4>
-                                    <div align="left">
-                                        <p>Email: #{pjBean.pessoa.email}</p>
-                                        <p>CNPJ: #{pjBean.pessoa.cnpj}</p>
-                                        <p>Descrição: #{pjBean.pessoa.descricao}</p>
-                                        <c:forEach var="estoque" items="#{estoqueBean.estoques}">
-                                            <b:column col-lg="4">
-                                                <div class="thumbnail">
-                                                    <div class="caption">
-                                                        <h4>#{estoque.nomeEstoque}</h4>
-                                                        <p>#{estoque.necessidade}</p>
-                                                        <p>#{estoque.qtdAtual}</p>
-                                                        <p>#{estoque.qtdDiaria}</p>
-                                                    </div>
-                                                </div><!-- /.col-lg-4 -->
-                                            </b:column>
-                                        </c:forEach>
-                                    </div>
-                                </div>
-
-                            </b:column>
-                        </b:row>
-                    </div>
-                </b:column>
             </div>
-        </b:row>
-
-        <br/>
-        <!-- Rodapé -->
-        <div id="footer" align="center">
-            <b:row>
-                <ui:insert name="footer">
-                    <!-- Import de página do rodapé -->
-                    <ui:include src="rodape.xhtml"/>
-                </ui:insert>
-            </b:row>
+            <div class="panel panel-default divPerfil" align="left">
+                <img src="imagens/ONG.jpg" style="position: relative; float: left;" alt="Imagem da ONG" class="fotoPerfil panel" />
+                <div class="tituloNomeUsuario">
+                    <h3 style="padding-top: 2%;">#{pjBean.ong.nomeUsuario}</h3>
+                </div>
+            </div>
         </div>
-        <br/>
-    </h:body>
-    <h:outputScript library="(whatever)" name="(whatever)/jQuery-(whatever).js" />
-</html>
 
+
+        <!-- Conteúdo que importa -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default cardsLateralEsquerda">
+                            <h5><i class="material-icons">info</i> Informações</h5>
+                            <hr/>
+                            <p class="itensPerfil">E-mail: #{pjBean.ong.email}</p>
+                            <p class="itensPerfil">Local: #{pjBean.ong.localizacao}</p>
+                            <p class="itensPerfil">Funcionamento: #{pjBean.ong.funcionamento}</p>
+                            <c:if test="#{loginBean.usuarioLogado != null and loginBean.usuarioLogado.idUsuario == pjBean.ong.idUsuario}">
+                                <div style="margin-bottom: 15px;">
+                                    <a href="editarONG.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
+                                </div>
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default cardsLateralEsquerda" >
+
+                            <h5><i class="material-icons">pets</i> Animais</h5>
+                            <hr/>
+                            <div align="center">
+                                <h1 style="font-size: 90px;"><strong>#{pjBean.animais.size()}</strong></h1>
+                                <h5>Animais!</h5>
+                                <div style="padding-top: 10px; padding-bottom: 10px;">
+                                    <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">ANIMAIS</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default cardsLateralEsquerda">
+                            <h5><i class="material-icons">event</i> Eventos</h5>
+                            <hr/>
+                            <div align="center">
+                                <h1 style="font-size: 90px;"><strong>#{pjBean.eventos.size()}</strong></h1>
+                                <h5>Evento!</h5>
+                                <div style="padding-top: 10px; padding-bottom: 10px;">
+                                    <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">ANIMAIS</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default cardsLateralEsquerda">
+                            <h5><i class="material-icons">book</i> Experiências</h5>
+                            <hr/>
+                            <div align="center">
+                                <h1 style="font-size: 90px;"><strong>#{pjBean.experiencias.size()}</strong></h1>
+                                <h5>Experiências!</h5>
+                                <div style="padding-top: 10px; padding-bottom: 10px;">
+                                    <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">ANIMAIS</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 panel panel-default wrapper meusAnunciosEventos" role="main">
+                            <div class="panel-body">
+                                <div aling="center">
+                                    <!-- Abas -->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active" style="width: 50%"><a href="#estoques" data-toggle="tab">Estoque</a></li>
+                                        <li style=" width: 50%"><a href="#eventos" data-toggle="tab">Eventos</a></li>
+                                    </ul>
+                                </div>
+                                <div id="myTabContent" class="tab-content">
+
+                                    <!-- estoques-->
+                                    <div class="tab-pane fade active in" id="estoques">
+
+                                        <div style="padding-top: 20px;">
+                                            <c:forEach var="estoque" items="#{pjBean.estoques}">
+                                                <h5>#{estoque.nomeEstoque} </h5>
+                                                <div class="myProgress" >
+                                                    <div class="myBar" style="width: #{(estoque.qtdAtual / estoque.qtdDiaria*30)}%;"></div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <c:if test="#{loginBean.usuarioLogado != null and pjBean.ong.idUsuario == loginBean.usuarioLogado.idUsuario}">
+                                            <div class="col-md-12" style="padding-top: 20px;">
+                                                <div class="col-md-6" align="center">
+
+                                                    <p><a href="#" class="btn btn-success" data-toggle="modal" data-target="#adicionar"  style="color: white;border-radius: 0px;">Adicionar</a></p>
+
+                                                    <!-- Tela de adicionar -->
+                                                    <div class="modal fade" id="adicionar" role="dialog">
+                                                        <div class="modal-dialog">
+
+                                                            <!-- Conteúdo -->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header" align="center">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title">Adicionar estoque</h4>
+                                                                    <hr/>
+                                                                    <h5>Cadastro</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <h:form>
+                                                                        <div class="col-md-12">
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-4" align="left">
+                                                                                    <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                                                                        Tipo Estoque:  
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <h:selectOneMenu value="#{estoqueBean.estoque.necessidade}" style="height: 40px; color: black;font-size: 14px;" class="form-control">
+                                                                                        <f:selectItem itemLabel="Ração" itemValue="Raçao"/>
+                                                                                        <f:selectItem itemLabel="Outro Alimento" itemValue="Outro Alimento"/>
+                                                                                        <f:selectItem itemLabel="Medicamento" itemValue="Medicamento"/>
+                                                                                        <f:selectItem itemLabel="Produto para Banho" itemValue="Produto para Banho"/>
+                                                                                        <f:selectItem itemLabel="Produto de Limpeza" itemValue="Produto de Limpeza"/>
+                                                                                        <f:selectItem itemLabel="Outro" itemValue="Outro"/>
+                                                                                    </h:selectOneMenu>   
+                                                                                </div>
+                                                                                <div class="col-md-4" align="left">
+                                                                                    <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                                                                        Nome do Estoque:  
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <h:inputText value="#{estoqueBean.estoque.nomeEstoque}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                                                </div>
+                                                                                <div class="col-md-4" align="left">
+                                                                                    <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                                                                        Quantidade Diária:  
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <h:inputText value="#{estoqueBean.estoque.qtdDiaria}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                                                </div>
+                                                                                <div class="col-md-4" align="left">
+                                                                                    <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                                                                        Quantidade Atual:  
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <h:inputText value="#{estoqueBean.estoque.qtdAtual}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <br/>
+                                                                                    <h:commandButton action="#{estoqueBean.Salvar()}" value="Cadastrar" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px; width: 100%;" />
+                                                                                    <br/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </h:form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6" align="center">
+                                                    <p><a href="editarEstoque.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">Editar</a></p>
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                    </div>
+                                    <!-- Eventos -->
+                                    <div class="tab-pane fade" id="eventos">
+                                        <div class="tab-pane fade active in" >
+
+                                            <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
+                                                <div class="row">
+                                                    <c:forEach var="evento" items="#{pjBean.eventos}">
+                                                        <div class="col-md-6">
+                                                            <img src="imagens/evento.png" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-12" align="center">
+                                                <p><a href="meusEventos.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+</html>

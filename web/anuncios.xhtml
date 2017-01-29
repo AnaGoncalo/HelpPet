@@ -62,12 +62,15 @@
                             <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
                             <div class="caption" align="center">
                                 <h5>#{anuncio.tituloAnuncio}</h5>
+                                <div align="left">
+                                    <p>Tipo: #{anuncio.tipoAnuncio}</p>
+                                </div>
 
-                                <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                                <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="##{anuncio.idAnuncio}" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
 
-                                <!-- Detalhamento da anúncio 1 -->
+                                <!-- Detalhamento da anúncio -->
 
-                                <div class="modal fade" id="myModal1" role="dialog">
+                                <div class="modal fade" id="#{anuncio.idAnuncio}" role="dialog">
                                     <div class="modal-dialog">
 
                                         <!-- Conteúdo -->
@@ -87,7 +90,8 @@
                                                         </div>
                                                         <div class="col-md-5">
                                                             <div align="left">
-                                                                <p>#{anuncio.descricaoAnuncio}</p>
+                                                                <p>Tipo: #{anuncio.tipoAnuncio}</p>
+                                                                <p>Descrição: #{anuncio.descricaoAnuncio}</p>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1">
@@ -123,10 +127,7 @@
             <div class="row">
                 <div class="col-md-12">
 
-
-
                     <!-- Título do formulário -->
-
                     <div class="container-fluid" id="anuncio">
                         <div class="row">
                             <div class="col-md-12" align="center">
@@ -134,7 +135,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="container-fluid">
                         <div class="row">
@@ -156,8 +156,6 @@
                                                     <div class="col-md-12">
                                                         <div class="row">
 
-
-
                                                             <div class="col-md-12">
                                                                 <div class="row">
 
@@ -169,7 +167,26 @@
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-md-8" >
-                                                                        <h:inputText class="form-control" style="width: 75%;font-size: 14px; margin-left: 10px;"/>
+                                                                        <h:inputText value="#{anuncioBean.anuncio.tituloAnuncio}" class="form-control" style="width: 75%;font-size: 14px; margin-left: 10px;"/>
+                                                                    </div>
+
+                                                                    <div class="col-md-2" >
+                                                                    </div>
+                                                                    <div class="col-md-2" >
+                                                                        <label style="font-size: 14px;color: black; padding-left: 10px; padding-top: 5px;">
+                                                                            Tipo:  
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-md-8" >
+                                                                        <h:selectOneMenu value="#{anuncioBean.anuncio.tipoAnuncio}" class="form-control" style="height: 40px; color: black; " >
+                                                                            <f:selectItem itemLabel="Banho/Tosa" itemValue="Banho/Tosa"/>
+                                                                            <f:selectItem itemLabel="Brinquedo" itemValue="Brinquedo"/>
+                                                                            <f:selectItem itemLabel="Consulta" itemValue="Consulta"/>
+                                                                            <f:selectItem itemLabel="Ração" itemValue="Ração"/>
+                                                                            <f:selectItem itemLabel="Roupa" itemValue="Roupa"/>
+                                                                            <f:selectItem itemLabel="Vacina" itemValue="Vacina"/>
+                                                                            <f:selectItem itemLabel="Outro" itemValue="Outro"/>
+                                                                        </h:selectOneMenu>
                                                                     </div>
 
                                                                     <div class="col-md-2" >
@@ -180,19 +197,15 @@
                                                                         </label>
                                                                     </div>
                                                                     <div class="col-md-8" >
-                                                                        <h:inputTextarea rows="3" class="form-control" style="margin-left: 10px; width: 75%;"/>  
+                                                                        <h:inputTextarea value="#{anuncioBean.anuncio.descricaoAnuncio}" rows="3" class="form-control" style="margin-left: 10px; width: 75%;"/>  
                                                                     </div>
-
 
                                                                 </div>
                                                             </div>
 
-
-
-
                                                             <div class="col-md-12" align="center">
                                                                 <br/>
-                                                                <h:button value="Cadastrar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px;"/>
+                                                                <h:commandButton action="#{anuncioBean.Salvar()}" value="Cadastrar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px;"/>
                                                             </div>
                                                         </div>
                                                     </div>

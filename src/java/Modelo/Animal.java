@@ -130,6 +130,28 @@ public class Animal {
     public boolean isStatusAnimal() {
         return statusAnimal;
     }
+    
+    public String getStatusAnimalString() {
+        if(this.tipoAnimal.equals("Adoção")){
+            if(this.statusAnimal)
+                return "Adotado";
+            else
+                return "Não Adotado";
+        }
+        else if(this.tipoAnimal.equals("Perdido")){
+            if(this.statusAnimal)
+                return "Perdido";
+            else
+                return "Encontrado";
+        }
+        else{
+            if(this.statusAnimal)
+                return "Esperando Resgate";
+            else
+                return "Resgatado";
+        }
+        
+    }
 
     public void setStatusAnimal(boolean status) {
         this.statusAnimal = status;

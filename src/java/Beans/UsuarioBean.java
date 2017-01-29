@@ -16,6 +16,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -29,48 +30,61 @@ import javax.ws.rs.client.WebTarget;
 @ManagedBean
 @RequestScoped
 public class UsuarioBean {
-    private Usuario usuario;
-    private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
-    private PessoaFisica pf = null;
-    private PessoaJuridica pj = null;
-    private List<Animal> meusAnimais = new ArrayList();
-    private List<Animal> meusAnimaisTop = new ArrayList();
-    
+
+    private Usuario usuario = (Usuario) getRequest().getAttribute("usuario");       //Usuario da pagina que esta sendo vista
+    private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");        // Usuario que está logado na sessão
+    private PessoaFisica pf = null;         //Complemento das informações do Usuario (se for Helper)
+    private PessoaJuridica pj = null;       //Complemento das informações do Usuario (se for Ong ou Clinica/Petshop
+    private List<Animal> meusAnimais = new ArrayList();         //Lista de animais do Usuario
+    private List<Animal> meusAnimaisTop = new ArrayList();      //Top 4 da lista de animais
+
     public UsuarioBean() {
-        this.usuario = new Usuario();
+        //this.usuario = new Usuario();
         
+        System.out.println("Iniciando o UsuarioBean");
+        
+//        if(usuario.getIdUsuario() != 0){
+//            MeusAnimais(usuario.getIdUsuario());
+//        }
     }
-    
-    public String Salvar(){
+
+    public String Salvar() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/usuario");
         Gson gson = new Gson();
         String json = gson.toJson(usuario);
         caminho.request().post(Entity.json(json));
-        
+
         return "index.jsf";
     }
-    
-    public String VerPerfil(int idUsuario){
+
+    public String VerPerfil(int idUsuario) {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/usuario/" + idUsuario);
         String json = caminho.request().get(String.class);
-        
+
         Gson gson = new Gson();
         usuario = gson.fromJson(json, Usuario.class);
         System.out.println("Ver Usuario: Que usuario é esse? " + usuario.getNomeUsuario() + usuario.getIdUsuario());
-        if(usuario.getIdPermissao() == 1){
+        if (usuario.getIdPermissao() == 1) {
             pf = gson.fromJson(json, PessoaFisica.class);
-            MeusAnimais(usuario.getIdUsuario());
+            //MeusAnimais(usuario.getIdUsuario());
             return "verHelper.jsf";
-        }
-        else{
-           pj = gson.fromJson(json, PessoaJuridica.class);
-           return "verOng.jsf";
+        } else {
+            pj = gson.fromJson(json, PessoaJuridica.class);
+            return "verOng.jsf";
         }
     }
     
-    public void MeusAnimais(int id){
+    public String VerMeusAnimais() {
+        MeusAnimais(usuario.getIdUsuario());
+        
+        return "meusAnimais.jsf?faces-redirect=true";
+    }
+    
+    
+
+    public void MeusAnimais(int id) {
         System.out.println("id Usuario para Meus Aniamis: " + id);
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + id);
@@ -78,14 +92,27 @@ public class UsuarioBean {
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);
         meusAnimais = Arrays.asList(vetor);
+        System.out.println("size MeusAnimais: " + meusAnimais.size());
+        if (meusAnimais.size() > 4) {
+            meusAnimaisTop = meusAnimais.subList(1, 5);
+        }
+        meusAnimaisTop = meusAnimais;
+        System.out.println("size MeusAnimaisTop: " + meusAnimaisTop.size());
+        for(Animal a : meusAnimaisTop){
+            System.out.println("nome A: " + a.getNomeAnimal());
+        }
     }
-    
-    public FacesContext getFacesContext(){
+
+    public FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();
     }
-  
-    public HttpSession getSession(){
+
+    public HttpSession getSession() {
         return (HttpSession) getFacesContext().getExternalContext().getSession(false);
+    }
+    
+    public HttpServletRequest  getRequest() {
+        return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
     }
 
     public Usuario getUsuario() {
@@ -121,12 +148,11 @@ public class UsuarioBean {
     }
 
     public List<Animal> getMeusAnimaisTop() {
-        System.out.println("qtd" + meusAnimais.size());
-        //meusAnimaisTop = meusAnimais.subList(1, 5);
+        System.out.println("qtd" + meusAnimais.size() + "usuario " + usuario.getNomeUsuario());
         return meusAnimaisTop;
     }
 
     public void setMeusAnimaisTop(List<Animal> meusAnimaisTop) {
         this.meusAnimaisTop = meusAnimaisTop;
-    }    
+    }
 }

@@ -7,7 +7,6 @@ package DAO;
 
 import Modelo.Encontro;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class EncontroDAO {
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setDate(1, (Date) encontro.getDataEncontro());
+            pstmt.setString(1, encontro.getDataEncontro());
             pstmt.setString(2, encontro.getHorarioEncontro());
             pstmt.setBoolean(3, encontro.isStatusEncontro());
             pstmt.setBoolean(4, encontro.isEditado());
@@ -64,7 +63,7 @@ public class EncontroDAO {
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setDate(1, (Date) encontro.getDataEncontro());
+            pstmt.setString(1, encontro.getDataEncontro());
             pstmt.setString(2, encontro.getHorarioEncontro());
             pstmt.setBoolean(3, encontro.isStatusEncontro());
             pstmt.setBoolean(4, encontro.isEditado());
@@ -123,7 +122,7 @@ public class EncontroDAO {
             rs= stmt.executeQuery(sql);
             while(rs.next())
             { 
-                Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getDate("dataEncontro"), rs.getString("horarioEncontro"),
+                Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getString("dataEncontro"), rs.getString("horarioEncontro"),
                         rs.getBoolean("statusEncontro"), rs.getBoolean("editado"), rs.getInt("idAnimal"), rs.getInt("idUsuario"),
                         rs.getString("localizacao"));
                 lista.add(a);
@@ -146,16 +145,18 @@ public class EncontroDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Encontro> lista = new ArrayList();
-        String sql= "SELECT * FROM Encontro WHERE idUsuario = ?";
+        String sql= "SELECT * FROM Encontro INNER JOIN Animal ON Encontro.idAnimal = Animal.idAnimal "
+                + "WHERE Encontro.idUsuario = ? OR Animal.idUsuario = ?";
         try
         {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, idUsuario);
+            pstmt.setInt(2, idUsuario);
             
             rs = pstmt.executeQuery();
             while(rs.next())
             {
-                Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getDate("dataEncontro"), rs.getString("horarioEncontro"),
+                Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getString("dataEncontro"), rs.getString("horarioEncontro"),
                         rs.getBoolean("statusEncontro"), rs.getBoolean("editado"), rs.getInt("idAnimal"), rs.getInt("idUsuario"),
                         rs.getString("localizacao"));
                 lista.add(a);

@@ -3,9 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Help Pet - Cadastro de eventos</title>
+        <title>Help Pet - Eventos</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
@@ -55,27 +56,28 @@
                 <h3 align="center" style="color: white;">Eventos</h3>
                 <hr/>
                 <br/>
+                <c:forEach var="evento" items="#{eventoBean.eventosTop}">
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail caixa">
                         <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
                         <div class="caption" align="center">
-                            <h5>Feira Potiguar de Adoção</h5>
+                            <h5>#{evento.nomeEvento}</h5>
                             <div align="left">
-                                <p>Data: 00/00/0000</p>
-                                <p>Local: Natal/RN</p>
+                                <p>Data: #{evento.dataEvento}</p>
+                                <p>Local: #{evento.localizacao}</p>
                             </div>
-                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="background-color: #87CEFF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
+                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="##{evento.idEvento}" style="background-color: #87CEFF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
 
-                            <!-- Detalhamento do evento 1 -->
+                            <!-- Detalhamento do evento -->
 
-                            <div class="modal fade" id="myModal1" role="dialog">
+                            <div class="modal fade" id="#{evento.idEvento}" role="dialog">
                                 <div class="modal-dialog">
 
                                     <!-- Conteúdo -->
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Feira Potiguar de Adoção</h4>
+                                            <h4 class="modal-title">#{evento.nomeEvento}</h4>
                                         </div>
                                         <div class="modal-body">
 
@@ -88,10 +90,11 @@
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div align="left">
-                                                            <p>Data: 00/00/0000</p>
-                                                            <p>Hora: 00:00 - 00:00</p>
-                                                            <p>Local: Natal/RN, Av. Salgado Filho, Tirol.</p>
-                                                            <p>Descrição: Evento destinado a adoção de gatos e cachorros. Participe!</p>
+                                                            <p>Data: #{evento.dataEvento}</p>
+                                                            <p>Hora: #{evento.horarioEvento}</p>
+                                                            <p>Local: #{evento.localizacao}</p>
+                                                            <p>Responsável: #{eventoBean.responsavel.nomeUsuario}</p>
+                                                            <p>Descrição: #{evento.descricaoEvento}</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1">
@@ -110,189 +113,15 @@
                         </div>
                     </div>
                 </div>
+                </c:forEach>
 
-
-
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>Feira Potiguar de Adoção</h5>
-                            <div align="left">
-                                <p>Data: 00/00/0000</p>
-                                <p>Local: Natal/RN</p>
-                            </div>
-                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal2" style="background-color: #87CEFF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
-                            <!-- Detalhamento do evento 2 -->
-
-                            <div class="modal fade" id="myModal2" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Conteúdo -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Feira Potiguar de Adoção</h4>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:250px;border-radius: 0px;"/>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div align="left">
-                                                            <p>Data: 00/00/0000</p>
-                                                            <p>Hora: 00:00 - 00:00</p>
-                                                            <p>Local: Natal/RN, Av. Salgado Filho, Tirol.</p>
-                                                            <p>Descrição: Evento destinado a adoção de gatos e cachorros. Participe!</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" style="background-color: #87CEFF; color: white; border-radius: 0px;" data-dismiss="modal">Fechar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>Feira Potiguar de Adoção</h5>
-                            <div align="left">
-                                <p>Data: 00/00/0000</p>
-                                <p>Local: Natal/RN</p>
-                            </div>
-                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="background-color: #87CEFF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
-                            <!-- Detalhamento do evento 3 -->
-
-                            <div class="modal fade" id="myModal3" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Conteúdo -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Feira Potiguar de Adoção</h4>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:250px;border-radius: 0px;"/>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div align="left">
-                                                            <p>Data: 00/00/0000</p>
-                                                            <p>Hora: 00:00 - 00:00</p>
-                                                            <p>Local: Natal/RN, Av. Salgado Filho, Tirol.</p>
-                                                            <p>Descrição: Evento destinado a adoção de gatos e cachorros. Participe!</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" style="background-color: #87CEFF; color: white; border-radius: 0px;" data-dismiss="modal">Fechar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>Feira Potiguar de Adoção</h5>
-                            <div align="left">
-                                <p>Data: 00/00/0000</p>
-                                <p>Local: Natal/RN</p>
-                            </div>
-                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal4" style="background-color: #87CEFF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-
-                            <!-- Detalhamento do evento 4 -->
-
-                            <div class="modal fade" id="myModal4" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Conteúdo -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Feira Potiguar de Adoção</h4>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:250px;border-radius: 0px;"/>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div align="left">
-                                                            <p>Data: 00/00/0000</p>
-                                                            <p>Hora: 00:00 - 00:00</p>
-                                                            <p>Local: Natal/RN, Av. Salgado Filho, Tirol.</p>
-                                                            <p>Descrição: Evento destinado a adoção de gatos e cachorros. Participe!</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" style="background-color: #87CEFF; color: white; border-radius: 0px;" data-dismiss="modal">Fechar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
+                
                 <!-- Botão para ver mais eventos -->
-
                 <div align="right">
                     <p><a href="buscarEvento.jsf" class="btn btn-default" style="background-color: white; color: #87CEFF; font-weight:bold; width: 60px; height: 60px;border-radius:100%;">
                             <i class="material-icons" style="color: #87CEFF; padding-top: 12px;">add</i>
                         </a>
                     </p>
-
                 </div>
 
             </div>
@@ -303,10 +132,7 @@
             <div class="row">
                 <div class="col-md-12">
 
-
-
                     <!-- Título do formulário -->
-
                     <div class="container-fluid" id="evento">
                         <div class="row">
                             <div class="col-md-12" align="center">
@@ -314,7 +140,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="container-fluid">
                         <div class="row">
@@ -327,9 +152,7 @@
                                     <div class="card">
                                         <div class="card-header panel panel-default" style="margin-top: -5%; padding-top: 3%; background-color: white; border-radius: 0px; margin-bottom: 10px; color: black;">
 
-
                                             <!-- Form-->
-
                                             <h:form class="form-signin">
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -341,82 +164,38 @@
                                                                     <label style="font-size: 14px;color: black; padding-left: 10px;">
                                                                         Nome:
                                                                     </label>
-                                                                    <h:inputText class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
+                                                                    <h:inputText value="#{eventoBean.evento.nomeEvento}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
                                                                     <label style="font-size: 14px;color: black; padding-left: 10px;">
                                                                         Data:
                                                                     </label>
-                                                                    <h:inputText class="form-control" style="font-size: 14px; color: black; margin-left: 10px;">
-                                                                        <f:convertDateTime pattern="dd-MM-yyyy"/>  
-                                                                    </h:inputText>
+                                                                    <h:inputText value="#{eventoBean.evento.dataEvento}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
                                                                     <label style="font-size: 14px;color: black;padding-left: 10px;">
-                                                                        Estado:
+                                                                        Horário:
                                                                     </label>
-                                                                    <h:selectOneMenu value="#" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
-                                                                        <f:selectItem itemLabel="Acre" itemValue="ac"/>
-                                                                        <f:selectItem itemLabel="Alagoas" itemValue="al"/>
-                                                                        <f:selectItem itemLabel="Amapá" itemValue="ap"/>
-                                                                        <f:selectItem itemLabel="Amazonas" itemValue="am"/>
-                                                                        <f:selectItem itemLabel="Bahia" itemValue="ba"/>
-                                                                        <f:selectItem itemLabel="Ceará" itemValue="ce"/>
-                                                                        <f:selectItem itemLabel="Distrito Federal" itemValue="df"/>
-                                                                        <f:selectItem itemLabel="Espírito Santo" itemValue="es"/>
-                                                                        <f:selectItem itemLabel="Goiás" itemValue="go"/>
-                                                                        <f:selectItem itemLabel="Maranhão" itemValue="ma"/>
-                                                                        <f:selectItem itemLabel="Mato Grosso" itemValue="mt"/>
-                                                                        <f:selectItem itemLabel="Mato Grosso do Sul" itemValue="ms"/>
-                                                                        <f:selectItem itemLabel="Minas Gerais" itemValue="mg"/>
-                                                                        <f:selectItem itemLabel="Pará" itemValue="pa"/>
-                                                                        <f:selectItem itemLabel="Paraíba" itemValue="pb"/>
-                                                                        <f:selectItem itemLabel="Paraná" itemValue="pr"/>
-                                                                        <f:selectItem itemLabel="Pernambuco	" itemValue="pe"/>
-                                                                        <f:selectItem itemLabel="Piauí" itemValue="pi"/>
-                                                                        <f:selectItem itemLabel="Rio de Janeiro" itemValue="rj"/>
-                                                                        <f:selectItem itemLabel="Rio Grande do Norte" itemValue="rn"/>
-                                                                        <f:selectItem itemLabel="Rio Grande do Sul" itemValue="rs"/>
-                                                                        <f:selectItem itemLabel="Rondônia" itemValue="ro"/>
-                                                                        <f:selectItem itemLabel="Roraima" itemValue="rr"/>
-                                                                        <f:selectItem itemLabel="Santa Catarina" itemValue="sc"/>
-                                                                        <f:selectItem itemLabel="São Paulo" itemValue="sp"/>
-                                                                        <f:selectItem itemLabel="Sergipe" itemValue="se"/>
-                                                                        <f:selectItem itemLabel="Tocantins" itemValue="to"/>
-                                                                    </h:selectOneMenu>
+                                                                    <h:inputText value="#{eventoBean.evento.horarioEvento}" class="form-control" style="font-size: 14px; color: black; margin-left: 10px;"/>
                                                                     <label style="font-size: 14px;color: black;padding-left: 10px;">
-                                                                        Cidade:
+                                                                        Local:
                                                                     </label>
-                                                                    <h:inputText class="form-control" style="font-size: 14px; color: black;margin-left: 10px;"/>
-                                                                    <label style="font-size: 14px;color: black;padding-left: 10px;">
-                                                                        Bairro:
-                                                                    </label>
-                                                                    <h:inputText class="form-control" style="font-size: 14px; color: black;margin-left: 10px;"/>
-
+                                                                    <h:inputText value="#{eventoBean.evento.localizacao}" class="form-control" style="font-size: 14px; color: black;margin-left: 10px;"/>
                                                                 </h:panelGrid>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <h:panelGrid columns="2" cellpadding="5">
                                                                     <label style="font-size: 14px;color: black;padding-left: 10px;">
-                                                                        Rua:
-                                                                    </label>
-                                                                    <h:inputText class="form-control" style="font-size: 14px; color: black;margin-left: 10px;"/>
-
-                                                                    <label style="font-size: 14px;color: black;padding-left: 10px;">
-                                                                        Complemento:
-                                                                    </label>
-                                                                    <h:inputText class="form-control" style="font-size: 14px; color: black;margin-left: 10px;"/>
-                                                                    <label style="font-size: 14px;color: black;padding-left: 10px;">
-                                                                        Horário:
+                                                                        Imagem:
                                                                     </label>
                                                                     <h:inputText class="form-control" style="font-size: 14px; color: black;margin-left: 10px;"/>
                                                                     <label style="font-size: 14px;color: black; padding-left: 10px;">
                                                                         Descrição:
                                                                     </label>
-                                                                    <h:inputTextarea class="form-control" rows="3" style="margin-left: 10px;"/>  
+                                                                    <h:inputTextarea value="#{eventoBean.evento.descricaoEvento}" class="form-control" rows="3" style="margin-left: 10px;"/>  
                                                                 </h:panelGrid>
                                                             </div>
                                                             <div class="col-md-1">
                                                             </div>
                                                             <div class="col-md-12" align="center">
                                                                 <br/>
-                                                                <h:button value="Cadastrar" class="btn btn-default" style="background-color: #87CEFF; color: white;border-radius: 0px;"/>
+                                                                <h:commandButton value="Cadastrar" action="#{eventoBean.Salvar()}" class="btn btn-default" style="background-color: #87CEFF; color: white;border-radius: 0px;"/>
                                                             </div>
                                                         </div>
                                                     </div>

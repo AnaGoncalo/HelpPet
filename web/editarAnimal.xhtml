@@ -64,7 +64,7 @@
                                                 <div class="text-center" >
                                                     <img src="imagens/gato2.jpg" height="120px" width="160px" style="border-radius: 0px;" alt="Foto do amimal"/>
                                                     <h6>Atualizar foto...</h6>
-                                                    <h:inputFile   class="text-center center-block well well-sm"/>
+                                                    <h:inputText value="#{animalBean.animal.fotoAnimal}"   class="text-center center-block well well-sm"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -77,7 +77,27 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                        <h:inputText value="#{animalBean.animal.nomeAnimal}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px;padding-top: 5px;">
+                                                            Tipo  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding-left: 15px;">
+                                                        <h:selectOneMenu value="#{animalBean.animal.tipoAnimal}" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
+                                                            <f:selectItem itemLabel="Adoção" itemValue="Adoção"/>
+                                                            <f:selectItem itemLabel="Perido" itemValue="Perdido"/>
+                                                            <f:selectItem itemLabel="Resgate" itemValue="Resgate"/>
+                                                        </h:selectOneMenu>   
                                                     </div>
                                                     <div class="col-md-2">
                                                     </div>
@@ -93,12 +113,9 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6" style="padding-left: 15px;">
-                                                        <h:selectOneMenu value="#" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
-                                                            <f:selectItem itemLabel="Espécie 1" itemValue="1"/>
-                                                            <f:selectItem itemLabel="Espécie 2" itemValue="2"/>
-                                                            <f:selectItem itemLabel="Espécie 3" itemValue="3"/>
-                                                            <f:selectItem itemLabel="Espécie 4" itemValue="4"/>
-                                                            <f:selectItem itemLabel="Espécie 5" itemValue="5"/>
+                                                        <h:selectOneMenu value="#{animalBean.animal.especie}" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
+                                                            <f:selectItem itemLabel="Cachorro" itemValue="Cachorro"/>
+                                                            <f:selectItem itemLabel="Gato" itemValue="Gato"/>
                                                         </h:selectOneMenu>   
                                                     </div>
                                                     <div class="col-md-2">
@@ -115,12 +132,12 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6" style="padding-left: 15px;">
-                                                        <h:selectOneMenu value="#" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
-                                                            <f:selectItem itemLabel="0-6 meses" itemValue="1"/>
-                                                            <f:selectItem itemLabel="6-12 meses" itemValue="2"/>
-                                                            <f:selectItem itemLabel="1-2 anos" itemValue="3"/>
-                                                            <f:selectItem itemLabel="2-5 anos" itemValue="4"/>
-                                                            <f:selectItem itemLabel="Mais de 5 anos" itemValue="5"/>
+                                                        <h:selectOneMenu value="#{animalBean.animal.idade}" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
+                                                            <f:selectItem itemLabel="0-6 meses" itemValue="0-6 meses"/>
+                                                            <f:selectItem itemLabel="6-12 meses" itemValue="6-12 meses"/>
+                                                            <f:selectItem itemLabel="1-2 anos" itemValue="1-2 anos"/>
+                                                            <f:selectItem itemLabel="2-5 anos" itemValue="2-5 anos"/>
+                                                            <f:selectItem itemLabel="Mais de 5 anos" itemValue="Mais de 5 anos"/>
                                                         </h:selectOneMenu>   
                                                     </div>
                                                     <div class="col-md-2">
@@ -137,12 +154,9 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6" style="padding-left: 15px;">
-                                                        <h:selectOneMenu value="#" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
-                                                            <f:selectItem itemLabel="Raça 1" itemValue="1"/>
-                                                            <f:selectItem itemLabel="Raça 2" itemValue="2"/>
-                                                            <f:selectItem itemLabel="Raça 3" itemValue="3"/>
-                                                            <f:selectItem itemLabel="Raça 4" itemValue="4"/>
-                                                            <f:selectItem itemLabel="Raça 5" itemValue="5"/>
+                                                        <h:selectOneMenu value="#{animalBean.animal.raca}" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
+                                                            <f:selectItem itemLabel="Viralata" itemValue="Viralata"/>
+                                                            <f:selectItem itemLabel="Outra" itemValue="Outra"/>
                                                         </h:selectOneMenu>   
                                                     </div>
                                                     <div class="col-md-2">
@@ -159,16 +173,31 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6" style="padding-left: 15px;">
-                                                        <h:selectOneMenu value="#" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
-                                                            <f:selectItem itemLabel="Macho" itemValue="1"/>
-                                                            <f:selectItem itemLabel="Fêmea" itemValue="2"/>
+                                                        <h:selectOneMenu value="#{animalBean.animal.sexo}" style="height: 40px; color: black;font-size: 14px; width: 100%;" class="form-control">
+                                                            <f:selectItem itemLabel="Macho" itemValue="Macho"/>
+                                                            <f:selectItem itemLabel="Fêmea" itemValue="Fêmea"/>
                                                         </h:selectOneMenu>   
                                                     </div>
                                                     <div class="col-md-2">
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px;padding-top: 5px;">
+                                                            Local:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputText value="#{animalBean.animal.localizacao}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-2">
@@ -179,7 +208,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6" style="padding-left: 15px;">
-                                                        <h:inputTextarea rows="3" class="form-control" style=" width: 100%; font-size: 14px;"/>  
+                                                        <h:inputTextarea value="#{animalBean.animal.descricaoAnimal}" rows="3" class="form-control" style=" width: 100%; font-size: 14px;"/>  
                                                     </div>
                                                     <div class="col-md-2">
                                                     </div>
@@ -187,7 +216,9 @@
                                             </div>
                                             <div class="col-md-12" align="center" style="margin-bottom: 30px;">
                                                 <br/>
-                                                <h:commandButton value="Salvar" class="btn btn-success" style=" color: white;border-radius: 0px; "/>
+                                                <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
+                                                <h:inputHidden value="#{animalBean.animal.idUsuario}"/>
+                                                <h:commandButton action="#{animalBean.Salvar()}" value="Salvar" class="btn btn-success" style=" color: white;border-radius: 0px; "/>
                                                 <br/>
                                             </div>
                                         </div>

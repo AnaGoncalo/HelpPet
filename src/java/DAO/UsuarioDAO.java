@@ -252,13 +252,13 @@ public class UsuarioDAO {
         return u;
     }
     
-    public static List<PessoaJuridica> listarOngs() throws SQLException
+    public static List<PessoaJuridica> listarOng() throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<PessoaJuridica> lista = new ArrayList();
-        String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 2";
+        String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 2 ";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);

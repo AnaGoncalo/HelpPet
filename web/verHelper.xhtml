@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Help Pet - Perfil</title>
 
@@ -35,7 +34,7 @@
             <div class="panel panel-default divPerfil" align="left">
                 <img src="imagens/foto.jpg" style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
-                    <h3 style="padding-top: 2%;">#{usuarioBean.pf.nomeUsuario}</h3>
+                    <h3 style="padding-top: 2%;">#{loginBean.usuarioLogado.nomeUsuario}</h3>
                 </div>
             </div>
         </div>
@@ -52,10 +51,7 @@
                         <div class="col-md-12 panel panel-default cardsLateralEsquerda">
                             <h5><i class="material-icons">info</i> Informações</h5>
                             <hr/>
-                            <p class="itensPerfil">E-mail: #{usuarioBean.pf.email}</p>
-                            <p class="itensPerfil">CPF: #{usuarioBean.pf.cpf}</p>
-                            <p class="itensPerfil">Nascimento: #{usuarioBean.pf.dataNascimento}</p>
-                            <p class="itensPerfil">Localização: #{usuarioBean.pf.localizacao}</p>
+                            <p class="itensPerfil">E-mail: #{loginBean.usuarioLogado.email}</p>
                             <div style="margin-bottom: 15px;">
                                 <a href="editarPerfil.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
                             </div>
@@ -106,16 +102,24 @@
                                     <div class="tab-pane fade active in" id="pets">
                                         <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
                                             <div class="row">
-                                                <c:forEach var="animal" items="#{usuarioBean.meusAnimaisTop}">
                                                 <div class="col-md-6">
                                                     <img src="imagens/gato2.jpg" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
                                                 </div>
-                                                </c:forEach>
-                                                
-                                                
+                                                <div class="col-md-6">
+                                                    <img src="imagens/gato2.jpg" width="200px" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
+                                                </div>
                                             </div>
                                         </div>
-                                        
+                                        <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img src="imagens/gato2.jpg" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img src="imagens/gato2.jpg" width="200px" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12" align="center">
                                             <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
 
@@ -172,6 +176,7 @@
                 </div>
             </div>
         </div>
-        
+
+
     </h:body>
 </html>

@@ -33,11 +33,18 @@ import javax.ws.rs.client.WebTarget;
 @RequestScoped
 public class ExperienciaBean {
     private Experiencia experiencia = new Experiencia();
-    private List<Experiencia> experiencias = new ArrayList();
+    private Usuario autor = null;
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
+    
+    private List<Experiencia> experiencias = new ArrayList();
+    private List<Experiencia> minhasExperiencias = new ArrayList();
     
     public ExperienciaBean() {
         Listar();
+        
+        if(user != null){
+            ListarMinhasExperiencias();
+        }
     }
     
     public void Listar(){
@@ -50,17 +57,21 @@ public class ExperienciaBean {
         experiencias = Arrays.asList(vetor);
     }
     
-    public void MinhasExperiencias(){
+    public void ListarMinhasExperiencias(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
         Experiencia[] vetor = gson.fromJson(json, Experiencia[].class);
-        experiencias = Arrays.asList(vetor);
+        minhasExperiencias = Arrays.asList(vetor);
     }
     
-    public void Salvar(){
+    public String Salvar(){
+        if(user == null)
+        {
+            return "loginSignin.jsf";
+        }
         
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/experiencia");
@@ -78,20 +89,24 @@ public class ExperienciaBean {
             caminho.request().put(Entity.json(json));
         }
         
-        
         Listar();
+        ListarMinhasExperiencias();
+        return "minhasExperiencias.jsf";
     }
     
     public String VerExperiencia(Experiencia e){
         experiencia = e;
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/usuario/" + experiencia.getIdUsuario());
+        String json = caminho.request().get(String.class);
+        Gson gson = new Gson();
+        autor = gson.fromJson(json, Usuario.class);
         return "experiencia.jsf";
     }
     
-    public void EditarExperiencia(ActionEvent evento){
-        //experiencia = (Experiencia) evento.getComponent().getAttributes().get("experienciaSelecionada");
-               
-        
-        
+    public String EditarExperiencia(Experiencia e){
+        experiencia = e;
+        return "editarExperiencia.jsf";
     }
     
     public FacesContext getFacesContext(){
@@ -117,6 +132,23 @@ public class ExperienciaBean {
     public void setExperiencias(List<Experiencia> experiencias) {
         this.experiencias = experiencias;
     }
+
+    public Usuario getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Usuario autor) {
+        this.autor = autor;
+    }
+
+    public List<Experiencia> getMinhasExperiencias() {
+        return minhasExperiencias;
+    }
+
+    public void setMinhasExperiencias(List<Experiencia> minhasExperiencias) {
+        this.minhasExperiencias = minhasExperiencias;
+    }
+    
     
     
 }

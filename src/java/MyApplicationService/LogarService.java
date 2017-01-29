@@ -27,7 +27,7 @@ public class LogarService {
        Gson gson = new Gson();
        Usuario user = gson.fromJson(json, Usuario.class);
        
-       Usuario usuarioLogado = null;
+       Usuario usuarioLogado = new Usuario();
        UsuarioDAO dao = new UsuarioDAO();
        
        String email = user.getEmail();

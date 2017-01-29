@@ -36,7 +36,8 @@ public class EstoqueBean {
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
 
     public EstoqueBean(){
-        Listar();
+        if(user != null)
+            MeusEstoques();
     }
 
     public void Listar(){
@@ -61,6 +62,7 @@ public class EstoqueBean {
     }
     
     public void Salvar(){
+        System.out.println("Bean estoque: salvar");
         Client cliente = ClientBuilder.newClient();        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque");
         Gson gson = new Gson();
@@ -68,6 +70,7 @@ public class EstoqueBean {
         if(estoque.getIdEstoque() == 0)
         {
             estoque.setIdUsuario(user.getIdUsuario());
+            System.out.println(estoque.getNomeEstoque());
             String json = gson.toJson(estoque);
             caminho.request().post(Entity.json(json));
         }
@@ -76,7 +79,7 @@ public class EstoqueBean {
             String json = gson.toJson(estoque);
             caminho.request().put(Entity.json(json));
         }
-        Listar();
+        MeusEstoques();
     }
     
     public FacesContext getFacesContext(){

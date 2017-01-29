@@ -27,42 +27,54 @@ import javax.ws.rs.client.WebTarget;
 @ManagedBean
 @SessionScoped
 public class LoginBean {
+
     private Usuario user = new Usuario();
     private Usuario usuarioLogado = null;
     private PessoaFisica pf = null;
     private PessoaJuridica pj = null;
-    
+
     public LoginBean() {
     }
     
-    public String Logar() throws SQLException{
-        
+    public String VerPerfil(){
+        if(usuarioLogado.getIdPermissao() == 1)
+            return "verHelper.jsf";
+        else if(usuarioLogado.getIdPermissao() == 2)
+            return "ong.jsf";
+        else
+            return "clinicaPetshop.jsf";
+    }
+
+    public String Logar() throws SQLException {
+
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/logar");
         Gson gson = new Gson();
         String json = gson.toJson(user);
         json = caminho.request().post(Entity.json(json), String.class);
-        
+
         usuarioLogado = gson.fromJson(json, Usuario.class);
-        if(usuarioLogado.getIdPermissao() == 1)
-        {
-            
+        if (usuarioLogado == null) {
+            return "loginSignin.jsf";
+        } else {
+            System.out.println("Logou? " + usuarioLogado.getNomeUsuario());
+            getSession().setAttribute("usuarioLogado", usuarioLogado);
+            return "index.xhtml";
         }
-        else
-        {
-            
-        }
-        System.out.println("Logou? " + usuarioLogado.getNomeUsuario());
-        
-        getSession().setAttribute("usuarioLogado", usuarioLogado);
-        return "index.xhtml";
     }
-    
-    public FacesContext getFacesContext(){
+
+    public String Deslogar() {
+        usuarioLogado = null;
+        getSession().setAttribute("usuarioLogado", usuarioLogado);
+
+        return "index.jsf";
+    }
+
+    public FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();
     }
-  
-    public HttpSession getSession(){
+
+    public HttpSession getSession() {
         return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
 
@@ -81,5 +93,5 @@ public class LoginBean {
     public void setUser(Usuario user) {
         this.user = user;
     }
-    
+
 }

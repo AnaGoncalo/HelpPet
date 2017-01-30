@@ -10,6 +10,10 @@ import Modelo.Animal;
 import Modelo.Encontro;
 import Modelo.Usuario;
 import com.google.gson.Gson;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +25,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -43,6 +48,8 @@ public class AnimalBean {
     private List<Animal> meusAnimais = new ArrayList();
     private Encontro encontro = new Encontro();
     
+    private Part imagem;
+    
     public AnimalBean() throws SQLException {
         Listar();
         animaisTop = animais.subList(1, 5);
@@ -63,6 +70,7 @@ public class AnimalBean {
         {
             System.out.println("Bean Salvar: " + animal.getNomeAnimal());
             animal.setIdUsuario(user.getIdUsuario());
+            animal.setFotoAnimal(upload());
             String json = gson.toJson(animal);
             caminho.request().post(Entity.json(json));
         }
@@ -208,5 +216,33 @@ public class AnimalBean {
     public void setMeusAnimais(List<Animal> meusAnimais) {
         this.meusAnimais = meusAnimais;
     }
+
+    public Part getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Part imagem) {
+        this.imagem = imagem;
+    }
     
+    
+    public String upload() {
+
+        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + animal.getNomeAnimal() + ".jpg";// + imagem.getSubmittedFileName();
+        //produto.setDescricao(imagem.getSubmittedFileName());
+        try (InputStream is = imagem.getInputStream();
+                OutputStream out = new FileOutputStream(nomeArquivoSaida)) {
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = is.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+
+        } catch (IOException e) {
+            //FacesUtil.addErrorMessage("Erro ao enviar arquivo.");
+        }
+        return "imagens\\" + animal.getNomeAnimal() + ".jpg";
+    }
 }

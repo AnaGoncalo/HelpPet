@@ -40,7 +40,6 @@
 
 
                     <!-- Título do formulário -->
-
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12" align="center">
@@ -80,12 +79,17 @@
                                                             <div class="col-md-1">
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                                <c:if test="#{animalBean.animal.fotoAnimal != null}">
+                                                                    <h:graphicImage value="#{animalBean.animal.fotoAnimal}" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                                </c:if>
+                                                                <c:if test="#{animalBean.animal.fotoAnimal == null}">
+                                                                    <img src="imagens/gato2.jpg" alt="Foto do animal" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                                </c:if>
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div align="left">
                                                                     <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
-                                                                    
+
                                                                     <p>Responsável: <h:form><h:commandLink action="#{animalBean.VerResponsavel()}" style="text-decoration: none; color: black;">#{animalBean.dono.nomeUsuario}</h:commandLink></h:form></p>
                                                                     <p>Espécie: #{animalBean.animal.especie}</p>
                                                                     <p>Idade: #{animalBean.animal.idade}</p>
@@ -104,7 +108,7 @@
                                                     <c:if test="#{loginBean.usuarioLogado != null and animalBean.animal.idUsuario != loginBean.usuarioLogado.idUsuario}">
                                                         <p><a href="#" data-toggle="modal" data-target="#encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;">Marcar encontro</a></p>
                                                     </c:if>
-                                                    
+
                                                     <c:if test="#{loginBean.usuarioLogado != null and animalBean.animal.idUsuario == loginBean.usuarioLogado.idUsuario}">
                                                         <p>
                                                             <h:form>
@@ -112,7 +116,7 @@
                                                             </h:form>
                                                         </p>
                                                     </c:if>
-                                                        
+
                                                 </div>
                                             </div>
                                         </div>

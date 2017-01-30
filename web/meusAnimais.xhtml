@@ -31,24 +31,25 @@
             </ui:insert>
         </div>
 
-
         <!-- Título da página -->
         <div style="margin-top: 7%; height: 100px; background-color: #ffa812;" align="center">
             <h3 align="center" style="color: white; padding-top:  20px;">Meus animais</h3>
             <hr style="margin-left: 10px; margin-right: 20px;"/>
         </div>
 
-
-
         <!-- Listagem de animais-->
-
         <div class="container" id="tourpackages-carousel" >
             <div class="row">
                 <br/><br/>
                 <c:forEach var="animal" items="#{animalBean.meusAnimais}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
-                            <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <c:if test="#{animal.fotoAnimal != null}">
+                                <h:graphicImage value="#{animal.fotoAnimal}" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            </c:if>
+                            <c:if test="#{animal.fotoAnimal == null}">
+                                <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            </c:if>
                             <div class="caption" align="center">
                                 <h5>#{animal.nomeAnimal}</h5>
                                 <div align="left">

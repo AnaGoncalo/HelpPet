@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Help Pet - Encontro</title>
 
@@ -39,16 +40,21 @@
 
 
         <div id="home1" class="home" style="margin-top: 40px;">
-            <div class="" align="center" style="margin-top: 5%;">    
-                <img src="imagens/gato2.jpg" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
+            <div class="" align="center" style="margin-top: 5%;">
+                <c:if test="#{animalBean.animal.fotoAnimal != null}">
+                    <h:graphicImage value="#{animalBean.animal.fotoAnimal}" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
+                </c:if>
+                <c:if test="#{animalBean.animal.fotoAnimal == null}">
+                    <img src="imagens/gato2.jpg" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
+                </c:if>
 
             </div>
             <div class="" style="margin-left:19%; margin-top: 2%">    
-                <img src="imagens/foto.jpg" alt="Imagem do responsável pelo animal" class="circular2"   /> <!--FOTO DO RESPONSÁVEL-->
+                <img src="imagens/userFoto.jpg" alt="Imagem do responsável pelo animal" class="circular2"   /> <!--FOTO DO RESPONSÁVEL-->
 
             </div>
             <div class="" style="margin-left:65%; margin-top: -150px;">    
-                <img src="imagens/foto2.jpg" alt="Iamgem do adotante" class="circular2"   /> <!--FOTO DO ADOTANTE-->
+                <img src="imagens/userFoto.jpg" alt="Iamgem do adotante" class="circular2"   /> <!--FOTO DO ADOTANTE-->
 
             </div>
         </div>
@@ -78,8 +84,7 @@
 
                                     <a href="#" class="btn btn-success" style="margin-left: 10%; border-radius: 0px; ">Confirmar</a>
                                 </div>
-                                
-                                
+
                             </div>
                         </div>
                     </div>
@@ -88,7 +93,6 @@
         </div>
 
         <!-- Formulário -->
-
         <div class="modal fade" id="encontro" role="dialog">
             <div class="modal-dialog">
 

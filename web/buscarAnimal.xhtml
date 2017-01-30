@@ -45,7 +45,12 @@
                 <c:forEach var="animal" items="#{animalBean.animais}">
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
-                            <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <c:if test="#{animal.fotoAnimal != null}">
+                                <h:graphicImage value="#{animal.fotoAnimal}" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            </c:if>
+                            <c:if test="#{animal.fotoAnimal == null}">
+                                <img src="imagens/gato2.jpg" alt="Foto da adoção" style="width:100%; height:170px; border-radius: 0px;"/>
+                            </c:if>
                             <div class="caption" align="center">
                                 <h5>#{animal.nomeAnimal}</h5>
                                 <div align="left">

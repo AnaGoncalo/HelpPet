@@ -43,8 +43,8 @@ public class EncontroService {
        Gson gson = new Gson();
        Encontro a = gson.fromJson(json, Encontro.class);
        //a.setIdUsuario(1);
-       System.out.println("Ainda não deu certo" + a.getHorarioEncontro());
-       System.out.println("Deu certo " + a.getIdAnimal());
+       System.out.println("Ainda não deu certo" + a.getAdotante().getIdUsuario());
+       //System.out.println("Deu certo " + a.getIdAnimal());
        EncontroDAO.CadastrarEncontro(a);
        
        String jsonSaida = gson.toJson(a);

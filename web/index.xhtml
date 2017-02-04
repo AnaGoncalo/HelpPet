@@ -76,7 +76,12 @@
             <div class="row">
                 <c:forEach var="animal" items="#{animalBean.animaisTop}">
                     <div class="col-lg-3">
-                        <img class="img-circle" src="imagens/gato2.jpg" alt="Imagem animal" width="140" height="140"/>
+                        <c:if test="#{animal.fotoAnimal != null}">
+                            <h:graphicImage value="#{animal.fotoAnimal}" class="img-circle" alt="Imagem animal" width="140" height="140"/>
+                        </c:if>
+                        <c:if test="#{animal.fotoAnimal == null}">
+                            <img class="img-circle" src="imagens/gato2.jpg" alt="Imagem animal" width="140" height="140"/>
+                        </c:if>
                         <h4>#{animal.nomeAnimal}</h4>
                         <p>Espécie: #{animal.especie}</p>
                         <p>Local: #{animal.localizacao}</p>

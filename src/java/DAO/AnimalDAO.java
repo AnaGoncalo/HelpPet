@@ -6,6 +6,7 @@
 package DAO;
 
 import Modelo.Animal;
+import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -52,7 +53,7 @@ public class AnimalDAO {
             pstmt.setString(8, animal.getTipoAnimal());
             pstmt.setBoolean(9, false);
             pstmt.setDate(10, (Date) animal.getCadastro());
-            pstmt.setInt(11, animal.getIdUsuario());
+            pstmt.setInt(11, animal.getResponsavel().getIdUsuario());
             pstmt.setString(12, animal.getLocalizacao());
            
             pstmt.executeUpdate();
@@ -130,17 +131,21 @@ public class AnimalDAO {
         ResultSet rs = null;
         Statement stmt= null;
         List<Animal> lista = new ArrayList();
-        String sql= "SELECT * FROM Animal WHERE statusAnimal = 0";
+        String sql= "SELECT * FROM Animal INNER JOIN Usuario ON Usuario.idUsuario = Animal.idUsuario WHERE statusAnimal = 0";
         try
         {
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
             { 
+                Usuario resp = new Usuario(rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), null, rs.getString("dataNascimento"),
+                        rs.getString("foto"), rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));
+                
                 Animal a = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getString("especie"), 
                         rs.getString("raca"), rs.getString("idade"), rs.getString("sexo"), rs.getString("descricaoAnimal"), 
                         rs.getString("tipoAnimal"), rs.getString("fotoAnimal"), rs.getDate("dataCadastro"),
-                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getString("localizacao"));
+                        rs.getBoolean("statusAnimal"), resp, rs.getString("localizacao"));
+                
                 lista.add(a);
             }
         } 
@@ -152,6 +157,7 @@ public class AnimalDAO {
         {
             Banco.closeConexao(conn, rs, null, stmt);
         } 
+        System.out.println("Animal dao: " + lista.size());
         return lista;
     }
     
@@ -161,7 +167,7 @@ public class AnimalDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Animal> lista = new ArrayList();
-        String sql= "SELECT * FROM Animal WHERE idUsuario = ?";
+        String sql= "SELECT * FROM Animal INNER JOIN Usuario ON Usuario.idUsuario = Animal.idUsuario WHERE Animal.idUsuario = ?";
         try
         {
             pstmt = conn.prepareStatement(sql);
@@ -170,10 +176,13 @@ public class AnimalDAO {
             rs = pstmt.executeQuery();
             while(rs.next())
             {
+                Usuario resp = new Usuario(rs.getInt("idUsuario"), rs.getString("nomeUsuario"), rs.getString("email"), null, rs.getString("dataNascimento"),
+                        rs.getString("foto"), rs.getString("localizacao"), rs.getString("telefone"), rs.getInt("idPermissao"));
+                
                 Animal a = new Animal(rs.getInt("idAnimal"), rs.getString("nomeAnimal"), rs.getString("especie"), 
                         rs.getString("raca"), rs.getString("idade"), rs.getString("sexo"), rs.getString("descricaoAnimal"), 
                         rs.getString("tipoAnimal"), rs.getString("fotoAnimal"), rs.getDate("dataCadastro"),
-                        rs.getBoolean("statusAnimal"), rs.getInt("idUsuario"), rs.getString("localizacao"));
+                        rs.getBoolean("statusAnimal"), resp, rs.getString("localizacao"));
                 
                 lista.add(a);
             }

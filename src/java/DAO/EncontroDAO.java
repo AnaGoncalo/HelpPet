@@ -5,7 +5,9 @@
  */
 package DAO;
 
+import Modelo.Animal;
 import Modelo.Encontro;
+import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,8 +38,8 @@ public class EncontroDAO {
             pstmt.setString(2, encontro.getHorarioEncontro());
             pstmt.setBoolean(3, encontro.isStatusEncontro());
             pstmt.setBoolean(4, encontro.isEditado());
-            pstmt.setInt(5, encontro.getIdAnimal());
-            pstmt.setInt(6, encontro.getIdUsuario());
+            pstmt.setInt(5, encontro.getAnimal().getIdAnimal());
+            pstmt.setInt(6, encontro.getAdotante().getIdUsuario());
             pstmt.setString(7, encontro.getLocalizacao());
            
             pstmt.executeUpdate();
@@ -67,8 +69,8 @@ public class EncontroDAO {
             pstmt.setString(2, encontro.getHorarioEncontro());
             pstmt.setBoolean(3, encontro.isStatusEncontro());
             pstmt.setBoolean(4, encontro.isEditado());
-            pstmt.setInt(5, encontro.getIdAnimal());
-            pstmt.setInt(6, encontro.getIdUsuario());
+            pstmt.setInt(5, encontro.getAnimal().getIdAnimal());
+            pstmt.setInt(6, encontro.getAdotante().getIdUsuario());
             pstmt.setString(7, encontro.getLocalizacao());
             pstmt.setInt(8, encontro.getIdEncontro());
            
@@ -115,17 +117,61 @@ public class EncontroDAO {
         ResultSet rs = null;
         Statement stmt= null;
         List<Encontro> lista = new ArrayList();
-        String sql= "SELECT * FROM Encontro";
+        String sql= "select * from Encontro " +
+                "inner join Usuario as Adotante on Adotante.idUsuario = Encontro.idUsuario " +
+                "inner join Animal on Animal.idAnimal = encontro.idAnimal " +
+                "inner join Usuario as Responsavel on Responsavel.idUsuario = Animal.idUsuario";
         try
         {
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
             { 
-                Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getString("dataEncontro"), rs.getString("horarioEncontro"),
-                        rs.getBoolean("statusEncontro"), rs.getBoolean("editado"), rs.getInt("idAnimal"), rs.getInt("idUsuario"),
-                        rs.getString("localizacao"));
-                lista.add(a);
+                Usuario resp = new Usuario();
+                resp.setIdUsuario(rs.getInt("Responsavel.idUsuario"));
+                resp.setNomeUsuario(rs.getString("Responsavel.nomeUsuario"));
+                resp.setEmail(rs.getString("Responsavel.email"));
+                resp.setDataNascimento(rs.getString("Responsavel.dataNascimento"));
+                resp.setTelefone(rs.getString("Responsavel.telefone"));
+                resp.setFoto(rs.getString("Responsavel.foto"));
+                resp.setLocalizacao(rs.getString("Responsavel.localizacao"));
+                resp.setIdPermissao(rs.getInt("Responsavel.idPermissao"));
+                
+                Animal animal = new Animal();
+                animal.setIdAnimal(rs.getInt("Animal.idAnimal"));
+                animal.setNomeAnimal(rs.getString("Animal.nomeAnimal"));
+                animal.setTipoAnimal(rs.getString("Animal.tipoAnimal"));
+                animal.setEspecie(rs.getString("Animal.especie"));
+                animal.setRaca(rs.getString("Animal.raca"));
+                animal.setIdade(rs.getString("Animal.idade"));
+                animal.setSexo(rs.getString("Animal.sexo"));
+                animal.setFotoAnimal(rs.getString("fotoAnimal"));
+                animal.setDescricaoAnimal(rs.getString("Animal.descricaoAnimal"));
+                animal.setStatusAnimal(rs.getBoolean("Animal.statusAnimal"));
+                animal.setLocalizacao(rs.getString("Animal.localizacao"));
+                animal.setResponsavel(resp);
+                
+                Usuario adot = new Usuario();
+                adot.setIdUsuario(rs.getInt("Adotante.idUsuario"));
+                adot.setNomeUsuario(rs.getString("Adotante.nomeUsuario"));
+                adot.setEmail(rs.getString("Adotante.email"));
+                adot.setDataNascimento(rs.getString("Adotante.dataNascimento"));
+                adot.setTelefone(rs.getString("Adotante.telefone"));
+                adot.setFoto(rs.getString("Adotante.foto"));
+                adot.setLocalizacao(rs.getString("Adotante.localizacao"));
+                adot.setIdPermissao(rs.getInt("Adotante.idPermissao"));
+                
+                Encontro e = new Encontro();
+                e.setIdEncontro(rs.getInt("idEncontro"));
+                e.setDataEncontro(rs.getString("dataEncontro"));
+                e.setHorarioEncontro(rs.getString("horarioEncontro"));
+                e.setLocalizacao(rs.getString("localizacao"));
+                e.setStatusEncontro(rs.getBoolean("statusEncontro"));
+                e.setEditado(rs.getBoolean("editado"));
+                e.setAnimal(animal);
+                e.setAdotante(adot);
+                
+                lista.add(e);
             }
         } 
         catch (SQLException ex) 
@@ -145,8 +191,11 @@ public class EncontroDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Encontro> lista = new ArrayList();
-        String sql= "SELECT * FROM Encontro INNER JOIN Animal ON Encontro.idAnimal = Animal.idAnimal "
-                + "WHERE Encontro.idUsuario = ? OR Animal.idUsuario = ?";
+        String sql= "select * from Encontro " +
+                "inner join Usuario as Adotante on Adotante.idUsuario = Encontro.idUsuario " +
+                "inner join Animal on Animal.idAnimal = encontro.idAnimal " +
+                "inner join Usuario as Responsavel on Responsavel.idUsuario = Animal.idUsuario " +
+                "WHERE Encontro.idUsuario = ? OR Animal.idUsuario = ?";
         try
         {
             pstmt = conn.prepareStatement(sql);
@@ -156,10 +205,51 @@ public class EncontroDAO {
             rs = pstmt.executeQuery();
             while(rs.next())
             {
-                Encontro a = new Encontro(rs.getInt("idEncontro"), rs.getString("dataEncontro"), rs.getString("horarioEncontro"),
-                        rs.getBoolean("statusEncontro"), rs.getBoolean("editado"), rs.getInt("idAnimal"), rs.getInt("idUsuario"),
-                        rs.getString("localizacao"));
-                lista.add(a);
+                Usuario resp = new Usuario();
+                resp.setIdUsuario(rs.getInt("Responsavel.idUsuario"));
+                resp.setNomeUsuario(rs.getString("Responsavel.nomeUsuario"));
+                resp.setEmail(rs.getString("Responsavel.email"));
+                resp.setDataNascimento(rs.getString("Responsavel.dataNascimento"));
+                resp.setTelefone(rs.getString("Responsavel.telefone"));
+                resp.setFoto(rs.getString("Responsavel.foto"));
+                resp.setLocalizacao(rs.getString("Responsavel.localizacao"));
+                resp.setIdPermissao(rs.getInt("Responsavel.idPermissao"));
+                
+                Animal animal = new Animal();
+                animal.setIdAnimal(rs.getInt("Animal.idAnimal"));
+                animal.setNomeAnimal(rs.getString("Animal.nomeAnimal"));
+                animal.setTipoAnimal(rs.getString("Animal.tipoAnimal"));
+                animal.setEspecie(rs.getString("Animal.especie"));
+                animal.setRaca(rs.getString("Animal.raca"));
+                animal.setIdade(rs.getString("Animal.idade"));
+                animal.setSexo(rs.getString("Animal.sexo"));
+                animal.setFotoAnimal(rs.getString("fotoAnimal"));
+                animal.setDescricaoAnimal(rs.getString("Animal.descricaoAnimal"));
+                animal.setStatusAnimal(rs.getBoolean("Animal.statusAnimal"));
+                animal.setLocalizacao(rs.getString("Animal.localizacao"));
+                animal.setResponsavel(resp); // pronto, já mudou
+                
+                Usuario adot = new Usuario();
+                adot.setIdUsuario(rs.getInt("Adotante.idUsuario"));
+                adot.setNomeUsuario(rs.getString("Adotante.nomeUsuario"));
+                adot.setEmail(rs.getString("Adotante.email"));
+                adot.setDataNascimento(rs.getString("Adotante.dataNascimento"));
+                adot.setTelefone(rs.getString("Adotante.telefone"));
+                adot.setFoto(rs.getString("Adotante.foto"));
+                adot.setLocalizacao(rs.getString("Adotante.localizacao"));
+                adot.setIdPermissao(rs.getInt("Adotante.idPermissao"));
+                
+                Encontro e = new Encontro();
+                e.setIdEncontro(rs.getInt("idEncontro"));
+                e.setDataEncontro(rs.getString("dataEncontro"));
+                e.setHorarioEncontro(rs.getString("horarioEncontro"));
+                e.setLocalizacao(rs.getString("localizacao"));
+                e.setStatusEncontro(rs.getBoolean("statusEncontro"));
+                e.setEditado(rs.getBoolean("editado"));
+                e.setAnimal(animal);
+                e.setAdotante(adot);
+                
+                lista.add(e);
             }
         } 
         catch (SQLException ex) 

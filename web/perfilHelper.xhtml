@@ -33,7 +33,7 @@
 
             </div>
             <div class="panel panel-default divPerfil" align="left">
-                <img src="imagens/foto.jpg" style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
+                <img src="imagens/userFoto.jpg" style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
                     <h3 style="padding-top: 2%;">#{loginBean.usuarioLogado.nomeUsuario}</h3>
                 </div>
@@ -106,8 +106,14 @@
                                         <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
                                             <div class="row">
                                                 <c:forEach var="animal" items="#{animalBean.meusAnimais}">
-                                                <div class="col-md-6" style="margin-bottom: 10px">
-                                                    <img src="imagens/gato2.jpg" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
+                                                <div class="col-md-6" width="200pc" height="200px" style="margin-bottom: 10px;">
+                                                    <c:if test="#{animal.fotoAnimal != null and animal.fotoAnimal.length() != 0}">
+                                                        <h:graphicImage value="#{animal.fotoAnimal}" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
+                                                    </c:if>
+                                                    <c:if test="#{animal.fotoAnimal == null or animal.fotoAnimal.length() == 0}">
+                                                        <img src="imagens/gato2.jpg" width="200pc" height="200px" class="img-rounded meusAnimais" alt="Imagem do animal"/>
+                                                    </c:if>
+                                                    
                                                 </div>
                                                     </c:forEach>
                                             </div>

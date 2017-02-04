@@ -56,18 +56,18 @@
                                     <th></th>
                                     <th>Responsável</th>
                                     <th>Nome do Animal</th>
+                                    <th>Adotante</th>
                                     <th>Status</th>
-                                    <th>Data</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                                 <c:forEach var="encontro" items="#{encontroBean.encontros}">
                                     <tr>
                                         <td>1</td>
-                                        <td>Responsavel</td>
-                                        <td>Gato 1</td>
-                                        <td>Aberta</td>
-                                        <td>#{encontro.dataEncontro}</td>
+                                        <td>#{encontro.animal.responsavel.nomeUsuario}</td>
+                                        <td>#{encontro.animal.nomeAnimal}</td>
+                                        <td>#{encontro.adotante.nomeUsuario}</td>
+                                        <td>#{encontro.statusEncontro}</td>
                                         <h:form>
                                         <td><h:commandLink action="#{encontroBean.VerEncontro(encontro)}" class="btn btn-primary btn-sm" style="border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span> VER MAIS</h:commandLink></td>
                                         <td><a href="#" class="btn btn-danger btn-sm" style="border-radius: 0px;"> Excluir</a></td>

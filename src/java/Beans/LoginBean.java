@@ -68,14 +68,13 @@ public class LoginBean {
         String json = gson.toJson(user);
         json = caminho.request().post(Entity.json(json), String.class);
 
-        usuarioLogado = gson.fromJson(json, Usuario.class);
-        if (usuarioLogado == null) {
-            return "loginSignin.jsf";
-        } else {
+        if (gson.fromJson(json, Usuario.class).getIdUsuario() != 0) {
+            usuarioLogado = gson.fromJson(json, Usuario.class);
             System.out.println("Logou? " + usuarioLogado.getNomeUsuario());
             getSession().setAttribute("usuarioLogado", usuarioLogado);
-            return "index.xhtml";
+            return "index.jsf";
         }
+        return "loginSignin.jsf";
     }
 
     public String Deslogar() {

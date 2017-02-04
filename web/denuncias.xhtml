@@ -57,7 +57,7 @@
                 <c:forEach var="denuncia" items="#{denunciaBean.denunciasTop}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
-                            <img src="imagens/gato1.png" alt="Foto da Denúncia" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <h:graphicImage value="#{denuncia.fotoDenuncia}" alt="Foto da Denúncia" style="width:100%; height:170px; border-radius: 0px;"/>
                             <div class="caption" align="center">
                                 <h5>#{denuncia.tituloDenuncia}</h5>
                                 <div align="left">
@@ -83,7 +83,7 @@
                                                         <div class="col-md-1">
                                                         </div>
                                                         <div class="col-md-5">
-                                                            <img src="imagens/gato1.png" alt="Foto da Denúncia" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                            <h:graphicImage value="#{denuncia.fotoDenuncia}" alt="Foto da Denúncia" style="width:100%; height:250px;border-radius: 0px;"/>
                                                         </div>
                                                         <div class="col-md-5">
                                                             <div align="left">
@@ -176,6 +176,7 @@
                                                                     <h:selectOneMenu value="#{denunciaBean.denuncia.tipoDenuncia}" style="height: 40px; color: black;margin-left: 10px;" class="form-control">
                                                                         <f:selectItem itemLabel="Abandono" itemValue="Abandono"/>
                                                                         <f:selectItem itemLabel="Maus-tratos" itemValue="Maus-Tratos"/>
+                                                                        <f:selectItem itemLabel="Outro" itemValue="Outro"/>
                                                                     </h:selectOneMenu>
                                                                     <label style="font-size: 14px;color: black; padding-left: 10px;">
                                                                         Imagem:

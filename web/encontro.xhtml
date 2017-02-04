@@ -40,31 +40,36 @@
 
 
         <div id="home1" class="home" style="margin-top: 40px;">
-            <div class="" align="center" style="margin-top: 5%;">
-                <c:if test="#{animalBean.animal.fotoAnimal != null}">
-                    <h:graphicImage value="#{animalBean.animal.fotoAnimal}" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
-                </c:if>
-                <c:if test="#{animalBean.animal.fotoAnimal == null}">
-                    <img src="imagens/gato2.jpg" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
-                </c:if>
-
+            <div class="row" align="center" >
+                <div class="col-md-12">
+                    <c:if test="#{encontroBean.encontro.animal.fotoAnimal != null}">
+                        <h:graphicImage value="#{encontroBean.encontro.animal.fotoAnimal}" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
+                    </c:if>
+                    <c:if test="#{encontroBean.encontro.animal.fotoAnimal == null}">
+                        <img src="imagens/gato2.jpg" alt="Imagem do animal" class="circular"/> <!--FOTO DO ANIMAL-->
+                    </c:if>
+                    <h4>#{encontroBean.encontro.animal.nomeAnimal}</h4>
+                </div>
             </div>
-            <div class="" style="margin-left:19%; margin-top: 2%">    
-                <img src="imagens/userFoto.jpg" alt="Imagem do responsável pelo animal" class="circular2"   /> <!--FOTO DO RESPONSÁVEL-->
-
-            </div>
-            <div class="" style="margin-left:65%; margin-top: -150px;">    
-                <img src="imagens/userFoto.jpg" alt="Iamgem do adotante" class="circular2"   /> <!--FOTO DO ADOTANTE-->
-
+            <div class="row" align="center">
+                <div class="col-md-6" align="center">    
+                    <img src="imagens/userFoto.jpg" alt="Imagem do responsável pelo animal" class="circular2" /> <!--FOTO DO RESPONSÁVEL-->
+                    <h4>#{encontroBean.encontro.animal.responsavel.nomeUsuario}</h4>
+                </div>
+                <div class="col-md-6" align="center">    
+                    <img src="imagens/userFoto.jpg" alt="Iamgem do adotante" class="circular2"   /> <!--FOTO DO ADOTANTE-->
+                    <h4>#{encontroBean.encontro.adotante.nomeUsuario}</h4>
+                </div>
             </div>
         </div>
-
-
 
         <!-- Adoção -->
         <div id="services" class="pad-section" style="background-color:#ffa812;">
             <div class="container">
-                <h2 class="text-center" style="color:white;">Adoção</h2> 
+                <h2 class="text-center" style="color:white;">
+                    <c:if test="#{encontroBean.encontro.animal.tipoAnimal == 'Adoção'}">Adoção</c:if>
+                    <c:if test="#{encontroBean.encontro.animal.tipoAnimal == 'Perdido'}">Devolução</c:if>
+                </h2> 
                 <hr/>
                 <div class="row text-center" >
                     <div class="panel panel-default">
@@ -74,15 +79,28 @@
                             </ul>
                             <div id="myTabContent" class="tab-content" style="color:#000000;">
                                 <div class="tab-pane fade active in" id="informacoes">
-                                    <br></br>
-                                    <h5 aling="center">Status: #{encontroBean.encontro.statusEncontro}</h5>
-                                    <h5 aling="center">Responsável: #{encontroBean.encontro.idUsuario}</h5>
+                                    <br/>
+                                    <h:inputHidden value="#{encontroBean.encontro.idEncontro}"/>
                                     <h5 aling="center">Local: #{encontroBean.encontro.localizacao}</h5>
                                     <h5 aling="center">Data: #{encontroBean.encontro.dataEncontro}</h5>
                                     <h5 aling="center">Hora: #{encontroBean.encontro.horarioEncontro}</h5>
-                                    <a href="#" class="btn btn-primary" style="border-radius: 0px;" data-toggle="modal" data-target="#encontro">Editar</a>
+                                    <br/>
+                                    <c:if test="#{encontroBean.encontro.statusEncontro}">
+                                        <h6 style="color: red;">Encontro Confirmado!</h6>
+                                    </c:if>
+                                    <c:if test="#{!encontroBean.encontro.statusEncontro and ((encontroBean.encontro.editado and encontroBean.encontro.adotante.idUsuario != loginBean.usuarioLogado.idUsuario) or (!encontroBean.encontro.editado and encontroBean.encontro.animal.responsavel.idUsuario != loginBean.usuarioLogado.idUsuario))}">
+                                        <h6 style="color: red;">Esperando Confirmação!</h6>
+                                    </c:if>
+                                    <br/>
+                                    <h:form>
+                                        <c:if test="#{!encontroBean.encontro.statusEncontro}">
+                                            <a href="#" class="btn btn-primary" style="border-radius: 0px;" data-toggle="modal" data-target="#encontro">Editar</a>
+                                        </c:if>
+                                        <c:if test="#{!encontroBean.encontro.statusEncontro and ((encontroBean.encontro.editado and encontroBean.encontro.adotante.idUsuario == loginBean.usuarioLogado.idUsuario) or (!encontroBean.encontro.editado and encontroBean.encontro.animal.responsavel.idUsuario == loginBean.usuarioLogado.idUsuario))}">
+                                            <a href="#" class="btn btn-success" style="border-radius: 0px;" data-toggle="modal" data-target="#confirme">Confirmar</a>
+                                        </c:if>
+                                    </h:form>
 
-                                    <a href="#" class="btn btn-success" style="margin-left: 10%; border-radius: 0px; ">Confirmar</a>
                                 </div>
 
                             </div>
@@ -111,81 +129,11 @@
 
                                     <div class="col-md-3" align="left">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
-                                            Estado:  
+                                            Data:  
                                         </label>
                                     </div>
                                     <div class="col-md-9">
-                                        <h:selectOneMenu value="#" style="color: black; width: 100%;" class="form-control">
-                                            <f:selectItem itemLabel="Acre" itemValue="ac"/>
-                                            <f:selectItem itemLabel="Alagoas" itemValue="al"/>
-                                            <f:selectItem itemLabel="Amapá" itemValue="ap"/>
-                                            <f:selectItem itemLabel="Amazonas" itemValue="am"/>
-                                            <f:selectItem itemLabel="Bahia" itemValue="ba"/>
-                                            <f:selectItem itemLabel="Ceará" itemValue="ce"/>
-                                            <f:selectItem itemLabel="Distrito Federal" itemValue="df"/>
-                                            <f:selectItem itemLabel="Espírito Santo" itemValue="es"/>
-                                            <f:selectItem itemLabel="Goiás" itemValue="go"/>
-                                            <f:selectItem itemLabel="Maranhão" itemValue="ma"/>
-                                            <f:selectItem itemLabel="Mato Grosso" itemValue="mt"/>
-                                            <f:selectItem itemLabel="Mato Grosso do Sul" itemValue="ms"/>
-                                            <f:selectItem itemLabel="Minas Gerais" itemValue="mg"/>
-                                            <f:selectItem itemLabel="Pará" itemValue="pa"/>
-                                            <f:selectItem itemLabel="Paraíba" itemValue="pb"/>
-                                            <f:selectItem itemLabel="Paraná" itemValue="pr"/>
-                                            <f:selectItem itemLabel="Pernambuco	" itemValue="pe"/>
-                                            <f:selectItem itemLabel="Piauí" itemValue="pi"/>
-                                            <f:selectItem itemLabel="Rio de Janeiro" itemValue="rj"/>
-                                            <f:selectItem itemLabel="Rio Grande do Norte" itemValue="rn"/>
-                                            <f:selectItem itemLabel="Rio Grande do Sul" itemValue="rs"/>
-                                            <f:selectItem itemLabel="Rondônia" itemValue="ro"/>
-                                            <f:selectItem itemLabel="Roraima" itemValue="rr"/>
-                                            <f:selectItem itemLabel="Santa Catarina" itemValue="sc"/>
-                                            <f:selectItem itemLabel="São Paulo" itemValue="sp"/>
-                                            <f:selectItem itemLabel="Sergipe" itemValue="se"/>
-                                            <f:selectItem itemLabel="Tocantins" itemValue="to"/>
-                                        </h:selectOneMenu>
-
-
-                                    </div>
-                                    <div class="col-md-3" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
-                                            Cidade:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
-                                    </div>
-                                    <div class="col-md-3" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Bairro:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
-                                    </div>
-                                    <div class="col-md-3" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Rua:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
-                                    </div>
-                                    <div class="col-md-3" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Número:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
-                                    </div>
-                                    <div class="col-md-3" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Complemento:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                        <h:inputText value="#{encontroBean.encontro.dataEncontro}" class="form-control" style="width: 100%;font-size: 14px;"/>
                                     </div>
                                     <div class="col-md-3" align="left">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;">
@@ -193,11 +141,62 @@
                                         </label>
                                     </div>
                                     <div class="col-md-9">
-                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
+                                        <h:inputText value="#{encontroBean.encontro.horarioEncontro}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                    </div>
+                                    <div class="col-md-3" align="left">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
+                                            Local:  
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h:inputText value="#{encontroBean.encontro.localizacao}" class="form-control" style="width: 100%;font-size: 14px;"/>
                                     </div>
                                     <div class="col-md-12">
                                         <br/>
-                                        <h:commandButton action="adocao.xhtml" value="Marcar encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
+                                        <h:commandButton action="#{encontroBean.Salvar()}" value="Salvar Alteração" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="confirme" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Conteúdo -->
+                <div class="modal-content">
+                    <div class="modal-header" align="center">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Confirme o encontro</h4>
+                        <hr/>
+                    </div>
+                    <div class="modal-body">
+                        <h:form>
+                            <div class="col-md-12">
+                                <div class="row">
+
+                                    <div class="col-md-12" align="center">
+                                        <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                            <h:inputText value="#{encontroBean.encontro.idEncontro}"/>
+                                            <h:inputText value="#{encontroBean.encontro.localizacao}"/>
+                                            <h:inputText value="#{encontroBean.encontro.horarioEncontro}"/>
+                                            <h:inputText value="#{encontroBean.encontro.dataEncontro}"/>
+                                            <h:inputText value="#{encontroBean.encontro.editado}"/>
+                                            <h:inputText value="#{encontroBean.encontro.statusEncontro}"/>
+                                            <h:inputText value="#{encontroBean.encontro.adotante}"/>
+                                            <h:inputText value="#{encontroBean.encontro.animal}"/>
+                                            Ao confirmar o encontro você concorda com a data, a hora e o local do encontro.
+                                        </label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <br/>
+                                        <h:commandButton action="#{encontroBean.Confirmar()}" value="Confirmar Encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
                                         <br/>
                                     </div>
                                 </div>

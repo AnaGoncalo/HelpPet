@@ -17,22 +17,22 @@ public class Encontro {
     private String horarioEncontro;
     private boolean statusEncontro;
     private boolean editado;
-    private int idAnimal;
-    private int idUsuario;
     private String localizacao;
+    private Animal animal;
+    private Usuario adotante;
 
     public Encontro() {
     }
 
-    public Encontro(int idEncontro, String dataEncontro, String horarioEncontro, boolean statusEncontro, boolean editado, int idAnimal, int idUsuario, String localizacao) {
+    public Encontro(int idEncontro, String dataEncontro, String horarioEncontro, boolean statusEncontro, boolean editado, String localizacao, Animal animal, Usuario adotante) {
         this.idEncontro = idEncontro;
         this.dataEncontro = dataEncontro;
         this.horarioEncontro = horarioEncontro;
         this.statusEncontro = statusEncontro;
         this.editado = editado;
-        this.idAnimal = idAnimal;
-        this.idUsuario = idUsuario;
         this.localizacao = localizacao;
+        this.animal = animal;
+        this.adotante = adotante;
     }
 
     public int getIdEncontro() {
@@ -75,22 +75,22 @@ public class Encontro {
         this.editado = editado;
     }
 
-    public int getIdAnimal() {
-        return idAnimal;
+    public Animal getAnimal() {
+        return animal;
     }
 
-    public void setIdAnimal(int idAnimal) {
-        this.idAnimal = idAnimal;
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuario getAdotante() {
+        return adotante;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setAdotante(Usuario adotante) {
+        this.adotante = adotante;
     }
-
+    
     public String getLocalizacao() {
         return localizacao;
     }
@@ -98,6 +98,5 @@ public class Encontro {
     public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
-    
     
 }

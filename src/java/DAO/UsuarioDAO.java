@@ -212,7 +212,7 @@ public class UsuarioDAO {
         Connection conn = Banco.getConexao();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
-        Usuario u = null;
+        Usuario u = new Usuario();
         
         String comandoSql= "SELECT * FROM Usuario WHERE Usuario.email = ? AND Usuario.senha = ?";
         try

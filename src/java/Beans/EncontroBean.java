@@ -24,6 +24,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+
 /**
  *
  * @author Ana Gonçalo
@@ -31,73 +32,91 @@ import javax.ws.rs.client.WebTarget;
 @ManagedBean
 @RequestScoped
 public class EncontroBean {
+
     private Encontro encontro;
     private Animal animal;
     private List<Encontro> encontros = new ArrayList();
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
-    
+
     public EncontroBean() {
-        if(user != null)
+        if (user != null) {
             MeusEncontros();
+        }
     }
-    
-    public String Adotar(Animal a){
+
+    public String Adotar(Animal a) {
         animal = a;
-        encontro.setIdUsuario(1); //pega o usuario da sessao
-        
+        encontro.setAdotante(user); //pega o usuario da sessao
+
         return "cadastrarEncontro.jsf";
     }
-    
-    public void Salvar(){
+
+    public String Salvar() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
         Gson gson = new Gson();
-        
-        if(encontro.getIdEncontro() == 0)
-        {
-            encontro.setIdUsuario(user.getIdUsuario());
+
+        if (encontro.getIdEncontro() == 0) {
+            encontro.setAdotante(user);
             String json = gson.toJson(encontro);
             caminho.request().post(Entity.json(json));
-        }
-        else
-        {
+        } else {
+            if (user.getIdUsuario() == encontro.getAdotante().getIdUsuario()) {
+                encontro.setEditado(false);
+            } else {
+                encontro.setEditado(true);
+            }
+
             String json = gson.toJson(encontro);
             caminho.request().put(Entity.json(json));
         }
-        
-        
+
+        return "meusEncontros.jsf";
     }
-    
-    public void MeusEncontros(){
+
+    public String Confirmar() {
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
+        Gson gson = new Gson();
+
+        System.out.println("testando Confirmar.. " + encontro.getIdEncontro());
+        encontro.setStatusEncontro(true);
+        String json = gson.toJson(encontro);
+        caminho.request().put(Entity.json(json));
+
+        return "meusEncontros.jsf";
+    }
+
+    public void MeusEncontros() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/encontro/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
-        
+
         Gson gson = new Gson();
         Encontro[] vetor = gson.fromJson(json, Encontro[].class);
         encontros = Arrays.asList(vetor);
     }
-    
-    public void Listar(){
+
+    public void Listar() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/encontro");
         String json = caminho.request().get(String.class);
-        
+
         Gson gson = new Gson();
         Encontro[] vetor = gson.fromJson(json, Encontro[].class);
         encontros = Arrays.asList(vetor);
     }
-    
-    public String VerEncontro(Encontro e){
+
+    public String VerEncontro(Encontro e) {
         encontro = e;
         return "encontro.jsf";
     }
-    
-    public FacesContext getFacesContext(){
+
+    public FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();
     }
-  
-    public HttpSession getSession(){
+
+    public HttpSession getSession() {
         return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
 
@@ -125,7 +144,5 @@ public class EncontroBean {
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
-    
-    
-    
+
 }

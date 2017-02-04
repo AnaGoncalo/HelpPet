@@ -90,7 +90,7 @@
                                                                 <div align="left">
                                                                     <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
 
-                                                                    <p>Responsável: <h:form><h:commandLink action="#{animalBean.VerResponsavel()}" style="text-decoration: none; color: black;">#{animalBean.dono.nomeUsuario}</h:commandLink></h:form></p>
+                                                                    <p>Responsável: <h:form><h:commandLink action="#{animalBean.VerResponsavel()}" style="text-decoration: none; color: black;">#{animalBean.animal.responsavel.nomeUsuario}</h:commandLink></h:form></p>
                                                                     <p>Espécie: #{animalBean.animal.especie}</p>
                                                                     <p>Idade: #{animalBean.animal.idade}</p>
                                                                     <p>Raça: #{animalBean.animal.raca}</p>
@@ -105,11 +105,11 @@
 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <c:if test="#{loginBean.usuarioLogado != null and animalBean.animal.idUsuario != loginBean.usuarioLogado.idUsuario}">
+                                                    <c:if test="#{loginBean.usuarioLogado != null and animalBean.animal.responsavel.idUsuario != loginBean.usuarioLogado.idUsuario}">
                                                         <p><a href="#" data-toggle="modal" data-target="#encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;">Marcar encontro</a></p>
                                                     </c:if>
 
-                                                    <c:if test="#{loginBean.usuarioLogado != null and animalBean.animal.idUsuario == loginBean.usuarioLogado.idUsuario}">
+                                                    <c:if test="#{loginBean.usuarioLogado != null and animalBean.animal.responsavel.idUsuario == loginBean.usuarioLogado.idUsuario}">
                                                         <p>
                                                             <h:form>
                                                                 <h:commandLink action="#{animalBean.EditarAnimal(animalBean.animal)}" value="Editar" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"/>
@@ -147,7 +147,7 @@
                 <div class="modal-content">
                     <div class="modal-header" align="center">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Marque o encontro</h4>
+                        <h4 class="modal-title">Marque o encontro para <c:if test="#{animalBean.animal.tipoAnimal == 'Adoção'}">adotar!</c:if></h4>
                         <hr/>
                         <h6 style="color: red;">Os dados informados aqui serão vistos apenas pelo responsável do animal</h6>
                     </div>

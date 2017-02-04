@@ -40,7 +40,9 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class AnimalBean {
     private Animal animal = new Animal();
-    private Usuario dono = null;
+    
+    //Em caso de marcar encontro, esse user será o adotante
+    //Em caso de cadastro de animal, esse user será o responsavel
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
   
     private List<Animal> animais = new ArrayList();
@@ -52,7 +54,8 @@ public class AnimalBean {
     
     public AnimalBean() throws SQLException {
         Listar();
-        animaisTop = animais.subList(1, 5);
+        if(animais.size() >= 4)
+            animaisTop = animais.subList(0, 4);
         
         if (user != null) {
             ListarMeusAnimais();
@@ -69,7 +72,7 @@ public class AnimalBean {
         if(animal.getIdAnimal() == 0)
         {
             System.out.println("Bean Salvar: " + animal.getNomeAnimal());
-            animal.setIdUsuario(user.getIdUsuario());
+            animal.setResponsavel(user);
             animal.setFotoAnimal(upload());
             String json = gson.toJson(animal);
             caminho.request().post(Entity.json(json));
@@ -110,8 +113,9 @@ public class AnimalBean {
        
         if(encontro.getIdEncontro() == 0)
         {
-            encontro.setIdUsuario(user.getIdUsuario());
-            encontro.setIdAnimal(animal.getIdAnimal());
+            encontro.setAdotante(user);
+            encontro.setAnimal(animal);
+            System.out.println("Testando Salvar Encontro: " + user.getIdUsuario());
             String json = gson.toJson(encontro);
             caminho.request().post(Entity.json(json));
         }
@@ -126,12 +130,6 @@ public class AnimalBean {
     public String VerAnimal(Animal a){
         animal = a;
         
-        Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/usuario/" + animal.getIdUsuario());
-        String json = caminho.request().get(String.class);
-        Gson gson = new Gson();
-        dono = gson.fromJson(json, Usuario.class);
-        
         return "animal.jsf";
     }
     
@@ -145,14 +143,14 @@ public class AnimalBean {
     public String Adotar(Animal a){
         animal = a;
         //encontro = new Encontro();
-        encontro.setIdUsuario(user.getIdUsuario()); //pega o usuario da sessao
-        encontro.setIdAnimal(animal.getIdAnimal());
+        encontro.setAdotante(user); //pega o usuario da sessao
+        encontro.setAnimal(animal);
         
         return "cadastrarEncontro.jsf";
     }
     
     public String VerResponsavel(){
-        getRequest().setAttribute("usuario", dono);
+        getRequest().setAttribute("usuario", animal.getResponsavel());
         return "VerHelper.jssetAttribute(f?faces-redirect=true";
     }
     
@@ -190,14 +188,6 @@ public class AnimalBean {
 
     public void setEncontro(Encontro encontro) {
         this.encontro = encontro;
-    }
-
-    public Usuario getDono() {
-        return dono;
-    }
-
-    public void setDono(Usuario dono) {
-        this.dono = dono;
     }
 
     public List<Animal> getAnimaisTop() {

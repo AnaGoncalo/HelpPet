@@ -63,16 +63,17 @@ public class EstoqueService {
        return jsonSaida;
    }
    
-   // "http://localhost:8080/TesteWS/rest/estoque"
+   // "http://localhost:8080/TesteWS/rest/estoque/{idEstoque}"
    @DELETE
-   public String excluirEstoque(String json) throws SQLException{
+   @Path("{idEstoque}")
+   public String excluirEstoque(@PathParam("idEstoque") int idEstoque) throws SQLException{
        Gson gson = new Gson();
-       Estoque a = gson.fromJson(json, Estoque.class);
+       //Estoque a = gson.fromJson(json, Estoque.class);
        
-       System.out.println("Deu certo " + a.getNomeEstoque());
-       EstoqueDAO.ExcluirEstoque(a);
+       System.out.println("Deu certo " + idEstoque);
+       EstoqueDAO.ExcluirEstoque(idEstoque);
        
-       String jsonSaida = gson.toJson(a);
+       String jsonSaida = gson.toJson(idEstoque);
        return jsonSaida;
    }
    

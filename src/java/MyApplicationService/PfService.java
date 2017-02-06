@@ -5,12 +5,16 @@
  */
 package MyApplicationService;
 
+import DAO.PessoaFisicaDAO;
 import DAO.UsuarioDAO;
+import Modelo.PessoaFisica;
+import Modelo.Usuario;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -20,7 +24,7 @@ import javax.ws.rs.PathParam;
  */
 @Path("pessoaFisica")
 public class PfService {
-    @GET
+   @GET
    @Path("{idUsuario}")
    public String listarPorUsuario(@PathParam("idUsuario") int idUsuario){
        
@@ -33,6 +37,18 @@ public class PfService {
        }
        
        return json;
+   }
+   // "http://localhost:8080/TesteWS/rest/pessoaFisica"
+   @PUT
+   public String editarUsuario(String json) throws SQLException{
+       Gson gson = new Gson();
+       PessoaFisica u = gson.fromJson(json, PessoaFisica.class);
+       
+       System.out.println("Deu certo " + u.getNomeUsuario());
+       PessoaFisicaDAO.editarPF(u);
+       
+       String jsonSaida = gson.toJson(u);
+       return jsonSaida;
    }
     
 }

@@ -73,6 +73,7 @@ public class UsuarioDAO {
             pstmt.setInt(7, usuario.getIdUsuario());
            
             pstmt.executeUpdate();
+            System.out.println("editou usuario");
         }
         catch (SQLException ex) 
         {
@@ -84,7 +85,7 @@ public class UsuarioDAO {
         } 
     }
     
-    public static void excluir(Usuario usuario) throws SQLException
+    public static void excluir(int idUsuario) throws SQLException
     {
         System.out.println("Testando excluir DAO usuario");
         Connection conn = Banco.getConexao();
@@ -93,7 +94,7 @@ public class UsuarioDAO {
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setInt(1, usuario.getIdUsuario());
+            pstmt.setInt(1, idUsuario);
            
             pstmt.executeUpdate();
         }

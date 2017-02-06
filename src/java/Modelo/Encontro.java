@@ -5,13 +5,12 @@
  */
 package Modelo;
 
-import java.util.Date;
-
 /**
  *
  * @author Ana Gonçalo
  */
 public class Encontro {
+
     private int idEncontro;
     private String dataEncontro;
     private String horarioEncontro;
@@ -67,6 +66,14 @@ public class Encontro {
         this.statusEncontro = statusEncontro;
     }
 
+    public String getStatusEncontro() {
+        if (this.statusEncontro) {
+            return "Não Confirmado";
+        } else {
+            return "Confirmado";
+        }
+    }
+
     public boolean isEditado() {
         return editado;
     }
@@ -90,7 +97,7 @@ public class Encontro {
     public void setAdotante(Usuario adotante) {
         this.adotante = adotante;
     }
-    
+
     public String getLocalizacao() {
         return localizacao;
     }
@@ -98,5 +105,5 @@ public class Encontro {
     public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
-    
+
 }

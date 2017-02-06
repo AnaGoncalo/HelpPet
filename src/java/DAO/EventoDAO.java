@@ -86,7 +86,7 @@ public class EventoDAO {
         return "OK!";
     }
     
-    public static String ExcluirEvento(Evento evento) throws SQLException
+    public static String ExcluirEvento(int idEvento) throws SQLException
     {
         System.out.println("evento dao excluir");
         Connection conn = Banco.getConexao();
@@ -95,7 +95,7 @@ public class EventoDAO {
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setInt(1, evento.getIdEvento());
+            pstmt.setInt(1, idEvento);
            
             pstmt.executeUpdate();
         }

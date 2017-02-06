@@ -83,6 +83,16 @@ public class EstoqueBean {
         MeusEstoques();
     }
     
+    public String ExcluirEstoque(Estoque e){
+        System.out.println("Bean Estoque Excluir " + e.getIdEstoque());
+        
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque/" + e.getIdEstoque());
+        caminho.request().delete();
+        
+        return null;
+    }
+    
     public FacesContext getFacesContext(){
         return FacesContext.getCurrentInstance();
     }

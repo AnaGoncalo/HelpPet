@@ -62,15 +62,16 @@ public class AnuncioService {
        return jsonSaida;
    }
    
-   //
+   // "http://localhost:8080/TesteWS/rest/anuncio/{idAnuncio}"
    @DELETE
-   public String excluirAnuncio(String json) throws SQLException{
+   @Path("{idAnuncio}")
+   public String excluirAnuncio(@PathParam("idAnuncio") int idAnuncio) throws SQLException{
        Gson gson = new Gson();
-       Anuncio a = gson.fromJson(json, Anuncio.class); 
+       //Anuncio a = gson.fromJson(json, Anuncio.class); 
+       System.out.println("Service Anuncio Excluir " + idAnuncio);
+       AnuncioDAO.ExcluirAnuncio(idAnuncio);
        
-       AnuncioDAO.ExcluirAnuncio(a);
-       
-       String jsonSaida = gson.toJson(a);
+       String jsonSaida = gson.toJson(idAnuncio);
        return jsonSaida;
    }
    

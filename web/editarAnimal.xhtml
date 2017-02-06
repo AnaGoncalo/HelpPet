@@ -28,14 +28,11 @@
             </ui:insert>
         </div>
 
-
         <br/>
         <br/>
         <br/>
         <br/>
         <br/>
-
-
 
         <!-- Form  -->
         <div class="container-fluid">
@@ -57,14 +54,14 @@
 
                                 </div>
 
-                                <h:form>
+                                <h:form class="form-signin" enctype="multipart/form-data">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-12" align="center">
                                                 <div class="text-center" >
-                                                    <img src="imagens/gato2.jpg" height="120px" width="160px" style="border-radius: 0px;" alt="Foto do amimal"/>
+                                                    <img src="#{animalBean.animal.fotoAnimal}" height="120px" width="160px" style="border-radius: 0px;" alt="Foto do amimal"/>
                                                     <h6>Atualizar foto...</h6>
-                                                    <h:inputText value="#{animalBean.animal.fotoAnimal}"   class="text-center center-block well well-sm"/>
+                                                    <h:inputFile value="#{animalBean.imagem}" class="text-center center-block well well-sm"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

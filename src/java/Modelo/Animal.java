@@ -45,8 +45,7 @@ public class Animal {
         this.statusAnimal = status;
         this.responsavel = responsavel;
         this.localizacao = localizacao;
-    }
-   
+    }   
     
     public int getIdAnimal() {
         return idAnimal;
@@ -140,15 +139,15 @@ public class Animal {
         }
         else if(this.tipoAnimal.equals("Perdido")){
             if(this.statusAnimal)
-                return "Perdido";
-            else
                 return "Encontrado";
+            else
+                return "Perdido";
         }
         else{
             if(this.statusAnimal)
-                return "Esperando Resgate";
-            else
                 return "Resgatado";
+            else
+                return "Esperando Resgate";
         }
         
     }

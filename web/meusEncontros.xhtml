@@ -69,8 +69,8 @@
                                         <td>#{encontro.adotante.nomeUsuario}</td>
                                         <td>#{encontro.statusEncontro}</td>
                                         <h:form>
-                                        <td><h:commandLink action="#{encontroBean.VerEncontro(encontro)}" class="btn btn-primary btn-sm" style="border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span> VER MAIS</h:commandLink></td>
-                                        <td><a href="#" class="btn btn-danger btn-sm" style="border-radius: 0px;"> Excluir</a></td>
+                                            <td><h:commandLink action="#{encontroBean.VerEncontro(encontro)}" value="VER MAIS" class="btn btn-primary btn-sm" style="border-radius: 0px;" /></td>
+                                            <td><h:commandLink action="#{encontroBean.ExcluirEncontro(encontro)}" value="EXCLUIR" class="btn btn-danger btn-sm" style="border-radius: 0px;" /></td>
                                         </h:form>
                                     </tr>
                                 </c:forEach>

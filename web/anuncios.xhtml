@@ -36,8 +36,7 @@
         <br/>
         <br/>
         <br/>
-
-
+        
         <!-- Título da página -->
         <div id="home" class="home">
             <div class="text-vcenter">
@@ -48,15 +47,13 @@
             </div>
         </div>
 
-
-
         <!-- Pequena listagem de anúncios -->
         <div id="about" class="pad-section" style="background-color:#1E90FF;">
             <div class="container" align="center">
                 <h3 align="center" style="color: white;">Anúncios</h3>
                 <hr/>
                 <br/>
-                <c:forEach var="anuncio" items="#{anuncioBean.anuncios}">
+                <c:forEach var="anuncio" items="#{anuncioBean.anunciosTop}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
                             <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
@@ -116,7 +113,6 @@
                     <p><a href="buscarAnuncio.jsf" class="btn btn-default" style="background-color: white; color: #1E90FF; font-weight:bold; width: 60px; height: 60px;border-radius:100%;">
                             <i class="material-icons" style="color: #1E90FF; padding-top: 12px;">add</i>
                         </a></p>
-
                 </div>
 
             </div>
@@ -150,8 +146,7 @@
 
 
                                             <!-- Form-->
-
-                                            <h:form class="form-signin">
+                                            <h:form class="form-signin" enctype="multipart/form-data">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="row">
@@ -189,6 +184,17 @@
                                                                         </h:selectOneMenu>
                                                                     </div>
 
+                                                                    <div class="col-md-2" >
+                                                                    </div>
+                                                                    <div class="col-md-2" >
+                                                                        <label style="font-size: 14px;color: black; padding-left: 10px; padding-top: 5px;">
+                                                                            Imagem:  
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="col-md-8" >
+                                                                        <h:inputFile value="#{anuncioBean.imagem}" class="form-control" style="width: 75%;font-size: 14px; margin-left: 10px;"/>
+                                                                    </div>
+                                                                    
                                                                     <div class="col-md-2" >
                                                                     </div>
                                                                     <div class="col-md-2" >

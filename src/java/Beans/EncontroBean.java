@@ -112,6 +112,16 @@ public class EncontroBean {
         return "encontro.jsf";
     }
 
+    public String ExcluirEncontro(Encontro e) {
+        System.out.println("Bean Anuncio Excluir " + e.getIdEncontro());
+        
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro/" + e.getIdEncontro());
+        caminho.request().delete();
+        
+        return "meusEncontros.jsf";
+    }
+
     public FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();
     }

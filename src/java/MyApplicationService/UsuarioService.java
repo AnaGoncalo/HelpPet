@@ -48,21 +48,23 @@ public class UsuarioService {
        
        System.out.println("Deu certo " + u.getNomeUsuario());
        UsuarioDAO.editar(u);
-       
+       u = UsuarioDAO.buscarById(u.getIdUsuario());
+       System.out.println("e ai");
        String jsonSaida = gson.toJson(u);
        return jsonSaida;
    }
    
-   // "http://localhost:8080/TesteWS/rest/usuario"
+   // "http://localhost:8080/TesteWS/rest/usuario/{idUsuario}"
    @DELETE
-   public String excluirUsuario(String json) throws SQLException{
+   @Path("{idUsuario}")
+   public String excluirUsuario(@PathParam("idUsuario") int idUsuario) throws SQLException{
        Gson gson = new Gson();
-       Usuario u = gson.fromJson(json, Usuario.class);
+       //Usuario u = gson.fromJson(json, Usuario.class);
        
-       System.out.println("Deu certo " + u.getNomeUsuario());
-       UsuarioDAO.excluir(u);
+       System.out.println("Deu certo " + idUsuario);
+       UsuarioDAO.excluir(idUsuario);
        
-       String jsonSaida = gson.toJson(u);
+       String jsonSaida = gson.toJson(idUsuario);
        return jsonSaida;
    }
     

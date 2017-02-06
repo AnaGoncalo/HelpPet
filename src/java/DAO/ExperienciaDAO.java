@@ -84,7 +84,7 @@ public class ExperienciaDAO {
         return "Ok!";
     }
     
-    public static String ExcluirExperiencia(Experiencia experiencia) throws SQLException{
+    public static String ExcluirExperiencia(int idExperiencia) throws SQLException{
         
         System.out.println("experiencia dao excluir");
         Connection conn = Banco.getConexao();
@@ -93,7 +93,7 @@ public class ExperienciaDAO {
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setInt(1, experiencia.getIdExperiencia());
+            pstmt.setInt(1, idExperiencia);
            
             pstmt.executeUpdate();
         }

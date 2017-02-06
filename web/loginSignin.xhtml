@@ -59,8 +59,9 @@
                                 <br/>
 
                                 <h:form class="form-signin">
-
+                                    <p style="color:red;">#{loginBean.mensagem}</p>
                                     <h:panelGrid columns="2" cellpadding="5">
+                                        
                                         <i class="material-icons">email</i>
                                         <h:inputText value="#{loginBean.user.email}"  class="form-control" style="font-size: 15px; width: 280px; margin-left: 10px;" p:placeholder="E-mail"/>
                                         <i class="material-icons">lock</i>

@@ -7,7 +7,6 @@
     <h:head>
         <title>Help Pet - Perfil</title>
 
-
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
@@ -33,7 +32,7 @@
 
             </div>
             <div class="panel panel-default divPerfil" align="left">
-                <img src="imagens/userFoto.jpg" style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
+                <img src="#{loginBean.usuarioLogado.foto}" style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
                     <h3 style="padding-top: 2%;">#{loginBean.usuarioLogado.nomeUsuario}</h3>
                 </div>
@@ -42,7 +41,6 @@
 
 
         <!-- Conteúdo que importa -->
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-1">
@@ -53,6 +51,9 @@
                             <h5><i class="material-icons">info</i> Informações</h5>
                             <hr/>
                             <p class="itensPerfil">E-mail: #{loginBean.usuarioLogado.email}</p>
+                            <p class="itensPerfil">CPF: #{loginBean.pf.cpf}</p>
+                            <p class="itensPerfil">Nascimento: #{loginBean.usuarioLogado.dataNascimento}</p>
+                            <p class="itensPerfil">Local: #{loginBean.usuarioLogado.localizacao}</p>
                             <div style="margin-bottom: 15px;">
                                 <a href="editarPerfil.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
                             </div>

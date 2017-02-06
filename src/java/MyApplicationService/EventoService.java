@@ -61,16 +61,17 @@ public class EventoService {
        return jsonSaida;
    }
    
-   // "http://localhost:8080/TesteWS/rest/evento"
+   // "http://localhost:8080/TesteWS/rest/evento/{idEvento}"
    @DELETE
-   public String excluirEvento(String json) throws SQLException{
+   @Path("{idEvento}")
+   public String excluirEvento(@PathParam("idEvento") int idEvento) throws SQLException{
        Gson gson = new Gson();
-       Evento a = gson.fromJson(json, Evento.class);
+       //Evento a = gson.fromJson(json, Evento.class);
        
-       System.out.println("Deu certo " + a.getNomeEvento());
-       EventoDAO.ExcluirEvento(a);
+       System.out.println("Deu certo " + idEvento);
+       EventoDAO.ExcluirEvento(idEvento);
        
-       String jsonSaida = gson.toJson(a);
+       String jsonSaida = gson.toJson(idEvento);
        return jsonSaida;
    }
    

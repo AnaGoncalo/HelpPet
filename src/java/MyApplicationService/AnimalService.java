@@ -102,20 +102,21 @@ public class AnimalService {
    
    // "http://localhost:8080/TesteWS/rest/animal"
    @DELETE
-   public String excluirAnimal(String json) 
+   @Path("{idAnimal}")
+   public String excluirAnimal(@PathParam("idAnimal") int idAnimal) 
    {
        Gson gson = new Gson();
-       Animal a = gson.fromJson(json, Animal.class);
+       //Animal a = gson.fromJson(json, Animal.class);
        
-       System.out.println("Deu certo " + a.getNomeAnimal());
+       System.out.println("Deu certo " + idAnimal);
        
        try {
-           AnimalDAO.ExcluirAnimal(a);
+           AnimalDAO.ExcluirAnimal(idAnimal);
        } catch (SQLException ex) {
            Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
        }
        
-       String jsonSaida = gson.toJson(a);
+       String jsonSaida = gson.toJson(idAnimal);
        return jsonSaida;
        
    }

@@ -87,7 +87,7 @@ public class PessoaFisicaDAO {
     
     public static void editarPF(PessoaFisica pf) throws SQLException
     {
-        System.out.println("Testando editar DAO PF");
+        System.out.println("Testando editar DAO PF " + pf.getIdUsuario());
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "UPDATE PessoaFisica SET cpf = ? WHERE idHelper = ?";

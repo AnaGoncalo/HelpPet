@@ -102,7 +102,7 @@ public class AnimalDAO {
         } 
     }
     
-    public static void ExcluirAnimal(Animal animal) throws SQLException
+    public static void ExcluirAnimal(int idAnimal) throws SQLException
     {
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
@@ -110,7 +110,7 @@ public class AnimalDAO {
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setInt(1, animal.getIdAnimal());
+            pstmt.setInt(1, idAnimal);
             
             pstmt.executeUpdate();
             System.out.println("Resultado excluir DAO");// + pstmt.executeUpdate());

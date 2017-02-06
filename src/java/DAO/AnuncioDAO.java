@@ -82,15 +82,16 @@ public class AnuncioDAO {
         return "OK!";
     }
     
-    public static String ExcluirAnuncio(Anuncio anuncio) throws SQLException
+    public static String ExcluirAnuncio(int idAnuncio) throws SQLException
     {
+        System.out.println("DAO Anuncio Excluir " + idAnuncio);
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "DELETE FROM Anuncio WHERE idAnuncio = ?";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setInt(1, anuncio.getIdAnuncio());
+            pstmt.setInt(1, idAnuncio);
             
             pstmt.executeUpdate();
             System.out.println("Resultado excluir DAO");// + pstmt.executeUpdate());

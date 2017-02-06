@@ -5,20 +5,21 @@
  */
 package Beans;
 
-import DAO.AnuncioDAO;
 import Modelo.Anuncio;
 import Modelo.Usuario;
 import com.google.gson.Gson;
-import java.sql.SQLException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -38,6 +39,8 @@ public class AnuncioBean {
     private List<Anuncio> anuncios = new ArrayList();
     private List<Anuncio> anunciosTop = new ArrayList();
     private List<Anuncio> meusAnuncios = new ArrayList();
+    
+    private Part imagem;
     
     public AnuncioBean() {
         Listar();
@@ -83,14 +86,22 @@ public class AnuncioBean {
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/anuncio");
         Gson gson = new Gson();
         
+        if(imagem != null){
+            anuncio.setFotoAnuncio(upload());
+        }
+        
         if(anuncio.getIdAnuncio() == 0)
         {
             anuncio.setIdUsuario(user.getIdUsuario());
+            if(imagem == null){
+                anuncio.setFotoAnuncio("imagens\\anuncio.jpg");
+            }
             String json = gson.toJson(anuncio);
             caminho.request().post(Entity.json(json));
         }
         else
         {
+            anuncio.setIdUsuario(user.getIdUsuario());
             String json = gson.toJson(anuncio);
             caminho.request().put(Entity.json(json));
         }
@@ -108,6 +119,16 @@ public class AnuncioBean {
     public String EditarAnuncio(Anuncio a){
         anuncio = a;
         return "editarAnuncio.jsf";
+    }
+    
+    public String ExcluirAnuncio(Anuncio a){
+        System.out.println("Bean Anuncio Excluir " + a.getIdAnuncio());
+        
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/anuncio/" + a.getIdAnuncio());
+        caminho.request().delete();
+        
+        return "meusAnuncios.jsf";
     }
 
     public FacesContext getFacesContext(){
@@ -149,5 +170,32 @@ public class AnuncioBean {
     public void setMeusAnuncios(List<Anuncio> meusAnuncios) {
         this.meusAnuncios = meusAnuncios;
     }
+
+    public Part getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Part imagem) {
+        this.imagem = imagem;
+    }
     
+    public String upload() {
+
+        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + anuncio.getTituloAnuncio() + ".jpg";// + imagem.getSubmittedFileName();
+        //produto.setDescricao(imagem.getSubmittedFileName());
+        try (InputStream is = imagem.getInputStream();
+                OutputStream out = new FileOutputStream(nomeArquivoSaida)) {
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = is.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+
+        } catch (IOException e) {
+            //FacesUtil.addErrorMessage("Erro ao enviar arquivo.");
+        }
+        return "imagens\\" + anuncio.getTituloAnuncio() + ".jpg";
+    }
 }

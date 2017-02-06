@@ -62,15 +62,16 @@ public class ExperienciaService {
        return jsonSaida;
    }
    
-   // "http://localhost:8080/TesteWS/rest/experiencia"
+   // "http://localhost:8080/TesteWS/rest/experiencia/{idExperiencia}"
    @DELETE
-   public String excluirExperiencia(String json) throws SQLException{
+   @Path("{idExperiencia}")
+   public String excluirExperiencia(@PathParam("idExperiencia") int idExperiencia) throws SQLException{
        Gson gson = new Gson();
-       Experiencia a = gson.fromJson(json, Experiencia.class);
+       //Experiencia a = gson.fromJson(json, Experiencia.class);
        
-       ExperienciaDAO.ExcluirExperiencia(a);
+       ExperienciaDAO.ExcluirExperiencia(idExperiencia);
        
-       String jsonSaida = gson.toJson(a);
+       String jsonSaida = gson.toJson(idExperiencia);
        return jsonSaida;
    }
    

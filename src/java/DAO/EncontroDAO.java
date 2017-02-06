@@ -87,16 +87,16 @@ public class EncontroDAO {
         return "OK!";
     }
     
-    public static String ExcluirEncontro(Encontro encontro) throws SQLException
+    public static String ExcluirEncontro(int idEncontro) throws SQLException
     {
-        System.out.println("encontro dao excluir");
+        System.out.println("encontro dao excluir " + idEncontro);
         Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         String comandoSql = "DELETE FROM Encontro WHERE idEncontro = ?";
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setInt(1, encontro.getIdEncontro());
+            pstmt.setInt(1, idEncontro);
            
             pstmt.executeUpdate();
         }

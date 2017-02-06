@@ -38,20 +38,18 @@
 
                 <div class="col-md-8">
 
-                    <h2 class="page-header" style="color: #ffa812;">
-                        Espaço Helper
-                        <br/>
-                    </h2>
+                    <h2 class="page-header" style="color: #ffa812;"> Espaço Helper </h2>
+                    
                     <small style="font-size: 16px;">Espaço destinado para troca de experiências entre os Helpers</small>   
 
                     <c:forEach var="experiencia" items="#{experienciaBean.experiencias}">
-                        <!-- Primeira experiência -->
+                       
                         <h3 style="text-decoration: none; color: #1E90FF;">
                             #{experiencia.tituloExperiencia}
                         </h3>
                         <p>Tipo: #{experiencia.tipoExperiencia}</p>
                         <hr/>
-                        <img class="img-responsive" style="border-radius: 0px; width: 890px; height: 300px;" src="imagens/experiencia.jpg" alt="Imagem da postagem"/>
+                        <img src="#{experiencia.foto}" alt="Imagem da postagem" class="img-responsive" style="border-radius: 0px; width: 100%; height: 300px;" />
                         <hr/>
                         <p>#{experiencia.texto}</p>
                         <h:form>
@@ -149,7 +147,7 @@
                             <h5>Cadastro</h5>
                         </div>
                         <div class="modal-body">
-                            <h:form>
+                            <h:form class="form" enctype="multipart/form-data">
                                 <div class="col-md-12">
                                     <div class="row">
 
@@ -175,7 +173,14 @@
                                                 <f:selectItem itemLabel="Saude" itemValue="Saude"/>
                                                 <f:selectItem itemLabel="Outro" itemValue="Outro"/>
                                             </h:selectOneMenu>   
-
+                                        </div>
+                                        <div class="col-md-2" align="left">
+                                            <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
+                                                Imagem:  
+                                            </label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <h:inputFile value="#{experienciaBean.imagem}" class="form-control" style="width: 100%;font-size: 14px;"/>
                                         </div>
                                         <div class="col-md-2" align="left">
                                             <label style="font-size: 14px;color: black; padding-left: 10px;">
@@ -189,7 +194,13 @@
 
                                         <div class="col-md-12">
                                             <br/>
-                                            <h:commandButton action="#{experienciaBean.Salvar()}" value="Salvar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px; width: 100%;"/>
+                                            <c:if test="#{loginBean.usuarioLogado == null}">
+                                                <h6 align="center" style="color: red;">Para realizar o cadastro é preciso estar logado no sistema.</h6>
+                                                <h:commandButton action="loginSignin.jsf" value="Entrar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px; width: 100%;"/>
+                                            </c:if>
+                                            <c:if test="#{loginBean.usuarioLogado != null}">
+                                                <h:commandButton action="#{experienciaBean.Salvar()}" value="Salvar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px; width: 100%;"/>
+                                            </c:if>
                                             <br/>
                                         </div>
                                     </div>

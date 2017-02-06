@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Help Pet - Editar experiência</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/helppet_css.css"></link>
+
+        <link rel="stylesheet" type="text/css" href="css/blog-home.css"></link>
+
+
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
+    </h:head>
+    <h:body>
+
+        <!-- Menu -->
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menuUsuario.xhtml"/>
+            </ui:insert>
+        </div>
+
+
+
+        <!-- Form  -->
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+
+                    <div class="alert alert-dismissible panel panel-default" style="margin-top: 5%; padding-left: 20px; padding-right: 20px; background-color: #1E90FF; border-radius: 0px;">
+                        <!--Panel-->
+                        <div class="card">
+                            <div class="card-header panel panel-default" style="margin-top: -5%; padding-top: 3%; background-color: white; border-radius: 0px; margin-bottom: 10px; color: black;">
+
+                                <!-- Conteúdo -->
+                                <div align="center" style="margin-left: 40px; margin-right: 40px;">
+                                    <h4 class="modal-title" style="color: #ffa812;">Editar experiência</h4>
+                                    <hr/>
+
+                                </div>
+
+                                <h:form>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12" align="center">
+                                                <div class="text-center" >
+                                                    <img src="imagens/experiencia.jpg" style="border-radius: 0px;" height="120px" width="160px" alt="Foto da experiência"/>
+                                                    <h6>Atualizar foto...</h6>
+                                                    <h:inputText   class="text-center center-block well well-sm"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px;">
+                                                            Título:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputText value="#{experienciaBean.experiencia.tituloExperiencia}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px;">
+                                                            Categoria:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding-left: 15px;">
+                                                        <h:selectOneMenu value="#{experienciaBean.experiencia.tipoExperiencia}" style="height: 40px; color: black;font-size: 14px;" class="form-control">
+                                                            <f:selectItem itemLabel="Alimentação" itemValue="Alimentação"/>
+                                                            <f:selectItem itemLabel="Comportamento" itemValue="Comportamento"/>
+                                                            <f:selectItem itemLabel="Filhotes" itemValue="Filhotes"/>
+                                                            <f:selectItem itemLabel="Idosos" itemValue="Idosos"/>
+                                                            <f:selectItem itemLabel="Saude" itemValue="Saude"/>
+                                                            <f:selectItem itemLabel="Outro" itemValue="Outro"/>
+                                                        </h:selectOneMenu>  
+
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px;">
+                                                            Conteúdo:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding-left: 15px;">
+                                                        <h:inputTextarea value="#{experienciaBean.experiencia.texto}" rows="3" class="form-control" style="margin-left: 10px;"/>  
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12" align="center" style="margin-bottom: 10px;">
+                                                <br/>
+                                                <h:inputHidden value="#{experienciaBean.experiencia.idExperiencia}"/>
+                                                <h:commandButton action="#{experienciaBean.Salvar()}" value="Salvar" class="btn btn-success" style=" color: white;border-radius: 0px; "/>
+                                                <br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:form>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+                </div>
+
+            </div>
+        </div>
+
+    </h:body>
+</html>

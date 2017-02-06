@@ -29,109 +29,31 @@
             </ui:insert>
         </div>
 
-
-
-
         <!-- Conteúdo -->
         <div class="container">
             <div class="row">
 
-                <div class="col-md-8">
+                <div class="col-md-12">
 
-                    <h2 class="page-header" style="color: #ffa812;">
-                        Espaço Helper
-                        <br/>
-                    </h2>
-                    <small style="font-size: 16px;">Espaço destinado para troca de experiências entre os Helpers</small>   
+                    <h2 class="page-header" style="color: #ffa812;"> #{experienciaBean.experiencia.tituloExperiencia} </h2> 
 
-                    <!-- Primeira experiência -->
-                    <h3 style="text-decoration: none; color: #1E90FF;">
-                        #{experienciaBean.experiencia.tituloExperiencia}
-                    </h3>
                     <p class="lead" style="font-size: 15px;">
                         Por: <a href="#" style="text-decoration: none;">#{experienciaBean.autor.nomeUsuario}</a>
                     </p>
-                    <p>Tipo: #{experiencia.tipoExperiencia}</p>
+                    <p class="lead" style="font-size: 15px;">Tipo: #{experienciaBean.experiencia.tipoExperiencia}</p>
                     <p><i class="material-icons" style=" font-size: 15px;">query_builder</i> Publicado em #{experienciaBean.experiencia.dataCadastro}</p>
-                    <hr/>
-                    <img class="img-responsive" style="border-radius: 0px; width: 890px; height: 300px;" src="imagens/experiencia.jpg" alt="Imagem da postagem"/>
-                    <hr/>
+                    
+                    <p align="center">
+                        <img src="#{experienciaBean.experiencia.foto}" alt="Imagem da postagem" class="img-responsive" style="border-radius: 0px; width: 70%; height: 300px;" />
+                    </p>
+                    
+                    <br/>
                     <p>#{experienciaBean.experiencia.texto}</p>
                     <p><a href="experiencias.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><i class="material-icons" style="color: white; font-size: 16px; padding-right: 10px;">arrow_back</i>Voltar</a></p>
-                    <hr/>
-
-
 
                 </div>
-
-                <!-- Lateral -->
-                <div class="col-md-4">
-
-                    <!-- Área de pesquisa -->
-                    <br/><br/>
-                    <div class="well panel panel-default" align="center" style="background-color: #ffa812; height: 170px;">
-                        <h4 style="color: white;">Pesquisa</h4>
-                        <hr/>
-                        <div >
-                            <h:form>
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <h:inputText class="form-control" style="color: white;"/>
-                                    <a href="#"><i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;"> search</i></a>
-                                </h:panelGrid>
-                            </h:form>
-
-                        </div>
-                    </div>
-                    <!-- Categorias -->
-
-                    <div class="well panel panel-default" align="center" style="background-color: #ffa812;">
-                        <h4 style="color: white;">Categorias</h4>
-                        <hr/>
-                        <div class="row">
-                            <div class="col-lg-6" align="center" >
-                                <ul class="list-unstyled">
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6" align="center">
-                                <ul class="list-unstyled">
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Categoria 1</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="well panel panel-default" align="center" style="background-color: #ffa812; color: white;">
-                        <h4 style="color: white;">Espaço Helper</h4>
-                        <hr/>
-                        <p>Vocês podem colocar um pequeno texto explicativo aqui!!!!!!</p>
-
-
-                    </div>
-
-                </div>
-
             </div>
-
-            <hr/>
-
         </div>
-
-
 
     </h:body>
 </html>

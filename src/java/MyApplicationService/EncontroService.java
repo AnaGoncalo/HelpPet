@@ -64,15 +64,17 @@ public class EncontroService {
        return jsonSaida;
    }
    
-   // "http://localhost:8080/TesteWS/rest/encontro"
+   // "http://localhost:8080/TesteWS/rest/encontro/{idEncontro}"
    @DELETE
-   public String excluirEncontro(String json) throws SQLException{
+   @Path("{idEncontro}")
+   public String excluirEncontro(@PathParam("idEncontro") int idEncontro) throws SQLException{
        Gson gson = new Gson();
-       Encontro a = gson.fromJson(json, Encontro.class);
+       //Encontro a = gson.fromJson(json, Encontro.class);
+       System.out.println("EncontroService excluir" + idEncontro);
        
-       EncontroDAO.ExcluirEncontro(a);
+       EncontroDAO.ExcluirEncontro(idEncontro);
        
-       String jsonSaida = gson.toJson(a);
+       String jsonSaida = gson.toJson(idEncontro);
        return jsonSaida;
    }
    

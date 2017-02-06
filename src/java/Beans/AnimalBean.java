@@ -5,7 +5,6 @@
  */
 package Beans;
 
-import DAO.AnimalDAO;
 import Modelo.Animal;
 import Modelo.Encontro;
 import Modelo.Usuario;
@@ -18,8 +17,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -39,64 +36,70 @@ import javax.ws.rs.core.MediaType;
 @ManagedBean
 @RequestScoped
 public class AnimalBean {
+
     private Animal animal = new Animal();
-    
+
     //Em caso de marcar encontro, esse user será o adotante
     //Em caso de cadastro de animal, esse user será o responsavel
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");
-  
+
     private List<Animal> animais = new ArrayList();
     private List<Animal> animaisTop = new ArrayList();
     private List<Animal> meusAnimais = new ArrayList();
     private Encontro encontro = new Encontro();
-    
+
     private Part imagem;
-    
+
     public AnimalBean() throws SQLException {
         Listar();
-        if(animais.size() >= 4)
+        if (animais.size() >= 4) {
             animaisTop = animais.subList(0, 4);
-        
+        }
+
         if (user != null) {
             ListarMeusAnimais();
         }
     }
-    
-    public String Salvar(){
-        if(user == null)
+
+    public String Salvar() {
+        if (user == null) {
             return "loginSignin.jsf";
+        }
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal");
         Gson gson = new Gson();
         
-        if(animal.getIdAnimal() == 0)
-        {
+        if (imagem != null) {
+            animal.setFotoAnimal(upload());
+        }
+        if (animal.getIdAnimal() == 0) {
             System.out.println("Bean Salvar: " + animal.getNomeAnimal());
             animal.setResponsavel(user);
-            animal.setFotoAnimal(upload());
+            if(imagem == null){
+                animal.setFotoAnimal("imagens\\animal.jpg");
+            }
             String json = gson.toJson(animal);
             caminho.request().post(Entity.json(json));
-        }
-        else
-        {
+        } else {
+            animal.setResponsavel(user);
             String json = gson.toJson(animal);
             caminho.request().put(Entity.json(json));
         }
-        
+
         ListarMeusAnimais();
         return "meusAnimais.jsf";
     }
-    
-    public void Listar(){
+
+    public void Listar() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal");
         String json = caminho.request().get(String.class);
-        
+
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);
         animais = Arrays.asList(vetor);
     }
-    
+
     public void ListarMeusAnimais() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + user.getIdUsuario());
@@ -105,67 +108,74 @@ public class AnimalBean {
         Animal[] vetor = gson.fromJson(json, Animal[].class);
         meusAnimais = Arrays.asList(vetor);
     }
-    
-    public String SalvarEncontro(){
+
+    public String SalvarEncontro() {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
         Gson gson = new Gson();
-       
-        if(encontro.getIdEncontro() == 0)
-        {
+
+        if (encontro.getIdEncontro() == 0) {
             encontro.setAdotante(user);
             encontro.setAnimal(animal);
             System.out.println("Testando Salvar Encontro: " + user.getIdUsuario());
             String json = gson.toJson(encontro);
             caminho.request().post(Entity.json(json));
-        }
-        else
-        {
+        } else {
             String json = gson.toJson(encontro);
             caminho.request().put(Entity.json(json));
         }
         return "index.jsf";
     }
-    
-    public String VerAnimal(Animal a){
+
+    public String VerAnimal(Animal a) {
         animal = a;
-        
+
         return "animal.jsf";
     }
-    
-    public String EditarAnimal(Animal a){
+
+    public String EditarAnimal(Animal a) {
         animal = a;
         System.out.println("Edita ...");
         return "editarAnimal.jsf";
 //return "index.jsf?faces-redirect=true";
     }
-    
-    public String Adotar(Animal a){
+
+    public String Adotar(Animal a) {
         animal = a;
         //encontro = new Encontro();
         encontro.setAdotante(user); //pega o usuario da sessao
         encontro.setAnimal(animal);
-        
+
         return "cadastrarEncontro.jsf";
     }
-    
-    public String VerResponsavel(){
+
+    public String VerResponsavel() {
         getRequest().setAttribute("usuario", animal.getResponsavel());
         return "VerHelper.jssetAttribute(f?faces-redirect=true";
     }
-    
-    public FacesContext getFacesContext(){
+
+    public String ExcluirAnimal(Animal a) {
+        System.out.println("Bean Animal Excluir " + a.getIdAnimal());
+
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal/" + a.getIdAnimal());
+        caminho.request().delete();
+
+        return "meusAnimais.jsf";
+    }
+
+    public FacesContext getFacesContext() {
         return FacesContext.getCurrentInstance();
     }
-  
-    public HttpSession getSession(){
+
+    public HttpSession getSession() {
         return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
-    
+
     public HttpServletRequest getRequest() {
         return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
     }
-    
+
     public Animal getAnimal() {
         return animal;
     }
@@ -214,8 +224,7 @@ public class AnimalBean {
     public void setImagem(Part imagem) {
         this.imagem = imagem;
     }
-    
-    
+
     public String upload() {
 
         String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + animal.getNomeAnimal() + ".jpg";// + imagem.getSubmittedFileName();

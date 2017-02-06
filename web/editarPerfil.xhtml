@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Help Pet - Editar perfil</title>
+
+        <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
+
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
+
+        <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
+
+
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
+
+    </h:head>
+    <h:body>
+
+        <!-- Menu -->
+        <div id="header">
+            <ui:insert name="header">
+                <!-- Import de página de menu -->
+                <ui:include src="menuUsuario.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <!-- Form  -->
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+
+                    <div class="alert alert-dismissible panel panel-default" style="margin-top: 5%; padding-left: 20px; padding-right: 20px; background-color: #ffa812; border-radius: 0px;">
+                        <!--Panel-->
+                        <div class="card">
+                            <div class="card-header panel panel-default" style="margin-top: -5%; padding-top: 3%; background-color: white; border-radius: 0px; margin-bottom: 10px; color: black;">
+
+                                <!-- Conteúdo -->
+                                <div align="center" style="margin-left: 40px; margin-right: 40px;">
+                                    <h4 class="modal-title">Editar perfil</h4>
+                                    <hr/>
+
+                                </div>
+
+                                <h:form class="form" enctype="multipart/form-data">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12" align="center">
+                                                <div class="text-center" >
+                                                    <img src="#{loginBean.usuarioLogado.foto}" height="120px" width="160px"  style="border-radius: 0px;" alt="Foto do usuario"/>
+                                                    <h6>Atualizar foto...</h6>
+                                                    <h:inputFile value="#{loginBean.imagem}" class="text-center center-block well well-sm"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                            Nome:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputText value="#{loginBean.usuarioLogado.nomeUsuario}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                            Email:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputText value="#{loginBean.usuarioLogado.email}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                            Senha:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputSecret value="#{loginBean.usuarioLogado.senha}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                            CPF:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputText value="#{loginBean.pf.cpf}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px;padding-top: 10px;">
+                                                            Nascimento:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputText value="#{loginBean.usuarioLogado.dataNascimento}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size: 14px;color: black; padding-left: 15px;padding-top: 10px;">
+                                                            Local:  
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h:inputText value="#{loginBean.usuarioLogado.localizacao}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12" align="center" style="margin-bottom: 10px;">
+                                                <h:inputHidden value="#{loginBean.usuarioLogado.idUsuario}"/>
+                                                <br/>
+                                                <div class="col-md-2" align="center"></div>
+                                                <div class="col-md-4" align="center" style="margin-bottom: 15px;">
+                                                    <h:commandButton action="perfilHelper.jsf" value="Cancelar" class="btn btn-danger" style=" color: white;border-radius: 0px; "/>
+                                                </div>
+                                                <div class="col-md-4" align="center" style="margin-bottom: 15px;">
+                                                    <h:commandButton action="#{loginBean.SalvarEditar()}" value="Salvar" class="btn btn-success" style=" color: white;border-radius: 0px; "/>
+                                                </div>
+                                                <div class="col-md-2" align="center"></div>
+                                                <br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:form>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+                </div>
+
+            </div>
+        </div>
+
+    </h:body>
+</html>

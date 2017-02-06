@@ -40,9 +40,9 @@ public class UsuarioBean {
 
     public UsuarioBean() {
         //this.usuario = new Usuario();
-        
+
         System.out.println("Iniciando o UsuarioBean");
-        
+
 //        if(usuario.getIdUsuario() != 0){
 //            MeusAnimais(usuario.getIdUsuario());
 //        }
@@ -52,6 +52,8 @@ public class UsuarioBean {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/usuario");
         Gson gson = new Gson();
+
+        usuario.setFoto("imagens\\users\\userFoto.jpg");
         String json = gson.toJson(usuario);
         caminho.request().post(Entity.json(json));
 
@@ -75,14 +77,12 @@ public class UsuarioBean {
             return "verOng.jsf";
         }
     }
-    
+
     public String VerMeusAnimais() {
         MeusAnimais(usuario.getIdUsuario());
-        
+
         return "meusAnimais.jsf?faces-redirect=true";
     }
-    
-    
 
     public void MeusAnimais(int id) {
         System.out.println("id Usuario para Meus Aniamis: " + id);
@@ -98,7 +98,7 @@ public class UsuarioBean {
         }
         meusAnimaisTop = meusAnimais;
         System.out.println("size MeusAnimaisTop: " + meusAnimaisTop.size());
-        for(Animal a : meusAnimaisTop){
+        for (Animal a : meusAnimaisTop) {
             System.out.println("nome A: " + a.getNomeAnimal());
         }
     }
@@ -110,8 +110,8 @@ public class UsuarioBean {
     public HttpSession getSession() {
         return (HttpSession) getFacesContext().getExternalContext().getSession(false);
     }
-    
-    public HttpServletRequest  getRequest() {
+
+    public HttpServletRequest getRequest() {
         return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
     }
 
@@ -155,4 +155,5 @@ public class UsuarioBean {
     public void setMeusAnimaisTop(List<Animal> meusAnimaisTop) {
         this.meusAnimaisTop = meusAnimaisTop;
     }
+
 }

@@ -81,7 +81,7 @@ public class EstoqueDAO {
         return "OK!";
     }
     
-    public static String ExcluirEstoque(Estoque estoque) throws SQLException
+    public static String ExcluirEstoque(int idEstoque) throws SQLException
     {
         System.out.println("estoque dao excluir");
         Connection conn = Banco.getConexao();
@@ -90,7 +90,7 @@ public class EstoqueDAO {
         try
         {
             pstmt = conn.prepareStatement(comandoSql);
-            pstmt.setInt(1, estoque.getIdEstoque());
+            pstmt.setInt(1, idEstoque);
            
             pstmt.executeUpdate();
         }

@@ -34,7 +34,7 @@
 
             </div>
             <div class="panel panel-default divPerfil" align="left">
-                <img src="imagens/userFoto.jpg"  style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
+                <img src="#{loginBean.usuarioLogado.foto}"  style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
                     <h3 style="padding-top: 2%;">#{loginBean.usuarioLogado.nomeUsuario}</h3>
                 </div>
@@ -54,13 +54,17 @@
                             <h5><i class="material-icons">info</i> Informações</h5>
                             <hr/>
                             <p class="itensPerfil">E-mail: #{loginBean.usuarioLogado.email}</p>
-                            <p class="itensPerfil">Telefone: #{loginBean.usuarioLogado.telefone}</p>
+                            <p class="itensPerfil">Data de Nascimento: #{loginBean.usuarioLogado.dataNascimento}</p>
                             <p class="itensPerfil">Local: #{loginBean.usuarioLogado.localizacao}</p>
-                            <p class="itensPerfil">CNPJ: #{loginBean.pj.cnpj}</p>
+                            <p class="itensPerfil">Telefone: #{loginBean.usuarioLogado.telefone}</p>
                             <p class="itensPerfil">Funcionamento: #{loginBean.pj.funcionamento}</p>
+                            <p class="itensPerfil">CNPJ: #{loginBean.pj.cnpj}</p>
                             <p class="itensPerfil">Site: #{loginBean.pj.site}</p>
+                            <p class="itensPerfil">Descrição: #{loginBean.pj.descricao}</p>
+                            
+                            
                             <div style="margin-bottom: 15px;">
-                                <a href="editarClinicaPetShop.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
+                                <a href="editarPerfil.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
                             </div>
                         </div>
                     </div>

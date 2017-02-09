@@ -20,7 +20,7 @@
         <a href="javascript:void(0)" class="closebtn fechar" onclick="closeNav()" style="color: #ffa812;">&times;</a>
 
         <div class="overlay-content user-menu" style="margin-top: -50px;">
-            <img src="imagens/userFoto.jpg" alt="Foto do usuário" class="circular"/>
+            <img src="#{loginBean.usuarioLogado.foto}" alt="Foto do usuário" class="circular"/>
             <h:form>
             <h:commandLink action="#{loginBean.VerPerfil()}" style="font-size: 27px;color: #ffa812;">Meu Perfil</h:commandLink>
             </h:form>

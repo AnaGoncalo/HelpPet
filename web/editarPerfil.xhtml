@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Help Pet - Editar perfil</title>
 
@@ -96,38 +97,41 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
-                                                            Senha:  
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <h:inputSecret value="#{loginBean.usuarioLogado.senha}" class="form-control" style="width: 100%;font-size: 14px;"/>
-                                                    </div>
-                                                    <div class="col-md-2">
+                                            <!--                                            <div class="col-md-12">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-2">
+                                                                                                </div>
+                                                                                                <div class="col-md-2">
+                                                                                                    <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                                                                        Senha:  
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                                <div class="col-md-6">
+                                                                                                    <h:inputSecret value="#{loginBean.usuarioLogado.senha}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                                                                </div>
+                                                                                                <div class="col-md-2">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>-->
+                                            <c:if test="#{loginBean.usuarioLogado.idPermissao == 1}">  
+
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                                CPF:  
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h:inputText value="#{loginBean.pf.cpf}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
-                                                            CPF:  
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <h:inputText value="#{loginBean.pf.cpf}" class="form-control" style="width: 100%;font-size: 14px;"/>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </c:if>
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-2">
@@ -145,6 +149,22 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                                Telefone:  
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h:inputText value="#{loginBean.usuarioLogado.telefone}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                     </div>
@@ -160,6 +180,74 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                            <c:if test="#{loginBean.usuarioLogado.idPermissao != 1}">  
+
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                                CNPJ:  
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h:inputText value="#{loginBean.pj.cnpj}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                                Funcionamento:  
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h:inputText value="#{loginBean.pj.funcionamento}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                                Site:  
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h:inputText value="#{loginBean.pj.site}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label style="font-size: 14px;color: black; padding-left: 15px; padding-top: 10px;">
+                                                                Descrição:  
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h:inputText value="#{loginBean.pj.descricao}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
 
                                             <div class="col-md-12" align="center" style="margin-bottom: 10px;">
                                                 <h:inputHidden value="#{loginBean.usuarioLogado.idUsuario}"/>

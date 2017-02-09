@@ -41,7 +41,13 @@
                 <c:forEach var="ong" items="#{pjBean.ongs}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
-                            <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <c:if test="#{ong.foto != null}">
+                                <h:graphicImage value="#{ong.foto}" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                            </c:if>
+                            <c:if test="#{ong.foto == null}">
+                                <img src="imagens/ONG.jpg" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                            </c:if>
+                            
                             <div class="caption" align="center">
                                 <h:inputHidden value="#{ong.idUsuario}"/>
                                 <h5>#{ong.nomeUsuario}</h5>

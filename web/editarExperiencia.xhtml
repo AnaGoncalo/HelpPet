@@ -52,14 +52,14 @@
 
                                 </div>
 
-                                <h:form>
+                                <h:form class="form" enctype="multipart/form-data">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-12" align="center">
                                                 <div class="text-center" >
-                                                    <img src="imagens/experiencia.jpg" style="border-radius: 0px;" height="120px" width="160px" alt="Foto da experiência"/>
+                                                    <img src="#{experienciaBean.experiencia.foto}" style="border-radius: 0px;" height="120px" width="160px" alt="Foto da experiência"/>
                                                     <h6>Atualizar foto...</h6>
-                                                    <h:inputText   class="text-center center-block well well-sm"/>
+                                                    <h:inputFile value="#{experienciaBean.imagem}" class="text-center center-block well well-sm"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -112,7 +112,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6" style="padding-left: 15px;">
-                                                        <h:inputTextarea value="#{experienciaBean.experiencia.texto}" rows="3" class="form-control" style="margin-left: 10px;"/>  
+                                                        <h:inputTextarea value="#{experienciaBean.experiencia.texto}" rows="5" class="form-control" style="margin-left: 10px;"/>  
                                                     </div>
                                                     <div class="col-md-2">
                                                     </div>

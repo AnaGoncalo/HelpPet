@@ -33,7 +33,7 @@
 
             </div>
             <div class="panel panel-default divPerfil" align="left">
-                <img src="imagens/userFoto.jpg" style="position: relative; float: left;" alt="Imagem da ONG" class="fotoPerfil panel" />
+                <img src="#{loginBean.usuarioLogado.foto}" style="position: relative; float: left;" alt="Imagem da ONG" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
                     <h3 style="padding-top: 2%;">#{loginBean.usuarioLogado.nomeUsuario}</h3>
                 </div>
@@ -58,8 +58,10 @@
                             <p class="itensPerfil">Funcionamento: #{loginBean.pj.funcionamento}</p>
                             <p class="itensPerfil">CNPJ: #{loginBean.pj.cnpj}</p>
                             <p class="itensPerfil">Site: #{loginBean.pj.site}</p>
+                            <p class="itensPerfil">Descrição: #{loginBean.pj.descricao}</p>
+                            
                                 <div style="margin-bottom: 15px;">
-                                    <a href="editarONG.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
+                                    <a href="editarPerfil.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
                                 </div>
                             
                         </div>
@@ -127,9 +129,10 @@
                                             <c:forEach var="estoque" items="#{estoqueBean.estoques}">
                                                 <h5>#{estoque.nomeEstoque} </h5>
                                                 <div class="myProgress" >
-                                                    <div class="myBar" style="width: #{(estoque.qtdAtual / estoque.qtdDiaria*30)}%;"></div>
+                                                    <div class="myBar" style="width: #{(estoque.qtdDiaria*30 / estoque.qtdAtual)}%;"></div>
                                                 </div>
                                             </c:forEach>
+                                            
                                         </div>
                                         <c:if test="#{loginBean.usuarioLogado != null}">
                                             <div class="col-md-12" style="padding-top: 20px;">

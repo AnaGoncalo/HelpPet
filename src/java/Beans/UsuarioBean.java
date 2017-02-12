@@ -31,12 +31,14 @@ import javax.ws.rs.client.WebTarget;
 @RequestScoped
 public class UsuarioBean {
 
-    private Usuario usuario = (Usuario) getRequest().getAttribute("usuario");       //Usuario da pagina que esta sendo vista
+    //private Usuario usuario = (Usuario) getRequest().getAttribute("usuario");       //Usuario da pagina que esta sendo vista
+    private Usuario usuario = new Usuario();
     private Usuario user = (Usuario) getSession().getAttribute("usuarioLogado");        // Usuario que está logado na sessão
     private PessoaFisica pf = null;         //Complemento das informações do Usuario (se for Helper)
     private PessoaJuridica pj = null;       //Complemento das informações do Usuario (se for Ong ou Clinica/Petshop
     private List<Animal> meusAnimais = new ArrayList();         //Lista de animais do Usuario
     private List<Animal> meusAnimaisTop = new ArrayList();      //Top 4 da lista de animais
+    private int idPermissao;
 
     public UsuarioBean() {
         //this.usuario = new Usuario();
@@ -52,7 +54,7 @@ public class UsuarioBean {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/usuario");
         Gson gson = new Gson();
-
+        usuario.setIdPermissao(idPermissao);
         usuario.setFoto("imagens\\users\\userFoto.jpg");
         String json = gson.toJson(usuario);
         caminho.request().post(Entity.json(json));
@@ -155,5 +157,14 @@ public class UsuarioBean {
     public void setMeusAnimaisTop(List<Animal> meusAnimaisTop) {
         this.meusAnimaisTop = meusAnimaisTop;
     }
+
+    public int getIdPermissao() {
+        return idPermissao;
+    }
+
+    public void setIdPermissao(int idPermissao) {
+        this.idPermissao = idPermissao;
+    }
+    
 
 }

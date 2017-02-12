@@ -104,7 +104,7 @@
                                                 <div class="row">
                                                     <c:forEach var="anuncio" items="#{anuncioBean.meusAnuncios}">
                                                         <div class="col-md-6" style="margin-bottom: 10px;">
-                                                        <img src="imagens/anuncio.jpg" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                            <img src="#{anuncio.fotoAnuncio}" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
                                                     </div>
                                                         </c:forEach>
                                                 </div>

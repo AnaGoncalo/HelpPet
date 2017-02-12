@@ -53,14 +53,14 @@
 
                                 </div>
 
-                                <h:form>
+                                <h:form enctype="multipart/form-data">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-12" align="center">
                                                 <div class="text-center" >
-                                                    <img src="imagens/evento.png" height="120px" width="160px" style="border-radius: 0px;" alt="Foto do evento"/>
+                                                    <img src="#{eventoBean.evento.fotoEvento}" height="120px" width="160px" style="border-radius: 0px;" alt="Foto do evento"/>
                                                     <h6>Atualizar foto...</h6>
-                                                    <h:inputText   class="text-center center-block well well-sm"/>
+                                                    <h:inputFile value="#{eventoBean.imagem}" class="text-center center-block well well-sm"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

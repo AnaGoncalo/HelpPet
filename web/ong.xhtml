@@ -33,7 +33,7 @@
 
             </div>
             <div class="panel panel-default divPerfil" align="left">
-                <img src="imagens/ONG.jpg" style="position: relative; float: left;" alt="Imagem da ONG" class="fotoPerfil panel" />
+                <img src="#{pjBean.ong.foto}" style="position: relative; float: left;" alt="Imagem da ONG" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
                     <h3 style="padding-top: 2%;">#{pjBean.ong.nomeUsuario}</h3>
                 </div>
@@ -69,9 +69,7 @@
                             <div align="center">
                                 <h1 style="font-size: 90px;"><strong>#{pjBean.animais.size()}</strong></h1>
                                 <h5>Animais!</h5>
-                                <div style="padding-top: 10px; padding-bottom: 10px;">
-                                    <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">ANIMAIS</a></p>
-                                </div>
+                                <br/>
                             </div>
                         </div>
                     </div>
@@ -82,9 +80,7 @@
                             <div align="center">
                                 <h1 style="font-size: 90px;"><strong>#{pjBean.eventos.size()}</strong></h1>
                                 <h5>Evento!</h5>
-                                <div style="padding-top: 10px; padding-bottom: 10px;">
-                                    <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">ANIMAIS</a></p>
-                                </div>
+                                <br/>
                             </div>
                         </div>
                     </div>
@@ -95,9 +91,7 @@
                             <div align="center">
                                 <h1 style="font-size: 90px;"><strong>#{pjBean.experiencias.size()}</strong></h1>
                                 <h5>Experiências!</h5>
-                                <div style="padding-top: 10px; padding-bottom: 10px;">
-                                    <p><a href="meusAnimais.jsf" class="btn btn-default" style="background-color: #FFB772; color: white;border-radius: 0px;">ANIMAIS</a></p>
-                                </div>
+                                <br/>
                             </div>
                         </div>
                     </div>
@@ -124,7 +118,7 @@
                                             <c:forEach var="estoque" items="#{pjBean.estoques}">
                                                 <h5>#{estoque.nomeEstoque} </h5>
                                                 <div class="myProgress" >
-                                                    <div class="myBar" style="width: #{(estoque.qtdAtual / estoque.qtdDiaria*30)}%;"></div>
+                                                    <div class="myBar" style="width: #{(estoque.qtdDiaria*30 / estoque.qtdAtual)}%;"></div>
                                                 </div>
                                             </c:forEach>
                                         </div>

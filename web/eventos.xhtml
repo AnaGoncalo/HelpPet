@@ -59,7 +59,7 @@
                 <c:forEach var="evento" items="#{eventoBean.eventosTop}">
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail caixa">
-                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
+                        <img src="#{evento.fotoEvento}" alt="Foto do Evento" style="width:100%; height:170px; border-radius: 0px;"/>
                         <div class="caption" align="center">
                             <h5>#{evento.nomeEvento}</h5>
                             <div align="left">
@@ -86,7 +86,7 @@
                                                     <div class="col-md-1">
                                                     </div>
                                                     <div class="col-md-5">
-                                                        <img src="imagens/evento.png" alt="Foto do Evento" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                        <img src="#{evento.fotoEvento}" alt="Foto do Evento" style="width:100%; height:250px;border-radius: 0px;"/>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div align="left">

@@ -43,7 +43,7 @@
                 <c:forEach var="clinica" items="#{pjBean.clinicas}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
-                            <img src="imagens/petshop.jpg" alt="Foto da Clínica ou Pet Shop" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <img src="#{clinica.foto}" alt="Foto da Clínica ou Pet Shop" style="width:100%; height:170px; border-radius: 0px;"/>
                             <div class="caption" align="center">
                                 <h5>#{clinica.nomeUsuario}</h5>
                                 <div align="left">

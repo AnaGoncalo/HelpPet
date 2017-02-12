@@ -26,7 +26,7 @@
         <div id="header">
             <ui:insert name="header">
                 <!-- Import de página de menu -->
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="menuUsuario.xhtml"/>
             </ui:insert>
         </div>
 
@@ -68,7 +68,7 @@
                                                 <label for="exampleInputPassword1" style="font-size: 15px;">
                                                     Tipo:
                                                 </label>
-                                                <h:selectOneMenu value="#" style="width: 300px; height: 40px;" class="form-control">
+                                                <h:selectOneMenu value="#{usuarioBean.idPermissao}" style="width: 300px; height: 40px;" class="form-control">
                                                     <f:selectItem itemLabel="Helper" itemValue="1"/>
                                                     <f:selectItem itemLabel="ONG" itemValue="2"/>
                                                     <f:selectItem itemLabel="Clínica/Pet Shop" itemValue="3"/>
@@ -77,22 +77,22 @@
                                                 <label for="exampleInputPassword1" style="padding-right: 10px;font-size: 15px;">
                                                     Nome:
                                                 </label>
-                                                <h:inputText class="form-control" id="nomeUsuario" style="font-size: 15px;margin-top: 5px;"/>
+                                                <h:inputText value="#{usuarioBean.usuario.nomeUsuario}" class="form-control" id="nomeUsuario" style="font-size: 15px;margin-top: 5px;"/>
 
                                                 <label for="exampleInputPassword1" style="padding-right: 10px; font-size: 15px;">
                                                     E-mail:
                                                 </label>
-                                                <h:inputText class="form-control" id="emailUsuario" style="font-size: 15px;margin-top: 5px;"/>
+                                                <h:inputText value="#{usuarioBean.usuario.email}" class="form-control" id="emailUsuario" style="font-size: 15px;margin-top: 5px;"/>
 
                                                 <label for="exampleInputPassword1" style="padding-right: 10px; font-size: 15px;">
                                                     Senha:
                                                 </label>
-                                                <h:inputSecret class="form-control" id="senhaUsuario" style="font-size: 15px;margin-top: 5px;"/>
+                                                <h:inputSecret value="#{usuarioBean.usuario.senha}" class="form-control" id="senhaUsuario" style="font-size: 15px;margin-top: 5px;"/>
 
                                             </h:panelGrid>
                                             <div align="center">
                                                 <br/><br/>
-                                                <h:button value="Cadastrar" style="height: 38px;width: 300px; background-color: #ffa812; color: white;border-radius: 0px;" class="btn btn-default"/>
+                                                <h:commandButton action="#{usuarioBean.Salvar()}" value="Cadastrar" style="height: 38px;width: 300px; background-color: #ffa812; color: white;border-radius: 0px;" class="btn btn-default"/>
                                                 <br/><br/>
                                                 <a class="btn btn-block btn-social btn-facebook" style="width: 300px;border-radius: 0px;" id="face">
                                                     <span class="fa"><img src="imagens/f.png" height="21px;"/></span> <div style="color: white;">Entre com o facebook </div>

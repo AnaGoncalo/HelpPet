@@ -125,7 +125,11 @@ public class PjBean {
     }
     public void ListarExperiencias(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia/" + ong.getIdUsuario());
+        WebTarget caminho;
+        if(ong != null)
+            caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia/" + ong.getIdUsuario());
+        else
+            caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia/" + clinica.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -145,6 +149,8 @@ public class PjBean {
     
     public String VerClinica(PessoaJuridica pj){
         clinica = pj;
+        ListarAnuncios();
+        //ListarExperiencias();
         return "clinicaPetshop.jsf";
     }
     

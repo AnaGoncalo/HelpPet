@@ -34,7 +34,7 @@
 
             </div>
             <div class="panel panel-default divPerfil" align="left">
-                <img src="imagens/petshop.jpg"  style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
+                <img src="#{pjBean.clinica.foto}"  style="position: relative; float: left;" alt="Imagem do usuário" class="fotoPerfil panel" />
                 <div class="tituloNomeUsuario">
                     <h3 style="padding-top: 2%;">#{pjBean.clinica.nomeUsuario}</h3>
                 </div>
@@ -56,21 +56,20 @@
                             <p class="itensPerfil">E-mail: #{pjBean.clinica.email}</p>
                             <p class="itensPerfil">Telefone: #{pjBean.clinica.telefone}</p>
                             <p class="itensPerfil">Local: #{pjBean.clinica.localizacao}</p>
-                            <div style="margin-bottom: 15px;">
-                                <a href="editarClinicaPetShop.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
-                            </div>
+                            <p class="itensPerfil">CNPJ: #{pjBean.clinica.cnpj}</p>
+                            <p class="itensPerfil">Funcionamento: #{pjBean.clinica.funcionamento}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 panel panel-default cardsLateralEsquerda">
                             <h5><i class="material-icons">book</i> Experiências</h5>
                             <hr/>
-                            <p class="itensPerfil"><strong>Última experiência adicionada</strong></p>
-                            <p class="itensPerfil">Nome: Minha Experiência</p>
-                            <p class="itensPerfil">Data: 00/00/0000</p>
-                            <div style="margin-bottom: 15px;">
-                                <a href="minhasExperiencias.jsf" class="btn btn-warning btn-xs" style="margin-left: 0%; background-color: #b48cd0;">Ver mais</a>
+                            <div align="center">
+                                <h1 style="font-size: 90px;"><strong>#{pjBean.experiencias.size()}</strong></h1>
+                                <h5>Experiências!</h5>
+                                <br/>
                             </div>
+                            
                         </div>
                     </div>
                     
@@ -95,15 +94,12 @@
 
                                             <div class="col-md-12" align="center" style="margin-top: 20px;margin-bottom: 20px;">
                                                 <div class="row">
-                                                    <c:forEach var="anuncio" items="#{anuncioBean.meusAnuncios}">
+                                                    <c:forEach var="anuncio" items="#{pjBean.anuncios}">
                                                         <div class="col-md-6" style="margin-bottom: 10px;">
-                                                        <img src="imagens/anuncio.jpg" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                            <img src="#{anuncio.fotoAnuncio}" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
                                                     </div>
                                                         </c:forEach>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12" align="center">
-                                                <p><a href="meusAnuncios.jsf" class="btn btn-default" style="background-color: #b48cd0; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Meus Anuncios</a></p>
                                             </div>
                                         </div>
                                     </div>

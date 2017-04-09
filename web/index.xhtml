@@ -9,16 +9,61 @@
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
+
         <link type="text/css" rel="stylesheet" href="estilo/bootstrap.css"  media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="estilo/bootstrap.min.css"  media="screen,projection"/>
 
         <link type="text/css" rel="stylesheet" href="estilo/helppet_css.css"  media="screen,projection"/>
-
-        <link href="http://bootswatch.com/paper/bootstrap.min.css" rel="stylesheet"/>
+        <link type="text/css" rel="stylesheet" href="css/estilo.css" />
 
 
         <script src="js/jquery-1.11.0.min.js"></script>
         <!-- <script src="js/bootstrap.min.js"></script> -->
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" type="text/css" rel="stylesheet" />
+        
+        <script>
+            // This example displays an address form, using the autocomplete feature
+            // of the Google Places API to help users fill in the information.
+            var placeSearch, autocomplete;
+            function initAutocomplete() {
+                // Create the autocomplete object, restricting the search to geographical
+                // location types.
+                autocomplete = new google.maps.places.Autocomplete(
+                        (document.getElementById('autocomplete')),
+                        {types: ['geocode']});
+                // When the user selects an address from the dropdown, populate the address
+                // fields in the form.
+                autocomplete.addListener('place_changed', fillInAddress);
+                $('form').submit(function (event) {
+                    event.preventDefault();
+                    alert("Endereço: " + document.getElementById('autocomplete'));
+                });
+            }
+            // [START region_geolocation]
+            // Bias the autocomplete object to the user's geographical location,
+            // as supplied by the browser's 'navigator.geolocation' object.
+            function geolocate() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var geolocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        var circle = new google.maps.Circle({
+                            center: geolocation,
+                            radius: position.coords.accuracy
+                        });
+                        autocomplete.setBounds(circle.getBounds());
+                    });
+                }
+            }
+            // [END region_geolocation]
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhrNWKeaGAXhLtfJ1njhfvgbIuKYSgoTE&amp;libraries=places&amp;callback=initAutocomplete"
+        async="" defer=""></script>
+
 
     </h:head>
     <h:body>
@@ -74,27 +119,32 @@
 
             <!-- Três imagens -->
             <div class="row">
+                <h:form>
                 <c:forEach var="animal" items="#{animalBean.animaisTop}">
-                    <div class="col-lg-3">
-                        <c:if test="#{animal.fotoAnimal != null}">
-                            <h:graphicImage value="#{animal.fotoAnimal}" class="img-circle" alt="Imagem animal" width="140" height="140"/>
-                        </c:if>
-                        <c:if test="#{animal.fotoAnimal == null}">
-                            <img class="img-circle" src="imagens/gato2.jpg" alt="Imagem animal" width="140" height="140"/>
-                        </c:if>
-                        <h4>#{animal.nomeAnimal}</h4>
-                        <p>Espécie: #{animal.especie}</p>
-                        <p>Local: #{animal.localizacao}</p>
-                        <p><a href="detalhamentoAnimal.jsf" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
-                    </div>
+                    
+                        <div class="col-lg-3">
+                            <c:if test="#{animal.fotoAnimal != null}">
+                                <h:graphicImage value="#{animal.fotoAnimal}" class="img-circle" alt="Imagem animal" width="140" height="140"/>
+                            </c:if>
+                            <c:if test="#{animal.fotoAnimal == null}">
+                                <img class="img-circle" src="imagens/gato2.jpg" alt="Imagem animal" width="140" height="140"/>
+                            </c:if>
+                            <h4>#{animal.nomeAnimal}</h4>
+                            <p>Espécie: #{animal.especie}</p>
+                            <p>Local: #{animal.localizacao}</p>
+                            
+                            <p><h:commandLink action="#{animalBean.VerAnimal(animal)}" class="btn btn-default glyphicon glyphicon-plus" style="background-color: #ffa812; color: white;border-radius: 0px;" value="Ver Mais"/></p>
+                        </div>
+                    
                 </c:forEach>
+                    </h:form>
             </div>
 
 
             <div class="col-md-11"></div>
             <div class="col-md-1" align="center">
                 <br/>
-                <p><a href="listagemAnimais.jsf" class="btn btn-default" style="background-color: #ffa812; color: white; font-weight:bold; width: 60px; height: 60px;border-radius:100%;"><i class="material-icons" style="color: white; padding-top: 12px;">add</i></a></p>
+                <p><a href="animais.jsf" class="btn btn-default" style="background-color: #ffa812; color: white; font-weight:bold; width: 60px; height: 60px;border-radius:100%;"><i class="material-icons" style="color: white; padding-top: 12px;">add</i></a></p>
             </div>
 
         </div>

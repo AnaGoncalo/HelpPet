@@ -36,7 +36,7 @@ public class EncontroDAO {
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, encontro.getDataEncontro());
             pstmt.setString(2, encontro.getHorarioEncontro());
-            pstmt.setBoolean(3, encontro.isStatusEncontro());
+            pstmt.setBoolean(3, encontro.getStatusEncontro());
             pstmt.setBoolean(4, encontro.isEditado());
             pstmt.setInt(5, encontro.getAnimal().getIdAnimal());
             pstmt.setInt(6, encontro.getAdotante().getIdUsuario());
@@ -67,7 +67,7 @@ public class EncontroDAO {
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, encontro.getDataEncontro());
             pstmt.setString(2, encontro.getHorarioEncontro());
-            pstmt.setBoolean(3, encontro.isStatusEncontro());
+            pstmt.setBoolean(3, encontro.getStatusEncontro());
             pstmt.setBoolean(4, encontro.isEditado());
             pstmt.setInt(5, encontro.getAnimal().getIdAnimal());
             pstmt.setInt(6, encontro.getAdotante().getIdUsuario());

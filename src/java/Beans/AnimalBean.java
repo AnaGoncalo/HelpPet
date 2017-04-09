@@ -137,7 +137,7 @@ public class AnimalBean {
         animal = a;
         System.out.println("Edita ...");
         return "editarAnimal.jsf";
-//return "index.jsf?faces-redirect=true";
+        //return "editarAnimal.jsf?faces-redirect=true";
     }
 
     public String Adotar(Animal a) {

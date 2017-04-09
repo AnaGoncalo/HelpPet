@@ -23,6 +23,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import org.apache.tomcat.jni.OS;
 
 /**
  *
@@ -52,6 +53,11 @@ public class EstoqueBean {
         
     }
     
+    public void VerEstoque(Estoque e){
+        estoque = e;
+        System.out.println("Ver estoque" + estoque.getNomeEstoque());
+    }
+    
     public void MeusEstoques(){
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/estoque/" + user.getIdUsuario());
@@ -63,7 +69,7 @@ public class EstoqueBean {
     }
     
     public void Salvar(){
-        System.out.println("Bean estoque: salvar");
+        System.out.println("Bean estoque: salvar" + estoque.getNomeEstoque());
         Client cliente = ClientBuilder.newClient();        
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque");
         Gson gson = new Gson();
@@ -83,6 +89,11 @@ public class EstoqueBean {
         MeusEstoques();
     }
     
+    public void EditarEstoque(Estoque e){
+        estoque = e;
+        Salvar();
+    }
+    
     public String ExcluirEstoque(Estoque e){
         System.out.println("Bean Estoque Excluir " + e.getIdEstoque());
         
@@ -90,6 +101,7 @@ public class EstoqueBean {
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque/" + e.getIdEstoque());
         caminho.request().delete();
         
+        MeusEstoques();
         return null;
     }
     

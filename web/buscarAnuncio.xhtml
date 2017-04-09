@@ -48,7 +48,7 @@
                 <c:forEach var="anuncio" items="#{anuncioBean.anuncios}">
                     <div class="col-xs-18 col-sm-6 col-md-3">
                         <div class="thumbnail caixa">
-                            <img src="imagens/anuncio.jpg" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <img src="#{anuncio.fotoAnuncio}" alt="Foto do Anúncio" style="width:100%; height:170px; border-radius: 0px;"/>
                             <div class="caption" align="center">
                                 <h5>#{anuncio.tituloAnuncio}</h5>
                                 <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="background-color: #1E90FF; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>

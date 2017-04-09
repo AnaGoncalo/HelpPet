@@ -58,20 +58,20 @@ public class Encontro {
         this.horarioEncontro = horarioEncontro;
     }
 
-    public boolean isStatusEncontro() {
-        return statusEncontro;
+    public String isStatusEncontro() {
+        if (this.statusEncontro) {
+            return "Confirmado";
+        } else {
+            return "Não Confirmado";
+        }
     }
 
     public void setStatusEncontro(boolean statusEncontro) {
         this.statusEncontro = statusEncontro;
     }
 
-    public String getStatusEncontro() {
-        if (this.statusEncontro) {
-            return "Não Confirmado";
-        } else {
-            return "Confirmado";
-        }
+    public boolean getStatusEncontro() {
+        return statusEncontro;
     }
 
     public boolean isEditado() {

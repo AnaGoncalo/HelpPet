@@ -64,11 +64,12 @@
         </div>
 
         <!-- Adoção -->
+        <c:set var="encontro" value="#{encontroBean.encontro}"/>
         <div id="services" class="pad-section" style="background-color:#ffa812;">
             <div class="container">
                 <h2 class="text-center" style="color:white;">
-                    <c:if test="#{encontroBean.encontro.animal.tipoAnimal == 'Adoção'}">Adoção</c:if>
-                    <c:if test="#{encontroBean.encontro.animal.tipoAnimal == 'Perdido'}">Devolução</c:if>
+                    <c:if test="#{encontro.animal.tipoAnimal == 'Adoção'}">Adoção</c:if>
+                    <c:if test="#{encontro.animal.tipoAnimal == 'Perdido'}">Devolução</c:if>
                 </h2> 
                 <hr/>
                 <div class="row text-center" >
@@ -80,10 +81,10 @@
                             <div id="myTabContent" class="tab-content" style="color:#000000;">
                                 <div class="tab-pane fade active in" id="informacoes">
                                     <br/>
-                                    <h:inputHidden value="#{encontroBean.encontro.idEncontro}"/>
-                                    <h5 aling="center">Local: #{encontroBean.encontro.localizacao}</h5>
-                                    <h5 aling="center">Data: #{encontroBean.encontro.dataEncontro}</h5>
-                                    <h5 aling="center">Hora: #{encontroBean.encontro.horarioEncontro}</h5>
+                                    <h:inputHidden value="#{encontro.idEncontro}"/>
+                                    <h5 aling="center">Local: #{encontro.localizacao}</h5>
+                                    <h5 aling="center">Data: #{encontro.dataEncontro}</h5>
+                                    <h5 aling="center">Hora: #{encontro.horarioEncontro}</h5>
                                     <br/>
                                     <c:if test="#{encontroBean.encontro.statusEncontro}">
                                         <h6 style="color: red;">Encontro Confirmado!</h6>
@@ -110,7 +111,7 @@
             </div>
         </div>
 
-        <!-- Formulário -->
+        <!-- Formulário de edicao -->
         <div class="modal fade" id="encontro" role="dialog">
             <div class="modal-dialog">
 
@@ -118,22 +119,27 @@
                 <div class="modal-content">
                     <div class="modal-header" align="center">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Marque o encontro</h4>
+                        <h4 class="modal-title">Edite o encontro</h4>
                         <hr/>
+                        <c:if test="#{encontroBean.encontro.adotante.idUsuario == loginBean.usuarioLogado.idUsuario}">
                         <h6 style="color: red;">Os dados informados aqui serão vistos apenas pelo responsável do animal</h6>
+                        </c:if>
+                        <c:if test="#{encontroBean.encontro.animal.responsavel.idUsuario == loginBean.usuarioLogado.idUsuario}">
+                        <h6 style="color: red;">Os dados informados aqui serão vistos apenas pelo interessado em adotar o animal</h6>
+                        </c:if>
                     </div>
                     <div class="modal-body">
                         <h:form >
                             <div class="col-md-12">
                                 <div class="row">
-
+                                    <h:inputHidden value="#{encontro.idEncontro}"/>
                                     <div class="col-md-3" align="left">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
                                             Data:  
                                         </label>
                                     </div>
                                     <div class="col-md-9">
-                                        <h:inputText value="#{encontroBean.encontro.dataEncontro}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                        <h:inputText value="#{encontro.dataEncontro}" class="form-control" style="width: 100%;font-size: 14px;"/>
                                     </div>
                                     <div class="col-md-3" align="left">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;">
@@ -141,7 +147,7 @@
                                         </label>
                                     </div>
                                     <div class="col-md-9">
-                                        <h:inputText value="#{encontroBean.encontro.horarioEncontro}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                        <h:inputText value="#{encontro.horarioEncontro}" class="form-control" style="width: 100%;font-size: 14px;"/>
                                     </div>
                                     <div class="col-md-3" align="left">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;">
@@ -149,7 +155,7 @@
                                         </label>
                                     </div>
                                     <div class="col-md-9">
-                                        <h:inputText value="#{encontroBean.encontro.localizacao}" class="form-control" style="width: 100%;font-size: 14px;"/>
+                                        <h:inputText value="#{encontro.localizacao}" class="form-control" style="width: 100%;font-size: 14px;"/>
                                     </div>
                                     <div class="col-md-12">
                                         <br/>
@@ -165,7 +171,7 @@
                 </div>
             </div>
         </div>
-        
+        <!-- Confirmar -->
         <div class="modal fade" id="confirme" role="dialog">
             <div class="modal-dialog">
 
@@ -180,23 +186,20 @@
                         <h:form>
                             <div class="col-md-12">
                                 <div class="row">
-
                                     <div class="col-md-12" align="center">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
-                                            <h:inputText value="#{encontroBean.encontro.idEncontro}"/>
-                                            <h:inputText value="#{encontroBean.encontro.localizacao}"/>
-                                            <h:inputText value="#{encontroBean.encontro.horarioEncontro}"/>
-                                            <h:inputText value="#{encontroBean.encontro.dataEncontro}"/>
-                                            <h:inputText value="#{encontroBean.encontro.editado}"/>
-                                            <h:inputText value="#{encontroBean.encontro.statusEncontro}"/>
-                                            <h:inputText value="#{encontroBean.encontro.adotante}"/>
-                                            <h:inputText value="#{encontroBean.encontro.animal}"/>
+                                            <h:inputHidden value="#{encontro.idEncontro}"/>
+                                            Local: #{encontro.localizacao}<br/>
+                                            Horário: #{encontro.horarioEncontro}<br/>
+                                            Data: #{encontro.dataEncontro}<br/>
+                                            Adotante: #{encontro.adotante.nomeUsuario}<br/>
+                                            Animal: #{encontro.animal.nomeAnimal}<br/>
                                             Ao confirmar o encontro você concorda com a data, a hora e o local do encontro.
                                         </label>
                                     </div>
                                     <div class="col-md-12">
                                         <br/>
-                                        <h:commandButton action="#{encontroBean.Confirmar()}" value="Confirmar Encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
+                                        <h:commandButton action="#{encontroBean.Confirmar(encontro)}" value="Confirmar Encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
                                         <br/>
                                     </div>
                                 </div>
@@ -208,7 +211,7 @@
                 </div>
             </div>
         </div>
-
+       
 
         <style>
             /* general styles */

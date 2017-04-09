@@ -90,7 +90,7 @@
                                                                 <div align="left">
                                                                     <h:inputHidden value="#{animalBean.animal.idAnimal}"/>
 
-                                                                    <p>Responsável: <h:form><h:commandLink action="#{animalBean.VerResponsavel()}" style="text-decoration: none; color: black;">#{animalBean.animal.responsavel.nomeUsuario}</h:commandLink></h:form></p>
+                                                                    <p>Responsável: #{animalBean.animal.responsavel.nomeUsuario}</p>
                                                                     <p>Espécie: #{animalBean.animal.especie}</p>
                                                                     <p>Idade: #{animalBean.animal.idade}</p>
                                                                     <p>Raça: #{animalBean.animal.raca}</p>
@@ -113,7 +113,7 @@
                                                         <p>
                                                             <h:form>
                                                                 <h:commandLink action="#{animalBean.EditarAnimal(animalBean.animal)}" value="Editar" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px;"/>
-                                                                <h:commandLink action="#{animalBean.ExcluirAnimal(animalBean.animal)}" value="Editar" class="btn btn-danger" style="background-color: #ffa812; color: white;border-radius: 0px;"/>
+                                                                <h:commandLink action="#{animalBean.ExcluirAnimal(animalBean.animal)}" value="Excluir" class="btn btn-danger" style="background-color: #ffa812; color: white;border-radius: 0px;"/>
                                                             </h:form>
                                                         </p>
                                                     </c:if>

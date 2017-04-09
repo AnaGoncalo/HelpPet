@@ -52,29 +52,31 @@ public class EncontroBean {
     }
 
     public String Salvar() {
-        Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
-        Gson gson = new Gson();
-
-        if (encontro.getIdEncontro() == 0) {
-            encontro.setAdotante(user);
-            String json = gson.toJson(encontro);
-            caminho.request().post(Entity.json(json));
-        } else {
-            if (user.getIdUsuario() == encontro.getAdotante().getIdUsuario()) {
-                encontro.setEditado(false);
-            } else {
-                encontro.setEditado(true);
-            }
-
-            String json = gson.toJson(encontro);
-            caminho.request().put(Entity.json(json));
-        }
+        System.out.println("Bean: Encontro Salvar " + encontro.getIdEncontro());
+//        Client cliente = ClientBuilder.newClient();
+//        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
+//        Gson gson = new Gson();
+//
+//        if (encontro.getIdEncontro() == 0) {
+//            encontro.setAdotante(user);
+//            String json = gson.toJson(encontro);
+//            caminho.request().post(Entity.json(json));
+//        } else {
+//            if (user.getIdUsuario() == encontro.getAdotante().getIdUsuario()) {
+//                encontro.setEditado(false);
+//            } else {
+//                encontro.setEditado(true);
+//            }
+//
+//            String json = gson.toJson(encontro);
+//            caminho.request().put(Entity.json(json));
+//        }
 
         return "meusEncontros.jsf";
     }
 
-    public String Confirmar() {
+    public String Confirmar(Encontro e) {
+        encontro = e;
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
         Gson gson = new Gson();

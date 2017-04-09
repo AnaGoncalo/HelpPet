@@ -85,6 +85,7 @@ public class LoginBean {
                 pj = gson.fromJson(json, PessoaJuridica.class);
             }
             mensagem = "";
+            
             return "index.jsf";
         }
         mensagem = "Email e/ou senha incorreto(s)";

@@ -66,7 +66,7 @@ public class AnimalBean {
             return "loginSignin.jsf";
         }
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/animal");
         Gson gson = new Gson();
         
         if (imagem != null) {
@@ -92,7 +92,7 @@ public class AnimalBean {
 
     public void Listar() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/animal");
         String json = caminho.request().get(String.class);
 
         Gson gson = new Gson();
@@ -102,7 +102,7 @@ public class AnimalBean {
 
     public void ListarMeusAnimais() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/animal/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);
@@ -111,7 +111,7 @@ public class AnimalBean {
 
     public String SalvarEncontro() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/encontro");
         Gson gson = new Gson();
 
         if (encontro.getIdEncontro() == 0) {
@@ -158,7 +158,7 @@ public class AnimalBean {
         System.out.println("Bean Animal Excluir " + a.getIdAnimal());
 
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/animal/" + a.getIdAnimal());
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/animal/" + a.getIdAnimal());
         caminho.request().delete();
 
         return "meusAnimais.jsf";
@@ -227,7 +227,7 @@ public class AnimalBean {
 
     public String upload() {
 
-        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + animal.getNomeAnimal() + ".jpg";// + imagem.getSubmittedFileName();
+        String nomeArquivoSaida = "D:\\Netbeans\\HelpPet\\web\\imagens\\" + animal.getNomeAnimal() + ".jpg";// + imagem.getSubmittedFileName();
         //produto.setDescricao(imagem.getSubmittedFileName());
         try (InputStream is = imagem.getInputStream();
                 OutputStream out = new FileOutputStream(nomeArquivoSaida)) {

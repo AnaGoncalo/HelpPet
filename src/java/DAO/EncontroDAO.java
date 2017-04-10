@@ -74,6 +74,13 @@ public class EncontroDAO {
             pstmt.setString(7, encontro.getLocalizacao());
             pstmt.setInt(8, encontro.getIdEncontro());
            
+            if(encontro.getStatusEncontro())
+            {
+                Animal a = encontro.getAnimal();
+                a.setStatusAnimal(true);
+                AnimalDAO.EditarAnimal(a);
+            }
+            
             pstmt.executeUpdate();
         }
         catch (SQLException ex) 

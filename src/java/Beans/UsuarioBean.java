@@ -52,7 +52,7 @@ public class UsuarioBean {
 
     public String Salvar() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/usuario");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/usuario");
         Gson gson = new Gson();
         usuario.setIdPermissao(idPermissao);
         usuario.setFoto("imagens\\users\\userFoto.jpg");
@@ -64,7 +64,7 @@ public class UsuarioBean {
 
     public String VerPerfil(int idUsuario) {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/usuario/" + idUsuario);
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/usuario/" + idUsuario);
         String json = caminho.request().get(String.class);
 
         Gson gson = new Gson();
@@ -89,7 +89,7 @@ public class UsuarioBean {
     public void MeusAnimais(int id) {
         System.out.println("id Usuario para Meus Aniamis: " + id);
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + id);
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/animal/" + id);
         String json = caminho.request().get(String.class);
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);

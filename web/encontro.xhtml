@@ -188,18 +188,19 @@
                                 <div class="row">
                                     <div class="col-md-12" align="center">
                                         <label style="font-size: 14px;color: black; padding-left: 10px;padding-top: 5px;">
-                                            <h:inputHidden value="#{encontro.idEncontro}"/>
+                                            
                                             Local: #{encontro.localizacao}<br/>
                                             Horário: #{encontro.horarioEncontro}<br/>
                                             Data: #{encontro.dataEncontro}<br/>
+                                            Responsavel: #{encontro.animal.responsavel.nomeUsuario}<br/>
                                             Adotante: #{encontro.adotante.nomeUsuario}<br/>
                                             Animal: #{encontro.animal.nomeAnimal}<br/>
-                                            Ao confirmar o encontro você concorda com a data, a hora e o local do encontro.
+                                            <h6 style="color: red;">Ao confirmar o encontro você concorda com a data, a hora e o local do encontro.</h6>
                                         </label>
                                     </div>
                                     <div class="col-md-12">
                                         <br/>
-                                        <h:commandButton action="#{encontroBean.Confirmar(encontro)}" value="Confirmar Encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
+                                        <h:commandButton action="#{encontroBean.getConfirmar(encontro)}" value="Confirmar Encontro" class="btn btn-default" style="background-color: #ffa812; color: white;border-radius: 0px; width: 100%;" />
                                         <br/>
                                     </div>
                                 </div>

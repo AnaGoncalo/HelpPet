@@ -33,7 +33,7 @@ public class testeBean {
     {
         Client cliente = ClientBuilder.newClient();
         
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/myapp");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/myapp");
         String json = caminho.request().get(String.class);
         System.out.println(json);
         teste = json;
@@ -42,7 +42,7 @@ public class testeBean {
     {
         Client cliente = ClientBuilder.newClient();
         
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/myapp");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/myapp");
         ModeloTeste m = new ModeloTeste(testePost);
         Gson gson = new Gson();
         String json = gson.toJson(m);

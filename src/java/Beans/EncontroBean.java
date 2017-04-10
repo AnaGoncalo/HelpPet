@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
@@ -30,7 +31,7 @@ import javax.ws.rs.client.WebTarget;
  * @author Ana Gonçalo
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EncontroBean {
 
     private Encontro encontro;
@@ -53,35 +54,37 @@ public class EncontroBean {
 
     public String Salvar() {
         System.out.println("Bean: Encontro Salvar " + encontro.getIdEncontro());
-//        Client cliente = ClientBuilder.newClient();
-//        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
-//        Gson gson = new Gson();
-//
-//        if (encontro.getIdEncontro() == 0) {
-//            encontro.setAdotante(user);
-//            String json = gson.toJson(encontro);
-//            caminho.request().post(Entity.json(json));
-//        } else {
-//            if (user.getIdUsuario() == encontro.getAdotante().getIdUsuario()) {
-//                encontro.setEditado(false);
-//            } else {
-//                encontro.setEditado(true);
-//            }
-//
-//            String json = gson.toJson(encontro);
-//            caminho.request().put(Entity.json(json));
-//        }
+        Client cliente = ClientBuilder.newClient();
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/encontro");
+        Gson gson = new Gson();
+
+        if (encontro.getIdEncontro() == 0) {
+            encontro.setAdotante(user);
+            String json = gson.toJson(encontro);
+            caminho.request().post(Entity.json(json));
+        } else {
+            if (user.getIdUsuario() == encontro.getAdotante().getIdUsuario()) {
+                encontro.setEditado(false);
+            } else {
+                encontro.setEditado(true);
+            }
+
+            String json = gson.toJson(encontro);
+            caminho.request().put(Entity.json(json));
+        }
 
         return "meusEncontros.jsf";
     }
 
-    public String Confirmar(Encontro e) {
+    public String getConfirmar(Encontro e) {
+        System.out.println("Bean encontro confirmar");
         encontro = e;
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/encontro");
         Gson gson = new Gson();
 
         System.out.println("testando Confirmar.. " + encontro.getIdEncontro());
+        System.out.println(e.getStatusEncontro());
         encontro.setStatusEncontro(true);
         String json = gson.toJson(encontro);
         caminho.request().put(Entity.json(json));
@@ -91,7 +94,7 @@ public class EncontroBean {
 
     public void MeusEncontros() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/encontro/" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/encontro/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
 
         Gson gson = new Gson();
@@ -101,7 +104,7 @@ public class EncontroBean {
 
     public void Listar() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/encontro");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/encontro");
         String json = caminho.request().get(String.class);
 
         Gson gson = new Gson();
@@ -118,7 +121,7 @@ public class EncontroBean {
         System.out.println("Bean Anuncio Excluir " + e.getIdEncontro());
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/encontro/" + e.getIdEncontro());
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/encontro/" + e.getIdEncontro());
         caminho.request().delete();
         
         return "meusEncontros.jsf";

@@ -69,7 +69,7 @@ public class PjBean {
     }
     public void ListarOngs(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/ongs");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/ongs");
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -79,7 +79,7 @@ public class PjBean {
     }
     public void ListarClinicas(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/clinicas");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/clinicas");
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -90,7 +90,7 @@ public class PjBean {
     public void ListarEstoques(){
         System.out.println("id da ong " + ong.getIdUsuario());
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/estoque/" + ong.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/estoque/" + ong.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -99,7 +99,7 @@ public class PjBean {
     }
     public void ListarAnimais() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + ong.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/animal/" + ong.getIdUsuario());
         String json = caminho.request().get(String.class);
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);
@@ -107,7 +107,7 @@ public class PjBean {
     }
     public void ListarEventos(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/evento/" + ong.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/evento/" + ong.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -116,7 +116,7 @@ public class PjBean {
     }
     public void ListarAnuncios(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/anuncio/" + clinica.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/anuncio/" + clinica.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -127,9 +127,9 @@ public class PjBean {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho;
         if(ong != null)
-            caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia/" + ong.getIdUsuario());
+            caminho = cliente.target("http://localhost:8080/HelpPet/rest/experiencia/" + ong.getIdUsuario());
         else
-            caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia/" + clinica.getIdUsuario());
+            caminho = cliente.target("http://localhost:8080/HelpPet/rest/experiencia/" + clinica.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();

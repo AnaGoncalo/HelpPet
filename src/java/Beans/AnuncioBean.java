@@ -59,7 +59,7 @@ public class AnuncioBean {
     
     public void Listar(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/anuncio");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/anuncio");
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -69,7 +69,7 @@ public class AnuncioBean {
     
     public void ListarMeusAnuncios(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/anuncio/" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/anuncio/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -83,7 +83,7 @@ public class AnuncioBean {
         }
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/anuncio");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/anuncio");
         Gson gson = new Gson();
         
         if(imagem != null){
@@ -125,7 +125,7 @@ public class AnuncioBean {
         System.out.println("Bean Anuncio Excluir " + a.getIdAnuncio());
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/anuncio/" + a.getIdAnuncio());
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/anuncio/" + a.getIdAnuncio());
         caminho.request().delete();
         
         return "meusAnuncios.jsf";
@@ -181,7 +181,7 @@ public class AnuncioBean {
     
     public String upload() {
 
-        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + anuncio.getTituloAnuncio() + ".jpg";// + imagem.getSubmittedFileName();
+        String nomeArquivoSaida = "D:\\Netbeans\\HelpPet\\web\\imagens\\" + anuncio.getTituloAnuncio() + ".jpg";// + imagem.getSubmittedFileName();
         //produto.setDescricao(imagem.getSubmittedFileName());
         try (InputStream is = imagem.getInputStream();
                 OutputStream out = new FileOutputStream(nomeArquivoSaida)) {

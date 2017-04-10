@@ -5,6 +5,7 @@ package MyApplicationService;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import DAO.AnimalDAO;
 import DAO.EncontroDAO;
 import Modelo.Encontro;
 import com.google.gson.Gson;
@@ -56,7 +57,6 @@ public class EncontroService {
    public String editarEncontro(String json) throws SQLException{
        Gson gson = new Gson();
        Encontro a = gson.fromJson(json, Encontro.class);
-       
        
        EncontroDAO.EditarEncontro(a);
        

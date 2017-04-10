@@ -49,7 +49,7 @@ public class MeusAnimaisBean {
 
     public void Listar() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/animal/" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/animal/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);

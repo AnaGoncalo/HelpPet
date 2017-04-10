@@ -51,7 +51,7 @@ public class ExperienciaBean {
     
     public void Listar(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/experiencia");
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -61,7 +61,7 @@ public class ExperienciaBean {
     
     public void ListarMinhasExperiencias(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/experiencia/" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/experiencia/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -76,7 +76,7 @@ public class ExperienciaBean {
         }
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/experiencia");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/experiencia");
         Gson gson = new Gson();
         
         if(imagem != null){
@@ -107,7 +107,7 @@ public class ExperienciaBean {
     public String VerExperiencia(Experiencia e){
         experiencia = e;
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/usuario/" + experiencia.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/usuario/" + experiencia.getIdUsuario());
         String json = caminho.request().get(String.class);
         Gson gson = new Gson();
         autor = gson.fromJson(json, Usuario.class);
@@ -123,9 +123,10 @@ public class ExperienciaBean {
         System.out.println("Bean Experiencia Excluir " + e.getIdExperiencia());
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/experiencia/" + e.getIdExperiencia());
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/experiencia/" + e.getIdExperiencia());
         caminho.request().delete();
         
+        ListarMinhasExperiencias();
         return "minhasExperiencias.jsf";
     }
     
@@ -179,7 +180,7 @@ public class ExperienciaBean {
     
     public String upload() {
 
-        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + experiencia.getTituloExperiencia() + ".jpg";// + imagem.getSubmittedFileName();
+        String nomeArquivoSaida = "D:\\Netbeans\\HelpPet\\web\\imagens\\" + experiencia.getTituloExperiencia() + ".jpg";// + imagem.getSubmittedFileName();
         //produto.setDescricao(imagem.getSubmittedFileName());
         try (InputStream is = imagem.getInputStream();
                 OutputStream out = new FileOutputStream(nomeArquivoSaida)) {

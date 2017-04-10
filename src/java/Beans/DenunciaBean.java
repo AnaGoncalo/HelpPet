@@ -49,7 +49,7 @@ public class DenunciaBean {
     
     public void Listar(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/denuncia");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/denuncia");
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -60,14 +60,14 @@ public class DenunciaBean {
     public String Salvar(){
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/denuncia");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/denuncia");
         Gson gson = new Gson();
         
         if(imagem != null){
             denuncia.setFotoDenuncia(upload());
         }
         else{
-            denuncia.setFotoDenuncia("imagens\\denuncia.jpg");
+            denuncia.setFotoDenuncia("imagens\\denuncie.jpg");
         }
         
         String json = gson.toJson(denuncia);
@@ -111,7 +111,7 @@ public class DenunciaBean {
 
     public String upload() {
 
-        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + denuncia.getTituloDenuncia() + ".jpg";// + imagem.getSubmittedFileName();
+        String nomeArquivoSaida = "D:\\Netbeans\\HelpPet\\web\\imagens\\" + denuncia.getTituloDenuncia() + ".jpg";// + imagem.getSubmittedFileName();
         //produto.setDescricao(imagem.getSubmittedFileName());
         try (InputStream is = imagem.getInputStream();
                 OutputStream out = new FileOutputStream(nomeArquivoSaida)) {

@@ -63,7 +63,7 @@
                                     <h:commandLink action="#{experienciaBean.EditarExperiencia(experiencia)}" value="EDITAR" class="btn btn-primary" style="border-radius: 0px;"/>
                                 </div>
                                 <div class="col-md-4">
-                                    <h:commandLink action="#" value="EXCLUIR" class="btn btn-danger" style="border-radius: 0px;"/>
+                                    <h:commandLink action="#{experienciaBean.ExcluirExperiencia(experiencia)}" value="EXCLUIR" class="btn btn-danger" style="border-radius: 0px;"/>
                                 </div>
                             </div>
                         </h:form>
@@ -137,31 +137,17 @@
 
             <hr/>
 
-
-
-
-
-
-
-
-
-
             <!-- Área de pesquisa -->
 
             <div id="container-floating">
-
-                <div id="floating-button" style="background-color: #1E90FF;">
-                    <a href="#" data-toggle="modal" data-target="#pesquisa" >
+                <a href="#" data-toggle="modal" data-target="#pesquisa" >
+                    <div id="floating-button" style="background-color: #1E90FF;">
                         <i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;">add</i>
-                    </a>
-                </div>
-
+                    </div>
+                </a>
             </div>
 
-
-
             <!-- Formulário -->
-
             <div class="modal fade" id="pesquisa" role="dialog">
                 <div class="modal-dialog">
 
@@ -170,8 +156,6 @@
                         <div class="modal-header" align="center">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Compartilhe uma experiência</h4>
-                            <hr/>
-                            <h5>Cadastro</h5>
                         </div>
                         <div class="modal-body">
                             <h:form class="form" enctype="multipart/form-data">
@@ -221,7 +205,13 @@
 
                                         <div class="col-md-12">
                                             <br/>
-                                            <h:commandButton action="#{experienciaBean.Salvar()}" value="Salvar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px; width: 100%;"/>
+                                            <c:if test="#{loginBean.usuarioLogado == null}">
+                                                <h6 align="center" style="color: red;">Para realizar o cadastro é preciso estar logado no sistema.</h6>
+                                                <h:commandButton action="loginSignin.jsf" value="Entrar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px; width: 100%;"/>
+                                            </c:if>
+                                            <c:if test="#{loginBean.usuarioLogado != null}">
+                                                <h:commandButton action="#{experienciaBean.Salvar()}" value="Salvar" class="btn btn-default" style="background-color: #1E90FF; color: white;border-radius: 0px; width: 100%;"/>
+                                            </c:if>
                                             <br/>
                                         </div>
                                     </div>
@@ -233,6 +223,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </h:body>
 </html>

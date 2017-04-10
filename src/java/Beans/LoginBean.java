@@ -42,14 +42,14 @@ public class LoginBean {
     public String VerPerfil() {
         if (usuarioLogado.getIdPermissao() == 1) {
             Client cliente = ClientBuilder.newClient();
-            WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaFisica/" + usuarioLogado.getIdUsuario());
+            WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/pessoaFisica/" + usuarioLogado.getIdUsuario());
             String json = caminho.request().get(String.class);
             Gson gson = new Gson();
             pf = gson.fromJson(json, PessoaFisica.class);
             return "perfilHelper.jsf";
         } else {
             Client cliente = ClientBuilder.newClient();
-            WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaJuridica/" + usuarioLogado.getIdUsuario());
+            WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/pessoaJuridica/" + usuarioLogado.getIdUsuario());
             String json = caminho.request().get(String.class);
             Gson gson = new Gson();
             pj = gson.fromJson(json, PessoaJuridica.class);
@@ -65,7 +65,7 @@ public class LoginBean {
     public String Logar() throws SQLException {
 
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/logar");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/logar");
         Gson gson = new Gson();
         String json = gson.toJson(user);
         json = caminho.request().post(Entity.json(json), String.class);
@@ -76,11 +76,11 @@ public class LoginBean {
             getSession().setAttribute("usuarioLogado", usuarioLogado);
 
             if (usuarioLogado.getIdPermissao() == 1) {
-                caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaFisica/" + usuarioLogado.getIdUsuario());
+                caminho = cliente.target("http://localhost:8080/HelpPet/rest/pessoaFisica/" + usuarioLogado.getIdUsuario());
                 json = caminho.request().get(String.class);
                 pf = gson.fromJson(json, PessoaFisica.class);
             } else {
-                caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaJuridica/" + usuarioLogado.getIdUsuario());
+                caminho = cliente.target("http://localhost:8080/HelpPet/rest/pessoaJuridica/" + usuarioLogado.getIdUsuario());
                 json = caminho.request().get(String.class);
                 pj = gson.fromJson(json, PessoaJuridica.class);
             }
@@ -94,7 +94,7 @@ public class LoginBean {
 
     public String SalvarEditar() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/usuario");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/usuario");
         Gson gson = new Gson();
 
         //upload
@@ -110,12 +110,12 @@ public class LoginBean {
         if (usuarioLogado.getIdPermissao() == 1) {
             System.out.println("bean editar pj");
             pf.setIdHelper(usuarioLogado.getIdUsuario());
-            caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaFisica");
+            caminho = cliente.target("http://localhost:8080/HelpPet/rest/pessoaFisica");
             json = gson.toJson(pf);
             json = caminho.request().put(Entity.json(json), String.class);
             return "perfilHelper.jsf";
         } else {
-            caminho = cliente.target("http://localhost:8080/TesteWS/rest/pessoaJuridica");
+            caminho = cliente.target("http://localhost:8080/HelpPet/rest/pessoaJuridica");
             json = gson.toJson(pj);
             json = caminho.request().put(Entity.json(json), String.class);
             if (usuarioLogado.getIdPermissao() == 2) {
@@ -191,7 +191,7 @@ public class LoginBean {
 
     public String upload() {
 
-        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\users\\" + usuarioLogado.getIdUsuario() + ".jpg";// + imagem.getSubmittedFileName();
+        String nomeArquivoSaida = "D:\\Netbeans\\HelpPet\\web\\imagens\\users\\" + usuarioLogado.getIdUsuario() + ".jpg";// + imagem.getSubmittedFileName();
         //produto.setDescricao(imagem.getSubmittedFileName());
         try (InputStream is = imagem.getInputStream();
                 OutputStream out = new FileOutputStream(nomeArquivoSaida)) {

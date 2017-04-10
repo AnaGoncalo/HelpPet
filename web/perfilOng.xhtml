@@ -131,7 +131,7 @@
                                                     <h5>#{estoque.nomeEstoque} </h5>
                                                 </a>
                                                 <div class="myProgress" >
-                                                    <div class="myBar" style="width: #{(estoque.qtdDiaria*30 / estoque.qtdAtual)}%;"></div>
+                                                    <div class="myBar" style="width: #{(estoque.qtdAtual/(estoque.qtdDiaria*30))*100}%;"></div>
                                                 </div>
 
                                                 <!-- Detalhamento do estoque -->

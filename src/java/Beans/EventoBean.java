@@ -61,7 +61,7 @@ public class EventoBean {
 
     public void Listar() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/evento");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/evento");
         String json = caminho.request().get(String.class);
 
         Gson gson = new Gson();
@@ -71,7 +71,7 @@ public class EventoBean {
 
     public void ListarMeusEventos() {
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/evento/" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/evento/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
 
         Gson gson = new Gson();
@@ -85,7 +85,7 @@ public class EventoBean {
         }
 
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/evento");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/evento");
         Gson gson = new Gson();
         
         if(imagem != null){
@@ -126,7 +126,7 @@ public class EventoBean {
         System.out.println("Bean Evento Excluir " + e.getIdEvento());
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/evento/" + e.getIdEvento());
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/evento/" + e.getIdEvento());
         caminho.request().delete();
         
         return "meusEventos.jsf";
@@ -198,7 +198,7 @@ public class EventoBean {
     
     public String upload() {
 
-        String nomeArquivoSaida = "D:\\Netbeans\\TesteWS\\web\\imagens\\" + evento.getNomeEvento() + ".jpg";// + imagem.getSubmittedFileName();
+        String nomeArquivoSaida = "D:\\Netbeans\\HelpPet\\web\\imagens\\" + evento.getNomeEvento() + ".jpg";// + imagem.getSubmittedFileName();
         //produto.setDescricao(imagem.getSubmittedFileName());
         try (InputStream is = imagem.getInputStream();
                 OutputStream out = new FileOutputStream(nomeArquivoSaida)) {

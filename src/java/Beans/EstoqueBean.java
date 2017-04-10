@@ -44,7 +44,7 @@ public class EstoqueBean {
 
     public void Listar(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/estoque");
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/estoque");
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -60,7 +60,7 @@ public class EstoqueBean {
     
     public void MeusEstoques(){
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://localhost:8080/TesteWS/rest/estoque/" + user.getIdUsuario());
+        WebTarget caminho = cliente.target("http://localhost:8080/HelpPet/rest/estoque/" + user.getIdUsuario());
         String json = caminho.request().get(String.class);
         
         Gson gson = new Gson();
@@ -71,7 +71,7 @@ public class EstoqueBean {
     public void Salvar(){
         System.out.println("Bean estoque: salvar" + estoque.getNomeEstoque());
         Client cliente = ClientBuilder.newClient();        
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque");
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/estoque");
         Gson gson = new Gson();
         
         if(estoque.getIdEstoque() == 0)
@@ -98,7 +98,7 @@ public class EstoqueBean {
         System.out.println("Bean Estoque Excluir " + e.getIdEstoque());
         
         Client cliente = ClientBuilder.newClient();
-        WebTarget caminho = cliente.target("http://127.0.0.1:8080/TesteWS/rest/estoque/" + e.getIdEstoque());
+        WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/estoque/" + e.getIdEstoque());
         caminho.request().delete();
         
         MeusEstoques();

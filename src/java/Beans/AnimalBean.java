@@ -20,6 +20,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -47,6 +48,8 @@ public class AnimalBean {
     private List<Animal> animaisTop = new ArrayList();
     private List<Animal> meusAnimais = new ArrayList();
     private Encontro encontro = new Encontro();
+    private String especie = "Todas";
+    private String tipo = "Todos";
 
     private Part imagem;
 
@@ -68,14 +71,14 @@ public class AnimalBean {
         Client cliente = ClientBuilder.newClient();
         WebTarget caminho = cliente.target("http://127.0.0.1:8080/HelpPet/rest/animal");
         Gson gson = new Gson();
-        
+
         if (imagem != null) {
             animal.setFotoAnimal(upload());
         }
         if (animal.getIdAnimal() == 0) {
             System.out.println("Bean Salvar: " + animal.getNomeAnimal());
             animal.setResponsavel(user);
-            if(imagem == null){
+            if (imagem == null) {
                 animal.setFotoAnimal("imagens\\animal.jpg");
             }
             String json = gson.toJson(animal);
@@ -98,6 +101,40 @@ public class AnimalBean {
         Gson gson = new Gson();
         Animal[] vetor = gson.fromJson(json, Animal[].class);
         animais = Arrays.asList(vetor);
+
+    }
+
+    public void filtrarEspecie(ValueChangeEvent e) {
+        especie = e.getNewValue().toString();
+        Filtrar();
+    }
+    
+    public void filtrarTipo(ValueChangeEvent e) {
+        tipo = e.getNewValue().toString();
+        Filtrar();
+    }
+
+    public void Filtrar() {
+        Listar();
+
+        System.out.println("Especie: " + especie + " Tipo: " + tipo);
+        List<Animal> filtro = new ArrayList();
+        for (Animal a : animais) {
+            if(a.getEspecie().equals(especie) && a.getTipoAnimal().equals(tipo)){
+                filtro.add(a);
+            }
+            else if (especie.equals("Todas") && a.getTipoAnimal().equals(tipo)) {
+                filtro.add(a);
+            }
+            else if(tipo.equals("Todos") && a.getEspecie().equals(especie)){
+                filtro.add(a);
+            }
+            else if(tipo.equals("Todos") && especie.equals("Todas")){
+                filtro.add(a);
+            }
+        }
+
+        animais = filtro;
     }
 
     public void ListarMeusAnimais() {
@@ -244,4 +281,22 @@ public class AnimalBean {
         }
         return "imagens\\" + animal.getNomeAnimal() + ".jpg";
     }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+
 }

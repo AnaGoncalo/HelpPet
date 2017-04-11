@@ -18,6 +18,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.ws.rs.client.Client;
@@ -47,6 +48,42 @@ public class ExperienciaBean {
         if(user != null){
             ListarMinhasExperiencias();
         }
+    }
+    
+    public void Filtrar(String c){
+        Listar();
+        
+        System.out.println("Filtrar Categoria: " + c);
+        
+        List<Experiencia> filtro = new ArrayList();
+        for(Experiencia e : experiencias){
+            if(e.getTipoExperiencia().equals(c)){
+                filtro.add(e);
+            }
+            else if(e.getTipoExperiencia().equals("Todas")){
+                filtro.add(e);
+            }
+        }
+        
+        experiencias = filtro;
+    }
+    
+    public void FiltrarMinhasExperiencias(String c){
+        ListarMinhasExperiencias();
+        
+        System.out.println("Filtrar Categoria: " + c);
+        
+        List<Experiencia> filtro = new ArrayList();
+        for(Experiencia e : experiencias){
+            if(e.getTipoExperiencia().equals(c)){
+                filtro.add(e);
+            }
+            else if(e.getTipoExperiencia().equals("Todas")){
+                filtro.add(e);
+            }
+        }
+        
+        minhasExperiencias = filtro;
     }
     
     public void Listar(){

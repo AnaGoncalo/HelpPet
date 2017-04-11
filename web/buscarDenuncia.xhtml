@@ -41,68 +41,67 @@
             <div class="row">
                 <br/><br/>
                 <c:forEach var="denuncia" items="#{denunciaBean.denuncias}">
-                
-                <div class="col-xs-18 col-sm-6 col-md-3">
-                    <div class="thumbnail caixa">
-                        <img src="#{denuncia.fotoDenuncia}" alt="Foto da Denúncia" style="width:100%; height:170px; border-radius: 0px;"/>
-                        <div class="caption" align="center">
-                            <h5>#{denuncia.tituloDenuncia}</h5>
-                            <div align="left">
-                                <p>Tipo: #{denuncia.tipoDenuncia}</p>
-                                <p>Local: #{denuncia.localizacao}</p>
-                            </div>
-                            <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="##{denuncia.idDenuncia}" style="background-color: #9400D3; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
 
-                            <!-- Detalhamento da denúncia -->
-                            <div class="modal fade" id="#{denuncia.idDenuncia}" role="dialog">
-                                <div class="modal-dialog">
+                    <div class="col-xs-18 col-sm-6 col-md-3">
+                        <div class="thumbnail caixa">
+                            <img src="#{denuncia.fotoDenuncia}" alt="Foto da Denúncia" style="width:100%; height:170px; border-radius: 0px;"/>
+                            <div class="caption" align="center">
+                                <h5>#{denuncia.tituloDenuncia}</h5>
+                                <div align="left">
+                                    <p>Tipo: #{denuncia.tipoDenuncia}</p>
+                                    <p>Local: #{denuncia.localizacao}</p>
+                                </div>
+                                <p><a href="#" class="btn btn-default" data-toggle="modal" data-target="##{denuncia.idDenuncia}" style="background-color: #9400D3; color: white;border-radius: 0px;width: 100%;"><span class="glyphicon glyphicon-plus"></span><span></span>Ver Mais</a></p>
 
-                                    <!-- Conteúdo -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">#{denuncia.tituloDenuncia}</h4>
-                                        </div>
-                                        <div class="modal-body">
+                                <!-- Detalhamento da denúncia -->
+                                <div class="modal fade" id="#{denuncia.idDenuncia}" role="dialog">
+                                    <div class="modal-dialog">
 
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <img src="#{denuncia.fotoDenuncia}" alt="Foto da Denúncia" style="width:100%; height:250px;border-radius: 0px;"/>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div align="left">
-                                                            <p>Tipo: #{denuncia.tipoDenuncia}</p>
-                                                            <p>Local: #{denuncia.localizacao}</p>
-                                                            <p>Descrição: #{denuncia.descricaoDenuncia}</p>
+                                        <!-- Conteúdo -->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">#{denuncia.tituloDenuncia}</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <img src="#{denuncia.fotoDenuncia}" alt="Foto da Denúncia" style="width:100%; height:250px;border-radius: 0px;"/>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div align="left">
+                                                                <p>Tipo: #{denuncia.tipoDenuncia}</p>
+                                                                <p>Local: #{denuncia.localizacao}</p>
+                                                                <p>Descrição: #{denuncia.descricaoDenuncia}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" style="background-color: #9400D3; color: white;" data-dismiss="modal">Fechar</button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" style="background-color: #9400D3; color: white;" data-dismiss="modal">Fechar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
+
                 </c:forEach>
-                
+
 
             </div>
         </div>
 
         <!-- Área de pesquisa -->
-
         <div id="container-floating">
 
             <div id="floating-button" style="background-color: #9400D3;">
@@ -112,10 +111,7 @@
             </div>
         </div>
 
-
-
         <!-- Formulário -->
-
         <div class="modal fade" id="pesquisa" role="dialog">
             <div class="modal-dialog">
 
@@ -125,7 +121,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Busca</h4>
                         <hr/>
-                        <h5>Busque por uma denúncia especifíca</h5>
+                        <h5>Busque por uma denúncia</h5>
                     </div>
                     <div class="modal-body">
                         <h:form>
@@ -138,23 +134,17 @@
                                         </label>
                                     </div>
                                     <div class="col-md-10">
-                                        <h:selectOneMenu value="#" style="height: 30px; color: black;font-size: 14px;" class="form-control">
-                                            <f:selectItem itemLabel="Abandono" itemValue="1"/>
-                                            <f:selectItem itemLabel="Maus-tratos" itemValue="2"/>
+                                        <h:selectOneMenu value="#{denunciaBean.tipo}" valueChangeListener="#{denunciaBean.FiltrarTipo}" style="height: 30px; color: black;font-size: 14px;" class="form-control">
+                                            <f:selectItem itemLabel="Todos" itemValue="Todos"/>
+                                            <f:selectItem itemLabel="Abandono" itemValue="Abandono"/>
+                                            <f:selectItem itemLabel="Maus-tratos" itemValue="Maus-Tratos"/>
+                                            <f:selectItem itemLabel="Outro" itemValue="Outro"/>
                                         </h:selectOneMenu>                                          
                                     </div>
-                                    <div class="col-md-2" align="left">
-                                        <label style="font-size: 14px;color: black; padding-left: 10px;">
-                                            Local:  
-                                        </label>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <h:inputText class="form-control" style="width: 100%;font-size: 14px;"/>
-                                    </div>
-
+                                    
                                     <div class="col-md-12">
                                         <br/>
-                                        <button class="btn btn-default" style="background-color: #9400D3; color: white;border-radius: 0px; width: 100%;" data-dismiss="modal">Pesquisar</button>
+                                        <h:commandLink action="#{denunciaBean.Filtrar()}" class="btn btn-default" style="background-color: #9400D3; color: white;border-radius: 0px; width: 100%;" >Pesquisar</h:commandLink>
                                         <br/>
                                     </div>
                                 </div>

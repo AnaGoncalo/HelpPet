@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Help Pet - Minhas Experiencias</title>
+        <title>Help Pet - Espaço Helper</title>
 
         <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon"></link>
 
@@ -38,20 +38,18 @@
 
                 <div class="col-md-8">
 
-                    <h2 class="page-header" style="color: #ffa812;">
-                        Minhas Experiencias
-                        <br/>
-                    </h2>
-                    <small style="font-size: 16px;">Listagem das experiências que você cadastrou</small>   
+                    <h2 class="page-header" style="color: #ffa812;"> Espaço Helper </h2>
+
+                    <small style="font-size: 16px;">Espaço destinado para troca de experiências entre os Helpers</small>   
 
                     <c:forEach var="experiencia" items="#{experienciaBean.minhasExperiencias}">
-                        <!-- Primeira experiência -->
+
                         <h3 style="text-decoration: none; color: #1E90FF;">
                             #{experiencia.tituloExperiencia}
                         </h3>
                         <p>Tipo: #{experiencia.tipoExperiencia}</p>
                         <hr/>
-                        <img class="img-responsive" style="border-radius: 0px; width: 890px; height: 300px;" src="#{experiencia.foto}" alt="Imagem da postagem"/>
+                        <img src="#{experiencia.foto}" alt="Imagem da postagem" class="img-responsive" style="border-radius: 0px; width: 100%; height: 300px;" />
                         <hr/>
                         <p>#{experiencia.texto}</p>
                         <h:form>
@@ -75,59 +73,44 @@
                 <!-- Lateral -->
                 <div class="col-md-4">
 
-                    <!-- Área de pesquisa -->
                     <br/><br/>
-                    <div class="well panel panel-default" align="center" style="background-color: #ffa812; height: 170px;">
-                        <h4 style="color: white;">Pesquisa</h4>
-                        <hr/>
-                        <div >
-                            <h:form>
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <h:inputText class="form-control" style="color: white;"/>
-                                    <a href="#"><i class="material-icons" style="color: white; margin-top: 17px; margin-left: 15px;"> search</i></a>
-                                </h:panelGrid>
-                            </h:form>
 
-                        </div>
-                    </div>
                     <!-- Categorias -->
-
                     <div class="well panel panel-default" align="center" style="background-color: #ffa812;">
                         <h4 style="color: white;">Categorias</h4>
                         <hr/>
                         <div class="row">
-                            <div class="col-lg-6" align="center" >
-                                <ul class="list-unstyled">
-                                    <li><a href="#" style="text-decoration: none;color: white;">Alimentação</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Filhotes</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Saude</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.col-lg-6 -->
-                            <div class="col-lg-6" align="center">
-                                <ul class="list-unstyled">
-                                    <li><a href="#" style="text-decoration: none;color: white;">Comportamento</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Idosos</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration: none;color: white;">Outro</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.col-lg-6 -->
+                            <h:form>
+                                <div class="col-lg-6" align="center" >
+                                    <ul class="list-unstyled">
+                                        <li><h:commandLink action="#{experienciaBean.FiltrarMinhasExperiencias('Alimentação')}" style="text-decoration: none;color: white;">Alimentação</h:commandLink>
+                                        </li>
+                                        <li><h:commandLink action="#{experienciaBean.FiltrarMinhasExperiencias('Filhotes')}" style="text-decoration: none;color: white;">Filhotes</h:commandLink>
+                                        </li>
+                                        <li><h:commandLink action="#{experienciaBean.FiltrarMinhasExperiencias('Saude')}" style="text-decoration: none;color: white;">Saude</h:commandLink>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <div class="col-lg-6" align="center">
+                                    <ul class="list-unstyled">
+                                        <li><h:commandLink action="#{experienciaBean.FiltrarMinhasExperiencias('Comportamento')}" style="text-decoration: none;color: white;">Comportamento</h:commandLink>
+                                        </li>
+                                        <li><h:commandLink action="#{experienciaBean.FiltrarMinhasExperiencias('Idosos')}" style="text-decoration: none;color: white;">Idosos</h:commandLink>
+                                        </li>
+                                        <li><h:commandLink action="#{experienciaBean.FiltrarMinhasExperiencias('Outro')}" style="text-decoration: none;color: white;">Outro</h:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </h:form>
                         </div>
-                        <!-- /.row -->
                     </div>
 
                     <div class="well panel panel-default" align="center" style="background-color: #ffa812; color: white;">
                         <h4 style="color: white;">Espaço Helper</h4>
                         <hr/>
-                        <p>Vocês podem colocar um pequeno texto explicativo aqui!!!!!!</p>
-
-
+                        <p>Somos uma rede colaborativa de ajuda animal, dessa forma, precisamos que você contribua com o conteudo desse espaço!</p>
+                        <p>Sinta-se a vontade para compartilhar dicas de cuidados, curiosidades e o que mais você souber sobre o mundo animal</p>
                     </div>
 
                 </div>
@@ -138,7 +121,6 @@
             <hr/>
 
             <!-- Área de pesquisa -->
-
             <div id="container-floating">
                 <a href="#" data-toggle="modal" data-target="#pesquisa" >
                     <div id="floating-button" style="background-color: #1E90FF;">
@@ -223,7 +205,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </h:body>
 </html>

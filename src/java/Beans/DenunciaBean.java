@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.Part;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -36,6 +37,8 @@ public class DenunciaBean {
     
     private Part imagem;
     
+    private String tipo = "Todos";
+    
     public DenunciaBean() {
         Listar();
         
@@ -55,6 +58,27 @@ public class DenunciaBean {
         Gson gson = new Gson();
         Denuncia[] vetor = gson.fromJson(json, Denuncia[].class);
         denuncias = Arrays.asList(vetor);
+    }
+    
+    public void FiltrarTipo(ValueChangeEvent e){
+        tipo = e.getNewValue().toString();
+        Filtrar();
+    }
+    
+    public void Filtrar(){
+        Listar();
+        
+        List<Denuncia> filtro = new ArrayList();
+        for(Denuncia d : denuncias){
+            if(d.getTipoDenuncia().equals(tipo)){
+                filtro.add(d);
+            }
+            else if(tipo.equals("Todos")){
+                filtro.add(d);
+            }
+        }
+        
+        denuncias = filtro;
     }
     
     public String Salvar(){
@@ -109,6 +133,14 @@ public class DenunciaBean {
         this.imagem = imagem;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
     public String upload() {
 
         String nomeArquivoSaida = "D:\\Netbeans\\HelpPet\\web\\imagens\\" + denuncia.getTituloDenuncia() + ".jpg";// + imagem.getSubmittedFileName();

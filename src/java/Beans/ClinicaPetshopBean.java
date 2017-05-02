@@ -26,7 +26,8 @@ public class ClinicaPetshopBean {
     
     public ClinicaPetshopBean() {
         try {
-            clinicasPetshops = PessoaJuridicaDAO.listarClinicaPetshops();
+            PessoaJuridicaDAO dao = new PessoaJuridicaDAO();
+            clinicasPetshops = dao.listarClinicaPetshops();
         } catch (SQLException ex) {
             Logger.getLogger(ClinicaPetshopBean.class.getName()).log(Level.SEVERE, null, ex);
         }

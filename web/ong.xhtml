@@ -52,8 +52,13 @@
                             <h5><i class="material-icons">info</i> Informações</h5>
                             <hr/>
                             <p class="itensPerfil">E-mail: #{pjBean.ong.email}</p>
+                            <p class="itensPerfil">Data de nascimento: #{pjBean.ong.dataNascimento}</p>
                             <p class="itensPerfil">Local: #{pjBean.ong.localizacao}</p>
+                            <p class="itensPerfil">Telefone: #{pjBean.ong.telefone}</p>
                             <p class="itensPerfil">Funcionamento: #{pjBean.ong.funcionamento}</p>
+                            <p class="itensPerfil">CNPJ: #{pjBean.ong.cnpj}</p>
+                            <p class="itensPerfil">Site: #{pjBean.ong.site}</p>
+                            <p class="itensPerfil">Descrição: #{pjBean.ong.descricao}</p>
                             <c:if test="#{loginBean.usuarioLogado != null and loginBean.usuarioLogado.idUsuario == pjBean.ong.idUsuario}">
                                 <div style="margin-bottom: 15px;">
                                     <a href="editarONG.jsf" class="btn btn-primary btn-xs" style="margin-left: 0%">Editar</a>
@@ -118,7 +123,7 @@
                                             <c:forEach var="estoque" items="#{pjBean.estoques}">
                                                 <h5>#{estoque.nomeEstoque} </h5>
                                                 <div class="myProgress" >
-                                                    <div class="myBar" style="width: #{(estoque.qtdDiaria*30 / estoque.qtdAtual)}%;"></div>
+                                                    <div class="myBar" style="width: #{(estoque.qtdAtual/(estoque.qtdDiaria*30))*100}%;"></div>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -216,7 +221,7 @@
                                                 <div class="row">
                                                     <c:forEach var="evento" items="#{pjBean.eventos}">
                                                         <div class="col-md-6">
-                                                            <img src="imagens/evento.png" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
+                                                            <img src="#{evento.fotoEvento}" width="200pc" height="200px" class="img-rounded meusEventos" alt="Imagem do evento"/>
                                                         </div>
                                                     </c:forEach>
                                                 </div>

@@ -20,17 +20,24 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class PessoaFisicaDAO {
+    private Connection conn;
     
-    public static List<PessoaFisica> byId(int idUsuario) throws SQLException
+    public PessoaFisicaDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public List<PessoaFisica> byId(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<PessoaFisica> lista = new ArrayList();
-        String comandoSql= "SELECT * FROM PessoaFisica pf inner join usuario on usuario.idUsuario = pf.idHelper where Usuario.idPermissao = 1 AND idUsuario = ?";
         
         try
         {
+            String comandoSql= "SELECT * FROM PessoaFisica pf inner join usuario on usuario.idUsuario = pf.idHelper where "
+                + "Usuario.idPermissao = 1 AND idUsuario = ?";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idUsuario);
             
@@ -49,20 +56,22 @@ public class PessoaFisicaDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }
     
-    public static List<PessoaFisica> listarHelpers() throws SQLException
+    public List<PessoaFisica> listarHelpers() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<PessoaFisica> lista = new ArrayList();
-        String comandoSql= "SELECT * FROM PessoaFisica pf inner join usuario on usuario.idUsuario = pf.idHelper where Usuario.idPermissao = 1";
+        
         try
         {
+            String comandoSql= "SELECT * FROM PessoaFisica pf inner join usuario on usuario.idUsuario = pf.idHelper where "
+                + "Usuario.idPermissao = 1";
+            
             pstmt = conn.prepareStatement(comandoSql);
             
             rs = pstmt.executeQuery();
@@ -80,19 +89,19 @@ public class PessoaFisicaDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }
     
-    public static void editarPF(PessoaFisica pf) throws SQLException
+    public void editarPF(PessoaFisica pf) throws SQLException
     {
         System.out.println("Testando editar DAO PF " + pf.getIdUsuario());
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE PessoaFisica SET cpf = ? WHERE idHelper = ?";
+        
         try
         {
+            String comandoSql = "UPDATE PessoaFisica SET cpf = ? WHERE idHelper = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, pf.getCpf());
             pstmt.setInt(2, pf.getIdHelper());
@@ -105,9 +114,7 @@ public class PessoaFisicaDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         } 
     }
-    
-    
 }

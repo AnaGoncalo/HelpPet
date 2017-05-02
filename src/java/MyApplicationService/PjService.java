@@ -30,7 +30,8 @@ public class PjService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(UsuarioDAO.buscarPJ(idUsuario));
+           UsuarioDAO dao = new UsuarioDAO();
+           json = gson.toJson(dao.buscarPJ(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -44,7 +45,8 @@ public class PjService {
        PessoaJuridica u = gson.fromJson(json, PessoaJuridica.class);
        
        System.out.println("Deu certo " + u.getNomeUsuario());
-       PessoaJuridicaDAO.editarPJ(u);
+       PessoaJuridicaDAO dao = new PessoaJuridicaDAO();
+       dao.editarPJ(u);
        
        String jsonSaida = gson.toJson(u);
        return jsonSaida;

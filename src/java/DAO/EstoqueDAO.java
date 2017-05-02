@@ -21,16 +21,22 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class EstoqueDAO {
+    private Connection conn;
     
-    public static String CadastrarEstoque(Estoque estoque) throws SQLException
+    public EstoqueDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public String CadastrarEstoque(Estoque estoque) throws SQLException
     {
         System.out.println("estoque dao");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Estoque(nomeEstoque, necessidade, qtdDiaria, qtdAtual, idUsuario) "
-                + "values(?, ?, ?, ?, ?)";
+        
         try
         {
+            String comandoSql = "INSERT INTO Estoque(nomeEstoque, necessidade, qtdDiaria, qtdAtual, idUsuario) "
+                + "values(?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, estoque.getNomeEstoque());
             pstmt.setString(2, estoque.getNecessidade());
@@ -46,20 +52,20 @@ public class EstoqueDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String EditarEstoque(Estoque estoque) throws SQLException
+    public String EditarEstoque(Estoque estoque) throws SQLException
     {
         System.out.println("estoque dao editar");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE Estoque SET nomeEstoque = ?, necessidade = ?, qtdDiaria = ?, qtdAtual = ?, idUsuario = ? "
-                + "WHERE idEstoque = ?";
+        
         try
         {
+            String comandoSql = "UPDATE Estoque SET nomeEstoque = ?, necessidade = ?, qtdDiaria = ?, qtdAtual = ?, idUsuario = ? "
+                + "WHERE idEstoque = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, estoque.getNomeEstoque());
             pstmt.setString(2, estoque.getNecessidade());
@@ -76,19 +82,20 @@ public class EstoqueDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String ExcluirEstoque(int idEstoque) throws SQLException
+    public String ExcluirEstoque(int idEstoque) throws SQLException
     {
         System.out.println("estoque dao excluir");
-        Connection conn = Banco.getConexao();
+        
         PreparedStatement pstmt = null;
-        String comandoSql = "DELETE FROM Estoque WHERE idEstoque = ?";
+        
         try
         {
+            String comandoSql = "DELETE FROM Estoque WHERE idEstoque = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idEstoque);
            
@@ -100,20 +107,20 @@ public class EstoqueDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static List<Estoque> ListarEstoques() throws SQLException
+    public List<Estoque> ListarEstoques() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         ResultSet rs = null;
         Statement stmt= null;
         List<Estoque> lista = new ArrayList();
-        String sql= "SELECT * FROM Estoque";
+        
         try
         {
+            String sql= "SELECT * FROM Estoque";
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
@@ -129,20 +136,20 @@ public class EstoqueDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, null, stmt);
+            FabricaConexao.closeConexao(conn, rs, null, stmt);
         } 
         return lista;
     }
     
-    public static List<Estoque> ListarPorUsuario(int idUsuario) throws SQLException
+    public List<Estoque> ListarPorUsuario(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Estoque> lista = new ArrayList();
-        String sql= "SELECT * FROM Estoque WHERE idUsuario = ?";
+        
         try
         {
+            String sql= "SELECT * FROM Estoque WHERE idUsuario = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, idUsuario);
             
@@ -160,7 +167,7 @@ public class EstoqueDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }

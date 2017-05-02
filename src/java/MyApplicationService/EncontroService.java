@@ -30,7 +30,8 @@ public class EncontroService {
    @GET
    public String listarEncontros() throws SQLException
    {
-       List<Encontro> encontros = EncontroDAO.ListarEncontros();
+       EncontroDAO dao = new EncontroDAO();
+       List<Encontro> encontros = dao.ListarEncontros();
        
        Gson gson = new Gson();
        String json = gson.toJson(encontros);
@@ -46,7 +47,8 @@ public class EncontroService {
        //a.setIdUsuario(1);
        System.out.println("Ainda não deu certo" + a.getAdotante().getIdUsuario());
        //System.out.println("Deu certo " + a.getIdAnimal());
-       EncontroDAO.CadastrarEncontro(a);
+       EncontroDAO dao = new EncontroDAO();
+       dao.CadastrarEncontro(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -58,7 +60,8 @@ public class EncontroService {
        Gson gson = new Gson();
        Encontro a = gson.fromJson(json, Encontro.class);
        
-       EncontroDAO.EditarEncontro(a);
+       EncontroDAO dao = new EncontroDAO();
+       dao.EditarEncontro(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -72,7 +75,8 @@ public class EncontroService {
        //Encontro a = gson.fromJson(json, Encontro.class);
        System.out.println("EncontroService excluir" + idEncontro);
        
-       EncontroDAO.ExcluirEncontro(idEncontro);
+       EncontroDAO dao = new EncontroDAO();
+       dao.ExcluirEncontro(idEncontro);
        
        String jsonSaida = gson.toJson(idEncontro);
        return jsonSaida;
@@ -86,7 +90,8 @@ public class EncontroService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(EncontroDAO.ListarPorUsuario(idUsuario));
+           EncontroDAO dao = new EncontroDAO();
+           json = gson.toJson(dao.ListarPorUsuario(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(EncontroService.class.getName()).log(Level.SEVERE, null, ex);
        }

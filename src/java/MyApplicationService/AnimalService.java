@@ -33,7 +33,8 @@ public class AnimalService {
    {
        List<Animal> animais = null;
        try {
-           animais = AnimalDAO.ListarAnimaisNaoAdotados();
+           AnimalDAO dao = new AnimalDAO();
+           animais = dao.ListarAnimaisNaoAdotados();
        } catch (SQLException ex) {
            Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -52,7 +53,8 @@ public class AnimalService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(AnimalDAO.ListarPorUsuario(idUsuario));
+           AnimalDAO dao = new AnimalDAO();
+           json = gson.toJson(dao.ListarPorUsuario(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -70,7 +72,8 @@ public class AnimalService {
        System.out.println("Deu certo " + a.getNomeAnimal());
        
        try {
-           AnimalDAO.CadastrarAnimal(a);
+           AnimalDAO dao = new AnimalDAO();
+           dao.CadastrarAnimal(a);
        } catch (SQLException ex) {
            Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -90,7 +93,8 @@ public class AnimalService {
        System.out.println("Deu certo " + a.getNomeAnimal());
        
        try {
-           AnimalDAO.EditarAnimal(a);
+           AnimalDAO dao = new AnimalDAO();
+           dao.EditarAnimal(a);
        } catch (SQLException ex) {
            Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -111,7 +115,8 @@ public class AnimalService {
        System.out.println("Deu certo " + idAnimal);
        
        try {
-           AnimalDAO.ExcluirAnimal(idAnimal);
+           AnimalDAO dao = new AnimalDAO();
+           dao.ExcluirAnimal(idAnimal);
        } catch (SQLException ex) {
            Logger.getLogger(AnimalService.class.getName()).log(Level.SEVERE, null, ex);
        }

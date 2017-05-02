@@ -23,15 +23,23 @@ import java.util.logging.Logger;
  */
 public class AnuncioDAO {
     
-    public static String CadastrarAnuncio(Anuncio anuncio) throws SQLException
+    private Connection conn;
+    
+    public AnuncioDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public String CadastrarAnuncio(Anuncio anuncio) throws SQLException
     {
         System.out.println("anuncio dao");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Anuncio(tituloAnuncio, descricaoAnuncio, fotoAnuncio, tipoAnuncio, idUsuario)"
-                + " values(?, ?, ?, ?, ?)";
+        
         try
         {
+            String comandoSql = "INSERT INTO Anuncio(tituloAnuncio, descricaoAnuncio, fotoAnuncio, tipoAnuncio, idUsuario)"
+                + " values(?, ?, ?, ?, ?)";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, anuncio.getTituloAnuncio());
             pstmt.setString(2, anuncio.getDescricaoAnuncio());
@@ -47,20 +55,22 @@ public class AnuncioDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String EditarAnuncio(Anuncio anuncio) throws SQLException
+    public String EditarAnuncio(Anuncio anuncio) throws SQLException
     {
         System.out.println("anuncio dao editar");
-        Connection conn = Banco.getConexao();
+        
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE Anuncio SET tituloAnuncio = ?, descricaoAnuncio = ?, fotoAnuncio = ?, tipoAnuncio = ?, "
-                + "idUsuario = ? WHERE idAnuncio = ?";
+        
         try
         {
+            String comandoSql = "UPDATE Anuncio SET tituloAnuncio = ?, descricaoAnuncio = ?, fotoAnuncio = ?, tipoAnuncio = ?, "
+                + "idUsuario = ? WHERE idAnuncio = ?";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, anuncio.getTituloAnuncio());
             pstmt.setString(2, anuncio.getDescricaoAnuncio());
@@ -77,19 +87,21 @@ public class AnuncioDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String ExcluirAnuncio(int idAnuncio) throws SQLException
+    public String ExcluirAnuncio(int idAnuncio) throws SQLException
     {
         System.out.println("DAO Anuncio Excluir " + idAnuncio);
-        Connection conn = Banco.getConexao();
+        
         PreparedStatement pstmt = null;
-        String comandoSql = "DELETE FROM Anuncio WHERE idAnuncio = ?";
+        
         try
         {
+            String comandoSql = "DELETE FROM Anuncio WHERE idAnuncio = ?";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idAnuncio);
             
@@ -102,20 +114,21 @@ public class AnuncioDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static List<Anuncio> ListarAnuncios() throws SQLException
+    public List<Anuncio> ListarAnuncios() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         ResultSet rs = null;
         Statement stmt= null;
         List<Anuncio> lista = new ArrayList();
-        String sql= "SELECT * FROM Anuncio";
+        
         try
         {
+            String sql= "SELECT * FROM Anuncio";
+            
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
@@ -131,20 +144,21 @@ public class AnuncioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, null, stmt);
+            FabricaConexao.closeConexao(conn, rs, null, stmt);
         } 
         return lista;
     }
     
-    public static List<Anuncio> ListarPorUsuario(int idUsuario) throws SQLException
+    public List<Anuncio> ListarPorUsuario(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Anuncio> lista = new ArrayList();
-        String sql= "SELECT * FROM Anuncio WHERE idUsuario = ?";
+        
         try
         {
+            String sql= "SELECT * FROM Anuncio WHERE idUsuario = ?";
+            
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, idUsuario);
             
@@ -162,7 +176,7 @@ public class AnuncioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }

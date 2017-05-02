@@ -18,10 +18,15 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class PermissaoDAO {
+    private Connection conn;
+    
+    public PermissaoDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
 
     public Permissao buscarById(int idPermissao) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Permissao p = null;
@@ -43,7 +48,7 @@ public class PermissaoDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return p;
     }

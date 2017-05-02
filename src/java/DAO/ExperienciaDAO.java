@@ -22,16 +22,22 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class ExperienciaDAO {
+    private Connection conn;
     
-    public static String CadastrarExperiencia(Experiencia experiencia) throws SQLException
+    public ExperienciaDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public String CadastrarExperiencia(Experiencia experiencia) throws SQLException
     {
         System.out.println("experiencia dao");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Experiencia(tituloExperiencia, tipoExperiencia, texto, foto,"
-                + "statusExperiencia, idUsuario) values(?, ?, ?, ?, ?, ?)";
+        
         try
         {
+            String comandoSql = "INSERT INTO Experiencia(tituloExperiencia, tipoExperiencia, texto, foto,"
+                + "statusExperiencia, idUsuario) values(?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, experiencia.getTituloExperiencia());
             pstmt.setString(2, experiencia.getTipoExperiencia());
@@ -48,20 +54,20 @@ public class ExperienciaDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String EditarExperiencia(Experiencia experiencia) throws SQLException{
+    public String EditarExperiencia(Experiencia experiencia) throws SQLException{
         
         System.out.println("experiencia dao editar");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE Experiencia SET tituloExperiencia = ?, tipoExperiencia = ?, texto = ?, foto = ?,"
-                + "statusExperiencia = ?, idUsuario = ? WHERE idExperiencia = ?";
+        
         try
         {
+            String comandoSql = "UPDATE Experiencia SET tituloExperiencia = ?, tipoExperiencia = ?, texto = ?, foto = ?,"
+                + "statusExperiencia = ?, idUsuario = ? WHERE idExperiencia = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, experiencia.getTituloExperiencia());
             pstmt.setString(2, experiencia.getTipoExperiencia());
@@ -79,19 +85,19 @@ public class ExperienciaDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "Ok!";
     }
     
-    public static String ExcluirExperiencia(int idExperiencia) throws SQLException{
+    public String ExcluirExperiencia(int idExperiencia) throws SQLException{
         
         System.out.println("experiencia dao excluir");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "DELETE FROM Experiencia WHERE idExperiencia = ?";
+        
         try
         {
+            String comandoSql = "DELETE FROM Experiencia WHERE idExperiencia = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idExperiencia);
            
@@ -103,20 +109,20 @@ public class ExperienciaDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "Ok!";
     }
     
-    public static List<Experiencia> ListarExperiencias() throws SQLException
+    public List<Experiencia> ListarExperiencias() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         ResultSet rs = null;
         Statement stmt= null;
         List<Experiencia> lista = new ArrayList();
-        String sql= "SELECT * FROM Experiencia";
+        
         try
         {
+            String sql= "SELECT * FROM Experiencia";
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
@@ -133,20 +139,20 @@ public class ExperienciaDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, null, stmt);
+            FabricaConexao.closeConexao(conn, rs, null, stmt);
         } 
         return lista;
     }
     
-    public static List<Experiencia> ListarPorUsuario(int idUsuario) throws SQLException
+    public List<Experiencia> ListarPorUsuario(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Experiencia> lista = new ArrayList();
-        String sql= "SELECT * FROM Experiencia WHERE idUsuario = ?";
+        
         try
         {
+            String sql= "SELECT * FROM Experiencia WHERE idUsuario = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, idUsuario);
             
@@ -165,7 +171,7 @@ public class ExperienciaDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }

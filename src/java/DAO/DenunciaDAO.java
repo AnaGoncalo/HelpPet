@@ -23,15 +23,23 @@ import java.util.logging.Logger;
  */
 public class DenunciaDAO {
     
-    public static String CadastrarDenuncia(Denuncia denuncia) throws SQLException
+    private Connection conn;
+    
+    public DenunciaDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public String CadastrarDenuncia(Denuncia denuncia) throws SQLException
     {
         System.out.println("denuncia dao");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Denuncia(tituloDenuncia, descricaoDenuncia, fotoDenuncia, tipoDenuncia,"
-                + "localizacao) values(?, ?, ?, ?, ?)";
+        
         try
         {
+            String comandoSql = "INSERT INTO Denuncia(tituloDenuncia, descricaoDenuncia, fotoDenuncia, tipoDenuncia,"
+                + "localizacao) values(?, ?, ?, ?, ?)";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, denuncia.getTituloDenuncia());
             pstmt.setString(2, denuncia.getDescricaoDenuncia());
@@ -47,20 +55,21 @@ public class DenunciaDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static List<Denuncia> ListarDenuncias() throws SQLException
+    public List<Denuncia> ListarDenuncias() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         ResultSet rs = null;
         Statement stmt= null;
         List<Denuncia> lista = new ArrayList();
-        String sql= "SELECT * FROM Denuncia";
+        
         try
         {
+            String sql= "SELECT * FROM Denuncia";
+            
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
@@ -77,7 +86,7 @@ public class DenunciaDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, null, stmt);
+            FabricaConexao.closeConexao(conn, rs, null, stmt);
         } 
         return lista;
     }

@@ -34,7 +34,8 @@ public class UsuarioService {
        Usuario u = gson.fromJson(json, Usuario.class);
        
        System.out.println("Deu certo " + u.getNomeUsuario());
-       UsuarioDAO.inserir(u);
+       UsuarioDAO dao = new UsuarioDAO();
+       dao.inserir(u);
        
        String jsonSaida = gson.toJson(u);
        return jsonSaida;    
@@ -47,8 +48,9 @@ public class UsuarioService {
        Usuario u = gson.fromJson(json, Usuario.class);
        
        System.out.println("Deu certo " + u.getNomeUsuario());
-       UsuarioDAO.editar(u);
-       u = UsuarioDAO.buscarById(u.getIdUsuario());
+       UsuarioDAO dao = new UsuarioDAO();
+       dao.editar(u);
+       u = dao.buscarById(u.getIdUsuario());
        System.out.println("e ai");
        String jsonSaida = gson.toJson(u);
        return jsonSaida;
@@ -62,7 +64,8 @@ public class UsuarioService {
        //Usuario u = gson.fromJson(json, Usuario.class);
        
        System.out.println("Deu certo " + idUsuario);
-       UsuarioDAO.excluir(idUsuario);
+       UsuarioDAO dao = new UsuarioDAO();
+       dao.excluir(idUsuario);
        
        String jsonSaida = gson.toJson(idUsuario);
        return jsonSaida;
@@ -76,7 +79,8 @@ public class UsuarioService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(UsuarioDAO.buscarById(idUsuario));
+           UsuarioDAO dao = new UsuarioDAO();
+           json = gson.toJson(dao.buscarById(idUsuario));
 //           Usuario u = gson.fromJson(json, Usuario.class);
 //           if(u.getIdPermissao() == 1)
 //               json = gson.toJson(PessoaFisicaDAO.byId(u.getIdUsuario()));

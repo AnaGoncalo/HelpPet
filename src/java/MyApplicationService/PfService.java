@@ -31,7 +31,8 @@ public class PfService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(UsuarioDAO.buscarPF(idUsuario));
+           UsuarioDAO dao = new UsuarioDAO();
+           json = gson.toJson(dao.buscarPF(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -45,7 +46,8 @@ public class PfService {
        PessoaFisica u = gson.fromJson(json, PessoaFisica.class);
        
        System.out.println("Deu certo " + u.getNomeUsuario());
-       PessoaFisicaDAO.editarPF(u);
+       PessoaFisicaDAO dao = new PessoaFisicaDAO();
+       dao.editarPF(u);
        
        String jsonSaida = gson.toJson(u);
        return jsonSaida;

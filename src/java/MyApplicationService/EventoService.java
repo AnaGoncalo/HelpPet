@@ -29,7 +29,8 @@ public class EventoService {
    @GET
    public String listarEvento() throws SQLException
    {
-       List<Evento> eventos = EventoDAO.ListarEventos();
+       EventoDAO dao = new EventoDAO();
+       List<Evento> eventos = dao.ListarEventos();
        
        Gson gson = new Gson();
        String json = gson.toJson(eventos);
@@ -43,7 +44,9 @@ public class EventoService {
        Gson gson = new Gson();
        Evento a = gson.fromJson(json, Evento.class);
        System.out.println("Deu certo " + a.getNomeEvento());
-       EventoDAO.CadastrarEvento(a);
+       
+       EventoDAO dao = new EventoDAO();
+       dao.CadastrarEvento(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -55,7 +58,9 @@ public class EventoService {
        Gson gson = new Gson();
        Evento a = gson.fromJson(json, Evento.class);
        System.out.println("Deu certo " + a.getNomeEvento());
-       EventoDAO.EditarEvento(a);
+       
+       EventoDAO dao = new EventoDAO();
+       dao.EditarEvento(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -69,7 +74,8 @@ public class EventoService {
        //Evento a = gson.fromJson(json, Evento.class);
        
        System.out.println("Deu certo " + idEvento);
-       EventoDAO.ExcluirEvento(idEvento);
+       EventoDAO dao = new EventoDAO();
+       dao.ExcluirEvento(idEvento);
        
        String jsonSaida = gson.toJson(idEvento);
        return jsonSaida;
@@ -83,7 +89,8 @@ public class EventoService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(EventoDAO.ListarPorUsuario(idUsuario));
+           EventoDAO dao = new EventoDAO();
+           json = gson.toJson(dao.ListarPorUsuario(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(EventoService.class.getName()).log(Level.SEVERE, null, ex);
        }

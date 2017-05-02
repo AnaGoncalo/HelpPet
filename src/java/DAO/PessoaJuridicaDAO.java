@@ -20,16 +20,24 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class PessoaJuridicaDAO {
+    private Connection conn;
     
-    public static List<PessoaJuridica> listarOngs() throws SQLException
+    public PessoaJuridicaDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public List<PessoaJuridica> listarOngs() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<PessoaJuridica> lista = new ArrayList();
-        String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 2";
+        
         try
         {
+            String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop "
+                    + "where Usuario.idPermissao = 2";
+            
             pstmt = conn.prepareStatement(comandoSql);
             
             rs = pstmt.executeQuery();
@@ -48,20 +56,21 @@ public class PessoaJuridicaDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }
     
-    public static List<PessoaJuridica> listarClinicaPetshops() throws SQLException
+    public List<PessoaJuridica> listarClinicaPetshops() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<PessoaJuridica> lista = new ArrayList();
-        String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 3";
+        
         try
         {
+            String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop "
+                    + "where Usuario.idPermissao = 3";
             pstmt = conn.prepareStatement(comandoSql);
             
             rs = pstmt.executeQuery();
@@ -80,20 +89,21 @@ public class PessoaJuridicaDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }
     
-    public static void editarPJ(PessoaJuridica pj) throws SQLException
+    public void editarPJ(PessoaJuridica pj) throws SQLException
     {
         System.out.println("Testando editar DAO PJ");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE PessoaJuridica SET cnpj = ?, funcionamento = ?, descricao = ?, site = ? "
-                + "WHERE idClinicaPetshop = ?";
+        
         try
         {
+            String comandoSql = "UPDATE PessoaJuridica SET cnpj = ?, funcionamento = ?, descricao = ?, site = ? "
+                + "WHERE idClinicaPetshop = ?";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, pj.getCnpj());
             pstmt.setString(2, pj.getFuncionamento());
@@ -109,7 +119,7 @@ public class PessoaJuridicaDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         } 
     }
 }

@@ -28,7 +28,8 @@ public class OngService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(UsuarioDAO.listarOng());
+           UsuarioDAO dao = new UsuarioDAO();
+           json = gson.toJson(dao.listarOng());
        } catch (SQLException ex) {
            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, null, ex);
        }

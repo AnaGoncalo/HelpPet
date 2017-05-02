@@ -29,7 +29,8 @@ public class AnuncioService {
    @GET
    public String listarAnuncio() throws SQLException
    {
-       List<Anuncio> anuncios = AnuncioDAO.ListarAnuncios();
+       AnuncioDAO dao = new AnuncioDAO();
+       List<Anuncio> anuncios = dao.ListarAnuncios();
        
        Gson gson = new Gson();
        String json = gson.toJson(anuncios);
@@ -43,7 +44,8 @@ public class AnuncioService {
        Gson gson = new Gson();
        Anuncio a = gson.fromJson(json, Anuncio.class);
        System.out.println("Deu certo " + a.getTituloAnuncio());
-       AnuncioDAO.CadastrarAnuncio(a);
+       AnuncioDAO dao = new AnuncioDAO();
+       dao.CadastrarAnuncio(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -56,7 +58,8 @@ public class AnuncioService {
        Anuncio a = gson.fromJson(json, Anuncio.class);
        
        System.out.println("Deu certo " + a.getTituloAnuncio());
-       AnuncioDAO.EditarAnuncio(a);
+       AnuncioDAO dao = new AnuncioDAO();
+       dao.EditarAnuncio(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -69,7 +72,8 @@ public class AnuncioService {
        Gson gson = new Gson();
        //Anuncio a = gson.fromJson(json, Anuncio.class); 
        System.out.println("Service Anuncio Excluir " + idAnuncio);
-       AnuncioDAO.ExcluirAnuncio(idAnuncio);
+       AnuncioDAO dao = new AnuncioDAO();
+       dao.ExcluirAnuncio(idAnuncio);
        
        String jsonSaida = gson.toJson(idAnuncio);
        return jsonSaida;
@@ -83,7 +87,8 @@ public class AnuncioService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(AnuncioDAO.ListarPorUsuario(idUsuario));
+           AnuncioDAO dao = new AnuncioDAO();
+           json = gson.toJson(dao.ListarPorUsuario(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(AnuncioService.class.getName()).log(Level.SEVERE, null, ex);
        }

@@ -28,7 +28,8 @@ public class ExperienciaService {
    @GET
    public String listarExperiencias() throws SQLException
    {
-       List<Experiencia> experiencias = ExperienciaDAO.ListarExperiencias();
+       ExperienciaDAO dao = new ExperienciaDAO();
+       List<Experiencia> experiencias = dao.ListarExperiencias();
        
        Gson gson = new Gson();
        String json = gson.toJson(experiencias);
@@ -43,7 +44,8 @@ public class ExperienciaService {
        Experiencia a = gson.fromJson(json, Experiencia.class);
        //a.setIdUsuario(1);
        System.out.println("Deu certo " + a.getTituloExperiencia());
-       ExperienciaDAO.CadastrarExperiencia(a);
+       ExperienciaDAO dao = new ExperienciaDAO();
+       dao.CadastrarExperiencia(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -56,7 +58,8 @@ public class ExperienciaService {
        Gson gson = new Gson();
        Experiencia a = gson.fromJson(json, Experiencia.class);
        
-       ExperienciaDAO.EditarExperiencia(a);
+       ExperienciaDAO dao = new ExperienciaDAO();
+       dao.EditarExperiencia(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -68,8 +71,8 @@ public class ExperienciaService {
    public String excluirExperiencia(@PathParam("idExperiencia") int idExperiencia) throws SQLException{
        Gson gson = new Gson();
        //Experiencia a = gson.fromJson(json, Experiencia.class);
-       
-       ExperienciaDAO.ExcluirExperiencia(idExperiencia);
+       ExperienciaDAO dao = new ExperienciaDAO();
+       dao.ExcluirExperiencia(idExperiencia);
        
        String jsonSaida = gson.toJson(idExperiencia);
        return jsonSaida;
@@ -83,7 +86,8 @@ public class ExperienciaService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(ExperienciaDAO.ListarPorUsuario(idUsuario));
+           ExperienciaDAO dao = new ExperienciaDAO();
+           json = gson.toJson(dao.ListarPorUsuario(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(ExperienciaService.class.getName()).log(Level.SEVERE, null, ex);
        }

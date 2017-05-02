@@ -23,16 +23,23 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class UsuarioDAO {
+    private Connection conn;
     
-    public static void inserir(Usuario usuario) throws SQLException
+    public UsuarioDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public void inserir(Usuario usuario) throws SQLException
     {
         System.out.println("Testando inserir DAo Usuario");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Usuario(nomeUsuario, email, senha, dataNascimento, foto, localizacao, idPermissao) "
-                + "values(?, ?, ?, ?, ?, ?, ?)";
+        
         try
         {
+            String comandoSql = "INSERT INTO Usuario(nomeUsuario, email, senha, dataNascimento, foto, localizacao, idPermissao) "
+                + "values(?, ?, ?, ?, ?, ?, ?)";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, usuario.getNomeUsuario());
             pstmt.setString(2, usuario.getEmail());
@@ -50,19 +57,20 @@ public class UsuarioDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         } 
     }
     
-    public static void editar(Usuario usuario) throws SQLException
+    public void editar(Usuario usuario) throws SQLException
     {
         System.out.println("Testando editar DAo Usuario");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE Usuario SET nomeUsuario = ?, email = ?, senha = ?, dataNascimento = ?, foto = ?, "
-                + "localizacao = ? WHERE idUsuario = ?";
+        
         try
         {
+            String comandoSql = "UPDATE Usuario SET nomeUsuario = ?, email = ?, senha = ?, dataNascimento = ?, foto = ?, "
+                + "localizacao = ? WHERE idUsuario = ?";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, usuario.getNomeUsuario());
             pstmt.setString(2, usuario.getEmail());
@@ -81,18 +89,18 @@ public class UsuarioDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         } 
     }
     
-    public static void excluir(int idUsuario) throws SQLException
+    public void excluir(int idUsuario) throws SQLException
     {
         System.out.println("Testando excluir DAO usuario");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "DELETE FROM Usuario WHERE idUsuario = ?";
+        
         try
         {
+            String comandoSql = "DELETE FROM Usuario WHERE idUsuario = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idUsuario);
            
@@ -104,19 +112,19 @@ public class UsuarioDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         } 
     }
     
-    public static Usuario buscarById(int idUsuario) throws SQLException
+    public Usuario buscarById(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Usuario u = null;
-        String comandoSql= "SELECT * FROM Usuario WHERE Usuario.idUsuario = ?";
+        
         try
         {
+            String comandoSql= "SELECT * FROM Usuario WHERE Usuario.idUsuario = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idUsuario);
             
@@ -143,20 +151,21 @@ public class UsuarioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return u;
     }
     
-    public static PessoaFisica buscarPF(int idUsuario) throws SQLException
+    public PessoaFisica buscarPF(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         PessoaFisica u = null;
-        String comandoSql= "SELECT * FROM PessoaFisica WHERE idHelper = ?";
+        
         try
         {
+            String comandoSql= "SELECT * FROM PessoaFisica WHERE idHelper = ?";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idUsuario);
             
@@ -172,20 +181,20 @@ public class UsuarioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return u;
     }
     
-    public static PessoaJuridica buscarPJ(int idUsuario) throws SQLException
+    public PessoaJuridica buscarPJ(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         PessoaJuridica u = null;
-        String comandoSql= "SELECT * FROM PessoaJuridica WHERE idClinicaPetshop = ?";
+        
         try
         {
+            String comandoSql= "SELECT * FROM PessoaJuridica WHERE idClinicaPetshop = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idUsuario);
             
@@ -202,7 +211,7 @@ public class UsuarioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return u;
     }
@@ -210,14 +219,14 @@ public class UsuarioDAO {
     public Usuario logar(String email, String senha) throws SQLException
     {
         System.out.println("DAO.UsuarioDAO.logar()");
-        Connection conn = Banco.getConexao();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         Usuario u = new Usuario();
         
-        String comandoSql= "SELECT * FROM Usuario WHERE Usuario.email = ? AND Usuario.senha = ?";
+        
         try
         {
+            String comandoSql= "SELECT * FROM Usuario WHERE Usuario.email = ? AND Usuario.senha = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, email);
             pstmt.setString(2, senha);
@@ -248,20 +257,20 @@ public class UsuarioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return u;
     }
     
-    public static List<PessoaJuridica> listarOng() throws SQLException
+    public List<PessoaJuridica> listarOng() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<PessoaJuridica> lista = new ArrayList();
-        String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 2 ";
+        
         try
         {
+            String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 2 ";
             pstmt = conn.prepareStatement(comandoSql);
             
             rs = pstmt.executeQuery();
@@ -280,20 +289,20 @@ public class UsuarioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }
     
-    public static List<PessoaJuridica> listarClinicaPetshops() throws SQLException
+    public List<PessoaJuridica> listarClinicaPetshops() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<PessoaJuridica> lista = new ArrayList();
-        String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 3";
+        
         try
         {
+            String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 3";
             pstmt = conn.prepareStatement(comandoSql);
             
             rs = pstmt.executeQuery();
@@ -312,7 +321,7 @@ public class UsuarioDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }

@@ -22,16 +22,22 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class EventoDAO {
+    private Connection conn;
     
-    public static String CadastrarEvento(Evento evento) throws SQLException
+    public EventoDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public String CadastrarEvento(Evento evento) throws SQLException
     {
         System.out.println("evento dao");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Evento(nomeEvento, dataEvento, horarioEvento, descricaoEvento, fotoEvento, idUsuario,"
-                + " localizacao) values(?, ?, ?, ?, ?, ?, ?)";
+        
         try
         {
+            String comandoSql = "INSERT INTO Evento(nomeEvento, dataEvento, horarioEvento, descricaoEvento, fotoEvento, idUsuario,"
+                + " localizacao) values(?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, evento.getNomeEvento());
             pstmt.setString(2, evento.getDataEvento());
@@ -49,20 +55,21 @@ public class EventoDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String EditarEvento(Evento evento) throws SQLException
+    public String EditarEvento(Evento evento) throws SQLException
     {
         System.out.println("evento dao editar");
-        Connection conn = Banco.getConexao();
+        
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE Evento SET nomeEvento = ?, dataEvento = ?, horarioEvento = ?, descricaoEvento = ?, "
-                + "fotoEvento = ?, idUsuario = ?, localizacao = ? WHERE idEvento = ?";
+        
         try
         {
+            String comandoSql = "UPDATE Evento SET nomeEvento = ?, dataEvento = ?, horarioEvento = ?, descricaoEvento = ?, "
+                + "fotoEvento = ?, idUsuario = ?, localizacao = ? WHERE idEvento = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, evento.getNomeEvento());
             pstmt.setString(2, evento.getDataEvento());
@@ -81,19 +88,19 @@ public class EventoDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String ExcluirEvento(int idEvento) throws SQLException
+    public String ExcluirEvento(int idEvento) throws SQLException
     {
         System.out.println("evento dao excluir");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "DELETE FROM Evento WHERE idEvento = ?";
+        
         try
         {
+            String comandoSql = "DELETE FROM Evento WHERE idEvento = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idEvento);
            
@@ -105,20 +112,20 @@ public class EventoDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static List<Evento> ListarEventos() throws SQLException
+    public List<Evento> ListarEventos() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         ResultSet rs = null;
         Statement stmt= null;
         List<Evento> lista = new ArrayList();
-        String sql= "SELECT * FROM Evento";
+        
         try
         {
+            String sql= "SELECT * FROM Evento";
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
@@ -135,20 +142,20 @@ public class EventoDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, null, stmt);
+            FabricaConexao.closeConexao(conn, rs, null, stmt);
         } 
         return lista;
     }
     
-    public static List<Evento> ListarPorUsuario(int idUsuario) throws SQLException
+    public List<Evento> ListarPorUsuario(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Evento> lista = new ArrayList();
-        String sql= "SELECT * FROM Evento WHERE idUsuario = ?";
+        
         try
         {
+            String sql= "SELECT * FROM Evento WHERE idUsuario = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, idUsuario);
             
@@ -167,7 +174,7 @@ public class EventoDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }

@@ -29,7 +29,8 @@ public class EstoqueService {
    @GET
    public String listarEstoque() throws SQLException
    {
-       List<Estoque> estoques = EstoqueDAO.ListarEstoques();
+       EstoqueDAO dao = new EstoqueDAO();
+       List<Estoque> estoques = dao.ListarEstoques();
        
        Gson gson = new Gson();
        String json = gson.toJson(estoques);
@@ -44,7 +45,9 @@ public class EstoqueService {
        Estoque a = gson.fromJson(json, Estoque.class);
        //a.setIdUsuario(1);
        System.out.println("Deu certo " + a.getNomeEstoque());
-       EstoqueDAO.CadastrarEstoque(a);
+       
+       EstoqueDAO dao = new EstoqueDAO();
+       dao.CadastrarEstoque(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -57,7 +60,9 @@ public class EstoqueService {
        Estoque a = gson.fromJson(json, Estoque.class);
        
        System.out.println("Deu certo " + a.getNomeEstoque());
-       EstoqueDAO.EditarEstoque(a);
+       
+       EstoqueDAO dao = new EstoqueDAO();
+       dao.EditarEstoque(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;
@@ -71,7 +76,9 @@ public class EstoqueService {
        //Estoque a = gson.fromJson(json, Estoque.class);
        
        System.out.println("Deu certo " + idEstoque);
-       EstoqueDAO.ExcluirEstoque(idEstoque);
+       
+       EstoqueDAO dao = new EstoqueDAO();
+       dao.ExcluirEstoque(idEstoque);
        
        String jsonSaida = gson.toJson(idEstoque);
        return jsonSaida;
@@ -85,7 +92,8 @@ public class EstoqueService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(EstoqueDAO.ListarPorUsuario(idUsuario));
+           EstoqueDAO dao = new EstoqueDAO();
+           json = gson.toJson(dao.ListarPorUsuario(idUsuario));
        } catch (SQLException ex) {
            Logger.getLogger(EstoqueService.class.getName()).log(Level.SEVERE, null, ex);
        }

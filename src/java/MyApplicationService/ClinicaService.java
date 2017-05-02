@@ -28,7 +28,8 @@ public class ClinicaService {
        Gson gson = new Gson();
        String json = null;
        try {
-           json = gson.toJson(UsuarioDAO.listarClinicaPetshops());
+           UsuarioDAO dao = new UsuarioDAO();
+           json = gson.toJson(dao.listarClinicaPetshops());
        } catch (SQLException ex) {
            Logger.getLogger(UsuarioService.class.getName()).log(Level.SEVERE, null, ex);
        }

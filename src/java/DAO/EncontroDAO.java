@@ -23,16 +23,23 @@ import java.util.logging.Logger;
  * @author Ana Gonçalo
  */
 public class EncontroDAO {
+    private Connection conn;
     
-    public static String CadastrarEncontro(Encontro encontro) throws SQLException
+    public EncontroDAO(){
+        super();
+        conn = FabricaConexao.getInstancia().getConexao();
+    }
+    
+    public String CadastrarEncontro(Encontro encontro) throws SQLException
     {
         System.out.println("encontro dao");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "INSERT INTO Encontro(dataEncontro, horarioEncontro, statusEncontro, editado, idAnimal, idUsuario, "
-                + "localizacao) values(?, ?, ?, ?, ?, ?, ?)";
+        
         try
         {
+            String comandoSql = "INSERT INTO Encontro(dataEncontro, horarioEncontro, statusEncontro, editado, idAnimal, idUsuario, "
+                + "localizacao) values(?, ?, ?, ?, ?, ?, ?)";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, encontro.getDataEncontro());
             pstmt.setString(2, encontro.getHorarioEncontro());
@@ -50,20 +57,21 @@ public class EncontroDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String EditarEncontro(Encontro encontro) throws SQLException
+    public String EditarEncontro(Encontro encontro) throws SQLException
     {
         System.out.println("encontro dao editar");
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "UPDATE Encontro SET dataEncontro = ?, horarioEncontro = ?, statusEncontro = ?, editado = ?, "
-                + "idAnimal = ?, idUsuario = ?, localizacao = ? WHERE idEncontro = ?";
+        
         try
         {
+            String comandoSql = "UPDATE Encontro SET dataEncontro = ?, horarioEncontro = ?, statusEncontro = ?, editado = ?, "
+                + "idAnimal = ?, idUsuario = ?, localizacao = ? WHERE idEncontro = ?";
+            
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setString(1, encontro.getDataEncontro());
             pstmt.setString(2, encontro.getHorarioEncontro());
@@ -78,7 +86,8 @@ public class EncontroDAO {
             {
                 Animal a = encontro.getAnimal();
                 a.setStatusAnimal(true);
-                AnimalDAO.EditarAnimal(a);
+                AnimalDAO daoAnimal = new AnimalDAO();
+                daoAnimal.EditarAnimal(a);
             }
             
             pstmt.executeUpdate();
@@ -89,19 +98,19 @@ public class EncontroDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static String ExcluirEncontro(int idEncontro) throws SQLException
+    public String ExcluirEncontro(int idEncontro) throws SQLException
     {
         System.out.println("encontro dao excluir " + idEncontro);
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
-        String comandoSql = "DELETE FROM Encontro WHERE idEncontro = ?";
+        
         try
         {
+            String comandoSql = "DELETE FROM Encontro WHERE idEncontro = ?";
             pstmt = conn.prepareStatement(comandoSql);
             pstmt.setInt(1, idEncontro);
            
@@ -113,23 +122,24 @@ public class EncontroDAO {
         } 
         finally
         {
-            Banco.closeConexao(conn, null, pstmt, null);
+            FabricaConexao.closeConexao(conn, null, pstmt, null);
         }
         return "OK!";
     }
     
-    public static List<Encontro> ListarEncontros() throws SQLException
+    public List<Encontro> ListarEncontros() throws SQLException
     {
-        Connection conn = Banco.getConexao();
         ResultSet rs = null;
         Statement stmt= null;
         List<Encontro> lista = new ArrayList();
-        String sql= "select * from Encontro " +
+        
+        try
+        {
+            String sql= "select * from Encontro " +
                 "inner join Usuario as Adotante on Adotante.idUsuario = Encontro.idUsuario " +
                 "inner join Animal on Animal.idAnimal = encontro.idAnimal " +
                 "inner join Usuario as Responsavel on Responsavel.idUsuario = Animal.idUsuario";
-        try
-        {
+            
             stmt = conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
@@ -187,24 +197,25 @@ public class EncontroDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, null, stmt);
+            FabricaConexao.closeConexao(conn, rs, null, stmt);
         } 
         return lista;
     }
     
-    public static List<Encontro> ListarPorUsuario(int idUsuario) throws SQLException
+    public List<Encontro> ListarPorUsuario(int idUsuario) throws SQLException
     {
-        Connection conn = Banco.getConexao();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Encontro> lista = new ArrayList();
-        String sql= "select * from Encontro " +
+        
+        try
+        {
+            String sql= "select * from Encontro " +
                 "inner join Usuario as Adotante on Adotante.idUsuario = Encontro.idUsuario " +
                 "inner join Animal on Animal.idAnimal = encontro.idAnimal " +
                 "inner join Usuario as Responsavel on Responsavel.idUsuario = Animal.idUsuario " +
                 "WHERE Encontro.idUsuario = ? OR Animal.idUsuario = ?";
-        try
-        {
+            
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, idUsuario);
             pstmt.setInt(2, idUsuario);
@@ -265,7 +276,7 @@ public class EncontroDAO {
         }
         finally
         {
-            Banco.closeConexao(conn, rs, pstmt, null);
+            FabricaConexao.closeConexao(conn, rs, pstmt, null);
         } 
         return lista;
     }

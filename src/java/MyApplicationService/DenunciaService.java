@@ -25,7 +25,8 @@ public class DenunciaService {
    @GET
    public String listarDenuncias() throws SQLException
    {
-       List<Denuncia> denuncias = DenunciaDAO.ListarDenuncias();
+       DenunciaDAO dao = new DenunciaDAO();
+       List<Denuncia> denuncias = dao.ListarDenuncias();
        
        Gson gson = new Gson();
        String json = gson.toJson(denuncias);
@@ -38,7 +39,8 @@ public class DenunciaService {
        Gson gson = new Gson();
        Denuncia a = gson.fromJson(json, Denuncia.class);
        System.out.println("Deu certo " + a.getTituloDenuncia());
-       DenunciaDAO.CadastrarDenuncia(a);
+       DenunciaDAO dao = new DenunciaDAO();
+       dao.CadastrarDenuncia(a);
        
        String jsonSaida = gson.toJson(a);
        return jsonSaida;

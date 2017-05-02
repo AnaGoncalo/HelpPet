@@ -57,7 +57,7 @@ public class EncontroDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "OK!";
     }
@@ -98,7 +98,7 @@ public class EncontroDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "OK!";
     }
@@ -122,7 +122,7 @@ public class EncontroDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "OK!";
     }
@@ -197,7 +197,7 @@ public class EncontroDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, null, stmt);
+            rs.close();
         } 
         return lista;
     }
@@ -276,7 +276,7 @@ public class EncontroDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            rs.close();
         } 
         return lista;
     }

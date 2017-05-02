@@ -53,12 +53,10 @@ public class AnimalDAO {
             pstmt.setString(12, animal.getLocalizacao());
 
             pstmt.executeUpdate();
-            pstmt.close();
-            
         } catch (SQLException ex) {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "OK!";
     }
@@ -84,11 +82,10 @@ public class AnimalDAO {
 
             pstmt.executeUpdate();
             System.out.println("Resultado editar DAO");
-            pstmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
     }
 
@@ -102,12 +99,12 @@ public class AnimalDAO {
             pstmt.setInt(1, idAnimal);
 
             pstmt.executeUpdate();
-            pstmt.close();
+            
             System.out.println("Resultado excluir DAO");// + pstmt.executeUpdate());
         } catch (SQLException ex) {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
     }
 
@@ -116,7 +113,8 @@ public class AnimalDAO {
         Statement stmt = null;
         List<Animal> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM Animal INNER JOIN Usuario ON Usuario.idUsuario = Animal.idUsuario WHERE statusAnimal = 0";
+            String sql = "SELECT * FROM Animal INNER JOIN Usuario ON Usuario.idUsuario = Animal.idUsuario "
+                    + "WHERE statusAnimal = 0";
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -130,11 +128,10 @@ public class AnimalDAO {
 
                 lista.add(a);
             }
-            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            FabricaConexao.closeConexao(conn, rs, null, stmt);
+            rs.close();
         }
         System.out.println("Animal dao: " + lista.size());
         return lista;
@@ -162,11 +159,10 @@ public class AnimalDAO {
 
                 lista.add(a);
             }
-            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            rs.close();
         }
         System.out.println("Animal DAO : qtd " + lista.size());
         return lista;

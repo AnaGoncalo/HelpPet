@@ -55,7 +55,7 @@ public class DenunciaDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "OK!";
     }
@@ -86,7 +86,7 @@ public class DenunciaDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, null, stmt);
+            rs.close();
         } 
         return lista;
     }

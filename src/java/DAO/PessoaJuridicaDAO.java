@@ -56,7 +56,8 @@ public class PessoaJuridicaDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return lista;
     }
@@ -89,7 +90,8 @@ public class PessoaJuridicaDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return lista;
     }
@@ -119,7 +121,7 @@ public class PessoaJuridicaDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         } 
     }
 }

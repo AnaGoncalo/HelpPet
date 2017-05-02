@@ -54,7 +54,7 @@ public class ExperienciaDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "OK!";
     }
@@ -85,7 +85,7 @@ public class ExperienciaDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "Ok!";
     }
@@ -109,7 +109,7 @@ public class ExperienciaDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         }
         return "Ok!";
     }
@@ -139,7 +139,7 @@ public class ExperienciaDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, null, stmt);
+            rs.close();
         } 
         return lista;
     }
@@ -171,7 +171,7 @@ public class ExperienciaDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            rs.close();
         } 
         return lista;
     }

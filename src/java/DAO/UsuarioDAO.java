@@ -57,7 +57,7 @@ public class UsuarioDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         } 
     }
     
@@ -89,7 +89,7 @@ public class UsuarioDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         } 
     }
     
@@ -112,7 +112,7 @@ public class UsuarioDAO {
         } 
         finally
         {
-            FabricaConexao.closeConexao(conn, null, pstmt, null);
+            pstmt.close();
         } 
     }
     
@@ -151,7 +151,8 @@ public class UsuarioDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return u;
     }
@@ -181,7 +182,8 @@ public class UsuarioDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return u;
     }
@@ -211,7 +213,8 @@ public class UsuarioDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return u;
     }
@@ -257,7 +260,8 @@ public class UsuarioDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return u;
     }
@@ -289,7 +293,8 @@ public class UsuarioDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return lista;
     }
@@ -302,7 +307,8 @@ public class UsuarioDAO {
         
         try
         {
-            String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop where Usuario.idPermissao = 3";
+            String comandoSql= "SELECT * FROM PessoaJuridica pj inner join usuario on usuario.idUsuario = pj.idClinicaPetshop "
+                    + "where Usuario.idPermissao = 3";
             pstmt = conn.prepareStatement(comandoSql);
             
             rs = pstmt.executeQuery();
@@ -321,7 +327,8 @@ public class UsuarioDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
+            rs.close();
         } 
         return lista;
     }

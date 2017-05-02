@@ -48,7 +48,7 @@ public class PermissaoDAO {
         }
         finally
         {
-            FabricaConexao.closeConexao(conn, rs, pstmt, null);
+            pstmt.close();
         } 
         return p;
     }
